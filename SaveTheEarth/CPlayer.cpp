@@ -26,6 +26,8 @@ void CPlayer::FrameMove(DWORD elapsed)
 
 void CPlayer::Control(CInput* m_Input)
 {
+	
+
 	if (m_Input->KeyPress(VK_UP))
 	{
 		m_Pos.y -= MoveSpeed;
@@ -42,6 +44,15 @@ void CPlayer::Control(CInput* m_Input)
 	{
 		m_Pos.x += MoveSpeed;
 	}
+
+	if (m_Pos.x > MAX_WIN_WIDTH - 120)
+		m_Pos.x = MAX_WIN_WIDTH - 120;
+	if (m_Pos.x < 0)
+		m_Pos.x = 0;
+	if (m_Pos.y > MAX_WIN_HEIGHT - 100)
+		m_Pos.y = MAX_WIN_HEIGHT - 100;
+	if (m_Pos.y < 0)
+		m_Pos.y = 0;
 }
 
 void CPlayer::Render()

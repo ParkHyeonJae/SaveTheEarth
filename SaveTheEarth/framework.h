@@ -58,8 +58,8 @@ enum TAG {
 };
 
 
-#ifdef UNICODE
-#pragma comment(linker, "/entry:wWinMainCRTStartup /SUBSYSTEM:CONSOLE")
-#else
-#pragma comment(linker, "/entry:WinMainCRTStartup /SUBSYSTEM:CONSOLE")
-#endif
+//#ifdef UNICODE
+//#pragma comment(linker, "/entry:wWinMainCRTStartup /SUBSYSTEM:CONSOLE")
+//#else
+//#pragma comment(linker, "/entry:WinMainCRTStartup /SUBSYSTEM:CONSOLE")
+//#endif

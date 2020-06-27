@@ -61,6 +61,16 @@ INT CGame::Render()
 	
 	m_GameManager->Render();
 
+#ifdef _DEBUG
+	WCHAR fpsStr[256];
+	wsprintfW(fpsStr, L"MODE:DEBUG\n fps: %d", m_fps);
+	m_Gfx->DrawTextOut(fpsStr, D2D1::Point2F(0, 0));
+#else
+	WCHAR fpsStr[256];
+	wsprintfW(fpsStr, L"MODE:RELEASE\n fps: %d", m_fps);
+	m_Gfx->DrawTextOut(fpsStr, D2D1::Point2F(0, 0));
+#endif
+
 	/*D2D1_POINT_2F center = { 0,0 };
 	m_bg->Draw(D2D1::Point2F(0, 0), D2D1::SizeF(2.2f, 2.1f), &center, 0.0f);
 	m_Gfx->GetRenderTarget()->SetTransform(D2D1::Matrix3x2F::Identity());
