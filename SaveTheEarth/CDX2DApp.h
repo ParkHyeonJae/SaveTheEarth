@@ -14,6 +14,9 @@ protected:
 
 	DWORD m_fps;
 
+	CInput* m_Input;
+protected:
+	CGraphics* m_Gfx;
 public:
 	CDX2DApp();
 	virtual ~CDX2DApp();
@@ -26,8 +29,8 @@ public:
 
 	virtual INT Init();
 	virtual INT Render();
-	virtual INT FrameMove();
-	virtual INT Control();
+	virtual INT FrameMove(DWORD elapsed);
+	virtual INT Control(CInput* m_Input);
 
 	LRESULT MsgProc(HWND, UINT, WPARAM, LPARAM);
 

@@ -61,6 +61,9 @@ INT CDX2DApp::Create(HINSTANCE hInst)
 
     GetWindowRect(m_hWnd, &m_rcWin);
 
+    m_Gfx = new CGraphics();
+    m_Gfx->Init(m_hWnd, m_rcWin);
+
     ShowWindow(m_hWnd, SW_SHOW);
     UpdateWindow(m_hWnd);
 
@@ -94,6 +97,8 @@ INT CDX2DApp::Run()
 
 void CDX2DApp::CleanUp()
 {
+    delete m_Input;
+    delete m_Gfx;
 }
 
 INT CDX2DApp::RenderLoop()
@@ -114,7 +119,7 @@ INT CDX2DApp::RenderLoop()
     }
     dlastTime = dCurTime;
 
-    HRESULT hr = FrameMove();
+    HRESULT hr = FrameMove(elapsed);
     if (!SUCCEEDED(hr))
         return -1;
     hr = Render();
@@ -126,6 +131,9 @@ INT CDX2DApp::RenderLoop()
 
 INT CDX2DApp::Init()
 {
+    m_Input = new CInput();
+    m_Input->Create(m_hWnd);
+    
 	return 0;
 }
 
@@ -134,14 +142,17 @@ INT CDX2DApp::Render()
 	return 0;
 }
 
-INT CDX2DApp::FrameMove()
+INT CDX2DApp::FrameMove(DWORD elapsed)
 {
+    if (m_Input) m_Input->FrameMove();
+    Control(m_Input);
     
 	return 0;
 }
 
-INT CDX2DApp::Control()
+INT CDX2DApp::Control(CInput* m_Input)
 {
+    
 	return 0;
 }
 

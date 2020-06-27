@@ -24,6 +24,7 @@
 #include <string.h>
 #include <ctime>
 #include <Mmsystem.h>
+#include <atlstr.h>
 
 #include <map>
 #include <list>
@@ -33,11 +34,28 @@
 #include <d2d1.h>
 #include <dwrite.h>
 
+#include "CInput.h"
+#include "CGraphics.h"
+#include "CSprite.h"
+#include "IGameObject.h"
+#include "CGameObject.h"
+#include "CPlayer.h"
+#include "CScrollBackground.h"
+#include "CObjectManager.h"
+#include "CGameManager.h"
 #include "CDX2DApp.h"
 #include "CGame.h"
 
 #define MAX_WIN_WIDTH 1600
 #define MAX_WIN_HEIGHT 900
+
+enum TAG {
+	PLAYER,
+	PBULLET,
+	ENEMY,
+	EBULLET,
+	BACKGROUND
+};
 
 
 #ifdef UNICODE
