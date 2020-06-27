@@ -17,14 +17,14 @@ INT CGame::Init()
 	m_GameManager = new CGameManager(m_Gfx, m_Input, m_ObjectManager);
 
 
-	//m_ScrollBackground01 = new CScrollBackground(D2D1::Point2F(0, 0), BACKGROUND, CGameManager::m_ScrollSpeed);
-	//m_ScrollBackground02 = new CScrollBackground(D2D1::Point2F(MAX_WIN_WIDTH, 0), BACKGROUND, CGameManager::m_ScrollSpeed);
-	//m_Player = new CPlayer(D2D1::Point2F(50, 250), PLAYER);
+	m_ScrollBackground01 = new CScrollBackground(D2D1::Point2F(0, 0), BACKGROUND, CGameManager::m_ScrollSpeed);
+	m_ScrollBackground02 = new CScrollBackground(D2D1::Point2F(MAX_WIN_WIDTH, 0), BACKGROUND, CGameManager::m_ScrollSpeed);
+	m_Player = new CPlayer(D2D1::Point2F(50, 250), PLAYER);
 
-	//
-	//m_ObjectManager->AddObject((CGameObject*)m_ScrollBackground01);
-	//m_ObjectManager->AddObject((CGameObject*)m_ScrollBackground02);
-	//m_ObjectManager->AddObject((CGameObject*)m_Player);
+	
+	m_ObjectManager->AddObject((CGameObject*)m_ScrollBackground01);
+	m_ObjectManager->AddObject((CGameObject*)m_ScrollBackground02);
+	m_ObjectManager->AddObject((CGameObject*)m_Player);
 
 
 
