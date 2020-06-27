@@ -57,9 +57,12 @@ enum TAG {
 	BACKGROUND
 };
 
+#ifdef _DEBUG
 
-//#ifdef UNICODE
-//#pragma comment(linker, "/entry:wWinMainCRTStartup /SUBSYSTEM:CONSOLE")
-//#else
-//#pragma comment(linker, "/entry:WinMainCRTStartup /SUBSYSTEM:CONSOLE")
-//#endif
+#ifdef UNICODE
+#pragma comment(linker, "/entry:wWinMainCRTStartup /SUBSYSTEM:CONSOLE")
+#else
+#pragma comment(linker, "/entry:WinMainCRTStartup /SUBSYSTEM:CONSOLE")
+#endif
+
+#endif
