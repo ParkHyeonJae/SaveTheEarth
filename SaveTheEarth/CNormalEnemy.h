@@ -1,12 +1,14 @@
 #pragma once
-class CPlayer : public CGameObject
+class CNormalEnemy : public CGameObject
 {
 private:
-	float MoveSpeed;
-	CPlayerBullet* m_PlayerBullet;
+	CNormalEnemyBullet* m_NormalEnemyBullet;
+	float angle;
+	D2D1_POINT_2F m_TargetPos;
+
 public:
-	CPlayer(D2D1_POINT_2F m_Pos, INT tag);
-	~CPlayer();
+	CNormalEnemy(D2D1_POINT_2F m_Pos, INT tag);
+	~CNormalEnemy();
 
 	virtual void Init() override;
 	virtual void Render() override;

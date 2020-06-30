@@ -59,6 +59,8 @@ INT CDX2DApp::Create(HINSTANCE hInst)
         ScreenXCenter, ScreenYCenter, MAX_WIN_WIDTH, MAX_WIN_HEIGHT, nullptr, nullptr, m_hInst, nullptr);
 
 
+    srand((unsigned int)time(NULL));
+
     GetWindowRect(m_hWnd, &m_rcWin);
 
     m_Gfx = new CGraphics();

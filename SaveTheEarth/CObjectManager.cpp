@@ -51,6 +51,15 @@ void CObjectManager::FrameMove(DWORD elapsed)
 {
 	for (auto iter = m_gameObjectList.begin(); iter != m_gameObjectList.end();)
 	{
+
+		if ((*iter)->m_tag == PBULLET)
+		{
+			if (dynamic_cast<CPlayerBullet*>((*iter))->IsMapOut())
+			{
+				m_gameObjectList.erase(iter);
+				break;
+			}
+		}
 		(*iter)->FrameMove(elapsed);
 		iter++;
 	}

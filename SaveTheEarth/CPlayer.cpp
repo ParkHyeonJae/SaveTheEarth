@@ -6,6 +6,7 @@ CPlayer::CPlayer(D2D1_POINT_2F m_Pos, INT tag) : CGameObject()
 	this->m_tag = tag;
 
 	m_Sprite = new CSprite(L"../Images/Player.png", CGameManager::m_Gfx);
+	
 }
 
 CPlayer::~CPlayer()
@@ -22,6 +23,18 @@ void CPlayer::Init()
 
 void CPlayer::FrameMove(DWORD elapsed)
 {
+	static DWORD CurTime = timeGetTime();
+	static DWORD OldTime = 0;
+
+	if (CurTime - OldTime >= 100)
+	{
+		m_PlayerBullet = new CPlayerBullet(D2D1::Point2F(m_Pos.x, m_Pos.y + 30.0f), PBULLET);
+		CGameManager::m_ObjectManager->AddObject((CGameObject*)m_PlayerBullet);
+		OldTime = CurTime;
+	}
+	else CurTime = timeGetTime();
+
+
 }
 
 void CPlayer::Control(CInput* m_Input)
@@ -53,6 +66,8 @@ void CPlayer::Control(CInput* m_Input)
 		m_Pos.y = MAX_WIN_HEIGHT - 100;
 	if (m_Pos.y < 0)
 		m_Pos.y = 0;
+
+	CGameManager::m_PlayerPos = m_Pos;
 }
 
 void CPlayer::Render()

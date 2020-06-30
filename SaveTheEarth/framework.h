@@ -39,6 +39,9 @@
 #include "CSprite.h"
 #include "IGameObject.h"
 #include "CGameObject.h"
+#include "CNormalEnemyBullet.h"
+#include "CNormalEnemy.h"
+#include "CPlayerBullet.h"
 #include "CPlayer.h"
 #include "CScrollBackground.h"
 #include "CObjectManager.h"
@@ -48,6 +51,8 @@
 
 #define MAX_WIN_WIDTH 1600
 #define MAX_WIN_HEIGHT 900
+
+#define PI 3.141592
 
 enum TAG {
 	PLAYER,

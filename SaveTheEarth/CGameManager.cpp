@@ -4,6 +4,8 @@ CGraphics* CGameManager::m_Gfx = NULL;
 CInput* CGameManager::m_Input = NULL;
 CObjectManager* CGameManager::m_ObjectManager = NULL;
 FLOAT CGameManager::m_ScrollSpeed = 10.0f;
+D2D1_POINT_2F CGameManager::m_PlayerPos = { 0,0 };
+
 CGameManager::CGameManager(CGraphics* m_Gfx, CInput* m_Input, CObjectManager* m_ObjectManager)
 {
 	this->m_Gfx = m_Gfx;

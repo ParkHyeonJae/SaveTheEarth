@@ -3,8 +3,11 @@ class CGame : public CDX2DApp
 {
 private:
 	CPlayer* m_Player;
+	CNormalEnemy* m_NormalEnemy;
+
 	CScrollBackground* m_ScrollBackground01;
 	CScrollBackground* m_ScrollBackground02;
+
 	CObjectManager* m_ObjectManager;
 
 	CGameManager* m_GameManager;

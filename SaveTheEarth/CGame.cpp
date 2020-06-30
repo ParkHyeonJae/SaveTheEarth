@@ -20,12 +20,12 @@ INT CGame::Init()
 	m_ScrollBackground01 = new CScrollBackground(D2D1::Point2F(0, 0), BACKGROUND, CGameManager::m_ScrollSpeed);
 	m_ScrollBackground02 = new CScrollBackground(D2D1::Point2F(MAX_WIN_WIDTH, 0), BACKGROUND, CGameManager::m_ScrollSpeed);
 	m_Player = new CPlayer(D2D1::Point2F(50, 250), PLAYER);
-
+	m_NormalEnemy = new CNormalEnemy(D2D1::Point2F(500,500), ENEMY);
 	
-	m_ObjectManager->AddObject((CGameObject*)m_ScrollBackground01);
-	m_ObjectManager->AddObject((CGameObject*)m_ScrollBackground02);
-	m_ObjectManager->AddObject((CGameObject*)m_Player);
-
+	m_ObjectManager->AddObject(dynamic_cast<CGameObject*>(m_ScrollBackground01));
+	m_ObjectManager->AddObject(dynamic_cast<CGameObject*>(m_ScrollBackground02));
+	m_ObjectManager->AddObject(dynamic_cast<CGameObject*>(m_Player));
+	m_ObjectManager->AddObject(dynamic_cast<CGameObject*>(m_NormalEnemy));
 
 
 	m_GameManager->Init();

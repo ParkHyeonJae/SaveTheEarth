@@ -1,17 +1,19 @@
 #pragma once
-class CPlayer : public CGameObject
+class CPlayerBullet : public CGameObject
 {
 private:
-	float MoveSpeed;
-	CPlayerBullet* m_PlayerBullet;
+	float m_BulletSpeed;
+	float theta;
 public:
-	CPlayer(D2D1_POINT_2F m_Pos, INT tag);
-	~CPlayer();
+	CPlayerBullet(D2D1_POINT_2F m_Pos, INT tag);
+	~CPlayerBullet();
 
 	virtual void Init() override;
 	virtual void Render() override;
 	virtual void FrameMove(DWORD elapsed) override;
 	virtual void Control(CInput* Input) override;
 	virtual void Release() override;
+
+	BOOL IsMapOut();
 };
 

@@ -6,6 +6,7 @@ public:
 	static  CInput* m_Input;
 	static CObjectManager* m_ObjectManager;
 	static FLOAT m_ScrollSpeed;
+	static D2D1_POINT_2F m_PlayerPos;
 public:
 	CGameManager(CGraphics * m_Gfx, CInput* m_Input, CObjectManager * m_ObjectManager);
 	~CGameManager();
