@@ -71,19 +71,6 @@ INT CGame::Render()
 	m_Gfx->DrawTextOut(fpsStr, D2D1::Point2F(0, 0));
 #endif
 
-	/*D2D1_POINT_2F center = { 0,0 };
-	m_bg->Draw(D2D1::Point2F(0, 0), D2D1::SizeF(2.2f, 2.1f), &center, 0.0f);
-	m_Gfx->GetRenderTarget()->SetTransform(D2D1::Matrix3x2F::Identity());
-
-	
-	m_sprite->Draw(D2D1::Point2F(500, 420), D2D1::SizeF(1.0f, 1.0f), &center, 0.0f);
-
-
-	m_Gfx->GetRenderTarget()->SetTransform(D2D1::Matrix3x2F::Identity());
-	m_Gfx->DrawTextOut(L"Click The Button!", D2D1::Point2F(0, 0));
-	*/
-
-
 	m_Gfx->EndDraw();
 	return 0;
 }
