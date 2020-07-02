@@ -3,6 +3,9 @@ class CPlayerBullet : public CGameObject
 {
 private:
 	std::vector<CSprite*> m_BulletSprites;
+	DWORD CurAnimTime;
+	DWORD OldAnimTime;
+	INT sequence;
 	float m_BulletSpeed;
 	float theta;
 public:

@@ -79,7 +79,6 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 
 			for (auto Enemyiter = m_gameObjectList.begin(); Enemyiter != m_gameObjectList.end();)
 			{
-				(*Enemyiter)->FrameMove(elapsed);
 				if ((*Enemyiter)->m_tag == ENEMY)
 				{
 					float CollRange = 40.0f;

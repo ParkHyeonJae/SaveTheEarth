@@ -16,26 +16,25 @@ CPlayerBullet::~CPlayerBullet()
 
 void CPlayerBullet::Init()
 {
+	CurAnimTime = timeGetTime();
+	OldAnimTime = 0;
+	sequence = 0;
 }
 
 void CPlayerBullet::Render()
 {
-	static DWORD CurTime = timeGetTime();
-	static DWORD OldTime = 0;
-	static INT sequence = 0;
-
 	m_BulletSprites[sequence]->Draw(m_Pos);
 
-	if (CurTime - OldTime > 100)
+	if (CurAnimTime - OldAnimTime > 100)
 	{
 		sequence++;
 		if (sequence == 3)
 			sequence = 0;
-		OldTime = CurTime;
+		OldAnimTime = CurAnimTime;
 	}
 	else
 	{
-		CurTime = timeGetTime();
+		CurAnimTime = timeGetTime();
 	}
 	//m_Sprite->Draw(m_Pos);
 }
