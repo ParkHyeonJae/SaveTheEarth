@@ -6,7 +6,7 @@ CObjectManager::CObjectManager()
 
 CObjectManager::~CObjectManager()
 {
-	Release();
+	AllRelease();
 }
 
 INT CObjectManager::AddObject(CGameObject* object)
@@ -38,7 +38,7 @@ BOOL CObjectManager::IsEmpty()
 	return m_gameObjectList.empty();
 }
 
-void CObjectManager::Init()
+void CObjectManager::AllInitalize()
 {
 	for (auto iter = m_gameObjectList.begin(); iter != m_gameObjectList.end();)
 	{
@@ -47,16 +47,66 @@ void CObjectManager::Init()
 	}
 }
 
-void CObjectManager::FrameMove(DWORD elapsed)
+void CObjectManager::AllFrameMove(DWORD elapsed)
 {
 	for (auto iter = m_gameObjectList.begin(); iter != m_gameObjectList.end();)
 	{
 		(*iter)->FrameMove(elapsed);
+		if ((*iter)->m_tag == EBULLET)
+		{
+			if (dynamic_cast<CNormalEnemyBullet*>((*iter))->IsMapOut())
+			{
+				m_gameObjectList.erase(iter);
+				break;
+			}
+		}
+
+		if ((*iter)->m_tag == PBULLET)
+		{
+			if (dynamic_cast<CPlayerBullet*>((*iter))->IsMapOut())
+			{
+				(*iter)->Release();
+				m_gameObjectList.erase(iter);
+				break;
+			}
+
+			RECT pBulletColl = {
+				(*iter)->GetPos().x - 20,
+				(*iter)->GetPos().y - 20,
+				(*iter)->GetPos().x + 20,
+				(*iter)->GetPos().y + 20,
+			};
+
+			for (auto Enemyiter = m_gameObjectList.begin(); Enemyiter != m_gameObjectList.end();)
+			{
+				(*Enemyiter)->FrameMove(elapsed);
+				if ((*Enemyiter)->m_tag == ENEMY)
+				{
+					float CollRange = 40.0f;
+					RECT EnemyColl = {
+					(*Enemyiter)->GetPos().x - CollRange,
+					(*Enemyiter)->GetPos().y - CollRange,
+					(*Enemyiter)->GetPos().x + CollRange,
+					(*Enemyiter)->GetPos().y + CollRange,
+					};
+
+					RECT temp;
+					if (IntersectRect(&temp, &pBulletColl, &EnemyColl))
+					{
+						m_gameObjectList.erase(Enemyiter);
+						break;
+					}
+				}
+				Enemyiter++;
+			}
+
+		}
+		
 		iter++;
 	}
 }
 
-void CObjectManager::Control(CInput* m_Input)
+void CObjectManager::AllControl(CInput* m_Input)
 {
 	for (auto iter = m_gameObjectList.begin(); iter != m_gameObjectList.end();)
 	{
@@ -65,7 +115,7 @@ void CObjectManager::Control(CInput* m_Input)
 	}
 }
 
-void CObjectManager::Render()
+void CObjectManager::AllRender()
 {
 	for (auto iter = m_gameObjectList.begin(); iter != m_gameObjectList.end();)
 	{
@@ -74,11 +124,15 @@ void CObjectManager::Render()
 	}
 }
 
-void CObjectManager::Release()
+
+void CObjectManager::AllRelease()
 {
-	for (auto iter = m_gameObjectList.begin(); iter != m_gameObjectList.end();)
-	{
-		(*iter)->Release();
-		iter++;
+	for (auto iter : m_gameObjectList) {
+		if (iter) {
+			iter->Release();
+			delete iter;
+			iter = nullptr;
+		}
 	}
+	m_gameObjectList.clear();
 }

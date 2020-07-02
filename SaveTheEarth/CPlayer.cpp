@@ -4,8 +4,9 @@ CPlayer::CPlayer(D2D1_POINT_2F m_Pos, INT tag) : CGameObject()
 {
 	this->m_Pos = m_Pos;
 	this->m_tag = tag;
-
+	CGameManager::m_PlayerPos = m_Pos;
 	m_Sprite = new CSprite(L"../Images/Player.png", CGameManager::m_Gfx);
+	
 }
 
 CPlayer::~CPlayer()
@@ -22,17 +23,15 @@ void CPlayer::Init()
 
 void CPlayer::FrameMove(DWORD elapsed)
 {
-	m_Pos.y += MoveSpeed;
+
+	
+
 }
 
 void CPlayer::Control(CInput* m_Input)
 {
-	if(m_Input->KeyPress(VK_SPACE))
-	{
-		m_Pos.y -= (MoveSpeed * 2);
-	}
 
-	/*if (m_Input->KeyPress(VK_UP))
+	if (m_Input->KeyPress(VK_UP))
 	{
 		m_Pos.y -= MoveSpeed;
 	}
@@ -56,7 +55,9 @@ void CPlayer::Control(CInput* m_Input)
 	if (m_Pos.y > MAX_WIN_HEIGHT - 100)
 		m_Pos.y = MAX_WIN_HEIGHT - 100;
 	if (m_Pos.y < 0)
-		m_Pos.y = 0;*/
+		m_Pos.y = 0;
+
+	CGameManager::m_PlayerPos = m_Pos;
 }
 
 void CPlayer::Render()

@@ -4,6 +4,10 @@ CGraphics* CGameManager::m_Gfx = NULL;
 CInput* CGameManager::m_Input = NULL;
 CObjectManager* CGameManager::m_ObjectManager = NULL;
 FLOAT CGameManager::m_ScrollSpeed = 10.0f;
+D2D1_POINT_2F CGameManager::m_PlayerPos = { 0,0 };
+FLOAT CGameManager::radian = PI / 180.0f;
+INT CGameManager::nowStatus = TITLE;
+
 CGameManager::CGameManager(CGraphics* m_Gfx, CInput* m_Input, CObjectManager* m_ObjectManager)
 {
 	this->m_Gfx = m_Gfx;
@@ -17,25 +21,25 @@ CGameManager::~CGameManager()
 
 void CGameManager::Init()
 {
-	m_ObjectManager->Init();
+	
 }
 
 void CGameManager::FrameMove(DWORD elapsed)
 {
-	m_ObjectManager->FrameMove(elapsed);
+	
 }
 
 void CGameManager::Control(CInput* m_Input)
 {
-	m_ObjectManager->Control(m_Input);
+	
 }
 
 void CGameManager::Render()
 {
-	m_ObjectManager->Render();
+	
 }
 
 void CGameManager::Release()
 {
-	m_ObjectManager->Release();
+	
 }

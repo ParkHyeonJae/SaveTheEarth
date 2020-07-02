@@ -3,6 +3,7 @@ class CPlayer : public CGameObject
 {
 private:
 	float MoveSpeed;
+	
 public:
 	CPlayer(D2D1_POINT_2F m_Pos, INT tag);
 	~CPlayer();

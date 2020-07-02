@@ -2,9 +2,11 @@
 class CGame : public CDX2DApp
 {
 private:
-	CPlayer* m_Player;
-	CScrollBackground* m_ScrollBackground01;
-	CScrollBackground* m_ScrollBackground02;
+	std::list<CSceneObject*> m_SceneList;
+
+	CGameScene01* m_GameScene01;
+	CGameScene02* m_GameScene02;
+
 	CObjectManager* m_ObjectManager;
 
 	CGameManager* m_GameManager;

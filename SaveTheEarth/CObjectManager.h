@@ -13,10 +13,12 @@ public:
 	BOOL IsEmpty();
 
 
-	void Init();
-	void FrameMove(DWORD elapsed);
-	void Control(CInput* m_Input);
-	void Render();
-	void Release();
+	void AllInitalize();
+	void AllFrameMove(DWORD elapsed);
+	void AllControl(CInput* m_Input);
+	void AllRender();
+	void AllRelease();
+
+	CObjectManager* GetObjectManager() { return this; }
 };
 

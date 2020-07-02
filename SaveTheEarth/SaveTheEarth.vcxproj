@@ -23,7 +23,7 @@
     <ProjectGuid>{F0577947-F96A-4B01-9D76-F12BC5FE058B}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>SaveTheEarth</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.18362.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -151,12 +151,19 @@
     <ClInclude Include="CGame.h" />
     <ClInclude Include="CGameManager.h" />
     <ClInclude Include="CGameObject.h" />
+    <ClInclude Include="CGameScene01.h" />
+    <ClInclude Include="CGameScene02.h" />
     <ClInclude Include="CGraphics.h" />
     <ClInclude Include="CInput.h" />
+    <ClInclude Include="CNormalEnemy.h" />
+    <ClInclude Include="CNormalEnemyBullet.h" />
     <ClInclude Include="CObjectManager.h" />
     <ClInclude Include="CPlayer.h" />
+    <ClInclude Include="CPlayerBullet.h" />
+    <ClInclude Include="CSceneObject.h" />
     <ClInclude Include="CScrollBackground.h" />
     <ClInclude Include="CSprite.h" />
+    <ClInclude Include="CTitleBackground.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="IGameObject.h" />
     <ClInclude Include="Resource.h" />
@@ -168,12 +175,19 @@
     <ClCompile Include="CGame.cpp" />
     <ClCompile Include="CGameManager.cpp" />
     <ClCompile Include="CGameObject.cpp" />
+    <ClCompile Include="CGameScene01.cpp" />
+    <ClCompile Include="CGameScene02.cpp" />
     <ClCompile Include="CGraphics.cpp" />
     <ClCompile Include="CInput.cpp" />
+    <ClCompile Include="CNormalEnemy.cpp" />
+    <ClCompile Include="CNormalEnemyBullet.cpp" />
     <ClCompile Include="CObjectManager.cpp" />
     <ClCompile Include="CPlayer.cpp" />
+    <ClCompile Include="CPlayerBullet.cpp" />
+    <ClCompile Include="CSceneObject.cpp" />
     <ClCompile Include="CScrollBackground.cpp" />
     <ClCompile Include="CSprite.cpp" />
+    <ClCompile Include="CTitleBackground.cpp" />
     <ClCompile Include="SaveTheEarth.cpp" />
   </ItemGroup>
   <ItemGroup>
