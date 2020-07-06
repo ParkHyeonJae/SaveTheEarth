@@ -15,12 +15,16 @@ void CGameScene02::Init()
 
 	m_ScrollBackground01 = new CScrollBackground(D2D1::Point2F(0, 0), BACKGROUND, CGameManager::m_ScrollSpeed);
 	m_ScrollBackground02 = new CScrollBackground(D2D1::Point2F(MAX_WIN_WIDTH, 0), BACKGROUND, CGameManager::m_ScrollSpeed);
-	m_Player = new CPlayer(D2D1::Point2F(50, 250), PLAYER);
+	m_Player = new CPlayer(D2D1::Point2F(50, 250), PLAYER, 100.0f);
 
+	m_GameUI = new CInGameUI(UI);
 
 	AddObject(dynamic_cast<CGameObject*>(m_ScrollBackground01));
 	AddObject(dynamic_cast<CGameObject*>(m_ScrollBackground02));
 	AddObject(dynamic_cast<CGameObject*>(m_Player));
+
+
+	AddObject(dynamic_cast<CGameObject*>(m_GameUI));
 	CSceneObject::Init();
 	AllInitalize();
 }
@@ -43,9 +47,9 @@ void CGameScene02::Control(CInput* m_Input)
 	static DWORD CurTime = timeGetTime();
 	static DWORD OldTime = 0;
 
-	if (CurTime - OldTime >= 500)
+	if (CurTime - OldTime >= 250)
 	{
-		m_PlayerBullet = new CPlayerBullet(D2D1::Point2F(CGameManager::m_PlayerPos.x, CGameManager::m_PlayerPos.y + 30.0f), PBULLET);
+		m_PlayerBullet = new CPlayerBullet(D2D1::Point2F(CGameManager::m_PlayerPos.x, CGameManager::m_PlayerPos.y + 30.0f), m_Player->GetRot(), PBULLET);
 		CGameManager::m_ObjectManager->AddObject(dynamic_cast<CGameObject*>(m_PlayerBullet));
 		OldTime = CurTime;
 	}

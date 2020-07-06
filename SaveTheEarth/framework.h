@@ -41,10 +41,13 @@
 #include "CGameObject.h"
 #include "CNormalEnemyBullet.h"
 #include "CNormalEnemy.h"
+#include "CBossEnemy.h"
+
 #include "CPlayerBullet.h"
 #include "CPlayer.h"
 #include "CScrollBackground.h"
 #include "CTitleBackground.h"
+#include "CInGameUI.h"
 #include "CObjectManager.h"
 #include "CSceneObject.h"
 #include "CGameScene01.h"
@@ -58,12 +61,15 @@
 
 #define PI 3.141592
 
+#define MAX_PLAYER_HP 1000
+
 enum TAG {
 	PLAYER,
 	PBULLET,
 	ENEMY,
 	EBULLET,
-	BACKGROUND
+	BACKGROUND,
+	UI
 };
 
 enum SCENE {

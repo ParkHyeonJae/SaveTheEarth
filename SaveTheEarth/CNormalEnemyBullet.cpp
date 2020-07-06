@@ -34,11 +34,12 @@ void CNormalEnemyBullet::Control(CInput* Input)
 
 void CNormalEnemyBullet::Release()
 {
+
 }
 
 BOOL CNormalEnemyBullet::IsMapOut()
 {
-	if (MAX_WIN_WIDTH < 0 || MAX_WIN_WIDTH < m_Pos.x)
+	if (m_Pos.x < 0 || MAX_WIN_WIDTH < m_Pos.x)
 		return TRUE;
 	if (MAX_WIN_HEIGHT < m_Pos.y || m_Pos.y < 0)
 		return TRUE;

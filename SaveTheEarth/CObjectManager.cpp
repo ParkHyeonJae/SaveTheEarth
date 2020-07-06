@@ -54,8 +54,9 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 		(*iter)->FrameMove(elapsed);
 		if ((*iter)->m_tag == EBULLET)
 		{
-			if (dynamic_cast<CNormalEnemyBullet*>((*iter))->IsMapOut())
+			if (((CNormalEnemyBullet*)(*iter))->IsMapOut())
 			{
+				(*iter)->Release();
 				m_gameObjectList.erase(iter);
 				break;
 			}

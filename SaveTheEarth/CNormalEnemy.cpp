@@ -42,14 +42,14 @@ void CNormalEnemy::FrameMove(DWORD elapsed)
 		m_Pos.y++;
 	if (m_Pos.y > m_TargetPos.y)
 		m_Pos.y--;
-
+	
 }
 
 void CNormalEnemy::Control(CInput* Input)
 {
 
-	m_NormalEnemyBullet = new CNormalEnemyBullet(m_Pos, EBULLET);
-	CGameManager::m_ObjectManager->AddObject(dynamic_cast<CGameObject*>(m_NormalEnemyBullet));
+	//m_NormalEnemyBullet = new CNormalEnemyBullet(m_Pos, EBULLET);
+	//CGameManager::m_ObjectManager->AddObject(dynamic_cast<CGameObject*>(m_NormalEnemyBullet));
 }
 
 void CNormalEnemy::Release()

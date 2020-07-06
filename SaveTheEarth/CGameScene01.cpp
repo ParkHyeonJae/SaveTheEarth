@@ -29,7 +29,15 @@ void CGameScene01::FrameMove(DWORD elapsed)
 
 void CGameScene01::Render()
 {
-
+#ifdef _DEBUG
+	WCHAR fpsStr[256];
+	wsprintfW(fpsStr, L"MODE:DEBUG\n fps: %d", CGameManager::m_fps);
+	CGameManager::m_Gfx->DrawTextOut(fpsStr, D2D1::Point2F(0, 0));
+#else
+	WCHAR fpsStr[256];
+	wsprintfW(fpsStr, L"MODE:RELEASE\n fps: %d", CGameManager::m_fps);
+	CGameManager::m_Gfx->DrawTextOut(fpsStr, D2D1::Point2F(0, 0));
+#endif
 
 	CSceneObject::Render();
 	AllRender();

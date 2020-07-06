@@ -9,7 +9,7 @@ private:
 	float m_BulletSpeed;
 	float theta;
 public:
-	CPlayerBullet(D2D1_POINT_2F m_Pos, INT tag);
+	CPlayerBullet(D2D1_POINT_2F m_Pos,FLOAT m_Rot, INT tag);
 	~CPlayerBullet();
 
 	virtual void Init() override;

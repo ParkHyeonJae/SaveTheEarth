@@ -9,6 +9,8 @@ public:
 	static D2D1_POINT_2F m_PlayerPos;
 	static FLOAT radian;
 	static INT nowStatus;
+	static DWORD m_fps;
+	static FLOAT m_playerHp;
 public:
 	CGameManager(CGraphics * m_Gfx, CInput* m_Input, CObjectManager * m_ObjectManager);
 	~CGameManager();

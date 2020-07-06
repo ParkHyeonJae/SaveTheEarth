@@ -16,6 +16,7 @@ public:
 
 	void Draw();
 	void Draw(D2D1_POINT_2F Pos);
+	void Draw(D2D1_POINT_2F Pos, D2D1_RECT_F* src);
 	void Draw(D2D1_POINT_2F Pos, D2D1_SIZE_F Scale, D2D1_POINT_2F* center = NULL);
 	void Draw(D2D1_POINT_2F Pos, D2D1_SIZE_F Scale, D2D1_POINT_2F* center = NULL, float angle = 0);
 	//	void Draw(int index, int x, int y);

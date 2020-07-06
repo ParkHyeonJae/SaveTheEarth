@@ -8,6 +8,9 @@ private:
 
 	CScrollBackground* m_ScrollBackground01;
 	CScrollBackground* m_ScrollBackground02;
+
+
+	CInGameUI* m_GameUI;
 public:
 	CGameScene02();
 	~CGameScene02();

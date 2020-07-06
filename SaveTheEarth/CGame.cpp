@@ -91,17 +91,7 @@ INT CGame::Render()
 	std::advance(iter, CGameManager::nowStatus);
 	(*iter)->Render();
 
-	
-
-#ifdef _DEBUG
-	WCHAR fpsStr[256];
-	wsprintfW(fpsStr, L"MODE:DEBUG\n fps: %d", m_fps);
-	m_Gfx->DrawTextOut(fpsStr, D2D1::Point2F(0, 0));
-#else
-	WCHAR fpsStr[256];
-	wsprintfW(fpsStr, L"MODE:RELEASE\n fps: %d", m_fps);
-	m_Gfx->DrawTextOut(fpsStr, D2D1::Point2F(0, 0));
-#endif
+	CGameManager::m_fps = m_fps;
 
 	m_Gfx->EndDraw();
 	return 0;

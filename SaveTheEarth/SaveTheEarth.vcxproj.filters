@@ -105,6 +105,12 @@
     <ClInclude Include="CTitleBackground.h">
       <Filter>헤더 파일\CGameObject\Scene01</Filter>
     </ClInclude>
+    <ClInclude Include="CInGameUI.h">
+      <Filter>헤더 파일\CGameObject\Scene02</Filter>
+    </ClInclude>
+    <ClInclude Include="CBossEnemy.h">
+      <Filter>헤더 파일\CGameObject\Scene02</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SaveTheEarth.cpp">
@@ -160,6 +166,12 @@
     </ClCompile>
     <ClCompile Include="CTitleBackground.cpp">
       <Filter>소스 파일\CGameObject\Scene01</Filter>
+    </ClCompile>
+    <ClCompile Include="CInGameUI.cpp">
+      <Filter>소스 파일\CGameObject\Scene02</Filter>
+    </ClCompile>
+    <ClCompile Include="CBossEnemy.cpp">
+      <Filter>소스 파일\CGameObject\Scene02</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
