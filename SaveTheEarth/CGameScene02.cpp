@@ -15,7 +15,9 @@ void CGameScene02::Init()
 
 	m_ScrollBackground01 = new CScrollBackground(D2D1::Point2F(0, 0), BACKGROUND, CGameManager::m_ScrollSpeed);
 	m_ScrollBackground02 = new CScrollBackground(D2D1::Point2F(MAX_WIN_WIDTH, 0), BACKGROUND, CGameManager::m_ScrollSpeed);
-	m_Player = new CPlayer(D2D1::Point2F(50, 250), PLAYER, 100.0f);
+	m_Player = new CPlayer(D2D1::Point2F(50, 250), PLAYER, MAX_PLAYER_HP);
+	m_BossEnemy = new CBossEnemy(D2D1::Point2F(MAX_WIN_WIDTH, rand() % MAX_WIN_HEIGHT), BOSS);
+
 
 	m_GameUI = new CInGameUI(UI);
 
@@ -23,6 +25,13 @@ void CGameScene02::Init()
 	AddObject(dynamic_cast<CGameObject*>(m_ScrollBackground02));
 	AddObject(dynamic_cast<CGameObject*>(m_Player));
 
+	AddObject(dynamic_cast<CGameObject*>(m_BossEnemy));
+	
+	for (size_t i = 0; i < 3; i++)
+	{
+		MisileEnemy* m_misileEnemy = new MisileEnemy(D2D1::Point2F(0, Mathf::RandomIntValue(0, 500)), MISILE);
+		AddObject(dynamic_cast<CGameObject*>(m_misileEnemy));
+	}
 
 	AddObject(dynamic_cast<CGameObject*>(m_GameUI));
 	CSceneObject::Init();
@@ -31,6 +40,7 @@ void CGameScene02::Init()
 
 void CGameScene02::FrameMove(DWORD elapsed)
 {
+
 	CSceneObject::FrameMove(elapsed);
 	AllFrameMove(elapsed);
 }
@@ -46,15 +56,17 @@ void CGameScene02::Control(CInput* m_Input)
 {
 	static DWORD CurTime = timeGetTime();
 	static DWORD OldTime = 0;
-
-	if (CurTime - OldTime >= 250)
+	
+	if (m_Input->BtnPress(VK_LBUTTON))
 	{
-		m_PlayerBullet = new CPlayerBullet(D2D1::Point2F(CGameManager::m_PlayerPos.x, CGameManager::m_PlayerPos.y + 30.0f), m_Player->GetRot(), PBULLET);
-		CGameManager::m_ObjectManager->AddObject(dynamic_cast<CGameObject*>(m_PlayerBullet));
-		OldTime = CurTime;
+		if (CurTime - OldTime >= 150)
+		{
+			m_PlayerBullet = new CPlayerBullet(D2D1::Point2F(CGameManager::m_PlayerPos.x, CGameManager::m_PlayerPos.y + 30.0f), m_Player->GetRot(), PBULLET);
+			CGameManager::m_ObjectManager->AddObject(dynamic_cast<CGameObject*>(m_PlayerBullet));
+			OldTime = CurTime;
+		}
+		else CurTime = timeGetTime();
 	}
-	else CurTime = timeGetTime();
-
 
 
 	//spawn Enemy

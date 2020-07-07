@@ -105,6 +105,21 @@ void CSprite::Draw(D2D1_POINT_2F Pos)
 	);
 }
 
+void CSprite::Draw(D2D1_POINT_2F Pos, FLOAT overlay)
+{
+	m_gfx->GetRenderTarget()->SetTransform(D2D1::Matrix3x2F::Identity());
+
+	m_gfx->GetRenderTarget()->DrawBitmap(
+		m_bmp,
+		D2D1::RectF(Pos.x, Pos.y,
+			Pos.x + m_bmp->GetSize().width, Pos.y + m_bmp->GetSize().height),
+		overlay,
+		D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR,
+		D2D1::RectF(0.0f, 0.0f,
+			m_bmp->GetSize().width, m_bmp->GetSize().height)
+	);
+}
+
 void CSprite::Draw(D2D1_POINT_2F Pos, D2D1_RECT_F* src)
 {
 	m_gfx->GetRenderTarget()->SetTransform(D2D1::Matrix3x2F::Identity());
@@ -158,6 +173,27 @@ void CSprite::Draw(D2D1_POINT_2F Pos, D2D1_SIZE_F Scale, D2D1_POINT_2F* center, 
 		D2D1::RectF(Pos.x, Pos.y,
 			Pos.x + m_bmp->GetSize().width, Pos.y + m_bmp->GetSize().height),
 		1.0f,
+		D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR,
+		D2D1::RectF(0.0f, 0.0f,
+			m_bmp->GetSize().width, m_bmp->GetSize().height)
+	);
+
+	m_gfx->GetRenderTarget()->SetTransform(D2D1::Matrix3x2F::Identity());
+}
+
+void CSprite::Draw(D2D1_POINT_2F Pos, D2D1_SIZE_F Scale, D2D1_POINT_2F* center, float angle, float overlay)
+{
+	D2D1_MATRIX_3X2_F Mat_Rot = D2D1::Matrix3x2F::Rotation(angle, *center);
+	D2D1_MATRIX_3X2_F Mat_Scale = D2D1::Matrix3x2F::Scale(Scale, *center);
+
+	D2D1_MATRIX_3X2_F Matrix = Mat_Scale * Mat_Rot;
+	m_gfx->GetRenderTarget()->SetTransform(Matrix);
+
+	m_gfx->GetRenderTarget()->DrawBitmap(
+		m_bmp,
+		D2D1::RectF(Pos.x, Pos.y,
+			Pos.x + m_bmp->GetSize().width, Pos.y + m_bmp->GetSize().height),
+		overlay,
 		D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_LINEAR,
 		D2D1::RectF(0.0f, 0.0f,
 			m_bmp->GetSize().width, m_bmp->GetSize().height)

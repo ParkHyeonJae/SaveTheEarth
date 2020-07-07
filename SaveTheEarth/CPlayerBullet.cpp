@@ -10,6 +10,7 @@ CPlayerBullet::CPlayerBullet(D2D1_POINT_2F m_Pos, FLOAT m_Rot, INT tag)
 	m_BulletSprites.push_back(new CSprite(L"../Images/PlayerBullet (0).png", CGameManager::m_Gfx));
 	m_BulletSprites.push_back(new CSprite(L"../Images/PlayerBullet (1).png", CGameManager::m_Gfx));
 	m_BulletSprites.push_back(new CSprite(L"../Images/PlayerBullet (2).png", CGameManager::m_Gfx));
+	m_RifleBulletAnimFunc = new CSpriteAnimation();
 }
 
 CPlayerBullet::~CPlayerBullet()
@@ -18,27 +19,16 @@ CPlayerBullet::~CPlayerBullet()
 
 void CPlayerBullet::Init()
 {
-	CurAnimTime = timeGetTime();
-	OldAnimTime = 0;
-	sequence = 0;
+	RifleBulletAnimSequence = 0;
 }
 
 void CPlayerBullet::Render()
 {
-	D2D1_POINT_2F center = { m_Pos.x + (m_BulletSprites[sequence]->GetBmp()->GetSize().width / 2), m_Pos.y + (m_BulletSprites[sequence]->GetBmp()->GetSize().height / 2) };
-	m_BulletSprites[sequence]->Draw(m_Pos, D2D1::SizeF(1.0f, 1.0f), &center, theta);
+	D2D1_POINT_2F center = { m_Pos.x + (m_BulletSprites[RifleBulletAnimSequence]->GetBmp()->GetSize().width / 2), m_Pos.y + (m_BulletSprites[RifleBulletAnimSequence]->GetBmp()->GetSize().height / 2) };
+	m_BulletSprites[RifleBulletAnimSequence]->Draw(m_Pos, D2D1::SizeF(1.0f, 1.0f), &center, theta);
+	m_RifleBulletAnimFunc->OnAnimRender(100, 0, 3);
 
-	if (CurAnimTime - OldAnimTime > 100)
-	{
-		sequence++;
-		if (sequence == 3)
-			sequence = 0;
-		OldAnimTime = CurAnimTime;
-	}
-	else
-	{
-		CurAnimTime = timeGetTime();
-	}
+	
 	//m_Sprite->Draw(m_Pos);
 }
 
@@ -54,6 +44,11 @@ void CPlayerBullet::Control(CInput* Input)
 
 void CPlayerBullet::Release()
 {
+	if (m_RifleBulletAnimFunc)
+	{
+		delete m_RifleBulletAnimFunc;
+		m_RifleBulletAnimFunc = nullptr;
+	}
 	if (!m_BulletSprites.empty()) {
 		m_BulletSprites.clear();
 	}

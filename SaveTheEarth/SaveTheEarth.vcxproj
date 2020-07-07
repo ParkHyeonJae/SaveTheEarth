@@ -165,9 +165,12 @@
     <ClInclude Include="CSceneObject.h" />
     <ClInclude Include="CScrollBackground.h" />
     <ClInclude Include="CSprite.h" />
+    <ClInclude Include="CSpriteAnimation.h" />
     <ClInclude Include="CTitleBackground.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="IGameObject.h" />
+    <ClInclude Include="Mathf.h" />
+    <ClInclude Include="MisileEnemy.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="SaveTheEarth.h" />
     <ClInclude Include="targetver.h" />
@@ -191,7 +194,10 @@
     <ClCompile Include="CSceneObject.cpp" />
     <ClCompile Include="CScrollBackground.cpp" />
     <ClCompile Include="CSprite.cpp" />
+    <ClCompile Include="CSpriteAnimation.cpp" />
     <ClCompile Include="CTitleBackground.cpp" />
+    <ClCompile Include="Mathf.cpp" />
+    <ClCompile Include="MisileEnemy.cpp" />
     <ClCompile Include="SaveTheEarth.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -46,15 +46,62 @@ void CObjectManager::AllInitalize()
 		iter++;
 	}
 }
-
+BOOL ispBulletColl = FALSE;
 void CObjectManager::AllFrameMove(DWORD elapsed)
 {
 	for (auto iter = m_gameObjectList.begin(); iter != m_gameObjectList.end();)
 	{
 		(*iter)->FrameMove(elapsed);
+
+		if ((*iter)->m_tag == PLAYER)
+		{
+			float CollRange = 40.0f;
+			RECT rPlayerColl = {
+			(*iter)->GetPos().x - CollRange,
+			(*iter)->GetPos().y - CollRange,
+			(*iter)->GetPos().x + CollRange,
+			(*iter)->GetPos().y + CollRange,
+			};
+
+			for (auto iter02 = m_gameObjectList.begin(); iter02 != m_gameObjectList.end();)
+			{
+				if ((*iter02)->m_tag == MISILE)
+				{
+					if (dynamic_cast<MisileEnemy*>((*iter02))->IsSpawn())
+					{
+						if (dynamic_cast<MisileEnemy*>((*iter02))->IsMapOut())
+						{
+							(*iter02)->Release();
+							m_gameObjectList.erase(iter02);
+							break;
+						}
+						RECT rMisileColl = {
+						(*iter02)->GetPos().x - 20.0f,
+						(*iter02)->GetPos().y - 20.0f,
+						(*iter02)->GetPos().x + 20.0f,
+						(*iter02)->GetPos().y + 20.0f,
+						};
+
+						RECT temp;
+						if (IntersectRect(&temp, &rPlayerColl, &rMisileColl))
+						{
+							printf("충돌\n");
+							dynamic_cast<CPlayer*>((*iter))->GetDamage(100.0f);
+							break;
+						}
+					}
+				}
+
+				iter02++;
+			}
+
+		}
+
+		
+
 		if ((*iter)->m_tag == EBULLET)
 		{
-			if (((CNormalEnemyBullet*)(*iter))->IsMapOut())
+			if (dynamic_cast<CNormalEnemyBullet*>((*iter))->IsMapOut())
 			{
 				(*iter)->Release();
 				m_gameObjectList.erase(iter);
@@ -72,34 +119,67 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 			}
 
 			RECT pBulletColl = {
-				(*iter)->GetPos().x - 20,
-				(*iter)->GetPos().y - 20,
-				(*iter)->GetPos().x + 20,
-				(*iter)->GetPos().y + 20,
+				(*iter)->GetPos().x - 20.0f,
+				(*iter)->GetPos().y - 5.0f,
+				(*iter)->GetPos().x + 20.0f,
+				(*iter)->GetPos().y + 5.0f,
 			};
 
 			for (auto Enemyiter = m_gameObjectList.begin(); Enemyiter != m_gameObjectList.end();)
 			{
+				if ((*Enemyiter)->m_tag == BOSS)
+				{
+					RECT EnemyColl = {
+					(*Enemyiter)->GetPos().x + 0.0f,
+					(*Enemyiter)->GetPos().y + 0.0f,
+					(*Enemyiter)->GetPos().x + 200.0f,
+					(*Enemyiter)->GetPos().y + 300.0f,
+					};
+
+					RECT temp;
+					if (IntersectRect(&temp, &pBulletColl, &EnemyColl))		//총알이 보스하고 닿았을때
+					{
+						ispBulletColl = TRUE;
+						break;
+					}
+				}
 				if ((*Enemyiter)->m_tag == ENEMY)
 				{
 					float CollRange = 40.0f;
 					RECT EnemyColl = {
-					(*Enemyiter)->GetPos().x - CollRange,
-					(*Enemyiter)->GetPos().y - CollRange,
-					(*Enemyiter)->GetPos().x + CollRange,
-					(*Enemyiter)->GetPos().y + CollRange,
+					((*Enemyiter)->GetPos().x - CollRange),
+					((*Enemyiter)->GetPos().y - CollRange),
+					((*Enemyiter)->GetPos().x + CollRange),
+					((*Enemyiter)->GetPos().y + CollRange),
 					};
 
 					RECT temp;
 					if (IntersectRect(&temp, &pBulletColl, &EnemyColl))
 					{
+						if (dynamic_cast<CNormalEnemy*>((*Enemyiter))->GetHp() <= 0) {
+							dynamic_cast<CNormalEnemy*>((*Enemyiter))->SetDead(TRUE);
+							break;
+						}
+						dynamic_cast<CNormalEnemy*>((*Enemyiter))->SetHp(
+							dynamic_cast<CNormalEnemy*>((*Enemyiter))->GetHp()
+							- dynamic_cast<CPlayerBullet*>((*iter))->GetDamage());
+						ispBulletColl = TRUE;
+						
+						break;
+					}
+					if (dynamic_cast<CNormalEnemy*>((*Enemyiter))->IsDelete()) {
 						m_gameObjectList.erase(Enemyiter);
 						break;
 					}
 				}
 				Enemyiter++;
 			}
-
+			if (ispBulletColl)
+			{
+				m_gameObjectList.erase(iter);
+				ispBulletColl = FALSE;
+				break;
+			}
 		}
 		
 		iter++;

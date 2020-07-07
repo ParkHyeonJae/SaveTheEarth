@@ -14,14 +14,15 @@
 #pragma comment(lib, "d2d1.lib")
 #pragma comment(lib, "dwrite.lib")
 
-
 // C 런타임 헤더 파일입니다.
 #include <stdlib.h>
 #include <malloc.h>
 #include <memory.h>
 #include <tchar.h>
 #include <stdio.h>
+#include <iostream>
 #include <string.h>
+#include <cmath>
 #include <ctime>
 #include <Mmsystem.h>
 #include <atlstr.h>
@@ -39,10 +40,11 @@
 #include "CSprite.h"
 #include "IGameObject.h"
 #include "CGameObject.h"
+#include "CSpriteAnimation.h"
 #include "CNormalEnemyBullet.h"
 #include "CNormalEnemy.h"
 #include "CBossEnemy.h"
-
+#include "MisileEnemy.h"
 #include "CPlayerBullet.h"
 #include "CPlayer.h"
 #include "CScrollBackground.h"
@@ -55,6 +57,7 @@
 #include "CGameManager.h"
 #include "CDX2DApp.h"
 #include "CGame.h"
+#include "Mathf.h"
 
 #define MAX_WIN_WIDTH 1600
 #define MAX_WIN_HEIGHT 900
@@ -69,7 +72,9 @@ enum TAG {
 	ENEMY,
 	EBULLET,
 	BACKGROUND,
-	UI
+	BOSS,
+	MISILE,
+	UI,
 };
 
 enum SCENE {
@@ -77,7 +82,11 @@ enum SCENE {
 	GAME01,
 	GAMEOVER
 };
-
+enum GUNS
+{
+	Rifle,
+	Shotgun
+};
 #ifdef _DEBUG
 
 #ifdef UNICODE

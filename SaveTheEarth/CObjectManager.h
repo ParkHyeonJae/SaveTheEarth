@@ -19,6 +19,7 @@ public:
 	void AllRender();
 	void AllRelease();
 
+	std::list<CGameObject*> GetObjectList() { return m_gameObjectList; }
 	CObjectManager* GetObjectManager() { return this; }
 };
 

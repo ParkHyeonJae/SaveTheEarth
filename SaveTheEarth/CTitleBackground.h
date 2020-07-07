@@ -1,7 +1,56 @@
 #pragma once
 class CTitleBackground : public CGameObject
 {
-	CSprite* Title;
+	CSprite* m_Title;
+	CSprite* m_Logo;
+	CSprite* m_Cloud01;
+	CSprite* m_Cloud02;
+	FLOAT m_CloudPosX01;
+	FLOAT m_CloudPosX02;
+
+	FLOAT m_LogoPosY;
+	FLOAT tTime = 0.0f;
+	FLOAT dTime = 0.01f;
+
+	FLOAT m_CloudMoveSpeed;
+
+	D2D1_POINT_2F m_UIPos;
+private:
+	enum UISTATE {
+		IDLE,
+		SELECT,
+		PRESS
+	};
+	enum UI {
+		GAMESTART,
+		HOWTOPLAY,
+		CREDIT,
+		OPTION,
+		EXIT
+	};
+	CSprite* m_GameStart[3];
+	CSprite* m_HowToPlay[3];
+	CSprite* m_Credit[3];
+	CSprite* m_Option[3];
+	CSprite* m_Exit[3];
+
+	INT m_uiSequence;
+	INT m_uiState[5];
+	INT m_uiSelected;
+
+	DWORD CurLoadTime;
+	DWORD OldLoadTime;
+	FLOAT UIOffset;
+private:
+	std::vector<CSprite*> m_UISelectAnim;
+	INT m_UISelectAnimSequence;
+	CSpriteAnimation* m_UISelectAnimFunc;
+
+	D2D1_POINT_2F GameStartUIPos;
+	D2D1_POINT_2F HowToPlayUIPos;
+	D2D1_POINT_2F CreditUIPos;
+	D2D1_POINT_2F OptionUIPos;
+	D2D1_POINT_2F ExitUIPos;
 public:
 	CTitleBackground(D2D1_POINT_2F m_Pos, INT tag);
 	~CTitleBackground();

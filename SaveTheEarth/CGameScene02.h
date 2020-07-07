@@ -9,6 +9,7 @@ private:
 	CScrollBackground* m_ScrollBackground01;
 	CScrollBackground* m_ScrollBackground02;
 
+	CBossEnemy* m_BossEnemy;
 
 	CInGameUI* m_GameUI;
 public:
