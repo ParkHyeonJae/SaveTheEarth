@@ -166,6 +166,7 @@
     <ClInclude Include="CScrollBackground.h" />
     <ClInclude Include="CSprite.h" />
     <ClInclude Include="CSpriteAnimation.h" />
+    <ClInclude Include="CTimer.h" />
     <ClInclude Include="CTitleBackground.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="IGameObject.h" />
@@ -195,6 +196,7 @@
     <ClCompile Include="CScrollBackground.cpp" />
     <ClCompile Include="CSprite.cpp" />
     <ClCompile Include="CSpriteAnimation.cpp" />
+    <ClCompile Include="CTimer.cpp" />
     <ClCompile Include="CTitleBackground.cpp" />
     <ClCompile Include="Mathf.cpp" />
     <ClCompile Include="MisileEnemy.cpp" />

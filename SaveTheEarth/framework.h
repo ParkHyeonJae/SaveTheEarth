@@ -40,6 +40,7 @@
 #include "CSprite.h"
 #include "IGameObject.h"
 #include "CGameObject.h"
+#include "CTimer.h"
 #include "CSpriteAnimation.h"
 #include "CNormalEnemyBullet.h"
 #include "CNormalEnemy.h"
@@ -82,8 +83,15 @@ enum SCENE {
 	GAME01,
 	GAMEOVER
 };
+enum PLAYERSTATE
+{
+	IDLE,
+	BACK,
+	FORWARD
+};
 enum GUNS
 {
+	DEFAULT,
 	Rifle,
 	Shotgun
 };

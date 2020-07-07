@@ -3,7 +3,6 @@ class CGameScene02 : public CSceneObject, CObjectManager
 {
 private:
 	CPlayer* m_Player;
-	CPlayerBullet* m_PlayerBullet;
 	CNormalEnemy* m_NormalEnemy;
 
 	CScrollBackground* m_ScrollBackground01;

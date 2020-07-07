@@ -39,7 +39,6 @@ CTitleBackground::CTitleBackground(D2D1_POINT_2F m_Pos, INT tag)
 CTitleBackground::~CTitleBackground()
 {
 }
-
 void CTitleBackground::Init()
 {
 	m_CloudPosX01 = 0.0f;
@@ -60,13 +59,13 @@ void CTitleBackground::Init()
 
 	m_UISelectAnimSequence = 0;
 
+	
 	GameStartUIPos = D2D1::Point2F(m_UIPos.x - UIOffset, m_UIPos.y - UIOffset);
 	HowToPlayUIPos = D2D1::Point2F(m_UIPos.x - UIOffset, m_UIPos.y + 100 - UIOffset);
-	CreditUIPos = D2D1::Point2F(m_UIPos.x - UIOffset, m_UIPos.y + 200 - UIOffset);
-	OptionUIPos = D2D1::Point2F(m_UIPos.x - UIOffset, m_UIPos.y + 300 - UIOffset);
-	ExitUIPos = D2D1::Point2F(m_UIPos.x - UIOffset, m_UIPos.y + 400 - UIOffset);
+	CreditUIPos = D2D1::Point2F(m_UIPos.x - UIOffset + 50.0f, m_UIPos.y + 200 - UIOffset);
+	OptionUIPos = D2D1::Point2F(m_UIPos.x - UIOffset + 110.0f, m_UIPos.y + 300 - UIOffset);
+	ExitUIPos = D2D1::Point2F(m_UIPos.x - UIOffset + 110.0f, m_UIPos.y + 400 - UIOffset);
 }
-
 void CTitleBackground::Render()
 {
 
@@ -87,17 +86,22 @@ void CTitleBackground::Render()
 	else m_HowToPlay[m_uiState[HOWTOPLAY]]->Draw(HowToPlayUIPos);
 
 
-	if (m_uiState[CREDIT] != SELECT) m_Credit[m_uiState[CREDIT]]->Draw(D2D1::Point2F(m_UIPos.x, m_UIPos.y + 200));
+	if (m_uiState[CREDIT] != SELECT) m_Credit[m_uiState[CREDIT]]->Draw(D2D1::Point2F(m_UIPos.x + 50, m_UIPos.y + 200));
 	else m_Credit[m_uiState[CREDIT]]->Draw(CreditUIPos);
 
 
-	if (m_uiState[OPTION] != SELECT) m_Option[m_uiState[OPTION]]->Draw(D2D1::Point2F(m_UIPos.x, m_UIPos.y + 300));
+	if (m_uiState[OPTION] != SELECT) m_Option[m_uiState[OPTION]]->Draw(D2D1::Point2F(m_UIPos.x + 110.0f, m_UIPos.y + 300));
 	else m_Option[m_uiState[OPTION]]->Draw(OptionUIPos);
 
 
-	if (m_uiState[EXIT] != SELECT) m_Exit[m_uiState[EXIT]]->Draw(D2D1::Point2F(m_UIPos.x, m_UIPos.y + 400));
+	if (m_uiState[EXIT] != SELECT) m_Exit[m_uiState[EXIT]]->Draw(D2D1::Point2F(m_UIPos.x + 110.0f, m_UIPos.y + 400));
 	else m_Exit[m_uiState[EXIT]]->Draw(ExitUIPos);
 
+	static INT wasSequence = m_uiSequence;
+	if (wasSequence != m_uiSequence) {
+		m_UISelectAnimSequence = 0;
+		wasSequence = m_uiSequence;
+	}
 
 	switch (m_uiSequence)
 	{
@@ -110,42 +114,47 @@ void CTitleBackground::Render()
 
 		if (m_UISelectAnimSequence != 3)
 			m_UISelectAnimSequence = m_UISelectAnimFunc->OnAnimRender(50, 0, 4);
-		
-			
-
-
 		break;
 	case HOWTOPLAY:
 		m_uiState[GAMESTART] = IDLE;
 		m_uiState[HOWTOPLAY] = SELECT;
 		m_uiState[CREDIT] = IDLE;
 
-		m_UISelectAnim[m_UISelectAnimSequence]->Draw(HowToPlayUIPos);
-		m_UISelectAnimSequence = m_UISelectAnimFunc->OnAnimRender(50, 0, 4);
+		m_UISelectAnim[m_UISelectAnimSequence]->Draw(D2D1::Point2F(HowToPlayUIPos.x + 60, HowToPlayUIPos.y + 10));
+		
+		if (m_UISelectAnimSequence != 3)
+			m_UISelectAnimSequence = m_UISelectAnimFunc->OnAnimRender(50, 0, 4);
+
 		break;
 	case CREDIT:
 		m_uiState[HOWTOPLAY] = IDLE;
 		m_uiState[CREDIT] = SELECT;
 		m_uiState[OPTION] = IDLE;
 
-		m_UISelectAnim[m_UISelectAnimSequence]->Draw(CreditUIPos);
-		m_UISelectAnimSequence = m_UISelectAnimFunc->OnAnimRender(50, 0, 4);
+		m_UISelectAnim[m_UISelectAnimSequence]->Draw(D2D1::Point2F(CreditUIPos.x + 10, CreditUIPos.y + 10));
+
+		if (m_UISelectAnimSequence != 3)
+			m_UISelectAnimSequence = m_UISelectAnimFunc->OnAnimRender(50, 0, 4);
 		break;
 	case OPTION:
 		m_uiState[CREDIT] = IDLE;
 		m_uiState[OPTION] = SELECT;
 		m_uiState[EXIT] = IDLE;
 
-		m_UISelectAnim[m_UISelectAnimSequence]->Draw(OptionUIPos);
-		m_UISelectAnimSequence = m_UISelectAnimFunc->OnAnimRender(50, 0, 4);
+		m_UISelectAnim[m_UISelectAnimSequence]->Draw(D2D1::Point2F(OptionUIPos.x - 50, OptionUIPos.y + 10));
+
+		if (m_UISelectAnimSequence != 3)
+			m_UISelectAnimSequence = m_UISelectAnimFunc->OnAnimRender(50, 0, 4);
 		break;
 	case EXIT:
 		m_uiState[OPTION] = IDLE;
 		m_uiState[EXIT] = SELECT;
 		m_uiState[GAMESTART] = IDLE;
 
-		m_UISelectAnim[m_UISelectAnimSequence]->Draw(ExitUIPos);
-		m_UISelectAnimSequence = m_UISelectAnimFunc->OnAnimRender(50, 0, 4);
+		m_UISelectAnim[m_UISelectAnimSequence]->Draw(D2D1::Point2F(ExitUIPos.x - 50, ExitUIPos.y + 10));
+
+		if (m_UISelectAnimSequence != 3)
+			m_UISelectAnimSequence = m_UISelectAnimFunc->OnAnimRender(50, 0, 4);
 		break;
 	default:
 		if (m_uiSequence == 5)

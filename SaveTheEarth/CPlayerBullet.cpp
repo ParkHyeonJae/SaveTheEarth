@@ -1,9 +1,10 @@
 #include "framework.h"
 
-CPlayerBullet::CPlayerBullet(D2D1_POINT_2F m_Pos, FLOAT m_Rot, INT tag)
+CPlayerBullet::CPlayerBullet(D2D1_POINT_2F m_Pos, FLOAT m_Rot, INT tag, INT m_GUN)
 {
 	this->m_Pos = m_Pos;
 	this->m_tag = tag;
+	this->m_GUN = m_GUN;
 	//printf("%f\n", m_Rot);
 	theta = m_Rot;
 	m_BulletSpeed = 1.0f;
@@ -34,6 +35,15 @@ void CPlayerBullet::Render()
 
 void CPlayerBullet::FrameMove(DWORD elapsed)
 {
+	switch (m_GUN)
+	{
+	case Rifle:
+		m_BulletSpeed = 2;
+		break;
+	case Shotgun:
+
+		break;
+	}
 	m_Pos.x += cosf(theta * CGameManager::radian) * m_BulletSpeed * elapsed;
 	m_Pos.y += sinf(theta * CGameManager::radian) * m_BulletSpeed * elapsed;
 }

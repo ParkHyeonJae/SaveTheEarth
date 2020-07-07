@@ -9,8 +9,10 @@ private:
 	float theta;
 
 	FLOAT m_BulletDamage = 20.0f;
+
+	INT m_GUN;
 public:
-	CPlayerBullet(D2D1_POINT_2F m_Pos,FLOAT m_Rot, INT tag);
+	CPlayerBullet(D2D1_POINT_2F m_Pos,FLOAT m_Rot, INT tag, INT m_GUN);
 	~CPlayerBullet();
 
 	virtual void Init() override;

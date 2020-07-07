@@ -54,21 +54,6 @@ void CGameScene02::Render()
 
 void CGameScene02::Control(CInput* m_Input)
 {
-	static DWORD CurTime = timeGetTime();
-	static DWORD OldTime = 0;
-	
-	if (m_Input->BtnPress(VK_LBUTTON))
-	{
-		if (CurTime - OldTime >= 150)
-		{
-			m_PlayerBullet = new CPlayerBullet(D2D1::Point2F(CGameManager::m_PlayerPos.x, CGameManager::m_PlayerPos.y + 30.0f), m_Player->GetRot(), PBULLET);
-			CGameManager::m_ObjectManager->AddObject(dynamic_cast<CGameObject*>(m_PlayerBullet));
-			OldTime = CurTime;
-		}
-		else CurTime = timeGetTime();
-	}
-
-
 	//spawn Enemy
 	if (m_Input->KeyDown(VK_F1)) {
 		m_NormalEnemy = new CNormalEnemy(D2D1::Point2F(MAX_WIN_WIDTH, rand() % MAX_WIN_HEIGHT), ENEMY);

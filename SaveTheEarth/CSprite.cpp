@@ -146,6 +146,10 @@ void CSprite::Draw(D2D1_POINT_2F Pos, D2D1_RECT_F* src)
 
 void CSprite::Draw(D2D1_POINT_2F Pos, D2D1_SIZE_F Scale, D2D1_POINT_2F* center)
 {
+	if (center == NULL) {
+		D2D1_POINT_2F ct = { (Pos.x + m_bmp->GetSize().width / 2) , (Pos.y + m_bmp->GetSize().height / 2) };
+		center = &ct;
+	}
 	m_gfx->GetRenderTarget()->SetTransform(D2D1::Matrix3x2F::Scale(Scale,*center));
 
 	m_gfx->GetRenderTarget()->DrawBitmap(
@@ -162,6 +166,10 @@ void CSprite::Draw(D2D1_POINT_2F Pos, D2D1_SIZE_F Scale, D2D1_POINT_2F* center)
 
 void CSprite::Draw(D2D1_POINT_2F Pos, D2D1_SIZE_F Scale, D2D1_POINT_2F* center, float angle)
 {
+	if (center == NULL) {
+		D2D1_POINT_2F ct = { (Pos.x + m_bmp->GetSize().width / 2) , (Pos.y + m_bmp->GetSize().height / 2) };
+		center = &ct;
+	}
 	D2D1_MATRIX_3X2_F Mat_Rot = D2D1::Matrix3x2F::Rotation(angle, *center);
 	D2D1_MATRIX_3X2_F Mat_Scale = D2D1::Matrix3x2F::Scale(Scale, *center);
 
@@ -183,6 +191,10 @@ void CSprite::Draw(D2D1_POINT_2F Pos, D2D1_SIZE_F Scale, D2D1_POINT_2F* center, 
 
 void CSprite::Draw(D2D1_POINT_2F Pos, D2D1_SIZE_F Scale, D2D1_POINT_2F* center, float angle, float overlay)
 {
+	if (center == NULL) {
+		D2D1_POINT_2F ct = { (Pos.x + m_bmp->GetSize().width / 2) , (Pos.y + m_bmp->GetSize().height / 2) };
+		center = &ct;
+	}
 	D2D1_MATRIX_3X2_F Mat_Rot = D2D1::Matrix3x2F::Rotation(angle, *center);
 	D2D1_MATRIX_3X2_F Mat_Scale = D2D1::Matrix3x2F::Scale(Scale, *center);
 
@@ -204,6 +216,10 @@ void CSprite::Draw(D2D1_POINT_2F Pos, D2D1_SIZE_F Scale, D2D1_POINT_2F* center, 
 
 void CSprite::Draw(D2D1_RECT_F* src, D2D1_POINT_2F pos, D2D1_POINT_2F Scale, D2D1_POINT_2F* center, float angle)
 {
+	if (center == NULL) {
+		D2D1_POINT_2F ct = { (pos.x + m_bmp->GetSize().width / 2) , (pos.y + m_bmp->GetSize().height / 2) };
+		center = &ct;
+	}
 	m_gfx->GetRenderTarget()->SetTransform(D2D1::Matrix3x2F::Identity());
 
 	D2D1_RECT_F dest = D2D1::RectF(
