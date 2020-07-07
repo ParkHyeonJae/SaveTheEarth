@@ -12,5 +12,7 @@ public:
 	virtual void FrameMove(DWORD elapsed) override;
 	virtual void Control(CInput* Input) override;
 	virtual void Release() override;
+
+	BOOL IsMapOut();
 };
 

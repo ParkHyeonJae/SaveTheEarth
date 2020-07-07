@@ -14,14 +14,15 @@
 #pragma comment(lib, "d2d1.lib")
 #pragma comment(lib, "dwrite.lib")
 
-
 // C 런타임 헤더 파일입니다.
 #include <stdlib.h>
 #include <malloc.h>
 #include <memory.h>
 #include <tchar.h>
 #include <stdio.h>
+#include <iostream>
 #include <string.h>
+#include <cmath>
 #include <ctime>
 #include <Mmsystem.h>
 #include <atlstr.h>
@@ -39,29 +40,61 @@
 #include "CSprite.h"
 #include "IGameObject.h"
 #include "CGameObject.h"
+#include "CTimer.h"
+#include "CSpriteAnimation.h"
 #include "CNormalEnemyBullet.h"
 #include "CNormalEnemy.h"
+#include "CBossEnemy.h"
+#include "MisileEnemy.h"
 #include "CPlayerBullet.h"
 #include "CPlayer.h"
 #include "CScrollBackground.h"
+#include "CTitleBackground.h"
+#include "CInGameUI.h"
 #include "CObjectManager.h"
+#include "CSceneObject.h"
+#include "CGameScene01.h"
+#include "CGameScene02.h"
 #include "CGameManager.h"
 #include "CDX2DApp.h"
 #include "CGame.h"
+#include "Mathf.h"
 
 #define MAX_WIN_WIDTH 1600
 #define MAX_WIN_HEIGHT 900
 
 #define PI 3.141592
 
+#define MAX_PLAYER_HP 1000
+
 enum TAG {
 	PLAYER,
 	PBULLET,
 	ENEMY,
 	EBULLET,
-	BACKGROUND
+	BACKGROUND,
+	BOSS,
+	MISILE,
+	UI,
 };
 
+enum SCENE {
+	TITLE,
+	GAME01,
+	GAMEOVER
+};
+enum PLAYERSTATE
+{
+	IDLE,
+	BACK,
+	FORWARD
+};
+enum GUNS
+{
+	DEFAULT,
+	Rifle,
+	Shotgun
+};
 #ifdef _DEBUG
 
 #ifdef UNICODE
