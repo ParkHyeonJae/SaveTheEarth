@@ -20,13 +20,13 @@ void CNormalEnemy::Init()
 
 void CNormalEnemy::Render()
 {
-	D2D1_POINT_2F center = { m_Sprite->GetBmp()->GetSize().width / 2, m_Sprite->GetBmp()->GetSize().height };
+	D2D1_POINT_2F center = { m_Pos.x + (m_Sprite->GetBmp()->GetSize().width / 2),  m_Pos.y + (m_Sprite->GetBmp()->GetSize().height) };
 	m_Sprite->Draw(m_Pos, D2D1::SizeF(1.0f, 1.0f), &center, angle);
 }
 
 void CNormalEnemy::FrameMove(DWORD elapsed)
 {
-	angle = atan2f(CGameManager::m_PlayerPos.y - m_TargetPos.y, CGameManager::m_PlayerPos.x - m_TargetPos.x);
+	angle = atan2f((CGameManager::m_PlayerPos.y - m_TargetPos.y), CGameManager::m_PlayerPos.x - m_TargetPos.x);
 	if (m_Pos.x < m_TargetPos.x)
 		m_Pos.x--;
 	if (m_Pos.x > m_TargetPos.x)
