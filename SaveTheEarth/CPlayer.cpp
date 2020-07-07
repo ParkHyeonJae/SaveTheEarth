@@ -25,15 +25,27 @@ CPlayer::CPlayer(D2D1_POINT_2F m_Pos, INT tag, FLOAT m_HP) : CGameObject()
 	m_playerForwardMotion.push_back(new CSprite(L"../Images/Sprites/09 Player Motion/BACK/3.png", CGameManager::m_Gfx));
 	m_playerForwardMotion.push_back(new CSprite(L"../Images/Sprites/09 Player Motion/BACK/4.png", CGameManager::m_Gfx));
 	
-	m_DefaultGun = new CSprite(L"../Images/Sprites//DefaultGun.png", CGameManager::m_Gfx);
+	m_DefaultGun = new CSprite(L"../Images/Sprites/DefaultGun.png", CGameManager::m_Gfx);
 
-	//m_RifleMotion.push_back(new CSprite(L"../Images/Sprites//DefaultGun.png", CGameManager::m_Gfx));
+	m_RifleMotion.push_back(new CSprite(L"../Images/Sprites/02 Rifle Motion/1.png", CGameManager::m_Gfx));
+	m_RifleMotion.push_back(new CSprite(L"../Images/Sprites/02 Rifle Motion/2.png", CGameManager::m_Gfx));
+	m_RifleMotion.push_back(new CSprite(L"../Images/Sprites/02 Rifle Motion/3.png", CGameManager::m_Gfx));
+	m_RifleMotion.push_back(new CSprite(L"../Images/Sprites/02 Rifle Motion/4.png", CGameManager::m_Gfx));
+	m_RifleMotion.push_back(new CSprite(L"../Images/Sprites/02 Rifle Motion/5.png", CGameManager::m_Gfx));
+
+	m_ShotgunMotion.push_back(new CSprite(L"../Images/Sprites/06 Shotgun Motion/1.png", CGameManager::m_Gfx));
+	m_ShotgunMotion.push_back(new CSprite(L"../Images/Sprites/06 Shotgun Motion/2.png", CGameManager::m_Gfx));
+	m_ShotgunMotion.push_back(new CSprite(L"../Images/Sprites/06 Shotgun Motion/3.png", CGameManager::m_Gfx));
+	m_ShotgunMotion.push_back(new CSprite(L"../Images/Sprites/06 Shotgun Motion/4.png", CGameManager::m_Gfx));
+	m_ShotgunMotion.push_back(new CSprite(L"../Images/Sprites/06 Shotgun Motion/5.png", CGameManager::m_Gfx));
 
 	for (INT i = 0; i < PLAYER_ANIM_COUNT; i++)
 	{
 		m_PlayerMotionAnimSequence[i] = 0;
 		m_PlayerMotionAnimFunc[i] = new CSpriteAnimation();
 	}
+	m_RifleMotionFunc = new CSpriteAnimation();
+	m_ShotgunMotionFunc = new CSpriteAnimation();
 }
 
 CPlayer::~CPlayer()
@@ -51,6 +63,10 @@ void CPlayer::Init()
 	m_playerState = IDLE;
 
 	m_GunState = DEFAULT;
+
+	m_RifleMotionSequence = 0;
+	m_ShotgunMotionSequence = 0;
+
 }
 
 
@@ -101,12 +117,12 @@ void CPlayer::Control(CInput* m_Input)
 	if (m_Input->KeyPress(VK_LEFT) || m_Input->KeyPress('A'))
 	{
 		m_Pos.x -= MoveSpeed;
-		m_playerState = BACK;
+		m_playerState = FORWARD;
 	}
 	if (m_Input->KeyPress(VK_RIGHT) || m_Input->KeyPress('D'))
 	{
 		m_Pos.x += MoveSpeed;
-		m_playerState = FORWARD;
+		m_playerState = BACK;
 	}
 
 	if (m_Pos.x > MAX_WIN_WIDTH - 120)
@@ -126,7 +142,7 @@ void CPlayer::Control(CInput* m_Input)
 		if (m_playerBulletFireTimer->OnTimer())
 		{
 			m_GunState = Rifle;
-			m_PlayerBullet = new CPlayerBullet(D2D1::Point2F(CGameManager::m_PlayerPos.x, CGameManager::m_PlayerPos.y + 30.0f), m_Rot, PBULLET, m_GunState);
+			m_PlayerBullet = new CPlayerBullet(D2D1::Point2F(CGameManager::m_PlayerPos.x, CGameManager::m_PlayerPos.y + 15.0f), m_Rot, PBULLET, m_GunState);
 			CGameManager::m_ObjectManager->AddObject(dynamic_cast<CGameObject*>(m_PlayerBullet));
 		}
 	}
@@ -167,7 +183,38 @@ void CPlayer::Render()
 		break;
 	}
 	
-	m_DefaultGun->Draw(D2D1::Point2F(m_Pos.x, m_Pos.y), D2D1::SizeF(1.0f, 1.0f), NULL, m_Rot, overlay);
+	switch (m_GunState)
+	{
+	case DEFAULT:
+		m_DefaultGun->Draw(D2D1::Point2F(m_Pos.x + 30, m_Pos.y + 20), D2D1::SizeF(1.0f, 1.0f), NULL, m_Rot, overlay);
+		break;
+	case Rifle:
+		if (!m_RifleMotionFunc->IsEndFrame()) {
+			D2D1_POINT_2F center = { (m_Pos.x + m_RifleMotion[m_RifleMotionSequence]->GetBmp()->GetSize().width / 2) 
+				, (m_Pos.y + m_RifleMotion[m_RifleMotionSequence]->GetBmp()->GetSize().height / 2) };
+			m_RifleMotion[m_RifleMotionSequence]->Draw(D2D1::Point2F(m_Pos.x, m_Pos.y), D2D1::SizeF(1.0f, 1.0f), &center, m_Rot, overlay);
+			m_RifleMotionSequence = m_RifleMotionFunc->OnAnimRender(50, 0, 5);
+		}
+		else {
+			m_RifleMotionSequence = 0;
+			m_RifleMotionFunc->InitSequence();
+			m_GunState = DEFAULT;
+		}
+		
+		break;
+	case Shotgun:
+		if (!m_ShotgunMotionFunc->IsEndFrame()) {
+			m_ShotgunMotion[m_ShotgunMotionSequence]->Draw(D2D1::Point2F(m_Pos.x, m_Pos.y - 5), D2D1::SizeF(1.0f, 1.0f), NULL, m_Rot, overlay);
+			m_ShotgunMotionSequence = m_ShotgunMotionFunc->OnAnimRender(50, 0, 5);
+		}
+		else {
+			m_ShotgunMotionSequence = 0;
+			m_ShotgunMotionFunc->InitSequence();
+			m_GunState = DEFAULT;
+		}
+		break;
+	}
+	
 
 }
 

@@ -139,6 +139,7 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 					RECT temp;
 					if (IntersectRect(&temp, &pBulletColl, &EnemyColl))		//총알이 보스하고 닿았을때
 					{
+						//dynamic_cast<CPlayerBullet*>((*iter))->SetColl(TRUE);
 						ispBulletColl = TRUE;
 						break;
 					}
@@ -163,6 +164,10 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 						dynamic_cast<CNormalEnemy*>((*Enemyiter))->SetHp(
 							dynamic_cast<CNormalEnemy*>((*Enemyiter))->GetHp()
 							- dynamic_cast<CPlayerBullet*>((*iter))->GetDamage());
+
+						//dynamic_cast<CPlayerBullet*>((*iter))->SetColl(TRUE);
+
+						
 						ispBulletColl = TRUE;
 						
 						break;
@@ -174,6 +179,11 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 				}
 				Enemyiter++;
 			}
+			//if (dynamic_cast<CPlayerBullet*>((*iter))->IsDelete())
+			//{
+			//	m_gameObjectList.erase(iter);
+			//	break;
+			//}
 			if (ispBulletColl)
 			{
 				m_gameObjectList.erase(iter);

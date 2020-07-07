@@ -14,6 +14,13 @@ private:
 	std::vector<CSprite*> m_RifleMotion;
 	std::vector<CSprite*> m_ShotgunMotion;
 	CSprite* m_DefaultGun;
+
+	INT m_RifleMotionSequence;
+	INT m_ShotgunMotionSequence;
+
+	CSpriteAnimation* m_RifleMotionFunc;
+	CSpriteAnimation* m_ShotgunMotionFunc;
+
 private:
 	float m_Rot;
 	float MoveSpeed;

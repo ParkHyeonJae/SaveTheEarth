@@ -76,11 +76,84 @@ void CTitleBackground::Render()
 	m_Cloud02->Draw(D2D1::Point2F(m_CloudPosX02, 200));
 	m_Logo->Draw(D2D1::Point2F(70, m_LogoPosY));
 
+	static INT wasSequence = m_uiSequence;
+	if (wasSequence != m_uiSequence) {
+		m_UISelectAnimSequence = 0;
+		wasSequence = m_uiSequence;
+	}
 
+	switch (m_uiSequence)
+	{
+	case GAMESTART:
+
+		m_UISelectAnim[m_UISelectAnimSequence]->Draw(D2D1::Point2F(GameStartUIPos.x + 60, GameStartUIPos.y + 10));
+
+		if (m_UISelectAnimSequence != 3) {
+			m_uiState[EXIT] = IDLE;
+			m_uiState[GAMESTART] = SELECT;
+			m_uiState[HOWTOPLAY] = IDLE;
+			m_UISelectAnimSequence = m_UISelectAnimFunc->OnAnimRender(50, 0, 4);
+		}
+		break;
+	case HOWTOPLAY:
+
+
+		m_UISelectAnim[m_UISelectAnimSequence]->Draw(D2D1::Point2F(HowToPlayUIPos.x + 60, HowToPlayUIPos.y + 10));
+		
+		if (m_UISelectAnimSequence != 3) {
+			m_uiState[GAMESTART] = IDLE;
+			m_uiState[HOWTOPLAY] = SELECT;
+			m_uiState[CREDIT] = IDLE;
+			m_UISelectAnimSequence = m_UISelectAnimFunc->OnAnimRender(50, 0, 4);
+		}
+		break;
+	case CREDIT:
+
+
+		m_UISelectAnim[m_UISelectAnimSequence]->Draw(D2D1::Point2F(CreditUIPos.x + 10, CreditUIPos.y + 10));
+
+		if (m_UISelectAnimSequence != 3) {
+			m_uiState[HOWTOPLAY] = IDLE;
+			m_uiState[CREDIT] = SELECT;
+			m_uiState[OPTION] = IDLE;
+			m_UISelectAnimSequence = m_UISelectAnimFunc->OnAnimRender(50, 0, 4);
+		}
+		break;
+	case OPTION:
+
+
+		m_UISelectAnim[m_UISelectAnimSequence]->Draw(D2D1::Point2F(OptionUIPos.x - 50, OptionUIPos.y + 10));
+
+		if (m_UISelectAnimSequence != 3) {
+			m_uiState[CREDIT] = IDLE;
+			m_uiState[OPTION] = SELECT;
+			m_uiState[EXIT] = IDLE;
+			m_UISelectAnimSequence = m_UISelectAnimFunc->OnAnimRender(50, 0, 4);
+		}
+		break;
+	case EXIT:
+
+
+		m_UISelectAnim[m_UISelectAnimSequence]->Draw(D2D1::Point2F(ExitUIPos.x - 50, ExitUIPos.y + 10));
+
+		if (m_UISelectAnimSequence != 3) {
+			m_uiState[OPTION] = IDLE;
+			m_uiState[EXIT] = SELECT;
+			m_uiState[GAMESTART] = IDLE;
+			m_UISelectAnimSequence = m_UISelectAnimFunc->OnAnimRender(50, 0, 4);
+		}
+		break;
+	default:
+		if (m_uiSequence == 5)
+			m_uiSequence = GAMESTART;
+		if (m_uiSequence == -1)
+			m_uiSequence = EXIT;
+		break;
+	}
 
 	if (m_uiState[GAMESTART] != SELECT) m_GameStart[m_uiState[GAMESTART]]->Draw(D2D1::Point2F(m_UIPos.x, m_UIPos.y));
 	else m_GameStart[m_uiState[GAMESTART]]->Draw(GameStartUIPos);
-	
+
 
 	if (m_uiState[HOWTOPLAY] != SELECT) m_HowToPlay[m_uiState[HOWTOPLAY]]->Draw(D2D1::Point2F(m_UIPos.x, m_UIPos.y + 100));
 	else m_HowToPlay[m_uiState[HOWTOPLAY]]->Draw(HowToPlayUIPos);
@@ -96,73 +169,6 @@ void CTitleBackground::Render()
 
 	if (m_uiState[EXIT] != SELECT) m_Exit[m_uiState[EXIT]]->Draw(D2D1::Point2F(m_UIPos.x + 110.0f, m_UIPos.y + 400));
 	else m_Exit[m_uiState[EXIT]]->Draw(ExitUIPos);
-
-	static INT wasSequence = m_uiSequence;
-	if (wasSequence != m_uiSequence) {
-		m_UISelectAnimSequence = 0;
-		wasSequence = m_uiSequence;
-	}
-
-	switch (m_uiSequence)
-	{
-	case GAMESTART:
-		m_uiState[EXIT] = IDLE;
-		m_uiState[GAMESTART] = SELECT;
-		m_uiState[HOWTOPLAY] = IDLE;
-
-		m_UISelectAnim[m_UISelectAnimSequence]->Draw(D2D1::Point2F(GameStartUIPos.x + 60, GameStartUIPos.y + 10));
-
-		if (m_UISelectAnimSequence != 3)
-			m_UISelectAnimSequence = m_UISelectAnimFunc->OnAnimRender(50, 0, 4);
-		break;
-	case HOWTOPLAY:
-		m_uiState[GAMESTART] = IDLE;
-		m_uiState[HOWTOPLAY] = SELECT;
-		m_uiState[CREDIT] = IDLE;
-
-		m_UISelectAnim[m_UISelectAnimSequence]->Draw(D2D1::Point2F(HowToPlayUIPos.x + 60, HowToPlayUIPos.y + 10));
-		
-		if (m_UISelectAnimSequence != 3)
-			m_UISelectAnimSequence = m_UISelectAnimFunc->OnAnimRender(50, 0, 4);
-
-		break;
-	case CREDIT:
-		m_uiState[HOWTOPLAY] = IDLE;
-		m_uiState[CREDIT] = SELECT;
-		m_uiState[OPTION] = IDLE;
-
-		m_UISelectAnim[m_UISelectAnimSequence]->Draw(D2D1::Point2F(CreditUIPos.x + 10, CreditUIPos.y + 10));
-
-		if (m_UISelectAnimSequence != 3)
-			m_UISelectAnimSequence = m_UISelectAnimFunc->OnAnimRender(50, 0, 4);
-		break;
-	case OPTION:
-		m_uiState[CREDIT] = IDLE;
-		m_uiState[OPTION] = SELECT;
-		m_uiState[EXIT] = IDLE;
-
-		m_UISelectAnim[m_UISelectAnimSequence]->Draw(D2D1::Point2F(OptionUIPos.x - 50, OptionUIPos.y + 10));
-
-		if (m_UISelectAnimSequence != 3)
-			m_UISelectAnimSequence = m_UISelectAnimFunc->OnAnimRender(50, 0, 4);
-		break;
-	case EXIT:
-		m_uiState[OPTION] = IDLE;
-		m_uiState[EXIT] = SELECT;
-		m_uiState[GAMESTART] = IDLE;
-
-		m_UISelectAnim[m_UISelectAnimSequence]->Draw(D2D1::Point2F(ExitUIPos.x - 50, ExitUIPos.y + 10));
-
-		if (m_UISelectAnimSequence != 3)
-			m_UISelectAnimSequence = m_UISelectAnimFunc->OnAnimRender(50, 0, 4);
-		break;
-	default:
-		if (m_uiSequence == 5)
-			m_uiSequence = GAMESTART;
-		if (m_uiSequence == -1)
-			m_uiSequence = EXIT;
-		break;
-	}
 	//CGameManager::m_Gfx->DrawTextOut(L"Press Space Key To Start", D2D1::Point2F(MAX_WIN_WIDTH / 2, 200));
 }
 
@@ -202,20 +208,25 @@ void CTitleBackground::Control(CInput* Input)
 
 	if (m_uiSelected != -1)
 	{
-		if (CurLoadTime - OldLoadTime > 250)
+		if (CurLoadTime - OldLoadTime > 50)
 		{
 			switch (m_uiSequence)
 			{
 			case GAMESTART:
 				CGameManager::nowStatus = GAME01;
+				m_uiSelected = -1;
 				break;
 			case HOWTOPLAY:
+				m_uiSelected = -1;
 				break;
 			case CREDIT:
+				m_uiSelected = -1;
 				break;
 			case OPTION:
+				m_uiSelected = -1;
 				break;
 			case EXIT:
+				m_uiSelected = -1;
 				PostQuitMessage(0);
 				break;
 			}
