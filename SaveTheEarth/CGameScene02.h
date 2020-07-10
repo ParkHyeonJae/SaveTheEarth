@@ -2,11 +2,14 @@
 class CGameScene02 : public CSceneObject, CObjectManager
 {
 private:
+	CTimer* m_EnemySpawnTimer;
+	CTimer* m_MisileSpawnTimer;
 	CPlayer* m_Player;
 	CNormalEnemy* m_NormalEnemy;
 
 	CScrollBackground* m_ScrollBackground01;
 	CScrollBackground* m_ScrollBackground02;
+	MisileEnemy* m_misileEnemy;
 
 	CBossEnemy* m_BossEnemy;
 

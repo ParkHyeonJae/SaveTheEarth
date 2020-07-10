@@ -11,6 +11,7 @@ CPlayerBullet::CPlayerBullet(D2D1_POINT_2F m_Pos, FLOAT m_Rot, INT tag, INT m_GU
 	m_BulletSprites.push_back(new CSprite(L"../Images/PlayerBullet (0).png", CGameManager::m_Gfx));
 	m_BulletSprites.push_back(new CSprite(L"../Images/PlayerBullet (1).png", CGameManager::m_Gfx));
 	m_BulletSprites.push_back(new CSprite(L"../Images/PlayerBullet (2).png", CGameManager::m_Gfx));
+	m_ShotgunSprite = new CSprite(L"../Images/PlayerBullet (3).png", CGameManager::m_Gfx);
 	m_RifleBulletAnimFunc = new CSpriteAnimation();
 
 	m_RifleEffectAnim.push_back(new CSprite(L"../Images/Sprites/03 Rifle Effect/1.png", CGameManager::m_Gfx));
@@ -48,9 +49,16 @@ void CPlayerBullet::Init()
 void CPlayerBullet::Render()
 {
 	if (!CollCheck) {
-		D2D1_POINT_2F center = { m_Pos.x + (m_BulletSprites[RifleBulletAnimSequence]->GetBmp()->GetSize().width / 2), m_Pos.y + (m_BulletSprites[RifleBulletAnimSequence]->GetBmp()->GetSize().height / 2) };
-		m_BulletSprites[RifleBulletAnimSequence]->Draw(m_Pos, D2D1::SizeF(1.0f, 1.0f), &center, theta);
-		RifleBulletAnimSequence = m_RifleBulletAnimFunc->OnAnimRender(100, 0, 3);
+		switch (m_GUN)
+		{
+		case Rifle:
+			m_BulletSprites[RifleBulletAnimSequence]->Draw(m_Pos, D2D1::SizeF(1.0f, 1.0f), NULL, theta);
+			RifleBulletAnimSequence = m_RifleBulletAnimFunc->OnAnimRender(100, 0, 3);
+			break;
+		case Shotgun:
+			m_ShotgunSprite->Draw(m_Pos, D2D1::SizeF(1.0f, 1.0f), NULL, theta);
+			break;
+		}
 	}
 	else
 	{

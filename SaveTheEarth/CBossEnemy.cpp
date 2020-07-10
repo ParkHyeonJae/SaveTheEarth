@@ -13,6 +13,7 @@ CBossEnemy::CBossEnemy(D2D1_POINT_2F m_Pos, INT tag)
 	m_BossAnim.push_back(new CSprite(L"../Images/Sprites/04 Boss/7.png", CGameManager::m_Gfx));
 	m_BossAnim.push_back(new CSprite(L"../Images/Sprites/04 Boss/8.png", CGameManager::m_Gfx));
 	m_BossAnimFunc = new CSpriteAnimation();
+	m_TargetPos = { 1200, 200 };
 }
 
 CBossEnemy::~CBossEnemy()
@@ -21,7 +22,7 @@ CBossEnemy::~CBossEnemy()
 
 void CBossEnemy::Init()
 {
-	m_TargetPos = { 1200, 200 };
+	
 }
 
 void CBossEnemy::Render()

@@ -34,6 +34,10 @@ CTitleBackground::CTitleBackground(D2D1_POINT_2F m_Pos, INT tag)
 	m_UISelectAnim.push_back(new CSprite(L"../Images/Title/01 UI Select Animation/3.png", CGameManager::m_Gfx));
 	m_UISelectAnim.push_back(new CSprite(L"../Images/Title/01 UI Select Animation/4.png", CGameManager::m_Gfx));
 	m_UISelectAnimFunc = new CSpriteAnimation();
+
+	m_CreditSprite = new CSprite(L"../Images/Title/Credit.png", CGameManager::m_Gfx);
+	m_CreditCheck = FALSE;
+
 }
 
 CTitleBackground::~CTitleBackground()
@@ -169,6 +173,12 @@ void CTitleBackground::Render()
 
 	if (m_uiState[EXIT] != SELECT) m_Exit[m_uiState[EXIT]]->Draw(D2D1::Point2F(m_UIPos.x + 110.0f, m_UIPos.y + 400));
 	else m_Exit[m_uiState[EXIT]]->Draw(ExitUIPos);
+
+	if (m_CreditCheck)
+	{
+		printf("BOOL Check : %d\n", m_CreditCheck);
+		m_CreditSprite->Draw(m_Pos);
+	}
 	//CGameManager::m_Gfx->DrawTextOut(L"Press Space Key To Start", D2D1::Point2F(MAX_WIN_WIDTH / 2, 200));
 }
 
@@ -220,6 +230,11 @@ void CTitleBackground::Control(CInput* Input)
 				m_uiSelected = -1;
 				break;
 			case CREDIT:
+				if (m_CreditCheck)
+					m_CreditCheck = FALSE;
+				else
+					m_CreditCheck = TRUE;
+
 				m_uiSelected = -1;
 				break;
 			case OPTION:

@@ -5,6 +5,10 @@ class CTitleBackground : public CGameObject
 	CSprite* m_Logo;
 	CSprite* m_Cloud01;
 	CSprite* m_Cloud02;
+
+	BOOL m_CreditCheck;
+	CSprite* m_CreditSprite;
+
 	FLOAT m_CloudPosX01;
 	FLOAT m_CloudPosX02;
 

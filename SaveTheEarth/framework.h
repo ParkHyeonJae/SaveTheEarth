@@ -26,6 +26,7 @@
 #include <ctime>
 #include <Mmsystem.h>
 #include <atlstr.h>
+#include <string>
 
 #include <map>
 #include <list>
@@ -35,9 +36,12 @@
 #include <d2d1.h>
 #include <dwrite.h>
 
+using namespace std;
+
 #include "CInput.h"
 #include "CGraphics.h"
 #include "CSprite.h"
+#include "Cimage.h"
 #include "IGameObject.h"
 #include "CGameObject.h"
 #include "CTimer.h"

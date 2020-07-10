@@ -3,6 +3,7 @@ class CPlayerBullet : public CGameObject
 {
 private:
 	std::vector<CSprite*> m_BulletSprites;
+	CSprite* m_ShotgunSprite;
 	CSpriteAnimation* m_RifleBulletAnimFunc;
 	INT RifleBulletAnimSequence;
 	float m_BulletSpeed;
