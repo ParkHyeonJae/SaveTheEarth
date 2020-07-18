@@ -4,40 +4,37 @@ CTitleBackground::CTitleBackground(D2D1_POINT_2F m_Pos, INT tag)
 {
 	this->m_Pos = m_Pos;
 	this->m_tag = tag;
-	m_Title = new CSprite(L"../Images/Title/TitleBG.png", CGameManager::m_Gfx);
-	m_Logo = new CSprite(L"../Images/Title/Logo.png", CGameManager::m_Gfx);
-	m_Cloud01 = new CSprite(L"../Images/Title/Cloud.png", CGameManager::m_Gfx);
-	m_Cloud02 = new CSprite(L"../Images/Title/Cloud.png", CGameManager::m_Gfx);
+	m_Title = CGameManager::m_ImageManager->GetImages()->GetSprite("Title/Title");
+	m_Logo = CGameManager::m_ImageManager->GetImages()->GetSprite("Title/Logo");
+	m_Cloud01 = CGameManager::m_ImageManager->GetImages()->GetSprite("Title/Cloud");
+	m_Cloud02 = CGameManager::m_ImageManager->GetImages()->GetSprite("Title/Cloud");
 
-	m_GameStart[IDLE] = new CSprite(L"../Images/Title/UI/GameStart.png", CGameManager::m_Gfx);
-	m_GameStart[SELECT] = new CSprite(L"../Images/Title/UI/GameStart_SELECT.png", CGameManager::m_Gfx);
-	m_GameStart[PRESS] = new CSprite(L"../Images/Title/UI/GameStart_PRESS.png", CGameManager::m_Gfx);
+	m_GameStart[IDLE] =		CGameManager::m_ImageManager->GetImages()->GetSprite("UI/GameStart");
+	m_GameStart[SELECT] =	CGameManager::m_ImageManager->GetImages()->GetSprite("UI/GameStart_SELECT");
+	m_GameStart[PRESS] =	CGameManager::m_ImageManager->GetImages()->GetSprite("UI/GameStart_PRESS");
 
-	m_HowToPlay[IDLE] = new CSprite(L"../Images/Title/UI/HowToPlay.png", CGameManager::m_Gfx);
-	m_HowToPlay[SELECT] = new CSprite(L"../Images/Title/UI/HowToPlay_SELECT.png", CGameManager::m_Gfx);
-	m_HowToPlay[PRESS] = new CSprite(L"../Images/Title/UI/HowToPlay_PRESS.png", CGameManager::m_Gfx);
+	m_HowToPlay[IDLE] = CGameManager::m_ImageManager->GetImages()->GetSprite("UI/HowToPlay");
+	m_HowToPlay[SELECT] = CGameManager::m_ImageManager->GetImages()->GetSprite("UI/HowToPlay_SELECT");
+	m_HowToPlay[PRESS] = CGameManager::m_ImageManager->GetImages()->GetSprite("UI/HowToPlay_PRESS");
 
-	m_Credit[IDLE] = new CSprite(L"../Images/Title/UI/Credit.png", CGameManager::m_Gfx);
-	m_Credit[SELECT] = new CSprite(L"../Images/Title/UI/Credit_SELECT.png", CGameManager::m_Gfx);
-	m_Credit[PRESS] = new CSprite(L"../Images/Title/UI/Credit_PRESS.png", CGameManager::m_Gfx);
+	m_Credit[IDLE] = CGameManager::m_ImageManager->GetImages()->GetSprite("UI/Credit");
+	m_Credit[SELECT] = CGameManager::m_ImageManager->GetImages()->GetSprite("UI/Credit_SELECT");
+	m_Credit[PRESS] = CGameManager::m_ImageManager->GetImages()->GetSprite("UI/Credit_PRESS");
 
-	m_Option[IDLE] = new CSprite(L"../Images/Title/UI/Option.png", CGameManager::m_Gfx);
-	m_Option[SELECT] = new CSprite(L"../Images/Title/UI/Option_SELECT.png", CGameManager::m_Gfx);
-	m_Option[PRESS] = new CSprite(L"../Images/Title/UI/Option_PRESS.png", CGameManager::m_Gfx);
+	m_Option[IDLE] = CGameManager::m_ImageManager->GetImages()->GetSprite("UI/Option");
+	m_Option[SELECT] = CGameManager::m_ImageManager->GetImages()->GetSprite("UI/Option_SELECT");
+	m_Option[PRESS] = CGameManager::m_ImageManager->GetImages()->GetSprite("UI/Option_PRESS");
 
-	m_Exit[IDLE] = new CSprite(L"../Images/Title/UI/Exit.png", CGameManager::m_Gfx);
-	m_Exit[SELECT] = new CSprite(L"../Images/Title/UI/Exit_SELECT.png", CGameManager::m_Gfx);
-	m_Exit[PRESS] = new CSprite(L"../Images/Title/UI/Exit_PRESS.png", CGameManager::m_Gfx);
+	m_Exit[IDLE] = CGameManager::m_ImageManager->GetImages()->GetSprite("UI/Exit");
+	m_Exit[SELECT] = CGameManager::m_ImageManager->GetImages()->GetSprite("UI/Exit_SELECT");
+	m_Exit[PRESS] = CGameManager::m_ImageManager->GetImages()->GetSprite("UI/Exit_PRESS");
 
-	m_UISelectAnim.push_back(new CSprite(L"../Images/Title/01 UI Select Animation/1.png", CGameManager::m_Gfx));
-	m_UISelectAnim.push_back(new CSprite(L"../Images/Title/01 UI Select Animation/2.png", CGameManager::m_Gfx));
-	m_UISelectAnim.push_back(new CSprite(L"../Images/Title/01 UI Select Animation/3.png", CGameManager::m_Gfx));
-	m_UISelectAnim.push_back(new CSprite(L"../Images/Title/01 UI Select Animation/4.png", CGameManager::m_Gfx));
+	
 	m_UISelectAnimFunc = new CSpriteAnimation();
+	m_UISelectAnim = CGameManager::m_ImageManager->GetImages()->GetMultiSprite("UISelectAnim");
 
-	m_CreditSprite = new CSprite(L"../Images/Title/Credit.png", CGameManager::m_Gfx);
+	m_CreditSprite = CGameManager::m_ImageManager->GetImages()->GetSprite("Credit");
 	m_CreditCheck = FALSE;
-
 }
 
 CTitleBackground::~CTitleBackground()
@@ -69,6 +66,8 @@ void CTitleBackground::Init()
 	CreditUIPos = D2D1::Point2F(m_UIPos.x - UIOffset + 50.0f, m_UIPos.y + 200 - UIOffset);
 	OptionUIPos = D2D1::Point2F(m_UIPos.x - UIOffset + 110.0f, m_UIPos.y + 300 - UIOffset);
 	ExitUIPos = D2D1::Point2F(m_UIPos.x - UIOffset + 110.0f, m_UIPos.y + 400 - UIOffset);
+
+	wasSequence = m_uiSequence;
 }
 void CTitleBackground::Render()
 {
@@ -80,7 +79,7 @@ void CTitleBackground::Render()
 	m_Cloud02->Draw(D2D1::Point2F(m_CloudPosX02, 200));
 	m_Logo->Draw(D2D1::Point2F(70, m_LogoPosY));
 
-	static INT wasSequence = m_uiSequence;
+	
 	if (wasSequence != m_uiSequence) {
 		m_UISelectAnimSequence = 0;
 		wasSequence = m_uiSequence;

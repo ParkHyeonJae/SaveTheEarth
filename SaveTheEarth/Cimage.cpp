@@ -144,9 +144,7 @@ vector<CSprite*> Cimage::GetMultiSprite(const string& Key)
 {
 	if (FindMultiImage(Key))
 	{
-		auto iter = m_multiImages.find(Key);
-		if (iter == m_multiImages.end())
-			return iter->second;
+		return m_multiImages.find(Key)->second;
 	}
 	return vector<CSprite*>();
 }

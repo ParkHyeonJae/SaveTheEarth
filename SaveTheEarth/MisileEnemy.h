@@ -2,7 +2,6 @@
 class MisileEnemy : public CGameObject
 {
 private:
-	CSprite *m_warningSprite;
 	FLOAT m_MoveSpeed;
 	BOOL m_SpawnCheck;
 	INT m_warningCount;

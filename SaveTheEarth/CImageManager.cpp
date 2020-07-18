@@ -124,5 +124,47 @@ INT CImageManager::ImageInit()
 	m_ExplosiveAnim.push_back(new CSprite(L"../Images/Sprites/08 Explosive/10.png", CGameManager::m_Gfx));
 	m_Images->AddMultiImage("ExplosiveAnim", m_ExplosiveAnim);
 
+	m_Images->AddImage("warning", new CSprite(L"../Images/warnnig.png", CGameManager::m_Gfx));
+	m_Images->AddImage("Misile", new CSprite(L"../Images/Misile.png", CGameManager::m_Gfx));
+
+
+	m_Images->AddImage("Title/Title", new CSprite(L"../Images/Title/TitleBG.png", CGameManager::m_Gfx));
+	m_Images->AddImage("Title/Logo", new CSprite(L"../Images/Title/Logo.png", CGameManager::m_Gfx));
+	m_Images->AddImage("Title/Cloud", new CSprite(L"../Images/Title/Cloud.png", CGameManager::m_Gfx));
+
+	// UI/GameStart
+	m_Images->AddImage("UI/GameStart", new CSprite(L"../Images/Title/UI/GameStart.png", CGameManager::m_Gfx));
+	m_Images->AddImage("UI/GameStart_SELECT", new CSprite(L"../Images/Title/UI/GameStart_SELECT.png", CGameManager::m_Gfx));
+	m_Images->AddImage("UI/GameStart_PRESS", new CSprite(L"../Images/Title/UI/GameStart_PRESS.png", CGameManager::m_Gfx));
+	
+	// UI/HowToPlay
+	m_Images->AddImage("UI/HowToPlay", new CSprite(L"../Images/Title/UI/HowToPlay.png", CGameManager::m_Gfx));
+	m_Images->AddImage("UI/HowToPlay_SELECT", new CSprite(L"../Images/Title/UI/HowToPlay_SELECT.png", CGameManager::m_Gfx));
+	m_Images->AddImage("UI/HowToPlay_PRESS", new CSprite(L"../Images/Title/UI/HowToPlay_PRESS.png", CGameManager::m_Gfx));
+	
+	// UI/Credit
+	m_Images->AddImage("UI/Credit", new CSprite(L"../Images/Title/UI/Credit.png", CGameManager::m_Gfx));
+	m_Images->AddImage("UI/Credit_SELECT", new CSprite(L"../Images/Title/UI/Credit_SELECT.png", CGameManager::m_Gfx));
+	m_Images->AddImage("UI/Credit_PRESS", new CSprite(L"../Images/Title/UI/Credit_PRESS.png", CGameManager::m_Gfx));
+	
+	// UI/Option
+	m_Images->AddImage("UI/Option", new CSprite(L"../Images/Title/UI/Option.png", CGameManager::m_Gfx));
+	m_Images->AddImage("UI/Option_SELECT", new CSprite(L"../Images/Title/UI/Option_SELECT.png", CGameManager::m_Gfx));
+	m_Images->AddImage("UI/Option_PRESS", new CSprite(L"../Images/Title/UI/Option_PRESS.png", CGameManager::m_Gfx));
+	
+	// UI/Exit
+	m_Images->AddImage("UI/Exit", new CSprite(L"../Images/Title/UI/Exit.png", CGameManager::m_Gfx));
+	m_Images->AddImage("UI/Exit_SELECT", new CSprite(L"../Images/Title/UI/Exit_SELECT.png", CGameManager::m_Gfx));
+	m_Images->AddImage("UI/Exit_PRESS", new CSprite(L"../Images/Title/UI/Exit_PRESS.png", CGameManager::m_Gfx));
+
+	std::vector<CSprite*> m_UISelectAnim;
+	m_UISelectAnim.push_back(new CSprite(L"../Images/Title/01 UI Select Animation/1.png", CGameManager::m_Gfx));
+	m_UISelectAnim.push_back(new CSprite(L"../Images/Title/01 UI Select Animation/2.png", CGameManager::m_Gfx));
+	m_UISelectAnim.push_back(new CSprite(L"../Images/Title/01 UI Select Animation/3.png", CGameManager::m_Gfx));
+	m_UISelectAnim.push_back(new CSprite(L"../Images/Title/01 UI Select Animation/4.png", CGameManager::m_Gfx));
+	m_Images->AddMultiImage("UISelectAnim", m_UISelectAnim);
+
+	//Credit Image
+	m_Images->AddImage("Credit", new CSprite(L"../Images/Title/Credit.png", CGameManager::m_Gfx));
 	return 0;
 }

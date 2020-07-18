@@ -5,9 +5,6 @@ MisileEnemy::MisileEnemy(D2D1_POINT_2F m_Pos, INT tag)
 	this->m_Pos = m_Pos;
 	this->m_tag = tag;
 
-	m_warningSprite = new CSprite(L"../Images/warnnig.png", CGameManager::m_Gfx);
-	m_Sprite = new CSprite(L"../Images/Misile.png", CGameManager::m_Gfx);
-
 	overlay = 1.0f;
 	m_warningCount = 6;
 	m_MoveSpeed = 100.0f;
@@ -25,10 +22,12 @@ void MisileEnemy::Init()
 
 void MisileEnemy::Render()
 {
-	m_warningSprite->Draw(m_Pos, overlay);
+	CGameManager::m_ImageManager->GetImages()
+		->Render("warning", m_Pos, overlay);
 
 	if (m_SpawnCheck)
-		m_Sprite->Draw(m_Pos);
+		CGameManager::m_ImageManager->GetImages()
+		->Render("Misile", m_Pos, 1.0f);
 }
 
 void MisileEnemy::FrameMove(DWORD elapsed)
