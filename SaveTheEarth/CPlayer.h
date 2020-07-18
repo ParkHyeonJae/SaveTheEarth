@@ -10,10 +10,8 @@ private:
 	CSpriteAnimation* m_PlayerMotionAnimFunc[PLAYER_ANIM_COUNT];
 private:
 	INT m_GunState;
-	std::vector<CSprite*> m_RifleMotion;
-	std::vector<CSprite*> m_ShotgunMotion;
-	CSprite* m_DefaultGun;
 
+	D2D1_SIZE_F m_RifleImageSize;
 	INT m_RifleMotionSequence;
 	INT m_ShotgunMotionSequence;
 

@@ -9,20 +9,6 @@ CPlayer::CPlayer(D2D1_POINT_2F m_Pos, INT tag, FLOAT m_HP) : CGameObject()
 
 	m_playerBulletFireTimer = new CTimer(150);
 
-	m_DefaultGun = new CSprite(L"../Images/Sprites/DefaultGun.png", CGameManager::m_Gfx);
-
-	m_RifleMotion.push_back(new CSprite(L"../Images/Sprites/02 Rifle Motion/1.png", CGameManager::m_Gfx));
-	m_RifleMotion.push_back(new CSprite(L"../Images/Sprites/02 Rifle Motion/2.png", CGameManager::m_Gfx));
-	m_RifleMotion.push_back(new CSprite(L"../Images/Sprites/02 Rifle Motion/3.png", CGameManager::m_Gfx));
-	m_RifleMotion.push_back(new CSprite(L"../Images/Sprites/02 Rifle Motion/4.png", CGameManager::m_Gfx));
-	m_RifleMotion.push_back(new CSprite(L"../Images/Sprites/02 Rifle Motion/5.png", CGameManager::m_Gfx));
-
-	m_ShotgunMotion.push_back(new CSprite(L"../Images/Sprites/06 Shotgun Motion/1.png", CGameManager::m_Gfx));
-	m_ShotgunMotion.push_back(new CSprite(L"../Images/Sprites/06 Shotgun Motion/2.png", CGameManager::m_Gfx));
-	m_ShotgunMotion.push_back(new CSprite(L"../Images/Sprites/06 Shotgun Motion/3.png", CGameManager::m_Gfx));
-	m_ShotgunMotion.push_back(new CSprite(L"../Images/Sprites/06 Shotgun Motion/4.png", CGameManager::m_Gfx));
-	m_ShotgunMotion.push_back(new CSprite(L"../Images/Sprites/06 Shotgun Motion/5.png", CGameManager::m_Gfx));
-
 	for (INT i = 0; i < PLAYER_ANIM_COUNT; i++)
 	{
 		m_PlayerMotionAnimSequence[i] = 0;
@@ -173,13 +159,16 @@ void CPlayer::Render()
 	switch (m_GunState)
 	{
 	case DEFAULT:
-		m_DefaultGun->Draw(D2D1::Point2F(m_Pos.x + 30, m_Pos.y + 20), D2D1::SizeF(1.0f, 1.0f), NULL, m_Rot, overlay);
+		CGameManager::m_ImageManager->GetImages()
+			->Render("DefaultGun", D2D1::Point2F(m_Pos.x + 30, m_Pos.y + 20), D2D1::SizeF(1.0f, 1.0f), NULL, m_Rot, overlay);
 		break;
 	case Rifle:
 		if (!m_RifleMotionFunc->IsEndFrame()) {
-			D2D1_POINT_2F center = { (m_Pos.x + m_RifleMotion[m_RifleMotionSequence]->GetBmp()->GetSize().width / 2) 
-				, (m_Pos.y + m_RifleMotion[m_RifleMotionSequence]->GetBmp()->GetSize().height / 2) };
-			m_RifleMotion[m_RifleMotionSequence]->Draw(D2D1::Point2F(m_Pos.x, m_Pos.y), D2D1::SizeF(1.0f, 1.0f), &center, m_Rot, overlay);
+			m_RifleImageSize = CGameManager::m_ImageManager->GetMultiImageSize("RifleMotion" , m_RifleMotionSequence);
+			D2D1_POINT_2F center = { (m_Pos.x + m_RifleImageSize.width / 2)
+				, (m_Pos.y + m_RifleImageSize.height / 2) };
+			CGameManager::m_ImageManager->GetImages()
+				->MultiRender("RifleMotion", m_RifleMotionSequence, D2D1::Point2F(m_Pos.x, m_Pos.y), D2D1::SizeF(1.0f, 1.0f), &center, m_Rot, overlay);
 			m_RifleMotionSequence = m_RifleMotionFunc->OnAnimRender(50, 0, 5);
 		}
 		else {
@@ -191,7 +180,8 @@ void CPlayer::Render()
 		break;
 	case Shotgun:
 		if (!m_ShotgunMotionFunc->IsEndFrame()) {
-			m_ShotgunMotion[m_ShotgunMotionSequence]->Draw(D2D1::Point2F(m_Pos.x, m_Pos.y - 5), D2D1::SizeF(1.0f, 1.0f), NULL, m_Rot, overlay);
+			CGameManager::m_ImageManager->GetImages()
+				->MultiRender("ShotgunMotion", m_ShotgunMotionSequence, D2D1::Point2F(m_Pos.x, m_Pos.y - 5), D2D1::SizeF(1.0f, 1.0f), NULL, m_Rot, overlay);
 			m_ShotgunMotionSequence = m_ShotgunMotionFunc->OnAnimRender(50, 0, 5);
 		}
 		else {

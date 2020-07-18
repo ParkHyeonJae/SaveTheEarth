@@ -16,6 +16,9 @@ public:
 			return m_Images->GetSprite(Key)->GetBmp()->GetSize();
 		return D2D1_SIZE_F();
 	}
-	D2D1_SIZE_F GetMultiImageSize(const string Key, const INT Seqnece) { return m_Images->GetMultiSprite(Key)[Seqnece]->GetBmp()->GetSize(); }
+	D2D1_SIZE_F GetMultiImageSize(const string Key, const INT Seqnece) {
+		if (!m_Images->GetMultiSprite(Key).empty())
+			return m_Images->GetMultiSprite(Key)[Seqnece]->GetBmp()->GetSize();
+	}
 };
 

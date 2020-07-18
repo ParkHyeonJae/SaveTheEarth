@@ -85,5 +85,22 @@ INT CImageManager::ImageInit()
 	m_playerForwardMotion.push_back(new CSprite(L"../Images/Sprites/09 Player Motion/BACK/4.png", CGameManager::m_Gfx));
 	m_Images->AddMultiImage("playerForwardMotion", m_playerForwardMotion);
 
+	m_Images->AddImage("DefaultGun", new CSprite(L"../Images/Sprites/DefaultGun.png", CGameManager::m_Gfx));
+
+	std::vector<CSprite*> m_RifleMotion;
+	m_RifleMotion.push_back(new CSprite(L"../Images/Sprites/02 Rifle Motion/1.png", CGameManager::m_Gfx));
+	m_RifleMotion.push_back(new CSprite(L"../Images/Sprites/02 Rifle Motion/2.png", CGameManager::m_Gfx));
+	m_RifleMotion.push_back(new CSprite(L"../Images/Sprites/02 Rifle Motion/3.png", CGameManager::m_Gfx));
+	m_RifleMotion.push_back(new CSprite(L"../Images/Sprites/02 Rifle Motion/4.png", CGameManager::m_Gfx));
+	m_RifleMotion.push_back(new CSprite(L"../Images/Sprites/02 Rifle Motion/5.png", CGameManager::m_Gfx));
+	m_Images->AddMultiImage("RifleMotion", m_RifleMotion);
+
+	std::vector<CSprite*> m_ShotgunMotion;
+	m_ShotgunMotion.push_back(new CSprite(L"../Images/Sprites/06 Shotgun Motion/1.png", CGameManager::m_Gfx));
+	m_ShotgunMotion.push_back(new CSprite(L"../Images/Sprites/06 Shotgun Motion/2.png", CGameManager::m_Gfx));
+	m_ShotgunMotion.push_back(new CSprite(L"../Images/Sprites/06 Shotgun Motion/3.png", CGameManager::m_Gfx));
+	m_ShotgunMotion.push_back(new CSprite(L"../Images/Sprites/06 Shotgun Motion/4.png", CGameManager::m_Gfx));
+	m_ShotgunMotion.push_back(new CSprite(L"../Images/Sprites/06 Shotgun Motion/5.png", CGameManager::m_Gfx));
+	m_Images->AddMultiImage("ShotgunMotion", m_ShotgunMotion);
 	return 0;
 }
