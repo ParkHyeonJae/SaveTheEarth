@@ -42,6 +42,7 @@ using namespace std;
 #include "CGraphics.h"
 #include "CSprite.h"
 #include "Cimage.h"
+#include "CImageManager.h"
 #include "IGameObject.h"
 #include "CGameObject.h"
 #include "CTimer.h"
