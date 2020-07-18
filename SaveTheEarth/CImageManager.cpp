@@ -47,6 +47,9 @@ INT CImageManager::ImageInit()
 	m_Images->AddImage("Stage01/TREES", new CSprite(L"../Images/Stage01/Stage01_Trees.png", CGameManager::m_Gfx));
 
 
+	m_Images->AddImage("NormalEnemyBullet", new CSprite(L"../Images/energy_blast-01.png", CGameManager::m_Gfx));
+
+	
 
 
 	//SAFE_DELETE(m_ShotgunSprite);
