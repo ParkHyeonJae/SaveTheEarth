@@ -65,6 +65,10 @@ using namespace std;
 #include "CGame.h"
 #include "Mathf.h"
 
+#define SAFE_DELETE( p ) { if( p ) { delete ( p ); ( p ) = nullptr; } }
+
+#define  SAFE_RELEASE( p ) { if( p ) { ( p )->Release(); } }
+
 #define MAX_WIN_WIDTH 1600
 #define MAX_WIN_HEIGHT 900
 
