@@ -17,7 +17,7 @@ BOOL Cimage::AddImage(string key, CSprite* sprite)
 BOOL Cimage::FindImage(string key)
 {
 	auto iter = m_images.find(key);
-	if (iter == m_images.end())
+	if (iter != m_images.end())
 		return TRUE;
 	return FALSE;
 }
@@ -37,7 +37,7 @@ BOOL Cimage::AddMultiImage(string key, vector<CSprite*> sprite)
 BOOL Cimage::FindMultiImage(string key)
 {
 	auto iter = m_multiImages.find(key);
-	if (iter == m_multiImages.end())
+	if (iter != m_multiImages.end())
 		return TRUE;
 	return FALSE;
 }
@@ -120,5 +120,24 @@ BOOL Cimage::Render(string key, D2D1_RECT_F* src, D2D1_POINT_2F pos, D2D1_POINT_
 			m.second->Draw(src, pos, Scale, center, angle);
 	}
 	return 0;
+}
+
+CSprite* Cimage::GetSprite(const string& Key)
+{
+	if (FindImage(Key)) {
+		return m_images.find(Key)->second;
+	}
+	return NULL;
+}
+
+vector<CSprite*> Cimage::GetMultiSprite(const string& Key)
+{
+	if (FindMultiImage(Key))
+	{
+		auto iter = m_multiImages.find(Key);
+		if (iter == m_multiImages.end())
+			return iter->second;
+	}
+	return vector<CSprite*>();
 }
 

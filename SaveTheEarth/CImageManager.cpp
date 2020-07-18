@@ -60,6 +60,9 @@ INT CImageManager::ImageInit()
 	m_BossAnim.push_back(new CSprite(L"../Images/Sprites/04 Boss/8.png", CGameManager::m_Gfx));
 	m_Images->AddMultiImage("BossIdleAnim", m_BossAnim);
 
+	m_Images->AddImage("playerHpBar_background", new CSprite(L"../Images/null hp.png", CGameManager::m_Gfx));
+	m_Images->AddImage("playerHpBar_foreground", new CSprite(L"../Images/HP bar.png", CGameManager::m_Gfx));
+	
 	//SAFE_DELETE(m_ShotgunSprite);
 	m_RifleEffectAnim.clear();
 	m_ShotgunEffectAnim.clear();
