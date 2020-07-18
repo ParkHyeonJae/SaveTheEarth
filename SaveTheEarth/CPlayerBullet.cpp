@@ -8,9 +8,7 @@ CPlayerBullet::CPlayerBullet(D2D1_POINT_2F m_Pos, FLOAT m_Rot, INT tag, INT m_GU
 	//printf("%f\n", m_Rot);
 	theta = m_Rot;
 	m_BulletSpeed = 1.0f;
-	m_BulletSprites.push_back(new CSprite(L"../Images/PlayerBullet (0).png", CGameManager::m_Gfx));
-	m_BulletSprites.push_back(new CSprite(L"../Images/PlayerBullet (1).png", CGameManager::m_Gfx));
-	m_BulletSprites.push_back(new CSprite(L"../Images/PlayerBullet (2).png", CGameManager::m_Gfx));
+
 	m_ShotgunSprite = new CSprite(L"../Images/PlayerBullet (3).png", CGameManager::m_Gfx);
 	m_RifleBulletAnimFunc = new CSpriteAnimation();
 
@@ -35,6 +33,16 @@ CPlayerBullet::CPlayerBullet(D2D1_POINT_2F m_Pos, FLOAT m_Rot, INT tag, INT m_GU
 
 CPlayerBullet::~CPlayerBullet()
 {
+	if (m_ShotgunEffectAnimFunc) {
+		delete m_ShotgunEffectAnimFunc;
+		m_ShotgunEffectAnimFunc = nullptr;
+	}
+	if (m_RifleEffectAnimFunc){
+		delete m_RifleEffectAnimFunc;
+		m_RifleEffectAnimFunc = nullptr;
+	}
+	m_RifleEffectAnim.clear();
+	m_ShotgunEffectAnim.clear();
 }
 
 void CPlayerBullet::Init()
@@ -52,7 +60,8 @@ void CPlayerBullet::Render()
 		switch (m_GUN)
 		{
 		case Rifle:
-			m_BulletSprites[RifleBulletAnimSequence]->Draw(m_Pos, D2D1::SizeF(1.0f, 1.0f), NULL, theta);
+			CGameManager::m_Images->MultiRender("RifleBullet", RifleBulletAnimSequence, m_Pos, D2D1::SizeF(1.0f, 1.0f), NULL, theta);
+			//m_BulletSprites[RifleBulletAnimSequence]->Draw(m_Pos, D2D1::SizeF(1.0f, 1.0f), NULL, theta);
 			RifleBulletAnimSequence = m_RifleBulletAnimFunc->OnAnimRender(100, 0, 3);
 			break;
 		case Shotgun:
@@ -87,14 +96,14 @@ void CPlayerBullet::FrameMove(DWORD elapsed)
 	switch (m_GUN)
 	{
 	case Rifle:
-		m_BulletSpeed = 2;
+		m_BulletSpeed = 20;
 		break;
 	case Shotgun:
-
+		m_BulletSpeed = 10;
 		break;
 	}
-	m_Pos.x += cosf(theta * CGameManager::radian) * m_BulletSpeed * elapsed;
-	m_Pos.y += sinf(theta * CGameManager::radian) * m_BulletSpeed * elapsed;
+	m_Pos.x += cosf(theta * CGameManager::radian) * m_BulletSpeed;
+	m_Pos.y += sinf(theta * CGameManager::radian) * m_BulletSpeed;
 }
 
 void CPlayerBullet::Control(CInput* Input)
@@ -108,10 +117,8 @@ void CPlayerBullet::Release()
 		delete m_RifleBulletAnimFunc;
 		m_RifleBulletAnimFunc = nullptr;
 	}
-	if (!m_BulletSprites.empty()) {
-		m_BulletSprites.clear();
-	}
 }
+
 
 BOOL CPlayerBullet::IsMapOut()
 {

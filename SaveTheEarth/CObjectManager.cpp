@@ -72,7 +72,8 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 						if (dynamic_cast<MisileEnemy*>((*iter02))->IsMapOut())
 						{
 							(*iter02)->Release();
-							m_gameObjectList.erase(iter02);
+							delete (*iter02);
+							iter02 = m_gameObjectList.erase(iter02);
 							break;
 						}
 						RECT rMisileColl = {
@@ -85,7 +86,6 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 						RECT temp;
 						if (IntersectRect(&temp, &rPlayerColl, &rMisileColl))
 						{
-							printf("Ãæµ¹\n");
 							dynamic_cast<CPlayer*>((*iter))->GetDamage(100.0f);
 							break;
 						}
@@ -104,7 +104,8 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 			if (dynamic_cast<CNormalEnemyBullet*>((*iter))->IsMapOut())
 			{
 				(*iter)->Release();
-				m_gameObjectList.erase(iter);
+				delete (*iter);
+				iter = m_gameObjectList.erase(iter);
 				break;
 			}
 		}

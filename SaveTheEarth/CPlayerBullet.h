@@ -2,7 +2,8 @@
 class CPlayerBullet : public CGameObject
 {
 private:
-	std::vector<CSprite*> m_BulletSprites;
+
+
 	CSprite* m_ShotgunSprite;
 	CSpriteAnimation* m_RifleBulletAnimFunc;
 	INT RifleBulletAnimSequence;
@@ -32,6 +33,7 @@ public:
 	virtual void FrameMove(DWORD elapsed) override;
 	virtual void Control(CInput* Input) override;
 	virtual void Release() override;
+
 
 	BOOL IsMapOut();
 	BOOL IsColl() {
