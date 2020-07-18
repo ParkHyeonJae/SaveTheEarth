@@ -76,6 +76,8 @@ using namespace std;
 
 #define MAX_PLAYER_HP 1000
 
+//#define SAFE_DELETE( p ) {if( p ){delete ( p ); ( p ) = nullptr;}}
+
 enum TAG {
 	PLAYER,
 	PBULLET,

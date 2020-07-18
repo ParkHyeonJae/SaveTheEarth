@@ -4,17 +4,14 @@ class CPlayer : public CGameObject
 {
 private:
 	INT m_playerState;
-	std::vector<CSprite*> m_playerIdleMotion;
-	std::vector<CSprite*> m_playerBackMotion;
-	std::vector<CSprite*> m_playerForwardMotion;
+
+
 	INT m_PlayerMotionAnimSequence[PLAYER_ANIM_COUNT];
 	CSpriteAnimation* m_PlayerMotionAnimFunc[PLAYER_ANIM_COUNT];
 private:
 	INT m_GunState;
-	std::vector<CSprite*> m_RifleMotion;
-	std::vector<CSprite*> m_ShotgunMotion;
-	CSprite* m_DefaultGun;
 
+	D2D1_SIZE_F m_RifleImageSize;
 	INT m_RifleMotionSequence;
 	INT m_ShotgunMotionSequence;
 

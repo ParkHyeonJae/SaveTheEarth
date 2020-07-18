@@ -14,7 +14,9 @@ INT CGame::Init()
 	CDX2DApp::Init();
 
 	m_ObjectManager = new CObjectManager();
-	m_GameManager = new CGameManager(m_Gfx, m_Input, m_ObjectManager);
+	m_ImageManager = new CImageManager();
+
+	m_GameManager = new CGameManager(m_Gfx, m_Input, m_ObjectManager, m_ImageManager);
 
 
 	m_GameScene01 = new CGameScene01();
@@ -24,7 +26,7 @@ INT CGame::Init()
 	m_SceneList.push_back(m_GameScene02);
 
 	m_GameManager->Init();
-
+	m_ImageManager->ImageInit();
 
 	auto iter = m_SceneList.begin();
 	std::advance(iter, CGameManager::nowStatus);

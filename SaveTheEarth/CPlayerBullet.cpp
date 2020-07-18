@@ -5,29 +5,12 @@ CPlayerBullet::CPlayerBullet(D2D1_POINT_2F m_Pos, FLOAT m_Rot, INT tag, INT m_GU
 	this->m_Pos = m_Pos;
 	this->m_tag = tag;
 	this->m_GUN = m_GUN;
-	//printf("%f\n", m_Rot);
+
 	theta = m_Rot;
 	m_BulletSpeed = 1.0f;
 
-	m_ShotgunSprite = new CSprite(L"../Images/PlayerBullet (3).png", CGameManager::m_Gfx);
 	m_RifleBulletAnimFunc = new CSpriteAnimation();
-
-	m_RifleEffectAnim.push_back(new CSprite(L"../Images/Sprites/03 Rifle Effect/1.png", CGameManager::m_Gfx));
-	m_RifleEffectAnim.push_back(new CSprite(L"../Images/Sprites/03 Rifle Effect/2.png", CGameManager::m_Gfx));
-	m_RifleEffectAnim.push_back(new CSprite(L"../Images/Sprites/03 Rifle Effect/3.png", CGameManager::m_Gfx));
-	m_RifleEffectAnim.push_back(new CSprite(L"../Images/Sprites/03 Rifle Effect/4.png", CGameManager::m_Gfx));
-	m_RifleEffectAnim.push_back(new CSprite(L"../Images/Sprites/03 Rifle Effect/5.png", CGameManager::m_Gfx));
-	m_RifleEffectAnim.push_back(new CSprite(L"../Images/Sprites/03 Rifle Effect/6.png", CGameManager::m_Gfx));
-	m_RifleEffectAnim.push_back(new CSprite(L"../Images/Sprites/03 Rifle Effect/7.png", CGameManager::m_Gfx));
-	m_RifleEffectAnim.push_back(new CSprite(L"../Images/Sprites/03 Rifle Effect/8.png", CGameManager::m_Gfx));
 	m_RifleEffectAnimFunc = new CSpriteAnimation();
-
-	m_ShotgunEffectAnim.push_back(new CSprite(L"../Images/Sprites/07 Shotgun Effect/1.png", CGameManager::m_Gfx));
-	m_ShotgunEffectAnim.push_back(new CSprite(L"../Images/Sprites/07 Shotgun Effect/2.png", CGameManager::m_Gfx));
-	m_ShotgunEffectAnim.push_back(new CSprite(L"../Images/Sprites/07 Shotgun Effect/3.png", CGameManager::m_Gfx));
-	m_ShotgunEffectAnim.push_back(new CSprite(L"../Images/Sprites/07 Shotgun Effect/4.png", CGameManager::m_Gfx));
-	m_ShotgunEffectAnim.push_back(new CSprite(L"../Images/Sprites/07 Shotgun Effect/5.png", CGameManager::m_Gfx));
-	m_ShotgunEffectAnim.push_back(new CSprite(L"../Images/Sprites/07 Shotgun Effect/6.png", CGameManager::m_Gfx));
 	m_ShotgunEffectAnimFunc = new CSpriteAnimation();
 }
 
@@ -41,8 +24,7 @@ CPlayerBullet::~CPlayerBullet()
 		delete m_RifleEffectAnimFunc;
 		m_RifleEffectAnimFunc = nullptr;
 	}
-	m_RifleEffectAnim.clear();
-	m_ShotgunEffectAnim.clear();
+
 }
 
 void CPlayerBullet::Init()
@@ -60,12 +42,12 @@ void CPlayerBullet::Render()
 		switch (m_GUN)
 		{
 		case Rifle:
-			CGameManager::m_Images->MultiRender("RifleBullet", RifleBulletAnimSequence, m_Pos, D2D1::SizeF(1.0f, 1.0f), NULL, theta);
+			CGameManager::m_ImageManager->GetImages()->MultiRender("RifleBullet", RifleBulletAnimSequence, m_Pos, D2D1::SizeF(1.0f, 1.0f), NULL, theta);
 			//m_BulletSprites[RifleBulletAnimSequence]->Draw(m_Pos, D2D1::SizeF(1.0f, 1.0f), NULL, theta);
 			RifleBulletAnimSequence = m_RifleBulletAnimFunc->OnAnimRender(100, 0, 3);
 			break;
 		case Shotgun:
-			m_ShotgunSprite->Draw(m_Pos, D2D1::SizeF(1.0f, 1.0f), NULL, theta);
+			CGameManager::m_ImageManager->GetImages()->Render("ShotgunBullet", m_Pos, D2D1::SizeF(1.0f, 1.0f), NULL, theta);
 			break;
 		}
 	}
@@ -74,21 +56,23 @@ void CPlayerBullet::Render()
 		switch (m_GUN)
 		{
 		case Rifle:
-			m_RifleEffectAnim[RifleEffectAnimSequence]->Draw(m_Pos, D2D1::SizeF(1.0f, 1.0f), NULL, theta);
+			CGameManager::m_ImageManager->GetImages()
+				->MultiRender("RifleEffectAnim", RifleEffectAnimSequence
+					,m_Pos, D2D1::SizeF(1.0f, 1.0f), NULL, theta);
 			RifleEffectAnimSequence = m_RifleEffectAnimFunc->OnAnimRender(50, 0, 8);
 
 			
 			break;
 		case Shotgun:
-			m_ShotgunEffectAnim[ShotgunEffectAnimSequence]->Draw(m_Pos, D2D1::SizeF(1.0f, 1.0f), NULL, theta);
+			CGameManager::m_ImageManager->GetImages()
+				->MultiRender("ShotgunEffectAnim", ShotgunEffectAnimSequence
+					, m_Pos, D2D1::SizeF(1.0f, 1.0f), NULL, theta);
 			ShotgunEffectAnimSequence = m_ShotgunEffectAnimFunc->OnAnimRender(50, 0, 6);
 			break;
 		}
 		if (RifleEffectAnimSequence == 7 || ShotgunEffectAnimSequence == 5)
 			m_isDelete = TRUE;
 	}
-	
-	//m_Sprite->Draw(m_Pos);
 }
 
 void CPlayerBullet::FrameMove(DWORD elapsed)

@@ -156,6 +156,7 @@
     <ClInclude Include="CGameScene02.h" />
     <ClInclude Include="CGraphics.h" />
     <ClInclude Include="Cimage.h" />
+    <ClInclude Include="CImageManager.h" />
     <ClInclude Include="CInGameUI.h" />
     <ClInclude Include="CInput.h" />
     <ClInclude Include="CNormalEnemy.h" />
@@ -187,6 +188,7 @@
     <ClCompile Include="CGameScene02.cpp" />
     <ClCompile Include="CGraphics.cpp" />
     <ClCompile Include="Cimage.cpp" />
+    <ClCompile Include="CImageManager.cpp" />
     <ClCompile Include="CInGameUI.cpp" />
     <ClCompile Include="CInput.cpp" />
     <ClCompile Include="CNormalEnemy.cpp" />

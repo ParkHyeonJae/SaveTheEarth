@@ -11,11 +11,10 @@ public:
 	static INT nowStatus;
 	static DWORD m_fps;
 	static FLOAT m_playerHp;
-	static 	Cimage* m_Images;
+	static 	CImageManager* m_ImageManager;
 
-	std::vector<CSprite*> m_BulletSprites;
 public:
-	CGameManager(CGraphics * m_Gfx, CInput* m_Input, CObjectManager * m_ObjectManager);
+	CGameManager(CGraphics * m_Gfx, CInput* m_Input, CObjectManager * m_ObjectManager, CImageManager* m_ImageManager);
 	~CGameManager();
 
 	void Init();

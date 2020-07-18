@@ -3,8 +3,6 @@ class CInGameUI : public CGameObject
 {
 private:
 	D2D1_POINT_2F m_hpBarPos;
-	CSprite* m_playerHpBar_background;
-	CSprite* m_playerHpBar_foreground;
 	D2D1_POINT_2F m_hpPos;
 	FLOAT hpSize;
 
@@ -12,6 +10,10 @@ private:
 	FLOAT MAXHP;
 	FLOAT CurHP;
 	FLOAT MAXIMG;
+
+	FLOAT CurIMG = 0;
+
+	D2D1_SIZE_F HpBarSize;
 public:
 	CInGameUI(INT tag);
 	~CInGameUI();

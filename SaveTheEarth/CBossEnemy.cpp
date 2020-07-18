@@ -4,16 +4,10 @@ CBossEnemy::CBossEnemy(D2D1_POINT_2F m_Pos, INT tag)
 {
 	this->m_Pos = m_Pos;
 	this->m_tag = tag;
-	m_BossAnim.push_back(new CSprite(L"../Images/Sprites/04 Boss/1.png", CGameManager::m_Gfx));
-	m_BossAnim.push_back(new CSprite(L"../Images/Sprites/04 Boss/2.png", CGameManager::m_Gfx));
-	m_BossAnim.push_back(new CSprite(L"../Images/Sprites/04 Boss/3.png", CGameManager::m_Gfx));
-	m_BossAnim.push_back(new CSprite(L"../Images/Sprites/04 Boss/4.png", CGameManager::m_Gfx));
-	m_BossAnim.push_back(new CSprite(L"../Images/Sprites/04 Boss/5.png", CGameManager::m_Gfx));
-	m_BossAnim.push_back(new CSprite(L"../Images/Sprites/04 Boss/6.png", CGameManager::m_Gfx));
-	m_BossAnim.push_back(new CSprite(L"../Images/Sprites/04 Boss/7.png", CGameManager::m_Gfx));
-	m_BossAnim.push_back(new CSprite(L"../Images/Sprites/04 Boss/8.png", CGameManager::m_Gfx));
+
 	m_BossAnimFunc = new CSpriteAnimation();
 	m_TargetPos = { 1200, 200 };
+	sequence = 0;
 }
 
 CBossEnemy::~CBossEnemy()
@@ -27,11 +21,9 @@ void CBossEnemy::Init()
 
 void CBossEnemy::Render()
 {
-	m_BossAnim[sequence]->Draw(m_Pos);
+	CGameManager::m_ImageManager->GetImages()->MultiRender("BossIdleAnim", sequence, m_Pos, D2D1::SizeF(1.f, 1.f), NULL, 0.0f);
 
 	sequence = m_BossAnimFunc->OnAnimRender(50, 0, 8);
-
-	//m_Sprite->Draw(m_Pos);
 }
 
 void CBossEnemy::FrameMove(DWORD elapsed)

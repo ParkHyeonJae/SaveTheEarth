@@ -11,12 +11,12 @@ private:
 	FLOAT m_HP;
 private:
 	INT SharkAnimSequence;
-	std::vector<CSprite*> m_SharkAnim;
+	D2D1_SIZE_F SharkAnimSize;
 	CSpriteAnimation* m_SharkAnimFunc;
 
 private:
 	INT ExplosiveSequence;
-	std::vector<CSprite*> m_ExplosiveAnim;
+	
 	CSpriteAnimation* m_ExplosiveAnimFunc;
 public:
 	CNormalEnemy(D2D1_POINT_2F m_Pos, INT tag);

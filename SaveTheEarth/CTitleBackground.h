@@ -39,6 +39,7 @@ private:
 	CSprite* m_Exit[3];
 
 	INT m_uiSequence;
+	INT wasSequence;
 	INT m_uiState[5];
 	INT m_uiSelected;
 
