@@ -14,6 +14,7 @@ public:
 	BOOL FindMultiImage(string key);
 
 	BOOL MultiRender(string key, INT sequence, D2D1_POINT_2F Pos, D2D1_SIZE_F Scale, D2D1_POINT_2F* center, float angle);
+	BOOL MultiRender(string key, INT sequence, D2D1_POINT_2F Pos, D2D1_SIZE_F Scale, D2D1_POINT_2F* center, float angle, float overlay);
 	BOOL Render(string key);
 	BOOL Render(string key, D2D1_POINT_2F Pos, FLOAT overlay);
 	BOOL Render(string key, D2D1_POINT_2F Pos, D2D1_RECT_F* src);

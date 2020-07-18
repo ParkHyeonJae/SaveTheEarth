@@ -63,8 +63,27 @@ INT CImageManager::ImageInit()
 	m_Images->AddImage("playerHpBar_background", new CSprite(L"../Images/null hp.png", CGameManager::m_Gfx));
 	m_Images->AddImage("playerHpBar_foreground", new CSprite(L"../Images/HP bar.png", CGameManager::m_Gfx));
 	
-	//SAFE_DELETE(m_ShotgunSprite);
-	m_RifleEffectAnim.clear();
-	m_ShotgunEffectAnim.clear();
+	std::vector<CSprite*> m_playerIdleMotion;
+	m_playerIdleMotion.push_back(new CSprite(L"../Images/Sprites/09 Player Motion/IDLE/1.png", CGameManager::m_Gfx));
+	m_playerIdleMotion.push_back(new CSprite(L"../Images/Sprites/09 Player Motion/IDLE/2.png", CGameManager::m_Gfx));
+	m_playerIdleMotion.push_back(new CSprite(L"../Images/Sprites/09 Player Motion/IDLE/3.png", CGameManager::m_Gfx));
+	m_playerIdleMotion.push_back(new CSprite(L"../Images/Sprites/09 Player Motion/IDLE/4.png", CGameManager::m_Gfx));
+	m_playerIdleMotion.push_back(new CSprite(L"../Images/Sprites/09 Player Motion/IDLE/5.png", CGameManager::m_Gfx));
+	m_Images->AddMultiImage("playerIdleMotion", m_playerIdleMotion);
+
+	std::vector<CSprite*> m_playerBackMotion;
+	m_playerBackMotion.push_back(new CSprite(L"../Images/Sprites/09 Player Motion/FORWARD/1.png", CGameManager::m_Gfx));
+	m_playerBackMotion.push_back(new CSprite(L"../Images/Sprites/09 Player Motion/FORWARD/2.png", CGameManager::m_Gfx));
+	m_playerBackMotion.push_back(new CSprite(L"../Images/Sprites/09 Player Motion/FORWARD/3.png", CGameManager::m_Gfx));
+	m_playerBackMotion.push_back(new CSprite(L"../Images/Sprites/09 Player Motion/FORWARD/4.png", CGameManager::m_Gfx));
+	m_Images->AddMultiImage("playerBackMotion", m_playerBackMotion);
+
+	std::vector<CSprite*> m_playerForwardMotion;
+	m_playerForwardMotion.push_back(new CSprite(L"../Images/Sprites/09 Player Motion/BACK/1.png", CGameManager::m_Gfx));
+	m_playerForwardMotion.push_back(new CSprite(L"../Images/Sprites/09 Player Motion/BACK/2.png", CGameManager::m_Gfx));
+	m_playerForwardMotion.push_back(new CSprite(L"../Images/Sprites/09 Player Motion/BACK/3.png", CGameManager::m_Gfx));
+	m_playerForwardMotion.push_back(new CSprite(L"../Images/Sprites/09 Player Motion/BACK/4.png", CGameManager::m_Gfx));
+	m_Images->AddMultiImage("playerForwardMotion", m_playerForwardMotion);
+
 	return 0;
 }

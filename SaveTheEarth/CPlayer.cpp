@@ -9,22 +9,6 @@ CPlayer::CPlayer(D2D1_POINT_2F m_Pos, INT tag, FLOAT m_HP) : CGameObject()
 
 	m_playerBulletFireTimer = new CTimer(150);
 
-	m_playerIdleMotion.push_back(new CSprite(L"../Images/Sprites/09 Player Motion/IDLE/1.png", CGameManager::m_Gfx));
-	m_playerIdleMotion.push_back(new CSprite(L"../Images/Sprites/09 Player Motion/IDLE/2.png", CGameManager::m_Gfx));
-	m_playerIdleMotion.push_back(new CSprite(L"../Images/Sprites/09 Player Motion/IDLE/3.png", CGameManager::m_Gfx));
-	m_playerIdleMotion.push_back(new CSprite(L"../Images/Sprites/09 Player Motion/IDLE/4.png", CGameManager::m_Gfx));
-	m_playerIdleMotion.push_back(new CSprite(L"../Images/Sprites/09 Player Motion/IDLE/5.png", CGameManager::m_Gfx));
-
-	m_playerBackMotion.push_back(new CSprite(L"../Images/Sprites/09 Player Motion/FORWARD/1.png", CGameManager::m_Gfx));
-	m_playerBackMotion.push_back(new CSprite(L"../Images/Sprites/09 Player Motion/FORWARD/2.png", CGameManager::m_Gfx));
-	m_playerBackMotion.push_back(new CSprite(L"../Images/Sprites/09 Player Motion/FORWARD/3.png", CGameManager::m_Gfx));
-	m_playerBackMotion.push_back(new CSprite(L"../Images/Sprites/09 Player Motion/FORWARD/4.png", CGameManager::m_Gfx));
-
-	m_playerForwardMotion.push_back(new CSprite(L"../Images/Sprites/09 Player Motion/BACK/1.png", CGameManager::m_Gfx));
-	m_playerForwardMotion.push_back(new CSprite(L"../Images/Sprites/09 Player Motion/BACK/2.png", CGameManager::m_Gfx));
-	m_playerForwardMotion.push_back(new CSprite(L"../Images/Sprites/09 Player Motion/BACK/3.png", CGameManager::m_Gfx));
-	m_playerForwardMotion.push_back(new CSprite(L"../Images/Sprites/09 Player Motion/BACK/4.png", CGameManager::m_Gfx));
-	
 	m_DefaultGun = new CSprite(L"../Images/Sprites/DefaultGun.png", CGameManager::m_Gfx);
 
 	m_RifleMotion.push_back(new CSprite(L"../Images/Sprites/02 Rifle Motion/1.png", CGameManager::m_Gfx));
@@ -167,18 +151,21 @@ void CPlayer::Render()
 	switch (m_playerState)
 	{
 	case IDLE:
-		m_playerIdleMotion[m_PlayerMotionAnimSequence[m_playerState]]
-			->Draw(D2D1::Point2F(m_Pos.x, m_Pos.y), D2D1::SizeF(1.0f, 1.0f), NULL, 0.0f, overlay);
+		CGameManager::m_ImageManager->GetImages()
+			->MultiRender("playerIdleMotion", m_PlayerMotionAnimSequence[m_playerState]
+				, D2D1::Point2F(m_Pos.x, m_Pos.y), D2D1::SizeF(1.0f, 1.0f), NULL, 0.0f, overlay);
 		m_PlayerMotionAnimSequence[m_playerState] = m_PlayerMotionAnimFunc[m_playerState]->OnAnimRender(50, 0, 5);
 		break;
 	case BACK:
-		m_playerBackMotion[m_PlayerMotionAnimSequence[m_playerState]]
-			->Draw(D2D1::Point2F(m_Pos.x, m_Pos.y), D2D1::SizeF(1.0f, 1.0f), NULL, 0.0f, overlay);
+		CGameManager::m_ImageManager->GetImages()
+			->MultiRender("playerBackMotion", m_PlayerMotionAnimSequence[m_playerState]
+				, D2D1::Point2F(m_Pos.x, m_Pos.y), D2D1::SizeF(1.0f, 1.0f), NULL, 0.0f, overlay);
 		m_PlayerMotionAnimSequence[m_playerState] = m_PlayerMotionAnimFunc[m_playerState]->OnAnimRender(50, 0, 4);
 		break;
 	case FORWARD:
-		m_playerForwardMotion[m_PlayerMotionAnimSequence[m_playerState]]
-			->Draw(D2D1::Point2F(m_Pos.x, m_Pos.y), D2D1::SizeF(1.0f, 1.0f), NULL, 0.0f, overlay);
+		CGameManager::m_ImageManager->GetImages()
+			->MultiRender("playerForwardMotion", m_PlayerMotionAnimSequence[m_playerState]
+				, D2D1::Point2F(m_Pos.x, m_Pos.y), D2D1::SizeF(1.0f, 1.0f), NULL, 0.0f, overlay);
 		m_PlayerMotionAnimSequence[m_playerState] = m_PlayerMotionAnimFunc[m_playerState]->OnAnimRender(50, 0, 4);
 		break;
 	}

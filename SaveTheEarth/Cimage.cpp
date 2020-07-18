@@ -52,6 +52,16 @@ BOOL Cimage::MultiRender(string key, INT sequence, D2D1_POINT_2F Pos, D2D1_SIZE_
 	return 0;
 }
 
+BOOL Cimage::MultiRender(string key, INT sequence, D2D1_POINT_2F Pos, D2D1_SIZE_F Scale, D2D1_POINT_2F* center, float angle, float overlay)
+{
+	for (auto m : m_multiImages)
+	{
+		if (m.first == key)
+			m.second[sequence]->Draw(Pos, Scale, center, angle, overlay);
+	}
+	return 0;
+}
+
 BOOL Cimage::Render(string key)
 {
 	for (auto m : m_images)

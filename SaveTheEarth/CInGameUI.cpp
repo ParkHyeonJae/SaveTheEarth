@@ -4,6 +4,14 @@ CInGameUI::CInGameUI(INT tag)
 {
 	this->m_tag = tag;
 	m_hpBarPos = { 0,0 };
+	CurHP = NULL;
+	HpBarSize = { 0.0f ,0.0f };
+	MAXHP = 0.0f;
+	MAXIMG = 0.0f;
+	hpSize = 0.0f;
+	m_hpPos = { 0.0f,0.0f };
+
+
 }
 
 CInGameUI::~CInGameUI()

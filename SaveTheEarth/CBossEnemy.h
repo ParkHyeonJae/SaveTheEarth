@@ -4,8 +4,6 @@ class CBossEnemy : public CGameObject
 private:
 	D2D1_POINT_2F m_TargetPos;
 	FLOAT deltaTime = 0.01f;
-	DWORD CurAnimTime;
-	DWORD OldAnimTime;
 	INT sequence;
 	CSpriteAnimation* m_BossAnimFunc;
 

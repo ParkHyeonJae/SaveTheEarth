@@ -4,9 +4,8 @@ class CPlayer : public CGameObject
 {
 private:
 	INT m_playerState;
-	std::vector<CSprite*> m_playerIdleMotion;
-	std::vector<CSprite*> m_playerBackMotion;
-	std::vector<CSprite*> m_playerForwardMotion;
+
+
 	INT m_PlayerMotionAnimSequence[PLAYER_ANIM_COUNT];
 	CSpriteAnimation* m_PlayerMotionAnimFunc[PLAYER_ANIM_COUNT];
 private:

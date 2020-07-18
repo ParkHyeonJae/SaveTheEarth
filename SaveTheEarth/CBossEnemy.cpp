@@ -7,6 +7,7 @@ CBossEnemy::CBossEnemy(D2D1_POINT_2F m_Pos, INT tag)
 
 	m_BossAnimFunc = new CSpriteAnimation();
 	m_TargetPos = { 1200, 200 };
+	sequence = 0;
 }
 
 CBossEnemy::~CBossEnemy()
