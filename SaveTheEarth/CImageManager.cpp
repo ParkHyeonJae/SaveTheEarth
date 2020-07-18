@@ -102,5 +102,27 @@ INT CImageManager::ImageInit()
 	m_ShotgunMotion.push_back(new CSprite(L"../Images/Sprites/06 Shotgun Motion/4.png", CGameManager::m_Gfx));
 	m_ShotgunMotion.push_back(new CSprite(L"../Images/Sprites/06 Shotgun Motion/5.png", CGameManager::m_Gfx));
 	m_Images->AddMultiImage("ShotgunMotion", m_ShotgunMotion);
+
+	std::vector<CSprite*> m_SharkAnim;
+	m_SharkAnim.push_back(new CSprite(L"../Images/Sprites/05 Shark Animation/1.png", CGameManager::m_Gfx));
+	m_SharkAnim.push_back(new CSprite(L"../Images/Sprites/05 Shark Animation/2.png", CGameManager::m_Gfx));
+	m_SharkAnim.push_back(new CSprite(L"../Images/Sprites/05 Shark Animation/3.png", CGameManager::m_Gfx));
+	m_SharkAnim.push_back(new CSprite(L"../Images/Sprites/05 Shark Animation/4.png", CGameManager::m_Gfx));
+	m_SharkAnim.push_back(new CSprite(L"../Images/Sprites/05 Shark Animation/5.png", CGameManager::m_Gfx));
+	m_Images->AddMultiImage("SharkAnim", m_SharkAnim);
+
+	std::vector<CSprite*> m_ExplosiveAnim;
+	m_ExplosiveAnim.push_back(new CSprite(L"../Images/Sprites/08 Explosive/1.png", CGameManager::m_Gfx));
+	m_ExplosiveAnim.push_back(new CSprite(L"../Images/Sprites/08 Explosive/2.png", CGameManager::m_Gfx));
+	m_ExplosiveAnim.push_back(new CSprite(L"../Images/Sprites/08 Explosive/3.png", CGameManager::m_Gfx));
+	m_ExplosiveAnim.push_back(new CSprite(L"../Images/Sprites/08 Explosive/4.png", CGameManager::m_Gfx));
+	m_ExplosiveAnim.push_back(new CSprite(L"../Images/Sprites/08 Explosive/5.png", CGameManager::m_Gfx));
+	m_ExplosiveAnim.push_back(new CSprite(L"../Images/Sprites/08 Explosive/6.png", CGameManager::m_Gfx));
+	m_ExplosiveAnim.push_back(new CSprite(L"../Images/Sprites/08 Explosive/7.png", CGameManager::m_Gfx));
+	m_ExplosiveAnim.push_back(new CSprite(L"../Images/Sprites/08 Explosive/8.png", CGameManager::m_Gfx));
+	m_ExplosiveAnim.push_back(new CSprite(L"../Images/Sprites/08 Explosive/9.png", CGameManager::m_Gfx));
+	m_ExplosiveAnim.push_back(new CSprite(L"../Images/Sprites/08 Explosive/10.png", CGameManager::m_Gfx));
+	m_Images->AddMultiImage("ExplosiveAnim", m_ExplosiveAnim);
+
 	return 0;
 }
