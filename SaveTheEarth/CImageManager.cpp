@@ -49,8 +49,16 @@ INT CImageManager::ImageInit()
 
 	m_Images->AddImage("NormalEnemyBullet", new CSprite(L"../Images/energy_blast-01.png", CGameManager::m_Gfx));
 
-	
-
+	std::vector<CSprite*> m_BossAnim;
+	m_BossAnim.push_back(new CSprite(L"../Images/Sprites/04 Boss/1.png", CGameManager::m_Gfx));
+	m_BossAnim.push_back(new CSprite(L"../Images/Sprites/04 Boss/2.png", CGameManager::m_Gfx));
+	m_BossAnim.push_back(new CSprite(L"../Images/Sprites/04 Boss/3.png", CGameManager::m_Gfx));
+	m_BossAnim.push_back(new CSprite(L"../Images/Sprites/04 Boss/4.png", CGameManager::m_Gfx));
+	m_BossAnim.push_back(new CSprite(L"../Images/Sprites/04 Boss/5.png", CGameManager::m_Gfx));
+	m_BossAnim.push_back(new CSprite(L"../Images/Sprites/04 Boss/6.png", CGameManager::m_Gfx));
+	m_BossAnim.push_back(new CSprite(L"../Images/Sprites/04 Boss/7.png", CGameManager::m_Gfx));
+	m_BossAnim.push_back(new CSprite(L"../Images/Sprites/04 Boss/8.png", CGameManager::m_Gfx));
+	m_Images->AddMultiImage("BossIdleAnim", m_BossAnim);
 
 	//SAFE_DELETE(m_ShotgunSprite);
 	m_RifleEffectAnim.clear();

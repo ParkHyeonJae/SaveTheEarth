@@ -8,7 +8,7 @@ private:
 	DWORD OldAnimTime;
 	INT sequence;
 	CSpriteAnimation* m_BossAnimFunc;
-	std::vector<CSprite*> m_BossAnim;
+
 public:
 	CBossEnemy(D2D1_POINT_2F m_Pos, INT tag);
 	~CBossEnemy();
