@@ -9,20 +9,16 @@ FLOAT CGameManager::radian = PI / 180.0f;
 INT CGameManager::nowStatus = TITLE;
 DWORD CGameManager::m_fps = 0;
 FLOAT CGameManager::m_playerHp = 1000.0f;
-Cimage* CGameManager::m_Images = NULL;
+CImageManager* CGameManager::m_ImageManager = NULL;
 
-CGameManager::CGameManager(CGraphics* m_Gfx, CInput* m_Input, CObjectManager* m_ObjectManager)
+CGameManager::CGameManager(CGraphics* m_Gfx, CInput* m_Input, CObjectManager* m_ObjectManager, CImageManager* m_ImageManager)
 {
 	this->m_Gfx = m_Gfx;
 	this->m_Input = m_Input;
 	this->m_ObjectManager = m_ObjectManager;
+	this->m_ImageManager = m_ImageManager;
 
-	m_Images = new Cimage();
 
-	m_BulletSprites.push_back(new CSprite(L"../Images/PlayerBullet (0).png", CGameManager::m_Gfx));
-	m_BulletSprites.push_back(new CSprite(L"../Images/PlayerBullet (1).png", CGameManager::m_Gfx));
-	m_BulletSprites.push_back(new CSprite(L"../Images/PlayerBullet (2).png", CGameManager::m_Gfx));
-	m_Images->AddMultiImage("RifleBullet", m_BulletSprites);
 }
 
 CGameManager::~CGameManager()

@@ -25,14 +25,14 @@ void CGameScene02::Init()
 	AddObject(dynamic_cast<CGameObject*>(m_ScrollBackground02));
 	AddObject(dynamic_cast<CGameObject*>(m_Player));
 
-	//m_BossEnemy = new CBossEnemy(D2D1::Point2F(MAX_WIN_WIDTH, rand() % MAX_WIN_HEIGHT), BOSS);
-	//AddObject(dynamic_cast<CGameObject*>(m_BossEnemy));
+	m_BossEnemy = new CBossEnemy(D2D1::Point2F(MAX_WIN_WIDTH, rand() % MAX_WIN_HEIGHT), BOSS);
+	AddObject(dynamic_cast<CGameObject*>(m_BossEnemy));
 	
-	for (size_t i = 0; i < 3; i++)
-	{
-		m_misileEnemy = new MisileEnemy(D2D1::Point2F(0, Mathf::RandomIntValue(0, 500)), MISILE);
-		AddObject(dynamic_cast<CGameObject*>(m_misileEnemy));
-	}
+	//for (size_t i = 0; i < 3; i++)
+	//{
+	//	m_misileEnemy = new MisileEnemy(D2D1::Point2F(0, Mathf::RandomIntValue(0, 500)), MISILE);
+	//	AddObject(dynamic_cast<CGameObject*>(m_misileEnemy));
+	//}
 	m_EnemySpawnTimer = new CTimer(1000);
 	m_MisileSpawnTimer = new CTimer(1500);
 

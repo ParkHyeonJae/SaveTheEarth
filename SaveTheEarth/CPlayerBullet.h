@@ -2,9 +2,6 @@
 class CPlayerBullet : public CGameObject
 {
 private:
-
-
-	CSprite* m_ShotgunSprite;
 	CSpriteAnimation* m_RifleBulletAnimFunc;
 	INT RifleBulletAnimSequence;
 	float m_BulletSpeed;
@@ -15,11 +12,11 @@ private:
 	INT m_GUN;
 	BOOL CollCheck;
 	BOOL m_isDelete;
-	std::vector<CSprite*> m_RifleEffectAnim;
+
 	INT RifleEffectAnimSequence;
 	CSpriteAnimation* m_RifleEffectAnimFunc;
 
-	std::vector<CSprite*> m_ShotgunEffectAnim;
+
 	INT ShotgunEffectAnimSequence;
 	CSpriteAnimation* m_ShotgunEffectAnimFunc;
 
