@@ -20,7 +20,7 @@ public:
 
 	void BeginDraw() { m_renderTarget->BeginDraw(); }
 	void EndDraw() { m_renderTarget->EndDraw(); }
-	void ClearScreen(float r, float g, float b);
+	void ClearScreen(float r, float g, float b, float a);
 	void DrawCircle(float x, float y, float radius, float r, float g, float b, float a);
 
 	void DrawTextOut(LPCWSTR text, D2D1_POINT_2F Pos);

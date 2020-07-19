@@ -12,7 +12,7 @@ public:
 	static DWORD m_fps;
 	static FLOAT m_playerHp;
 	static 	CImageManager* m_ImageManager;
-
+	static BOOL isinvincibility;
 public:
 	CGameManager(CGraphics * m_Gfx, CInput* m_Input, CObjectManager * m_ObjectManager, CImageManager* m_ImageManager);
 	~CGameManager();

@@ -85,7 +85,7 @@ INT CGame::Control(CInput* m_Input)
 INT CGame::Render()
 {
 	m_Gfx->BeginDraw();
-	m_Gfx->ClearScreen(1.0f, 1.0f, 1.0f);
+	m_Gfx->ClearScreen(1.0f, 1.0f, 1.0f, 1.0f);
 	
 	m_GameManager->Render();
 

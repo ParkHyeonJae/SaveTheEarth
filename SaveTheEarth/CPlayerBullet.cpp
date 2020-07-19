@@ -12,6 +12,7 @@ CPlayerBullet::CPlayerBullet(D2D1_POINT_2F m_Pos, FLOAT m_Rot, INT tag, INT m_GU
 	m_RifleBulletAnimFunc = new CSpriteAnimation();
 	m_RifleEffectAnimFunc = new CSpriteAnimation();
 	m_ShotgunEffectAnimFunc = new CSpriteAnimation();
+	Init();
 }
 
 CPlayerBullet::~CPlayerBullet()
@@ -24,7 +25,6 @@ CPlayerBullet::~CPlayerBullet()
 		delete m_RifleEffectAnimFunc;
 		m_RifleEffectAnimFunc = nullptr;
 	}
-
 }
 
 void CPlayerBullet::Init()
@@ -42,12 +42,12 @@ void CPlayerBullet::Render()
 		switch (m_GUN)
 		{
 		case Rifle:
-			CGameManager::m_ImageManager->GetImages()->MultiRender("RifleBullet", RifleBulletAnimSequence, m_Pos, D2D1::SizeF(1.0f, 1.0f), NULL, theta);
+			CGameManager::m_ImageManager->GetImages()->MultiRender("RifleBullet", RifleBulletAnimSequence, m_Pos, D2D1::SizeF(1.5f, 1.5f), NULL, theta);
 			//m_BulletSprites[RifleBulletAnimSequence]->Draw(m_Pos, D2D1::SizeF(1.0f, 1.0f), NULL, theta);
 			RifleBulletAnimSequence = m_RifleBulletAnimFunc->OnAnimRender(100, 0, 3);
 			break;
 		case Shotgun:
-			CGameManager::m_ImageManager->GetImages()->Render("ShotgunBullet", m_Pos, D2D1::SizeF(1.0f, 1.0f), NULL, theta);
+			CGameManager::m_ImageManager->GetImages()->Render("ShotgunBullet", m_Pos, D2D1::SizeF(1.5f, 1.5f), NULL, theta);
 			break;
 		}
 	}
@@ -60,7 +60,6 @@ void CPlayerBullet::Render()
 				->MultiRender("RifleEffectAnim", RifleEffectAnimSequence
 					,m_Pos, D2D1::SizeF(1.0f, 1.0f), NULL, theta);
 			RifleEffectAnimSequence = m_RifleEffectAnimFunc->OnAnimRender(50, 0, 8);
-
 			
 			break;
 		case Shotgun:
@@ -70,24 +69,30 @@ void CPlayerBullet::Render()
 			ShotgunEffectAnimSequence = m_ShotgunEffectAnimFunc->OnAnimRender(50, 0, 6);
 			break;
 		}
-		if (RifleEffectAnimSequence == 7 || ShotgunEffectAnimSequence == 5)
+		if (m_RifleEffectAnimFunc->IsEndFrame() || m_ShotgunEffectAnimFunc->IsEndFrame()) {
 			m_isDelete = TRUE;
+			m_RifleEffectAnimFunc->InitSequence();
+			m_ShotgunEffectAnimFunc->InitSequence();
+		}
 	}
 }
 
 void CPlayerBullet::FrameMove(DWORD elapsed)
 {
-	switch (m_GUN)
-	{
-	case Rifle:
-		m_BulletSpeed = 20;
-		break;
-	case Shotgun:
-		m_BulletSpeed = 10;
-		break;
+	if (!CollCheck) {
+		switch (m_GUN)
+		{
+		case Rifle:
+			m_BulletSpeed = 20;
+			break;
+		case Shotgun:
+			m_BulletSpeed = 10;
+			break;
+		}
+		FLOAT Angle = theta * CGameManager::radian;
+		m_Pos.x += cosf(Angle) * m_BulletSpeed;
+		m_Pos.y += sinf(Angle) * m_BulletSpeed;
 	}
-	m_Pos.x += cosf(theta * CGameManager::radian) * m_BulletSpeed;
-	m_Pos.y += sinf(theta * CGameManager::radian) * m_BulletSpeed;
 }
 
 void CPlayerBullet::Control(CInput* Input)

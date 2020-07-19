@@ -1,5 +1,6 @@
 #pragma once
 #define PLAYER_ANIM_COUNT 3
+#define PLAYER_HIT_OVERLAY_COUNT 6
 class CPlayer : public CGameObject
 {
 private:
@@ -29,8 +30,8 @@ private:
 	INT m_hitEffectCount;
 	FLOAT overlay;
 	FLOAT tTime = 0.0f;
-	FLOAT dTime = 0.2f;
-
+	FLOAT dTime;
+	FLOAT HitOverlaySpeed;
 	CTimer* m_playerBulletFireTimer;
 public:
 	CPlayer(D2D1_POINT_2F m_Pos, INT tag, FLOAT m_HP);

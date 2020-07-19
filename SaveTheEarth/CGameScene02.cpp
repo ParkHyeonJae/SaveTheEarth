@@ -25,18 +25,18 @@ void CGameScene02::Init()
 	AddObject(dynamic_cast<CGameObject*>(m_ScrollBackground02));
 	AddObject(dynamic_cast<CGameObject*>(m_Player));
 
-	m_BossEnemy = new CBossEnemy(D2D1::Point2F(MAX_WIN_WIDTH, rand() % MAX_WIN_HEIGHT), BOSS);
-	AddObject(dynamic_cast<CGameObject*>(m_BossEnemy));
+	//m_BossEnemy = new CBossEnemy(D2D1::Point2F(MAX_WIN_WIDTH, rand() % MAX_WIN_HEIGHT), BOSS);
+	//AddObject(dynamic_cast<CGameObject*>(m_BossEnemy));
 	
 	//for (size_t i = 0; i < 3; i++)
 	//{
 	//	m_misileEnemy = new MisileEnemy(D2D1::Point2F(0, Mathf::RandomIntValue(0, 500)), MISILE);
 	//	AddObject(dynamic_cast<CGameObject*>(m_misileEnemy));
 	//}
-	m_EnemySpawnTimer = new CTimer(1000);
+	m_EnemySpawnTimer = new CTimer(500);
 	m_MisileSpawnTimer = new CTimer(1500);
 
-	AddObject(dynamic_cast<CGameObject*>(m_GameUI));
+	AddUI(dynamic_cast<CGameObject*>(m_GameUI));
 	CSceneObject::Init();
 	AllInitalize();
 }
@@ -57,17 +57,16 @@ void CGameScene02::Render()
 
 void CGameScene02::Control(CInput* m_Input)
 {
-	//if (m_EnemySpawnTimer->OnTimer())
-	//{
-	//	m_NormalEnemy = new CNormalEnemy(D2D1::Point2F(MAX_WIN_WIDTH, rand() % MAX_WIN_HEIGHT), ENEMY);
-	//	AddObject(dynamic_cast<CGameObject*>(m_NormalEnemy));
-
-	//}
-	//if (m_MisileSpawnTimer->OnTimer())
-	//{
-	//	m_misileEnemy = new MisileEnemy(D2D1::Point2F(0, Mathf::RandomIntValue(0, 500)), MISILE);
-	//	AddObject(dynamic_cast<CGameObject*>(m_misileEnemy));
-	//}
+	if (m_EnemySpawnTimer->OnTimer())
+	{
+		m_NormalEnemy = new CNormalEnemy(D2D1::Point2F(MAX_WIN_WIDTH, rand() % MAX_WIN_HEIGHT), ENEMY);
+		AddObject(dynamic_cast<CGameObject*>(m_NormalEnemy));
+	}
+	if (m_MisileSpawnTimer->OnTimer())
+	{
+		m_misileEnemy = new MisileEnemy(D2D1::Point2F(0, Mathf::RandomIntValue(0, 500)), MISILE);
+		AddObject(dynamic_cast<CGameObject*>(m_misileEnemy));
+	}
 	//spawn Enemy
 	if (m_Input->KeyDown(VK_F1)) {
 		m_NormalEnemy = new CNormalEnemy(D2D1::Point2F(MAX_WIN_WIDTH, rand() % MAX_WIN_HEIGHT), ENEMY);

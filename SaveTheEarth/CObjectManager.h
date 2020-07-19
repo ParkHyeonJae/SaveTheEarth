@@ -3,11 +3,13 @@ class CObjectManager
 {
 private:
 	std::list<CGameObject*> m_gameObjectList;
+	std::list<CGameObject*> m_uiList;
 public:
 	CObjectManager();
 	~CObjectManager();
 
 	INT AddObject(CGameObject* object);
+	INT AddUI(CGameObject* object);
 	CGameObject FindObject(CGameObject* object);
 	BOOL IsExistObject(CGameObject* object);
 	BOOL IsEmpty();
