@@ -9,10 +9,13 @@ CNormalEnemy::CNormalEnemy(D2D1_POINT_2F m_Pos, INT tag)
 	
 	
 	m_SharkAnimFunc = new CSpriteAnimation();
+	m_SharkDeadAnimFunc = new CSpriteAnimation();
+	m_SharkDeadAnimFunc->SetLoop(FALSE);
 	m_ExplosiveAnimFunc = new CSpriteAnimation();
 
 	m_HP = 100.0f;
 	ExplosiveSequence = 0;
+	SharkDeadAnimSequence = 0;
 	SharkAnimSequence = 0;
 	m_deadCheck = FALSE;
 	m_isDelete = FALSE;
@@ -29,23 +32,30 @@ void CNormalEnemy::Init()
 
 void CNormalEnemy::Render()
 {
-	if (!m_deadCheck)
-	{
-		angle = atan2f(m_Pos.y - m_TargetPos.y, m_Pos.x - m_TargetPos.x) * (180.0f / PI);
-		SharkAnimSize = CGameManager::m_ImageManager->GetMultiImageSize("SharkAnim", SharkAnimSequence);
-		D2D1_POINT_2F center = { m_Pos.x + (SharkAnimSize.width / 2), m_Pos.y + (SharkAnimSize.height / 2) };
-		CGameManager::m_ImageManager->GetImages()
-			->MultiRender("SharkAnim", SharkAnimSequence, m_Pos, D2D1::SizeF(1.0f, 1.0f), &center, angle);
-		SharkAnimSequence = m_SharkAnimFunc->OnAnimRender(100, 0, 5);
-	}
-	else
-	{
-		CGameManager::m_ImageManager->GetImages()
-			->MultiRender("ExplosiveAnim", SharkAnimSequence, m_Pos, D2D1::SizeF(1.0f, 1.0f), NULL, angle);
-		SharkAnimSequence = m_ExplosiveAnimFunc->OnAnimRender(50, 0, 10);
-
-		if (SharkAnimSequence == 9)
-			m_isDelete = TRUE;
+	if (!m_isDelete) {
+		if (!m_deadCheck)
+		{
+			angle = atan2f(m_Pos.y - m_TargetPos.y, m_Pos.x - m_TargetPos.x) * (180.0f / PI);
+			SharkAnimSize = CGameManager::m_ImageManager->GetMultiImageSize("SharkAnim", SharkAnimSequence);
+			D2D1_POINT_2F center = { m_Pos.x + (SharkAnimSize.width / 2), m_Pos.y + (SharkAnimSize.height / 2) };
+			CGameManager::m_ImageManager->GetImages()
+				->MultiRender("SharkAnim", SharkAnimSequence, m_Pos, D2D1::SizeF(1.0f, 1.0f), &center, angle);
+			SharkAnimSequence = m_SharkAnimFunc->OnAnimRender(100, 0, 5);
+		}
+		else
+		{
+			CGameManager::m_ImageManager->GetImages()
+				->MultiRender("ExplosiveAnim", SharkAnimSequence, m_Pos, D2D1::SizeF(1.0f, 1.0f), NULL, angle);
+			
+			if (SharkDeadAnimSequence != 5) {
+				CGameManager::m_ImageManager->GetImages()
+					->MultiRender("SharkDeadAnim", SharkDeadAnimSequence, m_Pos, D2D1::SizeF(1.0f, 1.0f), NULL, angle);
+				SharkDeadAnimSequence = m_SharkDeadAnimFunc->OnAnimRender(100, 0, 5);
+			}
+			SharkAnimSequence = m_ExplosiveAnimFunc->OnAnimRender(50, 0, 10);
+			if (SharkAnimSequence == 9)
+				m_isDelete = TRUE;
+		}
 	}
 }
 

@@ -7,6 +7,7 @@ private:
 	INT sequence;
 
 	BOOL EndCheck;
+	BOOL IsLoop;
 public:
 	CSpriteAnimation();
 	~CSpriteAnimation();
@@ -18,6 +19,7 @@ public:
 	BOOL IsEndFrame() {
 		return EndCheck;
 	}
+	void SetLoop(BOOL IsLoop) { this->IsLoop = IsLoop; }
 	INT OnAnimRender(DWORD DelayTime, INT StartFrame, INT EndFrame);
 };
 

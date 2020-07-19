@@ -25,5 +25,6 @@ public:
 
 	CSprite* GetSprite(const string& Key);
 	vector<CSprite*> GetMultiSprite(const string& Key);
+	CSprite* GetMultiSprite(const string& Key, INT Sequence);
 };
 

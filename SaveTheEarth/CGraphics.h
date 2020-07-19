@@ -24,5 +24,11 @@ public:
 	void DrawCircle(float x, float y, float radius, float r, float g, float b, float a);
 
 	void DrawTextOut(LPCWSTR text, D2D1_POINT_2F Pos);
+
+	ID2D1SolidColorBrush* GetSolidColorBrush(INT n) { switch (n) { 
+	case 0: return m_Redbrush;
+	case 1: return m_Blackbrush;
+	case 2: return m_Whitebrush;
+	} }
 };
 

@@ -16,8 +16,9 @@ private:
 
 private:
 	INT ExplosiveSequence;
-	
+	INT SharkDeadAnimSequence;
 	CSpriteAnimation* m_ExplosiveAnimFunc;
+	CSpriteAnimation* m_SharkDeadAnimFunc;
 public:
 	CNormalEnemy(D2D1_POINT_2F m_Pos, INT tag);
 	~CNormalEnemy();

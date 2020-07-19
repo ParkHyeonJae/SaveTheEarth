@@ -74,6 +74,7 @@ CSprite::~CSprite()
 {
 }
 
+
 void CSprite::Draw()
 {
 	m_gfx->GetRenderTarget()->SetTransform(D2D1::Matrix3x2F::Identity());
@@ -187,6 +188,42 @@ void CSprite::Draw(D2D1_POINT_2F Pos, D2D1_SIZE_F Scale, D2D1_POINT_2F* center, 
 	);
 
 	m_gfx->GetRenderTarget()->SetTransform(D2D1::Matrix3x2F::Identity());
+}
+
+void CSprite::MaskDraw(D2D1_POINT_2F Pos, D2D1_SIZE_F Scale, D2D1_POINT_2F* center, float angle, OpacityBrush BrushType)
+{
+	m_gfx->GetRenderTarget()->SetAntialiasMode(D2D1_ANTIALIAS_MODE_ALIASED);
+
+	m_gfx->GetRenderTarget()->FillOpacityMask(
+		m_bmp,
+		CGameManager::m_Gfx->GetSolidColorBrush(BrushType),
+		D2D1_OPACITY_MASK_CONTENT_GRAPHICS,
+		D2D1::RectF(Pos.x, Pos.y,
+			Pos.x + m_bmp->GetSize().width, Pos.y + m_bmp->GetSize().height),
+		D2D1::RectF(0.0f, 0.0f,
+			m_bmp->GetSize().width, m_bmp->GetSize().height)
+	);
+
+	m_gfx->GetRenderTarget()->SetAntialiasMode(D2D1_ANTIALIAS_MODE_PER_PRIMITIVE);
+}
+
+void CSprite::MaskDraw(D2D1_POINT_2F Pos, D2D1_SIZE_F Scale, D2D1_POINT_2F* center, float angle, float overlay, D2D1_COLOR_F color, OpacityBrush BrushType)
+{
+	m_gfx->GetRenderTarget()->SetAntialiasMode(D2D1_ANTIALIAS_MODE_ALIASED);
+	D2D1_BRUSH_PROPERTIES property = { overlay , D2D1::Matrix3x2F::Identity() };
+	ID2D1SolidColorBrush* brush = CGameManager::m_Gfx->GetSolidColorBrush((INT)BrushType);
+	CGameManager::m_Gfx->GetRenderTarget()->CreateSolidColorBrush(color, property, &brush);
+	m_gfx->GetRenderTarget()->FillOpacityMask(
+		m_bmp,
+		brush,
+		D2D1_OPACITY_MASK_CONTENT_GRAPHICS,
+		D2D1::RectF(Pos.x, Pos.y,
+			Pos.x + m_bmp->GetSize().width, Pos.y + m_bmp->GetSize().height),
+		D2D1::RectF(0.0f, 0.0f,
+			m_bmp->GetSize().width, m_bmp->GetSize().height)
+	);
+
+	m_gfx->GetRenderTarget()->SetAntialiasMode(D2D1_ANTIALIAS_MODE_PER_PRIMITIVE);
 }
 
 void CSprite::Draw(D2D1_POINT_2F Pos, D2D1_SIZE_F Scale, D2D1_POINT_2F* center, float angle, float overlay)

@@ -176,6 +176,7 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 			{
 				if ((*Enemyiter)->m_tag == BOSS)
 				{
+					CBossEnemy* m_cBossEnemy = dynamic_cast<CBossEnemy*>((*Enemyiter));
 					RECT EnemyColl = {
 					(*Enemyiter)->GetPos().x + 0.0f,
 					(*Enemyiter)->GetPos().y + 0.0f,
@@ -186,8 +187,24 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 					RECT temp;
 					if (IntersectRect(&temp, &pBulletColl, &EnemyColl))		//총알이 보스하고 닿았을때
 					{
-						//dynamic_cast<CPlayerBullet*>((*iter))->SetColl(TRUE);
-						ispBulletColl = TRUE;
+						m_cPlayerBullet->SetColl(TRUE);
+						if (m_cBossEnemy->GetHp() >= 0) {
+							m_cBossEnemy->SetHp(
+								m_cBossEnemy->GetHp()
+								- m_cPlayerBullet->GetDamage());
+
+							m_cBossEnemy->SetHit(TRUE);
+							break;
+						}
+						else
+						{
+							m_cBossEnemy->SetDead(TRUE);
+							break;
+						}
+						break;
+					}
+					if (m_cBossEnemy->IsDelete()) {
+						m_gameObjectList.erase(Enemyiter);
 						break;
 					}
 				}
@@ -217,10 +234,6 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 							m_cNormalEnemy->SetDead(TRUE);
 							break;
 						}
-
-
-						
-						ispBulletColl = TRUE;
 						break;
 					}
 					if (m_cNormalEnemy->IsDelete()) {
@@ -236,12 +249,6 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 					m_gameObjectList.erase(iter);
 					break;
 				}
-			}
-			if (ispBulletColl)
-			{
-				//m_gameObjectList.erase(iter);
-				ispBulletColl = FALSE;
-				break;
 			}
 		}
 		iter++;

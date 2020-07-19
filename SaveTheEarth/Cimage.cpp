@@ -149,3 +149,12 @@ vector<CSprite*> Cimage::GetMultiSprite(const string& Key)
 	return vector<CSprite*>();
 }
 
+CSprite* Cimage::GetMultiSprite(const string& Key, INT Sequence)
+{
+	if (FindMultiImage(Key))
+	{
+		return m_multiImages.find(Key)->second[Sequence];
+	}
+	return NULL;
+}
+

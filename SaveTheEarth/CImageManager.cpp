@@ -111,6 +111,14 @@ INT CImageManager::ImageInit()
 	m_SharkAnim.push_back(new CSprite(L"../Images/Sprites/05 Shark Animation/5.png", CGameManager::m_Gfx));
 	m_Images->AddMultiImage("SharkAnim", m_SharkAnim);
 
+	std::vector<CSprite*> m_SharkDeadAnim;
+	m_SharkDeadAnim.push_back(new CSprite(L"../Images/Sprites/05 Shark Animation/Dead/1.png", CGameManager::m_Gfx));
+	m_SharkDeadAnim.push_back(new CSprite(L"../Images/Sprites/05 Shark Animation/Dead/2.png", CGameManager::m_Gfx));
+	m_SharkDeadAnim.push_back(new CSprite(L"../Images/Sprites/05 Shark Animation/Dead/3.png", CGameManager::m_Gfx));
+	m_SharkDeadAnim.push_back(new CSprite(L"../Images/Sprites/05 Shark Animation/Dead/4.png", CGameManager::m_Gfx));
+	m_SharkDeadAnim.push_back(new CSprite(L"../Images/Sprites/05 Shark Animation/Dead/5.png", CGameManager::m_Gfx));
+	m_Images->AddMultiImage("SharkDeadAnim", m_SharkDeadAnim);
+
 	std::vector<CSprite*> m_ExplosiveAnim;
 	m_ExplosiveAnim.push_back(new CSprite(L"../Images/Sprites/08 Explosive/1.png", CGameManager::m_Gfx));
 	m_ExplosiveAnim.push_back(new CSprite(L"../Images/Sprites/08 Explosive/2.png", CGameManager::m_Gfx));

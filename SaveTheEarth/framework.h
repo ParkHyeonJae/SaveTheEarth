@@ -37,6 +37,12 @@
 #include <dwrite.h>
 
 using namespace std;
+enum OpacityBrush
+{
+	RED,
+	BLACK,
+	WHITE
+};
 
 #include "CInput.h"
 #include "CGraphics.h"
@@ -106,6 +112,7 @@ enum GUNS
 	Rifle,
 	Shotgun
 };
+
 #ifdef _DEBUG
 
 #ifdef UNICODE
