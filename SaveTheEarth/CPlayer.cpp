@@ -27,7 +27,8 @@ void CPlayer::Init()
 {
 	isHit = FALSE;
 	overlay = 1.0f;
-	m_hitEffectCount = 6;
+	HitOverlaySpeed = 0.2f;
+	m_hitEffectCount = PLAYER_HIT_OVERLAY_COUNT;
 	m_Rot = 0.0f;
 	MoveSpeed = 15.0f;
 	m_playerState = IDLE;
@@ -36,7 +37,7 @@ void CPlayer::Init()
 
 	m_RifleMotionSequence = 0;
 	m_ShotgunMotionSequence = 0;
-
+	dTime = HitOverlaySpeed;
 }
 
 
@@ -47,6 +48,9 @@ void CPlayer::FrameMove(DWORD elapsed)
 	{
 		if (m_HP < wasPlayerHP)		//HP가 감소했을 때
 		{
+			CGameManager::isinvincibility = TRUE;
+			m_hitEffectCount = PLAYER_HIT_OVERLAY_COUNT;
+			dTime = HitOverlaySpeed;
 			isHit = TRUE;
 		}
 		wasPlayerHP = m_HP;
@@ -66,7 +70,8 @@ void CPlayer::FrameMove(DWORD elapsed)
 		}
 		else
 		{
-
+			isHit = FALSE;
+			CGameManager::isinvincibility = FALSE;
 		}
 	}
 
@@ -202,8 +207,11 @@ void CPlayer::Release()
 
 BOOL CPlayer::GetDamage(FLOAT damage)
 {
-	if (GetHp() <= 0)
-		return FALSE;
-	SetHp(GetHp() - damage);
+	if (!CGameManager::isinvincibility)
+	{
+		if (GetHp() <= 0)
+			return FALSE;
+		SetHp(GetHp() - damage);
 	return TRUE;
+	}
 }

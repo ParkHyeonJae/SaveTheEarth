@@ -65,6 +65,23 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 
 			for (auto iter02 = m_gameObjectList.begin(); iter02 != m_gameObjectList.end();)
 			{
+				if ((*iter02)->m_tag == ENEMY)
+				{
+					float CollRange = 40.0f;
+					RECT EnemyColl = {
+					((*iter02)->GetPos().x - CollRange),
+					((*iter02)->GetPos().y - CollRange),
+					((*iter02)->GetPos().x + CollRange),
+					((*iter02)->GetPos().y + CollRange),
+					};
+
+					RECT temp;
+					if (IntersectRect(&temp, &rPlayerColl, &EnemyColl))
+					{
+						dynamic_cast<CPlayer*>((*iter))->GetDamage(100.0f);
+						break;
+					}
+				}
 				if ((*iter02)->m_tag == MISILE)
 				{
 					if (dynamic_cast<MisileEnemy*>((*iter02))->IsSpawn())
