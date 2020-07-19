@@ -59,9 +59,9 @@ void CGraphics::CleanUp()
 		m_factory->Release();
 }
 
-void CGraphics::ClearScreen(float r, float g, float b)
+void CGraphics::ClearScreen(float r, float g, float b, float a)
 {
-	m_renderTarget->Clear(D2D1::ColorF(r, g, b));
+	m_renderTarget->Clear(D2D1::ColorF(r, g, b, a));
 }
 
 void CGraphics::DrawCircle(float x, float y, float radius, float r, float g, float b, float a)

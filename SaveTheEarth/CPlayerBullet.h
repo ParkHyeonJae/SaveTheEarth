@@ -40,5 +40,6 @@ public:
 	FLOAT GetDamage() { return m_BulletDamage; }
 
 	BOOL IsDelete() { return m_isDelete; }
+
 };
 

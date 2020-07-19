@@ -8,6 +8,8 @@ CBossEnemy::CBossEnemy(D2D1_POINT_2F m_Pos, INT tag)
 	m_BossAnimFunc = new CSpriteAnimation();
 	m_TargetPos = { 1200, 200 };
 	sequence = 0;
+
+
 }
 
 CBossEnemy::~CBossEnemy()
@@ -18,11 +20,11 @@ void CBossEnemy::Init()
 {
 	
 }
-
 void CBossEnemy::Render()
 {
 	CGameManager::m_ImageManager->GetImages()->MultiRender("BossIdleAnim", sequence, m_Pos, D2D1::SizeF(1.f, 1.f), NULL, 0.0f);
-
+	
+	//CGameManager::m_Gfx->GetRenderTarget()->Clear(D2D1::ColorF(1.0f, 1.0f, 1.0f, 1.0f));
 	sequence = m_BossAnimFunc->OnAnimRender(50, 0, 8);
 }
 
