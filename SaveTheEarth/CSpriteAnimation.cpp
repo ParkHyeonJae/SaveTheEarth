@@ -6,6 +6,7 @@ CSpriteAnimation::CSpriteAnimation()
 	OldAnimTime = 0;
 	sequence = 0;
 	EndCheck = FALSE;
+	IsLoop = TRUE;
 }
 
 CSpriteAnimation::~CSpriteAnimation()
@@ -16,9 +17,11 @@ INT CSpriteAnimation::OnAnimRender(DWORD DelayTime, INT StartFrame, INT EndFrame
 {
 	if (CurAnimTime - OldAnimTime > DelayTime)
 	{
-		sequence++;
+		if (EndCheck && !IsLoop) return sequence;
+		else sequence++;
 		if (sequence == EndFrame) {
-			sequence = StartFrame;
+			if (IsLoop)
+				sequence = StartFrame;
 			EndCheck = TRUE;
 		}
 		OldAnimTime = CurAnimTime;

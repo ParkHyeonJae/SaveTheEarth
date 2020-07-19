@@ -1,20 +1,18 @@
 #pragma once
 #define PLAYER_ANIM_COUNT 3
+#define PLAYER_HIT_OVERLAY_COUNT 6
 class CPlayer : public CGameObject
 {
 private:
 	INT m_playerState;
-	std::vector<CSprite*> m_playerIdleMotion;
-	std::vector<CSprite*> m_playerBackMotion;
-	std::vector<CSprite*> m_playerForwardMotion;
+
+
 	INT m_PlayerMotionAnimSequence[PLAYER_ANIM_COUNT];
 	CSpriteAnimation* m_PlayerMotionAnimFunc[PLAYER_ANIM_COUNT];
 private:
 	INT m_GunState;
-	std::vector<CSprite*> m_RifleMotion;
-	std::vector<CSprite*> m_ShotgunMotion;
-	CSprite* m_DefaultGun;
 
+	D2D1_SIZE_F m_RifleImageSize;
 	INT m_RifleMotionSequence;
 	INT m_ShotgunMotionSequence;
 
@@ -32,8 +30,8 @@ private:
 	INT m_hitEffectCount;
 	FLOAT overlay;
 	FLOAT tTime = 0.0f;
-	FLOAT dTime = 0.2f;
-
+	FLOAT dTime;
+	FLOAT HitOverlaySpeed;
 	CTimer* m_playerBulletFireTimer;
 public:
 	CPlayer(D2D1_POINT_2F m_Pos, INT tag, FLOAT m_HP);

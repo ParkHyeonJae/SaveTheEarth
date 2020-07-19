@@ -2,8 +2,6 @@
 class CPlayerBullet : public CGameObject
 {
 private:
-	std::vector<CSprite*> m_BulletSprites;
-	CSprite* m_ShotgunSprite;
 	CSpriteAnimation* m_RifleBulletAnimFunc;
 	INT RifleBulletAnimSequence;
 	float m_BulletSpeed;
@@ -14,11 +12,11 @@ private:
 	INT m_GUN;
 	BOOL CollCheck;
 	BOOL m_isDelete;
-	std::vector<CSprite*> m_RifleEffectAnim;
+
 	INT RifleEffectAnimSequence;
 	CSpriteAnimation* m_RifleEffectAnimFunc;
 
-	std::vector<CSprite*> m_ShotgunEffectAnim;
+
 	INT ShotgunEffectAnimSequence;
 	CSpriteAnimation* m_ShotgunEffectAnimFunc;
 
@@ -33,6 +31,7 @@ public:
 	virtual void Control(CInput* Input) override;
 	virtual void Release() override;
 
+
 	BOOL IsMapOut();
 	BOOL IsColl() {
 		return CollCheck;
@@ -41,5 +40,6 @@ public:
 	FLOAT GetDamage() { return m_BulletDamage; }
 
 	BOOL IsDelete() { return m_isDelete; }
+
 };
 

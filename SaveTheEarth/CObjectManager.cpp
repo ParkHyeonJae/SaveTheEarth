@@ -15,6 +15,12 @@ INT CObjectManager::AddObject(CGameObject* object)
 	return 0;
 }
 
+INT CObjectManager::AddUI(CGameObject* object)
+{
+	m_uiList.push_back(object);
+	return 0;
+}
+
 CGameObject CObjectManager::FindObject(CGameObject* object)
 {
 	return CGameObject();
@@ -45,16 +51,22 @@ void CObjectManager::AllInitalize()
 		(*iter)->Init();
 		iter++;
 	}
+	for (auto iter = m_uiList.begin(); iter != m_uiList.end();)
+	{
+		(*iter)->Init();
+		iter++;
+	}
 }
+
 BOOL ispBulletColl = FALSE;
 void CObjectManager::AllFrameMove(DWORD elapsed)
 {
 	for (auto iter = m_gameObjectList.begin(); iter != m_gameObjectList.end();)
 	{
 		(*iter)->FrameMove(elapsed);
-
 		if ((*iter)->m_tag == PLAYER)
 		{
+			CPlayer* m_cPlayer = dynamic_cast<CPlayer*>((*iter));
 			float CollRange = 40.0f;
 			RECT rPlayerColl = {
 			(*iter)->GetPos().x - CollRange,
@@ -65,14 +77,49 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 
 			for (auto iter02 = m_gameObjectList.begin(); iter02 != m_gameObjectList.end();)
 			{
+				if ((*iter02)->m_tag == ENEMY)
+				{
+					float CollRange = 40.0f;
+					RECT EnemyColl = {
+					((*iter02)->GetPos().x - CollRange),
+					((*iter02)->GetPos().y - CollRange),
+					((*iter02)->GetPos().x + CollRange),
+					((*iter02)->GetPos().y + CollRange),
+					};
+
+					RECT temp;
+					if (IntersectRect(&temp, &rPlayerColl, &EnemyColl))
+					{
+						m_cPlayer->GetDamage(100.0f);
+						break;
+					}
+				}
+				if ((*iter02)->m_tag == BOSS)
+				{
+					RECT EnemyColl = {
+					(*iter02)->GetPos().x + 0.0f,
+					(*iter02)->GetPos().y + 0.0f,
+					(*iter02)->GetPos().x + 200.0f,
+					(*iter02)->GetPos().y + 300.0f,
+					};
+
+					RECT temp;
+					if (IntersectRect(&temp, &rPlayerColl, &EnemyColl))
+					{
+						m_cPlayer->GetDamage(100.0f);
+						break;
+					}
+				}
 				if ((*iter02)->m_tag == MISILE)
 				{
-					if (dynamic_cast<MisileEnemy*>((*iter02))->IsSpawn())
+					MisileEnemy* m_misileEnemy = dynamic_cast<MisileEnemy*>((*iter02));
+					if (m_misileEnemy->IsSpawn())
 					{
-						if (dynamic_cast<MisileEnemy*>((*iter02))->IsMapOut())
+						if (m_misileEnemy->IsMapOut())
 						{
 							(*iter02)->Release();
-							m_gameObjectList.erase(iter02);
+							delete (*iter02);
+							iter02 = m_gameObjectList.erase(iter02);
 							break;
 						}
 						RECT rMisileColl = {
@@ -85,8 +132,7 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 						RECT temp;
 						if (IntersectRect(&temp, &rPlayerColl, &rMisileColl))
 						{
-							printf("충돌\n");
-							dynamic_cast<CPlayer*>((*iter))->GetDamage(100.0f);
+							m_cPlayer->GetDamage(100.0f);
 							break;
 						}
 					}
@@ -104,16 +150,17 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 			if (dynamic_cast<CNormalEnemyBullet*>((*iter))->IsMapOut())
 			{
 				(*iter)->Release();
-				m_gameObjectList.erase(iter);
+				delete (*iter);
+				iter = m_gameObjectList.erase(iter);
 				break;
 			}
 		}
 
 		if ((*iter)->m_tag == PBULLET)
 		{
-			if (dynamic_cast<CPlayerBullet*>((*iter))->IsMapOut())
+			CPlayerBullet* m_cPlayerBullet = dynamic_cast<CPlayerBullet*>((*iter));
+			if (m_cPlayerBullet->IsMapOut())
 			{
-				(*iter)->Release();
 				m_gameObjectList.erase(iter);
 				break;
 			}
@@ -129,6 +176,7 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 			{
 				if ((*Enemyiter)->m_tag == BOSS)
 				{
+					CBossEnemy* m_cBossEnemy = dynamic_cast<CBossEnemy*>((*Enemyiter));
 					RECT EnemyColl = {
 					(*Enemyiter)->GetPos().x + 0.0f,
 					(*Enemyiter)->GetPos().y + 0.0f,
@@ -139,13 +187,30 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 					RECT temp;
 					if (IntersectRect(&temp, &pBulletColl, &EnemyColl))		//총알이 보스하고 닿았을때
 					{
-						//dynamic_cast<CPlayerBullet*>((*iter))->SetColl(TRUE);
-						ispBulletColl = TRUE;
+						m_cPlayerBullet->SetColl(TRUE);
+						if (m_cBossEnemy->GetHp() >= 0) {
+							m_cBossEnemy->SetHp(
+								m_cBossEnemy->GetHp()
+								- m_cPlayerBullet->GetDamage());
+
+							m_cBossEnemy->SetHit(TRUE);
+							break;
+						}
+						else
+						{
+							m_cBossEnemy->SetDead(TRUE);
+							break;
+						}
+						break;
+					}
+					if (m_cBossEnemy->IsDelete()) {
+						m_gameObjectList.erase(Enemyiter);
 						break;
 					}
 				}
 				if ((*Enemyiter)->m_tag == ENEMY)
 				{
+					CNormalEnemy* m_cNormalEnemy = dynamic_cast<CNormalEnemy*>((*Enemyiter));
 					float CollRange = 40.0f;
 					RECT EnemyColl = {
 					((*Enemyiter)->GetPos().x - CollRange),
@@ -157,41 +222,40 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 					RECT temp;
 					if (IntersectRect(&temp, &pBulletColl, &EnemyColl))
 					{
-						if (dynamic_cast<CNormalEnemy*>((*Enemyiter))->GetHp() <= 0) {
-							dynamic_cast<CNormalEnemy*>((*Enemyiter))->SetDead(TRUE);
+						m_cPlayerBullet->SetColl(TRUE);
+						if (m_cNormalEnemy->GetHp() >= 0) {
+							m_cNormalEnemy->SetHp(
+								m_cNormalEnemy->GetHp()
+								- m_cPlayerBullet->GetDamage());
 							break;
 						}
-						dynamic_cast<CNormalEnemy*>((*Enemyiter))->SetHp(
-							dynamic_cast<CNormalEnemy*>((*Enemyiter))->GetHp()
-							- dynamic_cast<CPlayerBullet*>((*iter))->GetDamage());
-
-						//dynamic_cast<CPlayerBullet*>((*iter))->SetColl(TRUE);
-
-						
-						ispBulletColl = TRUE;
-						
+						else
+						{
+							m_cNormalEnemy->SetDead(TRUE);
+							break;
+						}
 						break;
 					}
-					if (dynamic_cast<CNormalEnemy*>((*Enemyiter))->IsDelete()) {
+					if (m_cNormalEnemy->IsDelete()) {
 						m_gameObjectList.erase(Enemyiter);
 						break;
 					}
 				}
 				Enemyiter++;
 			}
-			//if (dynamic_cast<CPlayerBullet*>((*iter))->IsDelete())
-			//{
-			//	m_gameObjectList.erase(iter);
-			//	break;
-			//}
-			if (ispBulletColl)
+			if (m_cPlayerBullet->IsColl())
 			{
-				m_gameObjectList.erase(iter);
-				ispBulletColl = FALSE;
-				break;
+				if (m_cPlayerBullet->IsDelete()) {
+					m_gameObjectList.erase(iter);
+					break;
+				}
 			}
 		}
-		
+		iter++;
+	}
+	for (auto iter = m_uiList.begin(); iter != m_uiList.end();)
+	{
+		(*iter)->FrameMove(elapsed);
 		iter++;
 	}
 }
@@ -203,11 +267,21 @@ void CObjectManager::AllControl(CInput* m_Input)
 		(*iter)->Control(m_Input);
 		iter++;
 	}
+	for (auto iter = m_uiList.begin(); iter != m_uiList.end();)
+	{
+		(*iter)->Control(m_Input);
+		iter++;
+	}
 }
 
 void CObjectManager::AllRender()
 {
 	for (auto iter = m_gameObjectList.begin(); iter != m_gameObjectList.end();)
+	{
+		(*iter)->Render();
+		iter++;
+	}
+	for (auto iter = m_uiList.begin(); iter != m_uiList.end();)
 	{
 		(*iter)->Render();
 		iter++;
@@ -224,5 +298,13 @@ void CObjectManager::AllRelease()
 			iter = nullptr;
 		}
 	}
+	for (auto iter : m_uiList) {
+		if (iter) {
+			iter->Release();
+			delete iter;
+			iter = nullptr;
+		}
+	}
 	m_gameObjectList.clear();
+	m_uiList.clear();
 }

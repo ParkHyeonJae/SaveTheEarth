@@ -37,11 +37,18 @@
 #include <dwrite.h>
 
 using namespace std;
+enum OpacityBrush
+{
+	RED,
+	BLACK,
+	WHITE
+};
 
 #include "CInput.h"
 #include "CGraphics.h"
 #include "CSprite.h"
 #include "Cimage.h"
+#include "CImageManager.h"
 #include "IGameObject.h"
 #include "CGameObject.h"
 #include "CTimer.h"
@@ -64,12 +71,18 @@ using namespace std;
 #include "CGame.h"
 #include "Mathf.h"
 
+#define SAFE_DELETE( p ) { if( p ) { delete ( p ); ( p ) = nullptr; } }
+
+#define  SAFE_RELEASE( p ) { if( p ) { ( p )->Release(); } }
+
 #define MAX_WIN_WIDTH 1600
 #define MAX_WIN_HEIGHT 900
 
 #define PI 3.141592
 
 #define MAX_PLAYER_HP 1000
+
+//#define SAFE_DELETE( p ) {if( p ){delete ( p ); ( p ) = nullptr;}}
 
 enum TAG {
 	PLAYER,
@@ -99,6 +112,7 @@ enum GUNS
 	Rifle,
 	Shotgun
 };
+
 #ifdef _DEBUG
 
 #ifdef UNICODE

@@ -9,13 +9,17 @@ FLOAT CGameManager::radian = PI / 180.0f;
 INT CGameManager::nowStatus = TITLE;
 DWORD CGameManager::m_fps = 0;
 FLOAT CGameManager::m_playerHp = 1000.0f;
+CImageManager* CGameManager::m_ImageManager = NULL;
+BOOL CGameManager::isinvincibility = FALSE;
 
-
-CGameManager::CGameManager(CGraphics* m_Gfx, CInput* m_Input, CObjectManager* m_ObjectManager)
+CGameManager::CGameManager(CGraphics* m_Gfx, CInput* m_Input, CObjectManager* m_ObjectManager, CImageManager* m_ImageManager)
 {
 	this->m_Gfx = m_Gfx;
 	this->m_Input = m_Input;
 	this->m_ObjectManager = m_ObjectManager;
+	this->m_ImageManager = m_ImageManager;
+
+
 }
 
 CGameManager::~CGameManager()

@@ -8,7 +8,7 @@ private:
 	CGameScene02* m_GameScene02;
 
 	CObjectManager* m_ObjectManager;
-
+	CImageManager* m_ImageManager;
 	CGameManager* m_GameManager;
 
 	
