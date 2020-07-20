@@ -1,4 +1,5 @@
 #include "framework.h"
+#include "CScoreManager.h"
 
 CObjectManager::CObjectManager()
 {
@@ -241,6 +242,7 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 						break;
 					}
 					if (m_cNormalEnemy->IsDelete()) {
+						Score::CScoreManager::ApplyScore(10.0f);
 						m_gameObjectList.erase(Enemyiter);
 						break;
 					}

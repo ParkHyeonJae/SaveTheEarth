@@ -165,6 +165,7 @@
     <ClInclude Include="CPlayer.h" />
     <ClInclude Include="CPlayerBullet.h" />
     <ClInclude Include="CSceneObject.h" />
+    <ClInclude Include="CScoreManager.h" />
     <ClInclude Include="CScrollBackground.h" />
     <ClInclude Include="CSprite.h" />
     <ClInclude Include="CSpriteAnimation.h" />
@@ -197,6 +198,7 @@
     <ClCompile Include="CPlayer.cpp" />
     <ClCompile Include="CPlayerBullet.cpp" />
     <ClCompile Include="CSceneObject.cpp" />
+    <ClCompile Include="CScoreManager.cpp" />
     <ClCompile Include="CScrollBackground.cpp" />
     <ClCompile Include="CSprite.cpp" />
     <ClCompile Include="CSpriteAnimation.cpp" />
