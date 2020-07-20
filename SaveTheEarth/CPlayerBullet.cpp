@@ -8,6 +8,7 @@ CPlayerBullet::CPlayerBullet(D2D1_POINT_2F m_Pos, FLOAT m_Rot, INT tag, INT m_GU
 
 	theta = m_Rot;
 	m_BulletSpeed = 1.0f;
+	m_BulletDamage = CGameManager::m_PlayerAttribute.m_ATKDamage;
 
 	m_RifleBulletAnimFunc = new CSpriteAnimation();
 	m_RifleEffectAnimFunc = new CSpriteAnimation();

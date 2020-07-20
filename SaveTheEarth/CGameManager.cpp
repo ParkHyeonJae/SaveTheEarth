@@ -11,6 +11,7 @@ DWORD CGameManager::m_fps = 0;
 FLOAT CGameManager::m_playerHp = 1000.0f;
 CImageManager* CGameManager::m_ImageManager = NULL;
 BOOL CGameManager::isinvincibility = FALSE;
+PLAYER_ATTR CGameManager::m_PlayerAttribute = { 20.0f, 0.0f, 0.0f };
 
 CGameManager::CGameManager(CGraphics* m_Gfx, CInput* m_Input, CObjectManager* m_ObjectManager, CImageManager* m_ImageManager)
 {

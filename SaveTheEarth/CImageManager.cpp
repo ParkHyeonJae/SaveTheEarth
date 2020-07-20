@@ -185,5 +185,10 @@ INT CImageManager::ImageInit()
 
 	m_Images->AddImage("SharkNullHp", new CSprite(L"../Images/Sprites/05 Shark Animation/HpBar/SharkHPBar_Back.png", CGameManager::m_Gfx));
 	m_Images->AddImage("SharkHpBar", new CSprite(L"../Images/Sprites/05 Shark Animation/HpBar/SharkHPBar_Fore.png", CGameManager::m_Gfx));
+
+	m_Images->AddImage("ATKUP", new CSprite(L"../Images/Sprites/01 Items/01 ATKUP.png", CGameManager::m_Gfx));
+	m_Images->AddImage("HPUP", new CSprite(L"../Images/Sprites/01 Items/02 HPUP.png", CGameManager::m_Gfx));
+	m_Images->AddImage("RPMUP", new CSprite(L"../Images/Sprites/01 Items/03 RPMUP.png", CGameManager::m_Gfx));
+
 	return 0;
 }

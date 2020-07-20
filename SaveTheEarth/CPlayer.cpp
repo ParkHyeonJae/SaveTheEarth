@@ -43,19 +43,25 @@ void CPlayer::Init()
 
 void CPlayer::FrameMove(DWORD elapsed)
 {
-	static FLOAT wasPlayerHP = m_HP;
-	if (wasPlayerHP != m_HP)		//HP에 변화를 감지했을 때
+	if (CGameManager::m_PlayerAttribute.m_IncreaseHP != 0)
 	{
-		if (m_HP < wasPlayerHP)		//HP가 감소했을 때
-		{
-			CGameManager::isinvincibility = TRUE;
-			m_hitEffectCount = PLAYER_HIT_OVERLAY_COUNT;
-			dTime = HitOverlaySpeed;
-			isHit = TRUE;
-		}
-		wasPlayerHP = m_HP;
+		m_HP += CGameManager::m_PlayerAttribute.m_IncreaseHP;
+		CGameManager::m_PlayerAttribute.m_IncreaseHP = 0;
 	}
-
+	else {
+		static FLOAT wasPlayerHP = m_HP;
+		if (wasPlayerHP != m_HP)		//HP에 변화를 감지했을 때
+		{
+			if (m_HP < wasPlayerHP)		//HP가 감소했을 때
+			{
+				CGameManager::isinvincibility = TRUE;
+				m_hitEffectCount = PLAYER_HIT_OVERLAY_COUNT;
+				dTime = HitOverlaySpeed;
+				isHit = TRUE;
+			}
+			wasPlayerHP = m_HP;
+		}
+	}
 	if (isHit)
 	{
 		if (m_hitEffectCount >= 0)
@@ -112,8 +118,16 @@ void CPlayer::Control(CInput* m_Input)
 	float RotDegree = atan2f(m_Pos.y - m_Input->GetMousePos().y, m_Pos.x - m_Input->GetMousePos().x);
 	m_Rot = (RotDegree * (180.0f / PI)) + 180.0f;
 
+	if (m_Input->BtnDown(VK_LBUTTON) || m_Input->BtnDown(VK_RBUTTON)) {
+		if (CGameManager::m_PlayerAttribute.m_RPM != 0)
+		{
+			m_playerBulletFireTimer->SetTimer(m_playerBulletFireTimer->GetDestTime() - CGameManager::m_PlayerAttribute.m_RPM);
+			CGameManager::m_PlayerAttribute.m_RPM = 0;
+		}
+	}
 	if (m_Input->BtnDown(VK_LBUTTON))
 	{
+		
 		if (m_playerBulletFireTimer->OnTimer())
 		{
 			m_GunState = Rifle;

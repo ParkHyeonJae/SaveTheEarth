@@ -160,6 +160,7 @@
     <ClInclude Include="CImageManager.h" />
     <ClInclude Include="CInGameUI.h" />
     <ClInclude Include="CInput.h" />
+    <ClInclude Include="CItem.h" />
     <ClInclude Include="CNormalEnemy.h" />
     <ClInclude Include="CNormalEnemyBullet.h" />
     <ClInclude Include="CObjectManager.h" />
@@ -194,6 +195,7 @@
     <ClCompile Include="CImageManager.cpp" />
     <ClCompile Include="CInGameUI.cpp" />
     <ClCompile Include="CInput.cpp" />
+    <ClCompile Include="CItem.cpp" />
     <ClCompile Include="CNormalEnemy.cpp" />
     <ClCompile Include="CNormalEnemyBullet.cpp" />
     <ClCompile Include="CObjectManager.cpp" />

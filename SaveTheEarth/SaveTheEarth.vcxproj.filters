@@ -141,6 +141,9 @@
     <ClInclude Include="CHealthBar.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="CItem.h">
+      <Filter>헤더 파일\CGameObject\Scene02</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="SaveTheEarth.cpp">
@@ -226,6 +229,9 @@
     </ClCompile>
     <ClCompile Include="CHealthBar.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="CItem.cpp">
+      <Filter>소스 파일\CGameObject\Scene02</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

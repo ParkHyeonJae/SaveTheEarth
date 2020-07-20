@@ -9,7 +9,7 @@ CBossEnemy::CBossEnemy(D2D1_POINT_2F m_Pos, INT tag)
 
 	m_BossNullHp = CGameManager::m_ImageManager->GetImages()->GetSprite("BossNullHp");
 	m_BossHpBar = CGameManager::m_ImageManager->GetImages()->GetSprite("BossHpBar");
-	
+	m_Sprite = CGameManager::m_ImageManager->GetImages()->GetMultiSprite("BossIdleAnim")[0];
 	Init();
 }
 
