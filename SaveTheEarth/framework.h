@@ -65,6 +65,7 @@ enum TAG {
 	BOSS,
 	MISILE,
 	UI,
+	ITEM,
 };
 
 enum SCENE {
@@ -84,6 +85,12 @@ enum GUNS
 	Rifle,
 	Shotgun
 };
+enum ITEMS
+{
+	ATKUP,
+	HPUP,
+	RPMUP
+};
 
 #include "CInput.h"
 #include "CGraphics.h"
@@ -95,6 +102,7 @@ enum GUNS
 #include "CTimer.h"
 #include "CHealthBar.h"
 #include "CSpriteAnimation.h"
+#include "CItem.h"
 #include "CNormalEnemyBullet.h"
 #include "CNormalEnemy.h"
 #include "CBossEnemy.h"

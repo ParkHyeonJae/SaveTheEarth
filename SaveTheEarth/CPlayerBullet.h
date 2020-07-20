@@ -7,7 +7,7 @@ private:
 	float m_BulletSpeed;
 	float theta;
 
-	FLOAT m_BulletDamage = 20.0f;
+	FLOAT m_BulletDamage;
 
 	INT m_GUN;
 	BOOL CollCheck;

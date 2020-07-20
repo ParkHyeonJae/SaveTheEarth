@@ -19,7 +19,8 @@ CNormalEnemy::CNormalEnemy(D2D1_POINT_2F m_Pos, INT tag)
 	SharkAnimSequence = 0;
 	m_deadCheck = FALSE;
 	m_isDelete = FALSE;
-
+	m_Sprite = CGameManager::m_ImageManager->GetImages()
+		->GetMultiSprite("SharkAnim")[0];
 	m_SharkNullHP = CGameManager::m_ImageManager->GetImages()->GetSprite("SharkNullHp");
 	m_SharkFullHP = CGameManager::m_ImageManager->GetImages()->GetSprite("SharkHpBar");
 	m_SharkHP = new CHealthBar("SharkNullHp", "SharkHpBar", m_Pos, TRUE, FALSE);
@@ -67,8 +68,13 @@ void CNormalEnemy::Render()
 				SharkDeadAnimSequence = m_SharkDeadAnimFunc->OnAnimRender(100, 0, 5);
 			}
 			SharkAnimSequence = m_ExplosiveAnimFunc->OnAnimRender(50, 0, 10);
-			if (SharkAnimSequence == 9)
+			if (SharkAnimSequence == 9) {
 				m_isDelete = TRUE;
+				if (Mathf::Probability(30))
+					CGameManager::m_ObjectManager
+					->AddObject(dynamic_cast<CGameObject*>
+					(new CItem(m_Pos, ITEM)));
+			}
 		}
 	}
 
