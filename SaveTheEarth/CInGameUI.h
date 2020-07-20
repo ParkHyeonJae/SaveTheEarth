@@ -23,7 +23,6 @@ private:
 	CSprite* m_LongDistancBar;
 	CSprite* m_whereDistanceBar;
 	FLOAT m_wherePosX;
-	FLOAT m_Score;
 public:
 	CInGameUI(INT tag);
 	~CInGameUI();
