@@ -4,10 +4,10 @@ CPlayer::CPlayer(D2D1_POINT_2F m_Pos, INT tag, FLOAT m_HP) : CGameObject()
 {
 	this->m_Pos = m_Pos;
 	this->m_tag = tag;
-	CGameManager::m_PlayerPos = m_Pos;
 	this->m_HP = m_HP;
 
-	m_playerBulletFireTimer = new CTimer(150);
+	CGameManager::m_PlayerPos = m_Pos;
+
 
 	for (INT i = 0; i < PLAYER_ANIM_COUNT; i++)
 	{
@@ -16,6 +16,8 @@ CPlayer::CPlayer(D2D1_POINT_2F m_Pos, INT tag, FLOAT m_HP) : CGameObject()
 	}
 	m_RifleMotionFunc = new CSpriteAnimation();
 	m_ShotgunMotionFunc = new CSpriteAnimation();
+
+	m_playerBulletFireTimer = new CTimer(150);
 }
 
 CPlayer::~CPlayer()
@@ -38,11 +40,19 @@ void CPlayer::Init()
 	m_RifleMotionSequence = 0;
 	m_ShotgunMotionSequence = 0;
 	dTime = HitOverlaySpeed;
+
+	IsStart = TRUE;
 }
 
 
 void CPlayer::FrameMove(DWORD elapsed)
 {
+	if (IsStart)
+	{
+		if (m_Pos.x > 150.0f)
+			IsStart = FALSE;
+		MoveR();
+	}
 	if (CGameManager::m_PlayerAttribute.m_IncreaseHP != 0)
 	{
 		m_HP += CGameManager::m_PlayerAttribute.m_IncreaseHP;
@@ -83,7 +93,11 @@ void CPlayer::FrameMove(DWORD elapsed)
 
 	CGameManager::m_playerHp = m_HP;
 }
-
+void CPlayer::MoveR()
+{
+	m_Pos.x += MoveSpeed;
+	m_playerState = BACK;
+}
 void CPlayer::Control(CInput* m_Input)
 {
 	m_playerState = IDLE;
@@ -106,15 +120,16 @@ void CPlayer::Control(CInput* m_Input)
 		m_playerState = BACK;
 	}
 
-	if (m_Pos.x > MAX_WIN_WIDTH - 120)
-		m_Pos.x = MAX_WIN_WIDTH - 120;
-	if (m_Pos.x < 0)
-		m_Pos.x = 0;
-	if (m_Pos.y > MAX_WIN_HEIGHT - 100)
-		m_Pos.y = MAX_WIN_HEIGHT - 100;
-	if (m_Pos.y < 0)
-		m_Pos.y = 0;
-
+	if (!IsStart) {
+		if (m_Pos.x > MAX_WIN_WIDTH - 120)
+			m_Pos.x = MAX_WIN_WIDTH - 120;
+		if (m_Pos.x < 0)
+			m_Pos.x = 0;
+		if (m_Pos.y > MAX_WIN_HEIGHT - 100)
+			m_Pos.y = MAX_WIN_HEIGHT - 100;
+		if (m_Pos.y < 0)
+			m_Pos.y = 0;
+	}
 	float RotDegree = atan2f(m_Pos.y - m_Input->GetMousePos().y, m_Pos.x - m_Input->GetMousePos().x);
 	m_Rot = (RotDegree * (180.0f / PI)) + 180.0f;
 
@@ -218,6 +233,8 @@ void CPlayer::Render()
 void CPlayer::Release()
 {
 }
+
+
 
 BOOL CPlayer::GetDamage(FLOAT damage)
 {

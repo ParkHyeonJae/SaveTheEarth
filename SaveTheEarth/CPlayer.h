@@ -4,9 +4,9 @@
 class CPlayer : public CGameObject
 {
 private:
+	BOOL IsStart;
+private:
 	INT m_playerState;
-
-
 	INT m_PlayerMotionAnimSequence[PLAYER_ANIM_COUNT];
 	CSpriteAnimation* m_PlayerMotionAnimFunc[PLAYER_ANIM_COUNT];
 private:
@@ -42,6 +42,8 @@ public:
 	virtual void FrameMove(DWORD elapsed) override;
 	virtual void Control(CInput* Input) override;
 	virtual void Release() override;
+
+	void MoveR();		//오른쪽으로 이동 (연출용 함수)
 
 	FLOAT GetHp() { return m_HP; }
 	void SetHp(FLOAT hp) { m_HP = hp; }
