@@ -38,10 +38,10 @@ void CInGameUI::Render()
 
 	m_hpPos = { m_Pos.x + 183, m_Pos.y + 58 };
 	D2D1_RECT_F hpSrc = {
-		m_hpPos.x,
-		m_hpPos.y,
-		m_hpPos.x + CurIMG,
-		m_hpPos.y + HpBarSize.height
+		0,
+		0,
+		(MAXIMG - CurIMG) * -1,
+		0
 	};
 	CGameManager::m_ImageManager->GetImages()->Render("playerHpBar_foreground", m_hpPos, &hpSrc);
 	m_wherePosX = ((ENDPOINT * Score::GETSCORE) / MAXSCORE);

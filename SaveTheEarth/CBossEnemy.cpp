@@ -7,15 +7,11 @@ CBossEnemy::CBossEnemy(D2D1_POINT_2F m_Pos, INT tag)
 
 	m_BossHitTimer = new CTimer(300);
 	m_BossAnimFunc = new CSpriteAnimation();
-	m_TargetPos = { 1200, 200 };
-	sequence = 0;
 
-	m_HP = 10000.0f;
-	m_deadCheck = FALSE;
-	m_isDelete = FALSE;
-	m_isHit = FALSE;
-	BlinkingCount = MAX_BLINKING_COUNT;
-	m_BossHitTimer->LoopCheck(FALSE);
+	m_BossNullHp = CGameManager::m_ImageManager->GetImages()->GetSprite("BossNullHp");
+	m_BossHpBar = CGameManager::m_ImageManager->GetImages()->GetSprite("BossHpBar");
+	
+	Init();
 }
 
 CBossEnemy::~CBossEnemy()
@@ -24,7 +20,17 @@ CBossEnemy::~CBossEnemy()
 
 void CBossEnemy::Init()
 {
+	HpBarSize.width = CGameManager::m_ImageManager->GetImageSize("BossNullHp").width;
+	HpBarSize.height = MAXIMG = CGameManager::m_ImageManager->GetImageSize("BossNullHp").height;
 
+	m_BossHpPos = { 900,0 };
+	m_HP = MAXHP = MAXBOSSHP;
+	m_deadCheck = FALSE;
+	m_isDelete = FALSE;
+	m_isHit = FALSE;
+	m_BossHitTimer->LoopCheck(FALSE);
+	m_TargetPos = { 1200, 200 };
+	sequence = 0;
 }
 
 void CBossEnemy::Render()
@@ -45,9 +51,17 @@ void CBossEnemy::Render()
 		D2D1_COLOR_F color = D2D1::ColorF(colorV, colorV, colorV, colorV);
 		m_texture->MaskDraw(m_Pos, D2D1::SizeF(1.f, 1.f), NULL, 0.0f,1.0f, color, OpacityBrush::WHITE);
 	}
-
-	//CGameManager::m_ImageManager->GetImages()->MultiRender("BossIdleAnim", sequence, m_Pos, D2D1::SizeF(1.f, 1.f), NULL, 0.0f);
 	sequence = m_BossAnimFunc->OnAnimRender(50, 0, 8);
+
+	CurIMG = (m_HP * MAXIMG) / MAXHP;
+	D2D1_RECT_F hpSrc = {
+		0,
+		(MAXIMG - CurIMG) * 1,
+		0,
+		0,
+	};
+	m_BossNullHp->Draw(m_BossHpPos);
+	m_BossHpBar->Draw(m_BossHpPos, &hpSrc);
 }
 
 void CBossEnemy::FrameMove(DWORD elapsed)

@@ -43,37 +43,12 @@ enum OpacityBrush
 	BLACK,
 	WHITE
 };
-
-#include "CInput.h"
-#include "CGraphics.h"
-#include "CSprite.h"
-#include "Cimage.h"
-#include "CImageManager.h"
-#include "IGameObject.h"
-#include "CGameObject.h"
-#include "CTimer.h"
-#include "CSpriteAnimation.h"
-#include "CNormalEnemyBullet.h"
-#include "CNormalEnemy.h"
-#include "CBossEnemy.h"
-#include "MisileEnemy.h"
-#include "CPlayerBullet.h"
-#include "CPlayer.h"
-#include "CScrollBackground.h"
-#include "CTitleBackground.h"
-#include "CInGameUI.h"
-#include "CObjectManager.h"
-#include "CSceneObject.h"
-#include "CGameScene01.h"
-#include "CGameScene02.h"
-#include "CGameManager.h"
-#include "CDX2DApp.h"
-#include "CGame.h"
-#include "Mathf.h"
-
 #define SAFE_DELETE( p ) { if( p ) { delete ( p ); ( p ) = nullptr; } }
 
 #define  SAFE_RELEASE( p ) { if( p ) { ( p )->Release(); } }
+//#define SAFE_DELETE( p ) {if( p ){delete ( p ); ( p ) = nullptr;}}
+
+#define Vector2 D2D1_POINT_2F
 
 #define MAX_WIN_WIDTH 1600
 #define MAX_WIN_HEIGHT 900
@@ -81,9 +56,6 @@ enum OpacityBrush
 #define PI 3.141592
 
 #define MAX_PLAYER_HP 1000
-
-//#define SAFE_DELETE( p ) {if( p ){delete ( p ); ( p ) = nullptr;}}
-
 enum TAG {
 	PLAYER,
 	PBULLET,
@@ -112,6 +84,35 @@ enum GUNS
 	Rifle,
 	Shotgun
 };
+
+#include "CInput.h"
+#include "CGraphics.h"
+#include "CSprite.h"
+#include "Cimage.h"
+#include "CImageManager.h"
+#include "IGameObject.h"
+#include "CGameObject.h"
+#include "CTimer.h"
+#include "CSpriteAnimation.h"
+#include "CNormalEnemyBullet.h"
+#include "CNormalEnemy.h"
+#include "CBossEnemy.h"
+#include "MisileEnemy.h"
+#include "CPlayerBullet.h"
+#include "CPlayer.h"
+#include "CScrollBackground.h"
+#include "CTitleBackground.h"
+#include "CInGameUI.h"
+#include "CObjectManager.h"
+#include "CSceneObject.h"
+#include "CGameScene01.h"
+#include "CGameScene02.h"
+#include "CGameManager.h"
+#include "CDX2DApp.h"
+#include "CGame.h"
+#include "Mathf.h"
+
+
 
 #ifdef _DEBUG
 
