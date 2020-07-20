@@ -1,5 +1,4 @@
 #include "framework.h"
-
 CBossEnemy::CBossEnemy(D2D1_POINT_2F m_Pos, INT tag)
 {
 	this->m_Pos = m_Pos;
@@ -20,17 +19,15 @@ CBossEnemy::~CBossEnemy()
 
 void CBossEnemy::Init()
 {
-	HpBarSize.width = CGameManager::m_ImageManager->GetImageSize("BossNullHp").width;
-	HpBarSize.height = MAXIMG = CGameManager::m_ImageManager->GetImageSize("BossNullHp").height;
-
 	m_BossHpPos = { 900,0 };
-	m_HP = MAXHP = MAXBOSSHP;
+	m_HP = MAXBOSSHP;
 	m_deadCheck = FALSE;
 	m_isDelete = FALSE;
 	m_isHit = FALSE;
 	m_BossHitTimer->LoopCheck(FALSE);
 	m_TargetPos = { 1200, 200 };
 	sequence = 0;
+	m_BossHP = new CHealthBar("BossNullHp", "BossHpBar", m_BossHpPos, FALSE, TRUE);
 }
 
 void CBossEnemy::Render()
@@ -53,10 +50,11 @@ void CBossEnemy::Render()
 	}
 	sequence = m_BossAnimFunc->OnAnimRender(50, 0, 8);
 
-	CurIMG = (m_HP * MAXIMG) / MAXHP;
+	//CurIMG = (m_HP * MAXIMG) / MAXHP;
+	m_BossHP->Setting(MAXBOSSHP, m_HP);
 	D2D1_RECT_F hpSrc = {
 		0,
-		(MAXIMG - CurIMG) * 1,
+		m_BossHP->RestIMG() * 1,
 		0,
 		0,
 	};

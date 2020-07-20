@@ -13,12 +13,16 @@ CNormalEnemy::CNormalEnemy(D2D1_POINT_2F m_Pos, INT tag)
 	m_SharkDeadAnimFunc->SetLoop(FALSE);
 	m_ExplosiveAnimFunc = new CSpriteAnimation();
 
-	m_HP = 100.0f;
+	m_HP = SHARKMAXHP;
 	ExplosiveSequence = 0;
 	SharkDeadAnimSequence = 0;
 	SharkAnimSequence = 0;
 	m_deadCheck = FALSE;
 	m_isDelete = FALSE;
+
+	m_SharkNullHP = CGameManager::m_ImageManager->GetImages()->GetSprite("SharkNullHp");
+	m_SharkFullHP = CGameManager::m_ImageManager->GetImages()->GetSprite("SharkHpBar");
+	m_SharkHP = new CHealthBar("SharkNullHp", "SharkHpBar", m_Pos, TRUE, FALSE);
 }
 
 CNormalEnemy::~CNormalEnemy()
@@ -41,6 +45,16 @@ void CNormalEnemy::Render()
 			CGameManager::m_ImageManager->GetImages()
 				->MultiRender("SharkAnim", SharkAnimSequence, m_Pos, D2D1::SizeF(1.0f, 1.0f), &center, angle);
 			SharkAnimSequence = m_SharkAnimFunc->OnAnimRender(100, 0, 5);
+
+			m_SharkHP->Setting(SHARKMAXHP, m_HP);
+			D2D1_RECT_F hpSrc = {
+				0,
+				0,
+				m_SharkHP->RestIMG() * -1,
+				0
+			};
+			m_SharkNullHP->Draw(m_Pos);
+			m_SharkFullHP->Draw(m_Pos, &hpSrc);
 		}
 		else
 		{
@@ -57,6 +71,8 @@ void CNormalEnemy::Render()
 				m_isDelete = TRUE;
 		}
 	}
+
+
 }
 
 void CNormalEnemy::FrameMove(DWORD elapsed)

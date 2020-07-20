@@ -4,13 +4,8 @@
 CInGameUI::CInGameUI(INT tag)
 {
 	this->m_tag = tag;
-	m_hpBarPos = { 0,0 };
 	CurHP = NULL;
-	HpBarSize = { 0.0f ,0.0f };
-	MAXHP = 0.0f;
-	MAXIMG = 0.0f;
-	hpSize = 0.0f;
-	m_hpPos = { 0.0f,0.0f };
+	m_hpPos = { 183, 58 };
 
 	m_LongDistancBar = CGameManager::m_ImageManager->GetImages()->GetSprite("LongBar");
 	m_whereDistanceBar = CGameManager::m_ImageManager->GetImages()->GetSprite("Where");
@@ -23,24 +18,19 @@ CInGameUI::~CInGameUI()
 
 void CInGameUI::Init()
 {
-	MAXHP = MAX_PLAYER_HP;
-	HpBarSize.width = MAXIMG = CGameManager::m_ImageManager->GetImageSize("playerHpBar_foreground").width;
-	HpBarSize.height = CGameManager::m_ImageManager->GetImageSize("playerHpBar_foreground").height;
+	m_UserHP = new CHealthBar("playerHpBar_background", "playerHpBar_foreground", m_hpPos, TRUE, FALSE);
 }
 
 void CInGameUI::Render()
 {
 	CurHP = CGameManager::m_playerHp;
-	
+	m_UserHP->Setting(MAX_PLAYER_HP, CurHP);
+
 	CGameManager::m_ImageManager->GetImages()->Render("playerHpBar_background", m_Pos, 1.0f);
-
-	CurIMG = (CurHP * MAXIMG) / MAXHP;
-
-	m_hpPos = { m_Pos.x + 183, m_Pos.y + 58 };
 	D2D1_RECT_F hpSrc = {
 		0,
 		0,
-		(MAXIMG - CurIMG) * -1,
+		m_UserHP->RestIMG() * -1,
 		0
 	};
 	CGameManager::m_ImageManager->GetImages()->Render("playerHpBar_foreground", m_hpPos, &hpSrc);
