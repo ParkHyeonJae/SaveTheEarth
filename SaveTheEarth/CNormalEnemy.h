@@ -1,4 +1,5 @@
 #pragma once
+#define SHARKMAXHP 500
 class CNormalEnemy : public CGameObject
 {
 private:
@@ -19,6 +20,11 @@ private:
 	INT SharkDeadAnimSequence;
 	CSpriteAnimation* m_ExplosiveAnimFunc;
 	CSpriteAnimation* m_SharkDeadAnimFunc;
+
+private:
+	CHealthBar* m_SharkHP;
+	CSprite* m_SharkNullHP;
+	CSprite* m_SharkFullHP;
 public:
 	CNormalEnemy(D2D1_POINT_2F m_Pos, INT tag);
 	~CNormalEnemy();

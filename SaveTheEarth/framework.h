@@ -93,6 +93,7 @@ enum GUNS
 #include "IGameObject.h"
 #include "CGameObject.h"
 #include "CTimer.h"
+#include "CHealthBar.h"
 #include "CSpriteAnimation.h"
 #include "CNormalEnemyBullet.h"
 #include "CNormalEnemy.h"

@@ -16,14 +16,10 @@ private:
 	FLOAT m_HP;
 	FLOAT colorV = 0.0f;
 
+	CHealthBar* m_BossHP;
 	CSprite* m_BossNullHp;
 	CSprite* m_BossHpBar;
-	D2D1_SIZE_F HpBarSize;
 	Vector2 m_BossHpPos;
-
-	FLOAT MAXHP;
-	FLOAT MAXIMG;
-	FLOAT CurIMG = 0;
 public:
 	CBossEnemy(D2D1_POINT_2F m_Pos, INT tag);
 	~CBossEnemy();

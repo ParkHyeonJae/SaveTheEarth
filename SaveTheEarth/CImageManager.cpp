@@ -183,6 +183,7 @@ INT CImageManager::ImageInit()
 	m_Images->AddImage("BossNullHp", new CSprite(L"../Images/Sprites/04 Boss/BossHPBar/bossNullHP.png", CGameManager::m_Gfx));
 	m_Images->AddImage("BossHpBar", new CSprite(L"../Images/Sprites/04 Boss/BossHPBar/bossHPbar.png", CGameManager::m_Gfx));
 
-
+	m_Images->AddImage("SharkNullHp", new CSprite(L"../Images/Sprites/05 Shark Animation/HpBar/SharkHPBar_Back.png", CGameManager::m_Gfx));
+	m_Images->AddImage("SharkHpBar", new CSprite(L"../Images/Sprites/05 Shark Animation/HpBar/SharkHPBar_Fore.png", CGameManager::m_Gfx));
 	return 0;
 }

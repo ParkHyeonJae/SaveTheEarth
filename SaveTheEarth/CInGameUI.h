@@ -2,22 +2,13 @@
 #define STARTPOINT 200
 #define ENDPOINT 1260
 #define MIDDLEPOINT 725
-#define MAXSCORE 20000.0f
 class CInGameUI : public CGameObject
 {
 private:
-	D2D1_POINT_2F m_hpBarPos;
 	D2D1_POINT_2F m_hpPos;
-	FLOAT hpSize;
 
-
-	FLOAT MAXHP;
+	CHealthBar* m_UserHP;
 	FLOAT CurHP;
-	FLOAT MAXIMG;
-
-	FLOAT CurIMG = 0;
-
-	D2D1_SIZE_F HpBarSize;
 
 	//Distance Bar
 	CSprite* m_LongDistancBar;

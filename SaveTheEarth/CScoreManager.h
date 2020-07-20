@@ -1,4 +1,5 @@
 #pragma once
+#define MAXSCORE 20000
 namespace Score
 {
 	class CScoreManager
