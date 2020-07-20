@@ -87,67 +87,68 @@ void CPlayer::FrameMove(DWORD elapsed)
 void CPlayer::Control(CInput* m_Input)
 {
 	m_playerState = IDLE;
-	if (m_Input->KeyPress(VK_UP) || m_Input->KeyPress('W'))
-	{
-		m_Pos.y -= MoveSpeed;
+	if (CGameManager::EnableInput) {
+		if (m_Input->KeyPress(VK_UP) || m_Input->KeyPress('W'))
+		{
+			m_Pos.y -= MoveSpeed;
+		}
+		if (m_Input->KeyPress(VK_DOWN) || m_Input->KeyPress('S'))
+		{
+			m_Pos.y += MoveSpeed;
+		}
+		if (m_Input->KeyPress(VK_LEFT) || m_Input->KeyPress('A'))
+		{
+			m_Pos.x -= MoveSpeed;
+			m_playerState = FORWARD;
+		}
+		if (m_Input->KeyPress(VK_RIGHT) || m_Input->KeyPress('D'))
+		{
+			m_Pos.x += MoveSpeed;
+			m_playerState = BACK;
+		}
 	}
-	if (m_Input->KeyPress(VK_DOWN) || m_Input->KeyPress('S'))
-	{
-		m_Pos.y += MoveSpeed;
+	if (!IsStart) {
+		if (m_Pos.x > MAX_WIN_WIDTH - 120)
+			m_Pos.x = MAX_WIN_WIDTH - 120;
+		if (m_Pos.x < 0)
+			m_Pos.x = 0;
+		if (m_Pos.y > MAX_WIN_HEIGHT - 100)
+			m_Pos.y = MAX_WIN_HEIGHT - 100;
+		if (m_Pos.y < 0)
+			m_Pos.y = 0;
 	}
-	if (m_Input->KeyPress(VK_LEFT) || m_Input->KeyPress('A'))
-	{
-		m_Pos.x -= MoveSpeed;
-		m_playerState = FORWARD;
-	}
-	if (m_Input->KeyPress(VK_RIGHT) || m_Input->KeyPress('D'))
-	{
-		m_Pos.x += MoveSpeed;
-		m_playerState = BACK;
-	}
-
-	if (m_Pos.x > MAX_WIN_WIDTH - 120)
-		m_Pos.x = MAX_WIN_WIDTH - 120;
-	if (m_Pos.x < 0)
-		m_Pos.x = 0;
-	if (m_Pos.y > MAX_WIN_HEIGHT - 100)
-		m_Pos.y = MAX_WIN_HEIGHT - 100;
-	if (m_Pos.y < 0)
-		m_Pos.y = 0;
-
 	float RotDegree = atan2f(m_Pos.y - m_Input->GetMousePos().y, m_Pos.x - m_Input->GetMousePos().x);
 	m_Rot = (RotDegree * (180.0f / PI)) + 180.0f;
 
-	if (m_Input->BtnDown(VK_LBUTTON) || m_Input->BtnDown(VK_RBUTTON)) {
-		if (CGameManager::m_PlayerAttribute.m_RPM != 0)
-		{
-			m_playerBulletFireTimer->SetTimer(m_playerBulletFireTimer->GetDestTime() - CGameManager::m_PlayerAttribute.m_RPM);
-			CGameManager::m_PlayerAttribute.m_RPM = 0;
-		}
-	}
-	if (m_Input->BtnDown(VK_LBUTTON))
+	if (CGameManager::m_PlayerAttribute.m_RPM != 0)
 	{
-		
-		if (m_playerBulletFireTimer->OnTimer())
-		{
-			m_GunState = Rifle;
-			m_PlayerBullet = new CPlayerBullet(D2D1::Point2F(CGameManager::m_PlayerPos.x, CGameManager::m_PlayerPos.y + 15.0f), m_Rot, PBULLET, m_GunState);
-			CGameManager::m_ObjectManager->AddObject(dynamic_cast<CGameObject*>(m_PlayerBullet));
-		}
+		m_playerBulletFireTimer->SetTimer(m_playerBulletFireTimer->GetDestTime() - CGameManager::m_PlayerAttribute.m_RPM);
+		CGameManager::m_PlayerAttribute.m_RPM = 0;
 	}
-	if (m_Input->BtnDown(VK_RBUTTON))
-	{
-		if (m_playerBulletFireTimer->OnTimer())
+	if (CGameManager::EnableInput) {
+		if (m_Input->BtnDown(VK_LBUTTON))
 		{
-			m_GunState = Shotgun;
-			for (int i = m_Rot - 10; i < m_Rot + 10; i += 5)
+
+			if (m_playerBulletFireTimer->OnTimer())
 			{
-				m_PlayerBullet = new CPlayerBullet(D2D1::Point2F(CGameManager::m_PlayerPos.x, CGameManager::m_PlayerPos.y + 30.0f), i, PBULLET, m_GunState);
+				m_GunState = Rifle;
+				m_PlayerBullet = new CPlayerBullet(D2D1::Point2F(CGameManager::m_PlayerPos.x, CGameManager::m_PlayerPos.y + 15.0f), m_Rot, PBULLET, m_GunState);
 				CGameManager::m_ObjectManager->AddObject(dynamic_cast<CGameObject*>(m_PlayerBullet));
 			}
 		}
+		if (m_Input->BtnDown(VK_RBUTTON))
+		{
+			if (m_playerBulletFireTimer->OnTimer())
+			{
+				m_GunState = Shotgun;
+				for (int i = m_Rot - 10; i < m_Rot + 10; i += 5)
+				{
+					m_PlayerBullet = new CPlayerBullet(D2D1::Point2F(CGameManager::m_PlayerPos.x, CGameManager::m_PlayerPos.y + 30.0f), i, PBULLET, m_GunState);
+					CGameManager::m_ObjectManager->AddObject(dynamic_cast<CGameObject*>(m_PlayerBullet));
+				}
+			}
+		}
 	}
-
 	CGameManager::m_PlayerPos = m_Pos;
 }
 
