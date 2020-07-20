@@ -1,4 +1,9 @@
 #pragma once
+struct PLAYER_ATTR {
+	FLOAT m_ATKDamage;
+	FLOAT m_IncreaseHP;
+	FLOAT m_RPM;
+};
 class CGameManager
 {
 public:
@@ -13,6 +18,8 @@ public:
 	static FLOAT m_playerHp;
 	static 	CImageManager* m_ImageManager;
 	static BOOL isinvincibility;
+
+	static PLAYER_ATTR m_PlayerAttribute;
 public:
 	CGameManager(CGraphics * m_Gfx, CInput* m_Input, CObjectManager * m_ObjectManager, CImageManager* m_ImageManager);
 	~CGameManager();

@@ -174,5 +174,21 @@ INT CImageManager::ImageInit()
 
 	//Credit Image
 	m_Images->AddImage("Credit", new CSprite(L"../Images/Title/Credit.png", CGameManager::m_Gfx));
+
+	// Distance Bar
+	m_Images->AddImage("LongBar", new CSprite(L"../Images/Sprites/10 Distance Bar/long bar.png", CGameManager::m_Gfx));
+	m_Images->AddImage("Where", new CSprite(L"../Images/Sprites/10 Distance Bar/where.png", CGameManager::m_Gfx));
+	
+	
+	m_Images->AddImage("BossNullHp", new CSprite(L"../Images/Sprites/04 Boss/BossHPBar/bossNullHP.png", CGameManager::m_Gfx));
+	m_Images->AddImage("BossHpBar", new CSprite(L"../Images/Sprites/04 Boss/BossHPBar/bossHPbar.png", CGameManager::m_Gfx));
+
+	m_Images->AddImage("SharkNullHp", new CSprite(L"../Images/Sprites/05 Shark Animation/HpBar/SharkHPBar_Back.png", CGameManager::m_Gfx));
+	m_Images->AddImage("SharkHpBar", new CSprite(L"../Images/Sprites/05 Shark Animation/HpBar/SharkHPBar_Fore.png", CGameManager::m_Gfx));
+
+	m_Images->AddImage("ATKUP", new CSprite(L"../Images/Sprites/01 Items/01 ATKUP.png", CGameManager::m_Gfx));
+	m_Images->AddImage("HPUP", new CSprite(L"../Images/Sprites/01 Items/02 HPUP.png", CGameManager::m_Gfx));
+	m_Images->AddImage("RPMUP", new CSprite(L"../Images/Sprites/01 Items/03 RPMUP.png", CGameManager::m_Gfx));
+
 	return 0;
 }

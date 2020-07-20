@@ -125,21 +125,15 @@ void CSprite::Draw(D2D1_POINT_2F Pos, D2D1_RECT_F* src)
 {
 	m_gfx->GetRenderTarget()->SetTransform(D2D1::Matrix3x2F::Identity());
 
-	
-	D2D1_RECT_F rect = {
-		 -Pos.x,
-		 -Pos.y,
-		 Pos.x + m_bmp->GetSize().width,
-		 Pos.y + m_bmp->GetSize().height,
-	};
 
 	m_gfx->GetRenderTarget()->DrawBitmap(
 		m_bmp,
-		D2D1::RectF(src->left, src->top,
-			src->right, src->bottom),
+		D2D1::RectF(Pos.x + src->left, Pos.y + src->top,
+			Pos.x + m_bmp->GetSize().width + src->right, Pos.y + m_bmp->GetSize().height + src->bottom),
 		1.0f,
 		D2D1_BITMAP_INTERPOLATION_MODE::D2D1_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR,
-		rect
+		D2D1::RectF(0 + src->left, 0 + src->top,
+			m_bmp->GetSize().width + src->right, m_bmp->GetSize().height + src->bottom)
 	);
 	m_gfx->GetRenderTarget()->SetTransform(D2D1::Matrix3x2F::Identity());
 }

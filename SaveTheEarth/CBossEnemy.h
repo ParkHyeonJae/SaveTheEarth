@@ -1,5 +1,5 @@
 #pragma once
-#define MAX_BLINKING_COUNT 2
+#define MAXBOSSHP 10000
 class CBossEnemy : public CGameObject
 {
 private:
@@ -14,6 +14,12 @@ private:
 	BOOL m_deadCheck;
 	BOOL m_isDelete;
 	FLOAT m_HP;
+	FLOAT colorV = 0.0f;
+
+	CHealthBar* m_BossHP;
+	CSprite* m_BossNullHp;
+	CSprite* m_BossHpBar;
+	Vector2 m_BossHpPos;
 public:
 	CBossEnemy(D2D1_POINT_2F m_Pos, INT tag);
 	~CBossEnemy();

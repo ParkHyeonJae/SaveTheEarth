@@ -1,4 +1,5 @@
 #include "framework.h"
+#include "CScoreManager.h"
 
 CObjectManager::CObjectManager()
 {
@@ -79,12 +80,11 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 			{
 				if ((*iter02)->m_tag == ENEMY)
 				{
-					float CollRange = 40.0f;
 					RECT EnemyColl = {
-					((*iter02)->GetPos().x - CollRange),
-					((*iter02)->GetPos().y - CollRange),
-					((*iter02)->GetPos().x + CollRange),
-					((*iter02)->GetPos().y + CollRange),
+					((*iter02)->GetPos().x - 0),
+					((*iter02)->GetPos().y - 0),
+					((*iter02)->GetPos().x + (*iter02)->GetSprite()->GetBmp()->GetSize().width),
+					((*iter02)->GetPos().y + (*iter02)->GetSprite()->GetBmp()->GetSize().height),
 					};
 
 					RECT temp;
@@ -137,7 +137,24 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 						}
 					}
 				}
+				if ((*iter02)->m_tag == ITEM)
+				{
+					CItem* m_Item = dynamic_cast<CItem*>((*iter02));
+					RECT rItemColl = {
+						(*iter02)->GetPos().x,
+						(*iter02)->GetPos().y,
+						(*iter02)->GetPos().x + m_Item->GetSize().width ,
+						(*iter02)->GetPos().y + m_Item->GetSize().height,
+					};
 
+					RECT temp;
+					if (IntersectRect(&temp, &rPlayerColl, &rItemColl))
+					{
+						m_Item->Apply();
+						m_gameObjectList.erase(iter02);
+						break;
+					}
+				}
 				iter02++;
 			}
 
@@ -174,7 +191,7 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 
 			for (auto Enemyiter = m_gameObjectList.begin(); Enemyiter != m_gameObjectList.end();)
 			{
-				if ((*Enemyiter)->m_tag == BOSS)
+				if ((*Enemyiter)->m_tag == BOSS)	// Enemyiter가 BOSS(보스 몬스터)일 경우
 				{
 					CBossEnemy* m_cBossEnemy = dynamic_cast<CBossEnemy*>((*Enemyiter));
 					RECT EnemyColl = {
@@ -193,6 +210,10 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 								m_cBossEnemy->GetHp()
 								- m_cPlayerBullet->GetDamage());
 
+							
+							if (m_cBossEnemy->IsHit()) {
+								break;
+							}
 							m_cBossEnemy->SetHit(TRUE);
 							break;
 						}
@@ -208,7 +229,7 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 						break;
 					}
 				}
-				if ((*Enemyiter)->m_tag == ENEMY)
+				if ((*Enemyiter)->m_tag == ENEMY)		// Enemyiter가 ENEMY(일반 몬스터)일 경우
 				{
 					CNormalEnemy* m_cNormalEnemy = dynamic_cast<CNormalEnemy*>((*Enemyiter));
 					float CollRange = 40.0f;
@@ -220,33 +241,34 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 					};
 
 					RECT temp;
-					if (IntersectRect(&temp, &pBulletColl, &EnemyColl))
+					if (IntersectRect(&temp, &pBulletColl, &EnemyColl))		//플레이어 총알이 몬스터를 맞췄을 때
 					{
-						m_cPlayerBullet->SetColl(TRUE);
-						if (m_cNormalEnemy->GetHp() >= 0) {
+						m_cPlayerBullet->SetColl(TRUE);		//총알 충돌
+						if (m_cNormalEnemy->GetHp() > 0) {		//몬스터가 죽지 않았을 때
 							m_cNormalEnemy->SetHp(
 								m_cNormalEnemy->GetHp()
-								- m_cPlayerBullet->GetDamage());
+								- m_cPlayerBullet->GetDamage());	//체력적용(몬스터의 현재HP - 플레이어 총알 데미지)
 							break;
 						}
 						else
 						{
-							m_cNormalEnemy->SetDead(TRUE);
+							m_cNormalEnemy->SetDead(TRUE);		//몬스터 죽음
 							break;
 						}
 						break;
 					}
-					if (m_cNormalEnemy->IsDelete()) {
-						m_gameObjectList.erase(Enemyiter);
+					if (m_cNormalEnemy->IsDelete()) {		//몬스터가 죽고, 죽는 애니메이션까지 모두 끝낱을 때
+						Score::CScoreManager::ApplyScore(10.0f);		//n점 추가
+						m_gameObjectList.erase(Enemyiter);		//몬스터 객체 제거
 						break;
 					}
 				}
 				Enemyiter++;
 			}
-			if (m_cPlayerBullet->IsColl())
+			if (m_cPlayerBullet->IsColl())		// 플레이어 총알이 충돌되었을 때
 			{
-				if (m_cPlayerBullet->IsDelete()) {
-					m_gameObjectList.erase(iter);
+				if (m_cPlayerBullet->IsDelete()) {		//플레이어 총알의 애니메이션이 모두 끝났을 때
+					m_gameObjectList.erase(iter);		//총알 객체 제거
 					break;
 				}
 			}
@@ -255,6 +277,7 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 	}
 	for (auto iter = m_uiList.begin(); iter != m_uiList.end();)
 	{
+		//UI FrameMove
 		(*iter)->FrameMove(elapsed);
 		iter++;
 	}
@@ -269,6 +292,7 @@ void CObjectManager::AllControl(CInput* m_Input)
 	}
 	for (auto iter = m_uiList.begin(); iter != m_uiList.end();)
 	{
+		//UI Control
 		(*iter)->Control(m_Input);
 		iter++;
 	}
@@ -283,6 +307,7 @@ void CObjectManager::AllRender()
 	}
 	for (auto iter = m_uiList.begin(); iter != m_uiList.end();)
 	{
+		//UI Render
 		(*iter)->Render();
 		iter++;
 	}
