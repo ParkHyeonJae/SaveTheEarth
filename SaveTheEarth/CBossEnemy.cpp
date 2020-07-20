@@ -5,7 +5,7 @@ CBossEnemy::CBossEnemy(D2D1_POINT_2F m_Pos, INT tag)
 	this->m_Pos = m_Pos;
 	this->m_tag = tag;
 
-	m_BossHitTimer = new CTimer(500);
+	m_BossHitTimer = new CTimer(300);
 	m_BossAnimFunc = new CSpriteAnimation();
 	m_TargetPos = { 1200, 200 };
 	sequence = 0;
@@ -15,6 +15,7 @@ CBossEnemy::CBossEnemy(D2D1_POINT_2F m_Pos, INT tag)
 	m_isDelete = FALSE;
 	m_isHit = FALSE;
 	BlinkingCount = MAX_BLINKING_COUNT;
+	m_BossHitTimer->LoopCheck(FALSE);
 }
 
 CBossEnemy::~CBossEnemy()
@@ -25,27 +26,15 @@ void CBossEnemy::Init()
 {
 
 }
-float colorV = 0.0f;
+
 void CBossEnemy::Render()
 {
-	
 	CSprite* m_texture = CGameManager::m_ImageManager->GetImages()->GetMultiSprite("BossIdleAnim", sequence);
 	m_texture->Draw(m_Pos, D2D1::SizeF(1.f, 1.f), NULL, 0.0f);
 	if (!m_deadCheck) {
 		if (m_isHit) {
-			if (BlinkingCount > 0) {
-				if (m_BossHitTimer->OnTimer())
-				{
-					BlinkingCount--;
-					m_texture->MaskDraw(m_Pos, D2D1::SizeF(1.f, 1.f), NULL, 0.0f, OpacityBrush::BLACK);
-				}
-			}
-			else
-			{
-				m_isHit = FALSE;
-				BlinkingCount = MAX_BLINKING_COUNT;
-
-			}
+			m_texture->MaskDraw(m_Pos, D2D1::SizeF(1.f, 1.f), NULL, 0.0f, OpacityBrush::BLACK);
+			m_isHit = FALSE;
 		}
 	}
 	else //When BOSS is Dead
