@@ -174,5 +174,9 @@ INT CImageManager::ImageInit()
 
 	//Credit Image
 	m_Images->AddImage("Credit", new CSprite(L"../Images/Title/Credit.png", CGameManager::m_Gfx));
+
+	// Distance Bar
+	m_Images->AddImage("LongBar", new CSprite(L"../Images/Sprites/10 Distance Bar/long bar.png", CGameManager::m_Gfx));
+	m_Images->AddImage("Where", new CSprite(L"../Images/Sprites/10 Distance Bar/where.png", CGameManager::m_Gfx));
 	return 0;
 }
