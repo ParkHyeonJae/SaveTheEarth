@@ -1,5 +1,4 @@
 #pragma once
-#define MAX_BLINKING_COUNT 1
 class CBossEnemy : public CGameObject
 {
 private:
