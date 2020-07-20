@@ -64,7 +64,7 @@ void CGameScene02::Control(CInput* m_Input)
 	}
 	if (m_MisileSpawnTimer->OnTimer())
 	{
-		m_misileEnemy = new MisileEnemy(D2D1::Point2F(0, Mathf::RandomIntValue(0, 500)), MISILE);
+		m_misileEnemy = new MisileEnemy(D2D1::Point2F(0, Mathf::RandomIntValue(0, 1000)), MISILE);
 		AddObject(dynamic_cast<CGameObject*>(m_misileEnemy));
 	}
 	//spawn Enemy
