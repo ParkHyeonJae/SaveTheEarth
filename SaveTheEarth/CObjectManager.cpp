@@ -193,6 +193,10 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 								m_cBossEnemy->GetHp()
 								- m_cPlayerBullet->GetDamage());
 
+							
+							if (m_cBossEnemy->IsHit()) {
+								break;
+							}
 							m_cBossEnemy->SetHit(TRUE);
 							break;
 						}
