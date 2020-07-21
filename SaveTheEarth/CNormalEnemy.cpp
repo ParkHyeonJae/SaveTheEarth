@@ -5,7 +5,7 @@ CNormalEnemy::CNormalEnemy(D2D1_POINT_2F m_Pos, INT tag)
 	this->m_Pos = m_Pos;
 	this->m_tag = tag;
 	m_TargetPos = { static_cast<FLOAT>(rand() % MAX_WIN_WIDTH), static_cast<FLOAT>(rand() % MAX_WIN_HEIGHT) };
-	m_TargetPos.x -= 1600.0f;
+	m_TargetPos.x -= 1800.0f;
 	
 	
 	m_SharkAnimFunc = new CSpriteAnimation();
