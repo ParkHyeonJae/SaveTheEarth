@@ -33,7 +33,7 @@ void CItem::Apply()
 		CGameManager::m_PlayerAttribute.m_ATKDamage += 10.0f;
 		break;
 	case HPUP:
-		CGameManager::m_PlayerAttribute.m_IncreaseHP = 25.0f;
+		CGameManager::m_PlayerAttribute.m_IncreaseHP = 100.0f;
 		break;
 	case RPMUP:
 		CGameManager::m_PlayerAttribute.m_RPM = 10.0f;
