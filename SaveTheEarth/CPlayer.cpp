@@ -18,6 +18,7 @@ CPlayer::CPlayer(D2D1_POINT_2F m_Pos, INT tag, FLOAT m_HP) : CGameObject()
 	m_ShotgunMotionFunc = new CSpriteAnimation();
 
 	m_playerBulletFireTimer = new CTimer(150);
+	Init();
 }
 
 CPlayer::~CPlayer()
