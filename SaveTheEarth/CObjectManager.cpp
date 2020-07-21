@@ -59,7 +59,6 @@ void CObjectManager::AllInitalize()
 	}
 }
 
-BOOL ispBulletColl = FALSE;
 void CObjectManager::AllFrameMove(DWORD elapsed)
 {
 	for (auto iter = m_gameObjectList.begin(); iter != m_gameObjectList.end();)
@@ -224,10 +223,7 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 						}
 						break;
 					}
-					if (m_cBossEnemy->IsDelete()) {
-						m_gameObjectList.erase(Enemyiter);
-						break;
-					}
+					
 				}
 				if ((*Enemyiter)->m_tag == ENEMY)		// Enemyiter가 ENEMY(일반 몬스터)일 경우
 				{
@@ -257,11 +253,7 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 						}
 						break;
 					}
-					if (m_cNormalEnemy->IsDelete()) {		//몬스터가 죽고, 죽는 애니메이션까지 모두 끝낱을 때
-						Score::CScoreManager::ApplyScore(10.0f);		//n점 추가
-						m_gameObjectList.erase(Enemyiter);		//몬스터 객체 제거
-						break;
-					}
+					
 				}
 				Enemyiter++;
 			}
@@ -273,6 +265,22 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 				}
 			}
 		}
+		if ((*iter)->m_tag == BOSS)	// Enemyiter가 BOSS(보스 몬스터)일 경우
+		{
+			if (dynamic_cast<CBossEnemy*>((*iter))->IsDelete()) {
+				m_gameObjectList.erase(iter);
+				break;
+			}
+		}
+		if ((*iter)->m_tag == ENEMY)	// Enemyiter가 BOSS(보스 몬스터)일 경우
+		{
+			if (dynamic_cast<CNormalEnemy*>((*iter))->IsDelete()) {		//몬스터가 죽고, 죽는 애니메이션까지 모두 끝낱을 때
+				Score::CScoreManager::ApplyScore(500.0f);		//n점 추가
+				m_gameObjectList.erase(iter);		//몬스터 객체 제거
+				break;
+			}
+		}
+		
 		iter++;
 	}
 	for (auto iter = m_uiList.begin(); iter != m_uiList.end();)

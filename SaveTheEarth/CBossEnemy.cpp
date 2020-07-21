@@ -33,8 +33,8 @@ void CBossEnemy::Init()
 void CBossEnemy::Render()
 {
 	CSprite* m_texture = CGameManager::m_ImageManager->GetImages()->GetMultiSprite("BossIdleAnim", sequence);
-	m_texture->Draw(m_Pos, D2D1::SizeF(1.f, 1.f), NULL, 0.0f);
 	if (!m_deadCheck) {
+		m_texture->Draw(m_Pos, D2D1::SizeF(1.f, 1.f), NULL, 0.0f);
 		if (m_isHit) {
 			m_texture->MaskDraw(m_Pos, D2D1::SizeF(1.f, 1.f), NULL, 0.0f, OpacityBrush::BLACK);
 			m_isHit = FALSE;
@@ -42,10 +42,14 @@ void CBossEnemy::Render()
 	}
 	else //When BOSS is Dead
 	{
+		
 		if (colorV > 1.0f)
 			m_isDelete = TRUE;
-		colorV += 0.005f;
+		colorV += 0.0025f;
 		D2D1_COLOR_F color = D2D1::ColorF(colorV, colorV, colorV, colorV);
+		m_Pos.x += (rand() % 20 * ((rand() % 2) ? 1 : -1));
+		m_Pos.y += (rand() % 20 * ((rand() % 2) ? 1 : -1));
+		m_texture->Draw(m_Pos, D2D1::SizeF(1.f, 1.f), NULL, 0.0f);
 		m_texture->MaskDraw(m_Pos, D2D1::SizeF(1.f, 1.f), NULL, 0.0f,1.0f, color, OpacityBrush::WHITE);
 	}
 	sequence = m_BossAnimFunc->OnAnimRender(50, 0, 8);
