@@ -10,6 +10,8 @@ CInGameUI::CInGameUI(INT tag)
 	m_LongDistancBar = CGameManager::m_ImageManager->GetImages()->GetSprite("LongBar");
 	m_whereDistanceBar = CGameManager::m_ImageManager->GetImages()->GetSprite("Where");
 	m_wherePosX = STARTPOINT;
+
+	Init();
 }
 
 CInGameUI::~CInGameUI()

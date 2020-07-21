@@ -21,6 +21,7 @@ public:
 	static BOOL EnableInput;
 
 	static PLAYER_ATTR m_PlayerAttribute;
+	static INT m_Level;
 public:
 	CGameManager(CGraphics * m_Gfx, CInput* m_Input, CObjectManager * m_ObjectManager, CImageManager* m_ImageManager);
 	~CGameManager();
@@ -32,3 +33,4 @@ public:
 	void Release();
 };
 
+ 

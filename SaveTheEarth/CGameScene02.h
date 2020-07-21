@@ -4,6 +4,7 @@ class CGameScene02 : public CSceneObject, CObjectManager
 private:
 	CTimer* m_EnemySpawnTimer;
 	CTimer* m_MisileSpawnTimer;
+	CTimer* m_BossSpawnTimer;
 	CPlayer* m_Player;
 	CNormalEnemy* m_NormalEnemy;
 

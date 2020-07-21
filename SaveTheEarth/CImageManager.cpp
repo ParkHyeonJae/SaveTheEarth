@@ -45,6 +45,10 @@ INT CImageManager::ImageInit()
 	m_Images->AddImage("Stage01/MOUNTAIN", new CSprite(L"../Images/Stage01/Stage01_Mountain.png", CGameManager::m_Gfx));
 	m_Images->AddImage("Stage01/SUN", new CSprite(L"../Images/Stage01/Stage01_Sun.png", CGameManager::m_Gfx));
 	m_Images->AddImage("Stage01/TREES", new CSprite(L"../Images/Stage01/Stage01_Trees.png", CGameManager::m_Gfx));
+	
+	m_Images->AddImage("Stage02/SKY", new CSprite(L"../Images/Stage02/Stage02_Sky.png", CGameManager::m_Gfx));
+	m_Images->AddImage("Stage02/MOUNTAIN", new CSprite(L"../Images/Stage02/Stage02_Mountain.png", CGameManager::m_Gfx));
+	m_Images->AddImage("Stage02/TREES", new CSprite(L"../Images/Stage02/Stage02_Trees.png", CGameManager::m_Gfx));
 
 
 	m_Images->AddImage("NormalEnemyBullet", new CSprite(L"../Images/energy_blast-01.png", CGameManager::m_Gfx));
