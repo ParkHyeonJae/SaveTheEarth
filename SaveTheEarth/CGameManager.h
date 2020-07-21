@@ -18,6 +18,7 @@ public:
 	static FLOAT m_playerHp;
 	static 	CImageManager* m_ImageManager;
 	static BOOL isinvincibility;
+	static BOOL EnableInput;
 
 	static PLAYER_ATTR m_PlayerAttribute;
 public:
