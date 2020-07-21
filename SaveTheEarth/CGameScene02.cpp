@@ -15,7 +15,7 @@ void CGameScene02::Init()
 	CGameManager::m_ObjectManager = GetObjectManager();
 
 	m_ScrollBackground01 = new CScrollBackground(D2D1::Point2F(0, 0), BACKGROUND, CGameManager::m_ScrollSpeed);
-	m_ScrollBackground02 = new CScrollBackground(D2D1::Point2F(MAX_WIN_WIDTH, 0), BACKGROUND, CGameManager::m_ScrollSpeed);
+	//m_ScrollBackground02 = new CScrollBackground(D2D1::Point2F(MAX_WIN_WIDTH, 0), BACKGROUND, CGameManager::m_ScrollSpeed);
 	m_Player = new CPlayer(D2D1::Point2F(-100, 350), PLAYER, MAX_PLAYER_HP);
 	
 
@@ -23,7 +23,7 @@ void CGameScene02::Init()
 	m_GameUI = new CInGameUI(UI);
 
 	AddObject(dynamic_cast<CGameObject*>(m_ScrollBackground01));
-	AddObject(dynamic_cast<CGameObject*>(m_ScrollBackground02));
+	//AddObject(dynamic_cast<CGameObject*>(m_ScrollBackground02));
 	AddObject(dynamic_cast<CGameObject*>(m_Player));
 
 	
