@@ -15,7 +15,6 @@ void CGameScene02::Init()
 	CGameManager::m_ObjectManager = GetObjectManager();
 
 	m_ScrollBackground01 = new CScrollBackground(D2D1::Point2F(0, 0), BACKGROUND, CGameManager::m_ScrollSpeed);
-	//m_ScrollBackground02 = new CScrollBackground(D2D1::Point2F(MAX_WIN_WIDTH, 0), BACKGROUND, CGameManager::m_ScrollSpeed);
 	m_Player = new CPlayer(D2D1::Point2F(-100, 350), PLAYER, MAX_PLAYER_HP);
 	
 
@@ -23,29 +22,24 @@ void CGameScene02::Init()
 	m_GameUI = new CInGameUI(UI);
 
 	AddObject(dynamic_cast<CGameObject*>(m_ScrollBackground01));
-	//AddObject(dynamic_cast<CGameObject*>(m_ScrollBackground02));
 	AddObject(dynamic_cast<CGameObject*>(m_Player));
 
 	
-	
-	//for (size_t i = 0; i < 3; i++)
-	//{
-	//	m_misileEnemy = new MisileEnemy(D2D1::Point2F(0, Mathf::RandomIntValue(0, 500)), MISILE);
-	//	AddObject(dynamic_cast<CGameObject*>(m_misileEnemy));
-	//}
 	m_EnemySpawnTimer = new CTimer(500);
 	m_MisileSpawnTimer = new CTimer(1500);
 	m_BossSpawnTimer = new CTimer(4500);
 	m_BossSpawnTimer->LoopCheck(FALSE);
 
 	AddUI(dynamic_cast<CGameObject*>(m_GameUI));
+
+	Score::CScoreManager::SetScore(3000);
 	CSceneObject::Init();
 	AllInitalize();
 }
 
 void CGameScene02::FrameMove(DWORD elapsed)
 {
-	if (Score::CScoreManager::GetScore() > 10000)
+	if (Score::CScoreManager::GetScore() > 11000)
 		CGameManager::m_Level = 2;
 
 	if (CGameManager::m_Level == 1) {

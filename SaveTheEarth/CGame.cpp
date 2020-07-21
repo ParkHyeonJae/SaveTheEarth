@@ -59,6 +59,11 @@ INT CGame::FrameMove(DWORD elapsed)
 	std::advance(iter, CGameManager::nowStatus);
 
 	if (wasStatus != CGameManager::nowStatus) {
+		auto iter2 = m_SceneList.begin();
+		std::advance(iter2, wasStatus);
+		(*iter2)->Release();
+
+		m_GameManager->Init();		//ÃÊ±âÈ­
 		(*iter)->Init();
 		wasStatus = CGameManager::nowStatus;
 	}
