@@ -258,7 +258,7 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 						break;
 					}
 					if (m_cNormalEnemy->IsDelete()) {		//몬스터가 죽고, 죽는 애니메이션까지 모두 끝낱을 때
-						Score::CScoreManager::ApplyScore(10.0f);		//n점 추가
+						Score::CScoreManager::ApplyScore(1000.0f);		//n점 추가
 						m_gameObjectList.erase(Enemyiter);		//몬스터 객체 제거
 						break;
 					}
