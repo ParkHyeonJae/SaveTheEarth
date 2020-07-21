@@ -4,8 +4,9 @@ class CScrollBackground : public CGameObject
 private:
 	float ScrollSpeed;
 
-	D2D1_POINT_2F m_CloudPos;
-	D2D1_POINT_2F m_MountainPos;
+	Vector2 m_CloudPos[2];
+	Vector2 m_MountainPos[2];
+	Vector2 m_Pos02;
 public:
 	CScrollBackground(D2D1_POINT_2F m_Pos, INT tag, FLOAT ScrollSpeed);
 	~CScrollBackground();
