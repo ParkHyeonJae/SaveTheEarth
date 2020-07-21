@@ -1,4 +1,5 @@
 #include "framework.h"
+#include "CScoreManager.h"
 
 CGameScene02::CGameScene02()
 {
@@ -25,8 +26,7 @@ void CGameScene02::Init()
 	AddObject(dynamic_cast<CGameObject*>(m_ScrollBackground02));
 	AddObject(dynamic_cast<CGameObject*>(m_Player));
 
-	//m_BossEnemy = new CBossEnemy(D2D1::Point2F(MAX_WIN_WIDTH, rand() % MAX_WIN_HEIGHT), BOSS);
-	//AddObject(dynamic_cast<CGameObject*>(m_BossEnemy));
+	
 	
 	//for (size_t i = 0; i < 3; i++)
 	//{
@@ -35,6 +35,8 @@ void CGameScene02::Init()
 	//}
 	m_EnemySpawnTimer = new CTimer(500);
 	m_MisileSpawnTimer = new CTimer(1500);
+	m_BossSpawnTimer = new CTimer(4500);
+	m_BossSpawnTimer->LoopCheck(FALSE);
 
 	AddUI(dynamic_cast<CGameObject*>(m_GameUI));
 	CSceneObject::Init();
@@ -43,7 +45,28 @@ void CGameScene02::Init()
 
 void CGameScene02::FrameMove(DWORD elapsed)
 {
+	if (Score::CScoreManager::GetScore() > 10000)
+		CGameManager::m_Level = 2;
 
+	if (CGameManager::m_Level == 1) {
+		if (m_EnemySpawnTimer->OnTimer())
+		{
+			m_NormalEnemy = new CNormalEnemy(D2D1::Point2F(MAX_WIN_WIDTH, rand() % MAX_WIN_HEIGHT), ENEMY);
+			AddObject(dynamic_cast<CGameObject*>(m_NormalEnemy));
+		}
+		if (m_MisileSpawnTimer->OnTimer())
+		{
+			m_misileEnemy = new MisileEnemy(D2D1::Point2F(0, Mathf::RandomIntValue(0, 1000)), MISILE);
+			AddObject(dynamic_cast<CGameObject*>(m_misileEnemy));
+		}
+	}
+	else {
+		if (m_BossSpawnTimer->OnTimer())
+		{
+			m_BossEnemy = new CBossEnemy(D2D1::Point2F(MAX_WIN_WIDTH, rand() % MAX_WIN_HEIGHT), BOSS);
+			AddObject(dynamic_cast<CGameObject*>(m_BossEnemy));
+		}
+	}
 	CSceneObject::FrameMove(elapsed);
 	AllFrameMove(elapsed);
 }
@@ -54,19 +77,9 @@ void CGameScene02::Render()
 	CSceneObject::Render();
 	AllRender();
 }
-
 void CGameScene02::Control(CInput* m_Input)
 {
-	if (m_EnemySpawnTimer->OnTimer())
-	{
-		m_NormalEnemy = new CNormalEnemy(D2D1::Point2F(MAX_WIN_WIDTH, rand() % MAX_WIN_HEIGHT), ENEMY);
-		AddObject(dynamic_cast<CGameObject*>(m_NormalEnemy));
-	}
-	if (m_MisileSpawnTimer->OnTimer())
-	{
-		m_misileEnemy = new MisileEnemy(D2D1::Point2F(0, Mathf::RandomIntValue(0, 1000)), MISILE);
-		AddObject(dynamic_cast<CGameObject*>(m_misileEnemy));
-	}
+
 	//spawn Enemy
 	if (m_Input->KeyDown(VK_F1)) {
 		m_NormalEnemy = new CNormalEnemy(D2D1::Point2F(MAX_WIN_WIDTH, rand() % MAX_WIN_HEIGHT), ENEMY);

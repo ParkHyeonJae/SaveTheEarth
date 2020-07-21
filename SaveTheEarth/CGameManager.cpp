@@ -13,6 +13,7 @@ CImageManager* CGameManager::m_ImageManager = NULL;
 BOOL CGameManager::isinvincibility = FALSE;
 BOOL CGameManager::EnableInput = TRUE;
 PLAYER_ATTR CGameManager::m_PlayerAttribute = { 20.0f, 0.0f, 0.0f };
+INT CGameManager::m_Level = 1;
 
 CGameManager::CGameManager(CGraphics* m_Gfx, CInput* m_Input, CObjectManager* m_ObjectManager, CImageManager* m_ImageManager)
 {
