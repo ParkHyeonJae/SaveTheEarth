@@ -110,6 +110,7 @@ enum ITEMS
 #include "CNormalEnemy.h"
 #include "CLauncher.h"
 #include "CBossLaserLauncher.h"
+#include "CBossBullet.h"
 #include "CBossBulletLauncher.h"
 #include "CBossEnemy.h"
 #include "MisileEnemy.h"

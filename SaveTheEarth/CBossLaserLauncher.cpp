@@ -8,6 +8,7 @@ CBossLaserLauncher::CBossLaserLauncher(D2D1_POINT_2F m_Pos, INT tag)
 }
 CBossLaserLauncher::~CBossLaserLauncher()
 {
+	Release();
 }
 
 void CBossLaserLauncher::Init()
@@ -31,6 +32,7 @@ void CBossLaserLauncher::Control(CInput* Input)
 
 void CBossLaserLauncher::Release()
 {
+	LauncherRelease();
 }
 
 void CBossLaserLauncher::LauncherInit()
