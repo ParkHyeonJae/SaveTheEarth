@@ -41,6 +41,9 @@ void CBossEnemy::Render()
 		if (m_LaserLauncher->IsRun()) {
 			m_IsBossShow = FALSE;
 		}
+		else if (m_BulletLauncher->IsRun()) {
+			m_IsBossShow = FALSE;
+		}
 		else m_IsBossShow = TRUE;
 		if (m_IsBossShow) {
 			m_texture->Draw(m_Pos, D2D1::SizeF(1.f, 1.f), NULL, 0.0f);

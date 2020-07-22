@@ -56,6 +56,10 @@ void CBossBulletLauncher::LauncherUpdate(DWORD elapsed)
 
 void CBossBulletLauncher::LauncherRender()
 {
+	if (IsRun() && !IsFinish()) {
+		IMAGES->MultiRender("BossBulletIdle", m_BulletIdle.sequence, D2D1::Point2F(m_Pos.x - 215.0f, m_Pos.y), D2D1::SizeF(1.0f, 1.0f), NULL, 0.0f, 1.0f);
+		m_BulletIdle.sequence = m_BulletIdle.AnimFunc->OnAnimRender(100, 0, 5);
+	}
 }
 
 void CBossBulletLauncher::LauncherRelease()
