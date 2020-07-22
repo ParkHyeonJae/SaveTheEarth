@@ -63,6 +63,7 @@ enum TAG {
 	EBULLET,
 	BACKGROUND,
 	BOSS,
+	BOSSLASER,
 	MISILE,
 	UI,
 	ITEM,
@@ -92,6 +93,7 @@ enum ITEMS
 	RPMUP
 };
 
+
 #include "CInput.h"
 #include "CGraphics.h"
 #include "CSprite.h"
@@ -105,6 +107,8 @@ enum ITEMS
 #include "CItem.h"
 #include "CNormalEnemyBullet.h"
 #include "CNormalEnemy.h"
+#include "CLauncher.h"
+#include "CBossLaserLauncher.h"
 #include "CBossEnemy.h"
 #include "MisileEnemy.h"
 #include "CPlayerBullet.h"
@@ -112,6 +116,7 @@ enum ITEMS
 #include "CScrollBackground.h"
 #include "CTitleBackground.h"
 #include "CInGameUI.h"
+
 #include "CObjectManager.h"
 #include "CSceneObject.h"
 #include "CGameScene01.h"

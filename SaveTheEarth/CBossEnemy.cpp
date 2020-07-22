@@ -25,20 +25,30 @@ void CBossEnemy::Init()
 	m_isDelete = FALSE;
 	m_isHit = FALSE;
 	m_BossHitTimer->LoopCheck(FALSE);
-	m_TargetPos = { 1200, 200 };
+	m_TargetPos = { 1060, 200 };
 	sequence = 0;
 	m_BossHP = new CHealthBar("BossNullHp", "BossHpBar", m_BossHpPos, FALSE, TRUE);
+	m_IsBossShow = TRUE;
+	m_LaserLauncher = new CBossLaserLauncher(D2D1::Point2F(m_Pos.x, m_Pos.y), BOSSLASER);
+	
 }
 
 void CBossEnemy::Render()
 {
 	CSprite* m_texture = CGameManager::m_ImageManager->GetImages()->GetMultiSprite("BossIdleAnim", sequence);
 	if (!m_deadCheck) {
-		m_texture->Draw(m_Pos, D2D1::SizeF(1.f, 1.f), NULL, 0.0f);
-		if (m_isHit) {
-			m_texture->MaskDraw(m_Pos, D2D1::SizeF(1.f, 1.f), NULL, 0.0f, OpacityBrush::BLACK);
-			m_isHit = FALSE;
+		if (m_LaserLauncher->IsRun()) {
+			m_IsBossShow = FALSE;
 		}
+		else m_IsBossShow = TRUE;
+		if (m_IsBossShow) {
+			m_texture->Draw(m_Pos, D2D1::SizeF(1.f, 1.f), NULL, 0.0f);
+			if (m_isHit) {
+				m_texture->MaskDraw(m_Pos, D2D1::SizeF(1.f, 1.f), NULL, 0.0f, OpacityBrush::BLACK);
+				m_isHit = FALSE;
+			}
+		}
+		
 	}
 	else //When BOSS is Dead
 	{
@@ -73,14 +83,20 @@ void CBossEnemy::FrameMove(DWORD elapsed)
 	 if (deltaTime <= 1.0f)
 		 deltaTime += 0.01;
 	 else {
-		 m_TargetPos = { 1200,  static_cast<FLOAT>(Mathf::RandomIntValue(100,200)) };
+		 m_TargetPos = { 1060,  static_cast<FLOAT>(Mathf::RandomIntValue(100,200)) };
 		 deltaTime = 0.01f;
 	 }
-	 
+	 if (m_LaserLauncher->IsRun())
+		 m_LaserLauncher->SetPos(D2D1::Point2F(m_Pos.x, m_Pos.y));
 }
 
 void CBossEnemy::Control(CInput* Input)
 {
+	if (Input->KeyDown(VK_F4))
+	{
+		m_LaserLauncher = new CBossLaserLauncher(D2D1::Point2F(m_Pos.x, m_Pos.y), BOSSLASER);
+		OBJECT->AddObject(dynamic_cast<CGameObject*>(m_LaserLauncher));
+	}
 }
 
 void CBossEnemy::Release()
