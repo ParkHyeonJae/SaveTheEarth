@@ -39,10 +39,17 @@ void CBossBulletLauncher::Release()
 
 void CBossBulletLauncher::LauncherInit()
 {
+	m_BulletTimer = new CTimer(500);
+	m_BulletIdle.AnimFunc = new CSpriteAnimation();
+	m_BulletIdle.sequence = 0;
 }
 
 void CBossBulletLauncher::LauncherUpdate(DWORD elapsed)
 {
+	if (m_BulletTimer->OnTimer())
+	{
+		OBJECT->AddObject(dynamic_cast<CGameObject*>(new CBossBullet(m_Pos, BOSSBULLET)));
+	}
 }
 
 void CBossBulletLauncher::LauncherRender()
