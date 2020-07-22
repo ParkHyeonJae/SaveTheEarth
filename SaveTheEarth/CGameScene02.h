@@ -5,6 +5,7 @@ private:
 	CTimer* m_EnemySpawnTimer;
 	CTimer* m_MisileSpawnTimer;
 	CTimer* m_BossSpawnTimer;
+	CTimer* m_BalanceTimer;
 	CPlayer* m_Player;
 	CNormalEnemy* m_NormalEnemy;
 
