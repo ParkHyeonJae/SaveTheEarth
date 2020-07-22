@@ -30,6 +30,7 @@ void CBossEnemy::Init()
 	m_BossHP = new CHealthBar("BossNullHp", "BossHpBar", m_BossHpPos, FALSE, TRUE);
 	m_IsBossShow = TRUE;
 	m_LaserLauncher = new CBossLaserLauncher(D2D1::Point2F(m_Pos.x, m_Pos.y), BOSSLASER);
+	m_BulletLauncher = new CBossBulletLauncher(D2D1::Point2F(m_Pos.x, m_Pos.y), BOSSBULLETLAUNCHER);
 	
 }
 
@@ -88,6 +89,9 @@ void CBossEnemy::FrameMove(DWORD elapsed)
 	 }
 	 if (m_LaserLauncher->IsRun())
 		 m_LaserLauncher->SetPos(D2D1::Point2F(m_Pos.x, m_Pos.y));
+
+	 if (m_BulletLauncher->IsRun())
+		 m_BulletLauncher->SetPos(D2D1::Point2F(m_Pos.x, m_Pos.y));
 }
 
 void CBossEnemy::Control(CInput* Input)
@@ -96,6 +100,11 @@ void CBossEnemy::Control(CInput* Input)
 	{
 		m_LaserLauncher = new CBossLaserLauncher(D2D1::Point2F(m_Pos.x, m_Pos.y), BOSSLASER);
 		OBJECT->AddObject(dynamic_cast<CGameObject*>(m_LaserLauncher));
+	}
+	if (Input->KeyDown(VK_F5))
+	{
+		m_BulletLauncher = new CBossBulletLauncher(D2D1::Point2F(m_Pos.x, m_Pos.y), BOSSBULLETLAUNCHER);
+		OBJECT->AddObject(dynamic_cast<CGameObject*>(m_BulletLauncher));
 	}
 }
 
