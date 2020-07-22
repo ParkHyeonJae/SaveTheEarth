@@ -24,6 +24,8 @@ private:
 	//BOSS SKILLS
 	BOOL m_IsBossShow;
 	CBossLaserLauncher* m_LaserLauncher;
+	CBossBulletLauncher* m_BulletLauncher;
+	CTimer* m_SkillTimer;
 public:
 	CBossEnemy(D2D1_POINT_2F m_Pos, INT tag);
 	~CBossEnemy();

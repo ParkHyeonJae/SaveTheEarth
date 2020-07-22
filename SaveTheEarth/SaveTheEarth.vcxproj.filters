@@ -162,6 +162,12 @@
     <ClInclude Include="CLauncher.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="CBossBulletLauncher.h">
+      <Filter>헤더 파일\CGameObject\Scene02\BOSS</Filter>
+    </ClInclude>
+    <ClInclude Include="CBossBullet.h">
+      <Filter>헤더 파일\CGameObject\Scene02\BOSS</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CSceneObject.cpp">
@@ -252,6 +258,12 @@
       <Filter>소스 파일\Main</Filter>
     </ClCompile>
     <ClCompile Include="CBossLaserLauncher.cpp">
+      <Filter>소스 파일\CGameObject\Scene02\BOSS</Filter>
+    </ClCompile>
+    <ClCompile Include="CBossBulletLauncher.cpp">
+      <Filter>소스 파일\CGameObject\Scene02\BOSS</Filter>
+    </ClCompile>
+    <ClCompile Include="CBossBullet.cpp">
       <Filter>소스 파일\CGameObject\Scene02\BOSS</Filter>
     </ClCompile>
   </ItemGroup>

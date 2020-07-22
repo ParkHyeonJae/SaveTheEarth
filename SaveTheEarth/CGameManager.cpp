@@ -12,8 +12,9 @@ DWORD CGameManager::m_fps = 0;
 FLOAT CGameManager::m_playerHp = 1000.0f;
 BOOL CGameManager::isinvincibility = FALSE;
 BOOL CGameManager::EnableInput = TRUE;
-PLAYER_ATTR CGameManager::m_PlayerAttribute = { 20.0f, 0.0f, 0.0f };
+PLAYER_ATTR CGameManager::m_PlayerAttribute = { 1.0f, 0.0f, 0.0f };
 INT CGameManager::m_Level = 1;
+FLOAT CGameManager::ApplyScore = 25.0f;
 
 CGameManager::CGameManager(CGraphics* m_Gfx, CInput* m_Input, CObjectManager* m_ObjectManager, CImageManager* m_ImageManager)
 {
@@ -36,7 +37,7 @@ void CGameManager::Init()
 	CGameManager::radian = PI / 180.0f;
 	CGameManager::isinvincibility = FALSE;
 	CGameManager::EnableInput = TRUE;
-	CGameManager::m_PlayerAttribute = { 20.0f, 0.0f, 0.0f };
+	CGameManager::m_PlayerAttribute = { 1.0f, 0.0f, 0.0f };
 	CGameManager::m_Level = 1;
 }
 
