@@ -1,13 +1,6 @@
 #pragma once
 class CBossLaserLauncher : public CGameObject, public ILauncher
 {
-	
-	typedef enum class LaserLauncherState {
-		LaserCharging,
-		LaserON,
-		LaserFire,
-		LaserOff
-	}LAUNCHER_STATE;
 private:
 	LAUNCHER_STATE m_CurState;
 	Animation m_LaserChaging;
@@ -28,5 +21,7 @@ public:
 	virtual void LauncherUpdate(DWORD elapsed) override;
 	virtual void LauncherRender() override;
 	virtual void LauncherRelease() override;
+
+	LAUNCHER_STATE GetLaserState() { return m_CurState; }
 };
 

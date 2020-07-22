@@ -22,6 +22,7 @@ public:
 
 	static PLAYER_ATTR m_PlayerAttribute;
 	static INT m_Level;
+	static FLOAT ApplyScore;
 public:
 	CGameManager(CGraphics * m_Gfx, CInput* m_Input, CObjectManager * m_ObjectManager, CImageManager* m_ImageManager);
 	~CGameManager();

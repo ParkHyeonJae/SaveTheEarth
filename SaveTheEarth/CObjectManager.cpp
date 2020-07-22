@@ -150,17 +150,99 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 					RECT temp;
 					if (IntersectRect(&temp, &rPlayerColl, &rItemColl))
 					{
-						m_Item->Apply();
-						m_gameObjectList.erase(iter02);
-						break;
+						if (m_Item->GetItemState() == HPUP) {
+							if (m_cPlayer->GetHp() < MAX_PLAYER_HP) {
+								m_Item->Apply();
+								m_gameObjectList.erase(iter02);
+								break;
+							}
+						}
+						else {
+							m_Item->Apply();
+							m_gameObjectList.erase(iter02);
+							break;
+						}
 					}
 				}
+				if ((*iter02)->m_tag == BOSSLASER)
+				{
+					CBossLaserLauncher* m_BossLaser = dynamic_cast<CBossLaserLauncher*>((*iter02));
+					if (m_BossLaser->IsRun() && !m_BossLaser->IsFinish())
+					{
+						if (m_BossLaser->GetLaserState() == LAUNCHER_STATE::LaserFire) {
+							RECT rBOSSLaser = {
+								(LONG)((*iter02)->GetPos().x - 1600),
+								(LONG)((*iter02)->GetPos().y + 100),
+								(LONG)((*iter02)->GetPos().x + 500),
+								(LONG)((*iter02)->GetPos().y + 400)
+							};
+							RECT temp;
+							if (IntersectRect(&temp, &rPlayerColl, &rBOSSLaser))
+							{
+								m_cPlayer->GetDamage(100.0f);
+								break;
+							}
+						}
+					}
+				}
+
 				iter02++;
 			}
 
 		}
 
-		
+		if ((*iter)->m_tag == BOSSBULLET)
+		{
+			CBossBullet* m_cBossBullet = dynamic_cast<CBossBullet*>((*iter));
+			if (m_cBossBullet->IsMapOut())
+			{
+				m_gameObjectList.erase(iter);
+				break;
+			}
+			RECT BossBulletColl = {
+				(LONG)((*iter)->GetPos().x - 15.0f),
+				(LONG)((*iter)->GetPos().y - 15.0f),
+				(LONG)((*iter)->GetPos().x + 15.0f),
+				(LONG)((*iter)->GetPos().y + 15.0f),
+			};
+
+			for (auto iter02 = m_gameObjectList.begin(); iter02 != m_gameObjectList.end();)
+			{
+				if ((*iter02)->m_tag == PLAYER)	// Enemyiter가 BOSS(보스 몬스터)일 경우
+				{
+					CPlayer* m_cPlayer = dynamic_cast<CPlayer*>((*iter02));
+					float CollRange = 40.0f;
+					RECT rPlayerColl = {
+					(LONG)((*iter02)->GetPos().x - CollRange),
+					(LONG)((*iter02)->GetPos().y - CollRange),
+					(LONG)((*iter02)->GetPos().x + CollRange),
+					(LONG)((*iter02)->GetPos().y + CollRange - 20.0f),
+					};
+
+					RECT temp;
+					if (IntersectRect(&temp, &BossBulletColl, &rPlayerColl))		//총알이 보스하고 닿았을때
+					{
+						m_cBossBullet->SetColl(TRUE);
+						if (m_cPlayer->GetHp() >= 0) {
+							m_cPlayer->SetHp(
+								m_cPlayer->GetHp()
+								- m_cBossBullet->GetDamage());
+							break;
+						}
+						break;
+					}
+
+				}
+				iter02++;
+			}
+			if (m_cBossBullet->IsColl())		// 플레이어 총알이 충돌되었을 때
+			{
+				if (m_cBossBullet->IsDelete()) {		//플레이어 총알의 애니메이션이 모두 끝났을 때
+					m_gameObjectList.erase(iter);		//총알 객체 제거
+					break;
+				}
+			}
+		}
 
 		if ((*iter)->m_tag == EBULLET)
 		{
@@ -270,13 +352,23 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 		{
 			if (dynamic_cast<CBossEnemy*>((*iter))->IsDelete()) {
 				m_gameObjectList.erase(iter);
+				CGameManager::nowStatus = TITLE;
 				break;
 			}
 		}
 		if ((*iter)->m_tag == ENEMY)	// Enemyiter가 BOSS(보스 몬스터)일 경우
 		{
 			if (dynamic_cast<CNormalEnemy*>((*iter))->IsDelete()) {		//몬스터가 죽고, 죽는 애니메이션까지 모두 끝낱을 때
-				Score::CScoreManager::ApplyScore(500.0f);		//n점 추가
+				Score::CScoreManager::ApplyScore(CGameManager::ApplyScore);		//n점 추가
+				m_gameObjectList.erase(iter);		//몬스터 객체 제거
+				break;
+			}
+		}
+		if ((*iter)->m_tag == BOSSBULLETLAUNCHER)	// Enemyiter가 BOSS(보스 몬스터)일 경우
+		{
+			CBossBulletLauncher* m_BossBullet = dynamic_cast<CBossBulletLauncher*>((*iter));
+			if (!m_BossBullet->IsRun() && m_BossBullet->IsFinish())
+			{
 				m_gameObjectList.erase(iter);		//몬스터 객체 제거
 				break;
 			}

@@ -40,12 +40,17 @@ void CBossBulletLauncher::Release()
 void CBossBulletLauncher::LauncherInit()
 {
 	m_BulletTimer = new CTimer(500);
+	m_BulletSkillEndTimer = new CTimer(10000);
 	m_BulletIdle.AnimFunc = new CSpriteAnimation();
 	m_BulletIdle.sequence = 0;
 }
 
 void CBossBulletLauncher::LauncherUpdate(DWORD elapsed)
 {
+	if (m_BulletSkillEndTimer->OnTimer()) {
+		SetRun(FALSE);
+		SetFinish(TRUE);
+	}
 	if (m_BulletTimer->OnTimer())
 	{
 		SetRun(TRUE);

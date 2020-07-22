@@ -4,6 +4,8 @@ class CBossBulletLauncher : public CGameObject, public ILauncher
 private:
 	Animation m_BulletIdle;
 	CTimer* m_BulletTimer;
+
+	CTimer* m_BulletSkillEndTimer;
 public:
 	CBossBulletLauncher(D2D1_POINT_2F m_Pos, INT tag);
 	~CBossBulletLauncher();

@@ -94,7 +94,12 @@ enum ITEMS
 	HPUP,
 	RPMUP
 };
-
+typedef enum class LaserLauncherState {
+	LaserCharging,
+	LaserON,
+	LaserFire,
+	LaserOff
+}LAUNCHER_STATE;
 
 #include "CInput.h"
 #include "CGraphics.h"
