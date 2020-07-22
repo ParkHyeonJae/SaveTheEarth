@@ -50,7 +50,7 @@ void CBossBulletLauncher::LauncherUpdate(DWORD elapsed)
 	{
 		SetRun(TRUE);
 		SetFinish(FALSE);
-		OBJECT->AddObject(dynamic_cast<CGameObject*>(new CBossBullet(D2D1::Point2F(m_Pos.x, m_Pos.y + 150.0f), BOSSBULLET)));
+		OBJECT->AddObject(dynamic_cast<CGameObject*>(new CBossBullet(D2D1::Point2F(m_Pos.x, m_Pos.y + 250.0f), BOSSBULLET)));
 	}
 }
 
