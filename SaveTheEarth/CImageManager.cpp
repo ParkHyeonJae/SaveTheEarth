@@ -245,6 +245,7 @@ INT CImageManager::ImageInit()
 	m_BossBullet.push_back(new CSprite(L"../Images/Sprites/04 Boss/BossBullet/Bullet/3.png", CGameManager::m_Gfx));
 	m_Images->AddMultiImage("BossBullet", m_BossBullet);
 
+
 	std::vector<CSprite*> m_BossBulletEffect;
 	m_BossBulletEffect.push_back(new CSprite(L"../Images/Sprites/04 Boss/BossBullet/BulletEffect/1.png", CGameManager::m_Gfx));
 	m_BossBulletEffect.push_back(new CSprite(L"../Images/Sprites/04 Boss/BossBullet/BulletEffect/2.png", CGameManager::m_Gfx));
