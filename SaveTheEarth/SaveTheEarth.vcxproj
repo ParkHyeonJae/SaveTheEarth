@@ -147,6 +147,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CBossBulletLauncher.h" />
     <ClInclude Include="CBossEnemy.h" />
     <ClInclude Include="CBossLaserLauncher.h" />
     <ClInclude Include="CDX2DApp.h" />
@@ -184,6 +185,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CBossBulletLauncher.cpp" />
     <ClCompile Include="CBossEnemy.cpp" />
     <ClCompile Include="CBossLaserLauncher.cpp" />
     <ClCompile Include="CDX2DApp.cpp" />

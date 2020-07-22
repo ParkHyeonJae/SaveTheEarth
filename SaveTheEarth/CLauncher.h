@@ -1,10 +1,6 @@
 #pragma once
 class ILauncher {
 protected:
-	struct Animation {
-		CSpriteAnimation* AnimFunc;
-		INT sequence;
-	};
 	BOOL m_bRunCheck;
 	BOOL m_bFinish;
 	RECT m_LaucherCollision;

@@ -1,11 +1,17 @@
 #pragma once
 class CGameObject : public IGameObject
 {
+	
 protected:
 	D2D1_POINT_2F m_Pos;
 	CSprite* m_Sprite;
 
 public:
+	struct Animation {
+		CSpriteAnimation* AnimFunc;
+		INT sequence;
+	};
+
 	D2D1_POINT_2F			m_Scale;
 	INT						m_tag;
 
