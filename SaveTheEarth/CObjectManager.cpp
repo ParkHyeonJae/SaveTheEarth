@@ -72,18 +72,19 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 			(*iter)->GetPos().x - CollRange,
 			(*iter)->GetPos().y - CollRange,
 			(*iter)->GetPos().x + CollRange,
-			(*iter)->GetPos().y + CollRange,
+			(*iter)->GetPos().y + CollRange - 20.0f,
 			};
 
 			for (auto iter02 = m_gameObjectList.begin(); iter02 != m_gameObjectList.end();)
 			{
 				if ((*iter02)->m_tag == ENEMY)
 				{
+					float CollRange = 40.0f;
 					RECT EnemyColl = {
-					((*iter02)->GetPos().x - 0),
-					((*iter02)->GetPos().y - 0),
-					((*iter02)->GetPos().x + (*iter02)->GetSprite()->GetBmp()->GetSize().width),
-					((*iter02)->GetPos().y + (*iter02)->GetSprite()->GetBmp()->GetSize().height),
+					((*iter02)->GetPos().x - CollRange),
+					((*iter02)->GetPos().y - CollRange),
+					((*iter02)->GetPos().x + CollRange),
+					((*iter02)->GetPos().y + CollRange),
 					};
 
 					RECT temp;
@@ -123,7 +124,7 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 						}
 						RECT rMisileColl = {
 						(*iter02)->GetPos().x - 20.0f,
-						(*iter02)->GetPos().y - 20.0f,
+						(*iter02)->GetPos().y - 15.0f,
 						(*iter02)->GetPos().x + 20.0f,
 						(*iter02)->GetPos().y + 20.0f,
 						};
