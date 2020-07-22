@@ -69,10 +69,10 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 			CPlayer* m_cPlayer = dynamic_cast<CPlayer*>((*iter));
 			float CollRange = 40.0f;
 			RECT rPlayerColl = {
-			(*iter)->GetPos().x - CollRange,
-			(*iter)->GetPos().y - CollRange,
-			(*iter)->GetPos().x + CollRange,
-			(*iter)->GetPos().y + CollRange - 20.0f,
+			(LONG)((*iter)->GetPos().x - CollRange),
+			(LONG)((*iter)->GetPos().y - CollRange),
+			(LONG)((*iter)->GetPos().x + CollRange),
+			(LONG)((*iter)->GetPos().y + CollRange - 20.0f),
 			};
 
 			for (auto iter02 = m_gameObjectList.begin(); iter02 != m_gameObjectList.end();)
@@ -81,10 +81,10 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 				{
 					float CollRange = 40.0f;
 					RECT EnemyColl = {
-					((*iter02)->GetPos().x - CollRange),
-					((*iter02)->GetPos().y - CollRange),
-					((*iter02)->GetPos().x + CollRange),
-					((*iter02)->GetPos().y + CollRange),
+					(LONG)((*iter02)->GetPos().x - CollRange),
+					(LONG)((*iter02)->GetPos().y - CollRange),
+					(LONG)((*iter02)->GetPos().x + CollRange),
+					(LONG)((*iter02)->GetPos().y + CollRange),
 					};
 
 					RECT temp;
@@ -97,10 +97,10 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 				if ((*iter02)->m_tag == BOSS)
 				{
 					RECT EnemyColl = {
-					(*iter02)->GetPos().x + 0.0f,
-					(*iter02)->GetPos().y + 0.0f,
-					(*iter02)->GetPos().x + 200.0f,
-					(*iter02)->GetPos().y + 300.0f,
+					(LONG)((*iter02)->GetPos().x + 0.0f),
+					(LONG)((*iter02)->GetPos().y + 0.0f),
+					(LONG)((*iter02)->GetPos().x + 200.0f),
+					(LONG)((*iter02)->GetPos().y + 300.0f),
 					};
 
 					RECT temp;
@@ -123,10 +123,10 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 							break;
 						}
 						RECT rMisileColl = {
-						(*iter02)->GetPos().x - 20.0f,
-						(*iter02)->GetPos().y - 15.0f,
-						(*iter02)->GetPos().x + 20.0f,
-						(*iter02)->GetPos().y + 20.0f,
+						(LONG)((*iter02)->GetPos().x - 20.0f),
+						(LONG)((*iter02)->GetPos().y - 15.0f),
+						(LONG)((*iter02)->GetPos().x + 20.0f),
+						(LONG)((*iter02)->GetPos().y + 20.0f),
 						};
 
 						RECT temp;
@@ -141,10 +141,10 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 				{
 					CItem* m_Item = dynamic_cast<CItem*>((*iter02));
 					RECT rItemColl = {
-						(*iter02)->GetPos().x,
-						(*iter02)->GetPos().y,
-						(*iter02)->GetPos().x + m_Item->GetSize().width ,
-						(*iter02)->GetPos().y + m_Item->GetSize().height,
+						(LONG)((*iter02)->GetPos().x),
+						(LONG)((*iter02)->GetPos().y),
+						(LONG)((*iter02)->GetPos().x + m_Item->GetSize().width ),
+						(LONG)((*iter02)->GetPos().y + m_Item->GetSize().height),
 					};
 
 					RECT temp;
@@ -183,10 +183,10 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 			}
 
 			RECT pBulletColl = {
-				(*iter)->GetPos().x - 20.0f,
-				(*iter)->GetPos().y - 5.0f,
-				(*iter)->GetPos().x + 20.0f,
-				(*iter)->GetPos().y + 5.0f,
+				(LONG)((*iter)->GetPos().x - 20.0f),
+				(LONG)((*iter)->GetPos().y - 5.0f),
+				(LONG)((*iter)->GetPos().x + 20.0f),
+				(LONG)((*iter)->GetPos().y + 5.0f),
 			};
 
 			for (auto Enemyiter = m_gameObjectList.begin(); Enemyiter != m_gameObjectList.end();)
@@ -195,10 +195,10 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 				{
 					CBossEnemy* m_cBossEnemy = dynamic_cast<CBossEnemy*>((*Enemyiter));
 					RECT EnemyColl = {
-					(*Enemyiter)->GetPos().x + 0.0f,
-					(*Enemyiter)->GetPos().y + 0.0f,
-					(*Enemyiter)->GetPos().x + 200.0f,
-					(*Enemyiter)->GetPos().y + 300.0f,
+					(LONG)((*Enemyiter)->GetPos().x + 0.0f),
+					(LONG)((*Enemyiter)->GetPos().y + 0.0f),
+					(LONG)((*Enemyiter)->GetPos().x + 200.0f),
+					(LONG)((*Enemyiter)->GetPos().y + 300.0f),
 					};
 
 					RECT temp;
@@ -231,10 +231,10 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 					CNormalEnemy* m_cNormalEnemy = dynamic_cast<CNormalEnemy*>((*Enemyiter));
 					float CollRange = 40.0f;
 					RECT EnemyColl = {
-					((*Enemyiter)->GetPos().x - CollRange),
-					((*Enemyiter)->GetPos().y - CollRange),
-					((*Enemyiter)->GetPos().x + CollRange),
-					((*Enemyiter)->GetPos().y + CollRange),
+					(LONG)((*Enemyiter)->GetPos().x - CollRange),
+					(LONG)((*Enemyiter)->GetPos().y - CollRange),
+					(LONG)((*Enemyiter)->GetPos().x + CollRange),
+					(LONG)((*Enemyiter)->GetPos().y + CollRange),
 					};
 
 					RECT temp;
@@ -277,6 +277,15 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 		{
 			if (dynamic_cast<CNormalEnemy*>((*iter))->IsDelete()) {		//몬스터가 죽고, 죽는 애니메이션까지 모두 끝낱을 때
 				Score::CScoreManager::ApplyScore(500.0f);		//n점 추가
+				m_gameObjectList.erase(iter);		//몬스터 객체 제거
+				break;
+			}
+		}
+		if ((*iter)->m_tag == BOSSLASER)	// Enemyiter가 BOSS(보스 몬스터)일 경우
+		{
+			CBossLaserLauncher* m_BossLaser = dynamic_cast<CBossLaserLauncher*>((*iter));
+			if (!m_BossLaser->IsRun() && m_BossLaser->IsFinish())
+			{
 				m_gameObjectList.erase(iter);		//몬스터 객체 제거
 				break;
 			}

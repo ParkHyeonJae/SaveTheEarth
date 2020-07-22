@@ -183,16 +183,52 @@ INT CImageManager::ImageInit()
 	m_Images->AddImage("LongBar", new CSprite(L"../Images/Sprites/10 Distance Bar/long bar.png", CGameManager::m_Gfx));
 	m_Images->AddImage("Where", new CSprite(L"../Images/Sprites/10 Distance Bar/where.png", CGameManager::m_Gfx));
 	
-	
+	//BOSS HP Bar
 	m_Images->AddImage("BossNullHp", new CSprite(L"../Images/Sprites/04 Boss/BossHPBar/bossNullHP.png", CGameManager::m_Gfx));
 	m_Images->AddImage("BossHpBar", new CSprite(L"../Images/Sprites/04 Boss/BossHPBar/bossHPbar.png", CGameManager::m_Gfx));
 
+	//Shark HP Bar
 	m_Images->AddImage("SharkNullHp", new CSprite(L"../Images/Sprites/05 Shark Animation/HpBar/SharkHPBar_Back.png", CGameManager::m_Gfx));
 	m_Images->AddImage("SharkHpBar", new CSprite(L"../Images/Sprites/05 Shark Animation/HpBar/SharkHPBar_Fore.png", CGameManager::m_Gfx));
 
+	//Items
 	m_Images->AddImage("ATKUP", new CSprite(L"../Images/Sprites/01 Items/01 ATKUP.png", CGameManager::m_Gfx));
 	m_Images->AddImage("HPUP", new CSprite(L"../Images/Sprites/01 Items/02 HPUP.png", CGameManager::m_Gfx));
 	m_Images->AddImage("RPMUP", new CSprite(L"../Images/Sprites/01 Items/03 RPMUP.png", CGameManager::m_Gfx));
 
+	//Boss Laser Skills
+	std::vector<CSprite*> m_BossLaser_Charging;
+	m_BossLaser_Charging.push_back(new CSprite(L"../Images/Sprites/04 Boss/01 BossLaserCharging/1.png", CGameManager::m_Gfx));
+	m_BossLaser_Charging.push_back(new CSprite(L"../Images/Sprites/04 Boss/01 BossLaserCharging/2.png", CGameManager::m_Gfx));
+	m_BossLaser_Charging.push_back(new CSprite(L"../Images/Sprites/04 Boss/01 BossLaserCharging/3.png", CGameManager::m_Gfx));
+	m_BossLaser_Charging.push_back(new CSprite(L"../Images/Sprites/04 Boss/01 BossLaserCharging/4.png", CGameManager::m_Gfx));
+	m_BossLaser_Charging.push_back(new CSprite(L"../Images/Sprites/04 Boss/01 BossLaserCharging/5.png", CGameManager::m_Gfx));
+	m_BossLaser_Charging.push_back(new CSprite(L"../Images/Sprites/04 Boss/01 BossLaserCharging/6.png", CGameManager::m_Gfx));
+	m_BossLaser_Charging.push_back(new CSprite(L"../Images/Sprites/04 Boss/01 BossLaserCharging/7.png", CGameManager::m_Gfx));
+	m_BossLaser_Charging.push_back(new CSprite(L"../Images/Sprites/04 Boss/01 BossLaserCharging/8.png", CGameManager::m_Gfx));
+	m_Images->AddMultiImage("BossLaser_Charging", m_BossLaser_Charging);
+
+	std::vector<CSprite*> m_BossLaser_On;
+	m_BossLaser_On.push_back(new CSprite(L"../Images/Sprites/04 Boss/02 BossLaserOn/1.png", CGameManager::m_Gfx));
+	m_BossLaser_On.push_back(new CSprite(L"../Images/Sprites/04 Boss/02 BossLaserOn/2.png", CGameManager::m_Gfx));
+	m_BossLaser_On.push_back(new CSprite(L"../Images/Sprites/04 Boss/02 BossLaserOn/3.png", CGameManager::m_Gfx));
+	m_Images->AddMultiImage("BossLaser_On", m_BossLaser_On);
+
+	std::vector<CSprite*> m_BossLaser_Fire;
+	m_BossLaser_Fire.push_back(new CSprite(L"../Images/Sprites/04 Boss/03 BossLaserFire/1.png", CGameManager::m_Gfx));
+	m_BossLaser_Fire.push_back(new CSprite(L"../Images/Sprites/04 Boss/03 BossLaserFire/2.png", CGameManager::m_Gfx));
+	m_BossLaser_Fire.push_back(new CSprite(L"../Images/Sprites/04 Boss/03 BossLaserFire/3.png", CGameManager::m_Gfx));
+	m_BossLaser_Fire.push_back(new CSprite(L"../Images/Sprites/04 Boss/03 BossLaserFire/4.png", CGameManager::m_Gfx));
+	m_BossLaser_Fire.push_back(new CSprite(L"../Images/Sprites/04 Boss/03 BossLaserFire/5.png", CGameManager::m_Gfx));
+	m_Images->AddMultiImage("BossLaser_Fire", m_BossLaser_Fire);
+
+	std::vector<CSprite*> m_BossLaser_Off;
+	m_BossLaser_Off.push_back(new CSprite(L"../Images/Sprites/04 Boss/04 BossLaserOff/1.png", CGameManager::m_Gfx));
+	m_BossLaser_Off.push_back(new CSprite(L"../Images/Sprites/04 Boss/04 BossLaserOff/2.png", CGameManager::m_Gfx));
+	m_BossLaser_Off.push_back(new CSprite(L"../Images/Sprites/04 Boss/04 BossLaserOff/3.png", CGameManager::m_Gfx));
+	m_BossLaser_Off.push_back(new CSprite(L"../Images/Sprites/04 Boss/04 BossLaserOff/4.png", CGameManager::m_Gfx));
+	m_BossLaser_Off.push_back(new CSprite(L"../Images/Sprites/04 Boss/04 BossLaserOff/5.png", CGameManager::m_Gfx));
+	m_BossLaser_Off.push_back(new CSprite(L"../Images/Sprites/04 Boss/04 BossLaserOff/6.png", CGameManager::m_Gfx));
+	m_Images->AddMultiImage("BossLaser_Off", m_BossLaser_Off);
 	return 0;
 }

@@ -20,5 +20,7 @@ public:
 
 	D2D1_POINT_2F GetPos() { return m_Pos; }
 	CSprite* GetSprite() { return m_Sprite; }
+
+	void SetPos(Vector2 m_Pos) { this->m_Pos = m_Pos; }
 };
 

@@ -148,6 +148,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="CBossEnemy.h" />
+    <ClInclude Include="CBossLaserLauncher.h" />
     <ClInclude Include="CDX2DApp.h" />
     <ClInclude Include="CGame.h" />
     <ClInclude Include="CGameManager.h" />
@@ -161,6 +162,7 @@
     <ClInclude Include="CInGameUI.h" />
     <ClInclude Include="CInput.h" />
     <ClInclude Include="CItem.h" />
+    <ClInclude Include="CLauncher.h" />
     <ClInclude Include="CNormalEnemy.h" />
     <ClInclude Include="CNormalEnemyBullet.h" />
     <ClInclude Include="CObjectManager.h" />
@@ -183,6 +185,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CBossEnemy.cpp" />
+    <ClCompile Include="CBossLaserLauncher.cpp" />
     <ClCompile Include="CDX2DApp.cpp" />
     <ClCompile Include="CGame.cpp" />
     <ClCompile Include="CGameManager.cpp" />

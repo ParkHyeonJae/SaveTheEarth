@@ -20,6 +20,10 @@ private:
 	CSprite* m_BossNullHp;
 	CSprite* m_BossHpBar;
 	Vector2 m_BossHpPos;
+
+	//BOSS SKILLS
+	BOOL m_IsBossShow;
+	CBossLaserLauncher* m_LaserLauncher;
 public:
 	CBossEnemy(D2D1_POINT_2F m_Pos, INT tag);
 	~CBossEnemy();

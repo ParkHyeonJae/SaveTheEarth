@@ -32,5 +32,5 @@ public:
 	void Render();
 	void Release();
 };
-
- 
+#define IMAGES CGameManager::m_ImageManager->GetImages()
+#define OBJECT CGameManager::m_ObjectManager
