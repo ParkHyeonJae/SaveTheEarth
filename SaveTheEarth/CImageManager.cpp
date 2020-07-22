@@ -238,5 +238,22 @@ INT CImageManager::ImageInit()
 	m_BossBulletIdle.push_back(new CSprite(L"../Images/Sprites/04 Boss/BossBullet/BossIdle/4.png", CGameManager::m_Gfx));
 	m_BossBulletIdle.push_back(new CSprite(L"../Images/Sprites/04 Boss/BossBullet/BossIdle/5.png", CGameManager::m_Gfx));
 	m_Images->AddMultiImage("BossBulletIdle", m_BossBulletIdle);
+
+	std::vector<CSprite*> m_BossBullet;
+	m_BossBullet.push_back(new CSprite(L"../Images/Sprites/04 Boss/BossBullet/Bullet/1.png", CGameManager::m_Gfx));
+	m_BossBullet.push_back(new CSprite(L"../Images/Sprites/04 Boss/BossBullet/Bullet/2.png", CGameManager::m_Gfx));
+	m_BossBullet.push_back(new CSprite(L"../Images/Sprites/04 Boss/BossBullet/Bullet/3.png", CGameManager::m_Gfx));
+	m_Images->AddMultiImage("BossBullet", m_BossBullet);
+
+	std::vector<CSprite*> m_BossBulletEffect;
+	m_BossBulletEffect.push_back(new CSprite(L"../Images/Sprites/04 Boss/BossBullet/BulletEffect/1.png", CGameManager::m_Gfx));
+	m_BossBulletEffect.push_back(new CSprite(L"../Images/Sprites/04 Boss/BossBullet/BulletEffect/2.png", CGameManager::m_Gfx));
+	m_BossBulletEffect.push_back(new CSprite(L"../Images/Sprites/04 Boss/BossBullet/BulletEffect/3.png", CGameManager::m_Gfx));
+	m_BossBulletEffect.push_back(new CSprite(L"../Images/Sprites/04 Boss/BossBullet/BulletEffect/4.png", CGameManager::m_Gfx));
+	m_BossBulletEffect.push_back(new CSprite(L"../Images/Sprites/04 Boss/BossBullet/BulletEffect/5.png", CGameManager::m_Gfx));
+	m_BossBulletEffect.push_back(new CSprite(L"../Images/Sprites/04 Boss/BossBullet/BulletEffect/6.png", CGameManager::m_Gfx));
+	m_BossBulletEffect.push_back(new CSprite(L"../Images/Sprites/04 Boss/BossBullet/BulletEffect/7.png", CGameManager::m_Gfx));
+	m_BossBulletEffect.push_back(new CSprite(L"../Images/Sprites/04 Boss/BossBullet/BulletEffect/8.png", CGameManager::m_Gfx));
+	m_Images->AddMultiImage("BossBulletEffect", m_BossBulletEffect);
 	return 0;
 }
