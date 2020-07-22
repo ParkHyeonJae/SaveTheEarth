@@ -63,6 +63,9 @@ enum TAG {
 	EBULLET,
 	BACKGROUND,
 	BOSS,
+	BOSSLASER,
+	BOSSBULLET,
+	BOSSBULLETLAUNCHER,
 	MISILE,
 	UI,
 	ITEM,
@@ -91,20 +94,30 @@ enum ITEMS
 	HPUP,
 	RPMUP
 };
+typedef enum class LaserLauncherState {
+	LaserCharging,
+	LaserON,
+	LaserFire,
+	LaserOff
+}LAUNCHER_STATE;
 
 #include "CInput.h"
 #include "CGraphics.h"
 #include "CSprite.h"
 #include "Cimage.h"
 #include "CImageManager.h"
+#include "CSpriteAnimation.h"
 #include "IGameObject.h"
 #include "CGameObject.h"
 #include "CTimer.h"
 #include "CHealthBar.h"
-#include "CSpriteAnimation.h"
 #include "CItem.h"
 #include "CNormalEnemyBullet.h"
 #include "CNormalEnemy.h"
+#include "CLauncher.h"
+#include "CBossLaserLauncher.h"
+#include "CBossBullet.h"
+#include "CBossBulletLauncher.h"
 #include "CBossEnemy.h"
 #include "MisileEnemy.h"
 #include "CPlayerBullet.h"
@@ -112,6 +125,7 @@ enum ITEMS
 #include "CScrollBackground.h"
 #include "CTitleBackground.h"
 #include "CInGameUI.h"
+
 #include "CObjectManager.h"
 #include "CSceneObject.h"
 #include "CGameScene01.h"

@@ -43,35 +43,20 @@
     <Filter Include="소스 파일\Manager">
       <UniqueIdentifier>{fdf8937d-24c8-4440-89f2-34f8c296e723}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\CGameObject\Scene02\BOSS">
+      <UniqueIdentifier>{85f69b5c-03f2-4ed4-a014-6d5aafbfa0cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\CGameObject\Scene02\BOSS">
+      <UniqueIdentifier>{bb645bc8-2045-4d90-802b-b9a9f73aca8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Main">
+      <UniqueIdentifier>{b200fd98-23d3-4c1f-a829-aea758591af0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Main">
+      <UniqueIdentifier>{1dab368d-ded9-4f29-b2eb-459eb6b49459}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="framework.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="targetver.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="SaveTheEarth.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="CDX2DApp.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="CGame.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="CInput.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="CGraphics.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="CSprite.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="CSceneObject.h">
       <Filter>헤더 파일\CScene</Filter>
     </ClInclude>
@@ -108,23 +93,8 @@
     <ClInclude Include="CInGameUI.h">
       <Filter>헤더 파일\CGameObject\Scene02</Filter>
     </ClInclude>
-    <ClInclude Include="CBossEnemy.h">
-      <Filter>헤더 파일\CGameObject\Scene02</Filter>
-    </ClInclude>
-    <ClInclude Include="Mathf.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="MisileEnemy.h">
       <Filter>헤더 파일\CGameObject\Scene02</Filter>
-    </ClInclude>
-    <ClInclude Include="CSpriteAnimation.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="CTimer.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Cimage.h">
-      <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="CGameManager.h">
       <Filter>헤더 파일\Manager</Filter>
@@ -138,32 +108,68 @@
     <ClInclude Include="CScoreManager.h">
       <Filter>헤더 파일\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="CHealthBar.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="CItem.h">
       <Filter>헤더 파일\CGameObject\Scene02</Filter>
     </ClInclude>
+    <ClInclude Include="CBossEnemy.h">
+      <Filter>헤더 파일\CGameObject\Scene02\BOSS</Filter>
+    </ClInclude>
+    <ClInclude Include="CDX2DApp.h">
+      <Filter>헤더 파일\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="CGame.h">
+      <Filter>헤더 파일\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="CGraphics.h">
+      <Filter>헤더 파일\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="CHealthBar.h">
+      <Filter>헤더 파일\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="Cimage.h">
+      <Filter>헤더 파일\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="CInput.h">
+      <Filter>헤더 파일\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="CSprite.h">
+      <Filter>헤더 파일\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="CSpriteAnimation.h">
+      <Filter>헤더 파일\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="CTimer.h">
+      <Filter>헤더 파일\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="framework.h">
+      <Filter>헤더 파일\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="Mathf.h">
+      <Filter>헤더 파일\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>헤더 파일\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="SaveTheEarth.h">
+      <Filter>헤더 파일\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>헤더 파일\Main</Filter>
+    </ClInclude>
+    <ClInclude Include="CBossLaserLauncher.h">
+      <Filter>헤더 파일\CGameObject\Scene02\BOSS</Filter>
+    </ClInclude>
+    <ClInclude Include="CLauncher.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="CBossBulletLauncher.h">
+      <Filter>헤더 파일\CGameObject\Scene02\BOSS</Filter>
+    </ClInclude>
+    <ClInclude Include="CBossBullet.h">
+      <Filter>헤더 파일\CGameObject\Scene02\BOSS</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="SaveTheEarth.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="CDX2DApp.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="CGame.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="CInput.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="CGraphics.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="CSprite.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="CSceneObject.cpp">
       <Filter>소스 파일\CScene</Filter>
     </ClCompile>
@@ -197,23 +203,8 @@
     <ClCompile Include="CInGameUI.cpp">
       <Filter>소스 파일\CGameObject\Scene02</Filter>
     </ClCompile>
-    <ClCompile Include="CBossEnemy.cpp">
-      <Filter>소스 파일\CGameObject\Scene02</Filter>
-    </ClCompile>
-    <ClCompile Include="Mathf.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="MisileEnemy.cpp">
       <Filter>소스 파일\CGameObject\Scene02</Filter>
-    </ClCompile>
-    <ClCompile Include="CSpriteAnimation.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="CTimer.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Cimage.cpp">
-      <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="CGameManager.cpp">
       <Filter>소스 파일\Manager</Filter>
@@ -227,11 +218,53 @@
     <ClCompile Include="CScoreManager.cpp">
       <Filter>소스 파일\Manager</Filter>
     </ClCompile>
-    <ClCompile Include="CHealthBar.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="CItem.cpp">
       <Filter>소스 파일\CGameObject\Scene02</Filter>
+    </ClCompile>
+    <ClCompile Include="CBossEnemy.cpp">
+      <Filter>소스 파일\CGameObject\Scene02\BOSS</Filter>
+    </ClCompile>
+    <ClCompile Include="CDX2DApp.cpp">
+      <Filter>소스 파일\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="CGame.cpp">
+      <Filter>소스 파일\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="CGraphics.cpp">
+      <Filter>소스 파일\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="CHealthBar.cpp">
+      <Filter>소스 파일\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Cimage.cpp">
+      <Filter>소스 파일\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="CInput.cpp">
+      <Filter>소스 파일\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="CSprite.cpp">
+      <Filter>소스 파일\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="CSpriteAnimation.cpp">
+      <Filter>소스 파일\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="CTimer.cpp">
+      <Filter>소스 파일\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Mathf.cpp">
+      <Filter>소스 파일\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="SaveTheEarth.cpp">
+      <Filter>소스 파일\Main</Filter>
+    </ClCompile>
+    <ClCompile Include="CBossLaserLauncher.cpp">
+      <Filter>소스 파일\CGameObject\Scene02\BOSS</Filter>
+    </ClCompile>
+    <ClCompile Include="CBossBulletLauncher.cpp">
+      <Filter>소스 파일\CGameObject\Scene02\BOSS</Filter>
+    </ClCompile>
+    <ClCompile Include="CBossBullet.cpp">
+      <Filter>소스 파일\CGameObject\Scene02\BOSS</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -11,6 +11,7 @@ public:
 	~CItem();
 
 	void Apply();
+	INT GetItemState() { return ItemState; }
 	D2D1_SIZE_F GetSize() { return m_ItemSprite->GetBmp()->GetSize(); }
 
 	virtual void Init() override;

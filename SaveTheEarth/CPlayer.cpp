@@ -17,7 +17,7 @@ CPlayer::CPlayer(D2D1_POINT_2F m_Pos, INT tag, FLOAT m_HP) : CGameObject()
 	m_RifleMotionFunc = new CSpriteAnimation();
 	m_ShotgunMotionFunc = new CSpriteAnimation();
 
-	m_playerBulletFireTimer = new CTimer(150);
+	m_playerBulletFireTimer = new CTimer(550);
 	Init();
 }
 
@@ -68,6 +68,7 @@ void CPlayer::FrameMove(DWORD elapsed)
 				CGameManager::isinvincibility = TRUE;
 				m_hitEffectCount = PLAYER_HIT_OVERLAY_COUNT;
 				dTime = HitOverlaySpeed;
+				overlay = 1.0f;
 				isHit = TRUE;
 			}
 			wasPlayerHP = m_HP;

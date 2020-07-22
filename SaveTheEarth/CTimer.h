@@ -12,7 +12,7 @@ public:
 	~CTimer();
 	VOID LoopCheck(BOOL IsLoop) { this->IsLoop = IsLoop; }
 	DWORD GetDestTime() { return DestTime; }
-	VOID SetTimer(FLOAT DestTime) { this->DestTime = DestTime; }
+	VOID SetTimer(DWORD DestTime) { this->DestTime = DestTime; }
 	BOOL OnTimer();
 };
 

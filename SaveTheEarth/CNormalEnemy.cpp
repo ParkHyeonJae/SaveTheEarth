@@ -70,7 +70,7 @@ void CNormalEnemy::Render()
 			SharkAnimSequence = m_ExplosiveAnimFunc->OnAnimRender(50, 0, 10);
 			if (SharkAnimSequence == 9) {
 				m_isDelete = TRUE;
-				if (Mathf::Probability(30))
+				if (Mathf::Probability(50))
 					CGameManager::m_ObjectManager
 					->AddObject(dynamic_cast<CGameObject*>
 					(new CItem(m_Pos, ITEM)));
