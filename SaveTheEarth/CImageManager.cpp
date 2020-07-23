@@ -256,5 +256,15 @@ INT CImageManager::ImageInit()
 	m_BossBulletEffect.push_back(new CSprite(L"../Images/Sprites/04 Boss/BossBullet/BulletEffect/7.png", CGameManager::m_Gfx));
 	m_BossBulletEffect.push_back(new CSprite(L"../Images/Sprites/04 Boss/BossBullet/BulletEffect/8.png", CGameManager::m_Gfx));
 	m_Images->AddMultiImage("BossBulletEffect", m_BossBulletEffect);
+
+
+	std::vector<CSprite*> m_BossBarrier;
+	m_BossBarrier.push_back(new CSprite(L"../Images/Sprites/11 Player Skill/BARRIER/1.png", CGameManager::m_Gfx));
+	m_BossBarrier.push_back(new CSprite(L"../Images/Sprites/11 Player Skill/BARRIER/2.png", CGameManager::m_Gfx));
+	m_BossBarrier.push_back(new CSprite(L"../Images/Sprites/11 Player Skill/BARRIER/3.png", CGameManager::m_Gfx));
+	m_BossBarrier.push_back(new CSprite(L"../Images/Sprites/11 Player Skill/BARRIER/4.png", CGameManager::m_Gfx));
+	m_BossBarrier.push_back(new CSprite(L"../Images/Sprites/11 Player Skill/BARRIER/5.png", CGameManager::m_Gfx));
+	m_BossBarrier.push_back(new CSprite(L"../Images/Sprites/11 Player Skill/BARRIER/6.png", CGameManager::m_Gfx));
+	m_Images->AddMultiImage("BossBarrier", m_BossBarrier);
 	return 0;
 }
