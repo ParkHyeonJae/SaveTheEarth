@@ -180,6 +180,9 @@
     <ClInclude Include="CPlayerLaserLauncher.h">
       <Filter>헤더 파일\CGameObject\Scene02\PLAYER</Filter>
     </ClInclude>
+    <ClInclude Include="CFadeInOut.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CSceneObject.cpp">
@@ -283,6 +286,9 @@
     </ClCompile>
     <ClCompile Include="CPlayerLaserLauncher.cpp">
       <Filter>소스 파일\CGameObject\Scene02\PLAYER</Filter>
+    </ClCompile>
+    <ClCompile Include="CFadeInOut.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

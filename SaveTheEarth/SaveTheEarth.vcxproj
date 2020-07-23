@@ -152,6 +152,7 @@
     <ClInclude Include="CBossEnemy.h" />
     <ClInclude Include="CBossLaserLauncher.h" />
     <ClInclude Include="CDX2DApp.h" />
+    <ClInclude Include="CFadeInOut.h" />
     <ClInclude Include="CGame.h" />
     <ClInclude Include="CGameManager.h" />
     <ClInclude Include="CGameObject.h" />
@@ -193,6 +194,7 @@
     <ClCompile Include="CBossEnemy.cpp" />
     <ClCompile Include="CBossLaserLauncher.cpp" />
     <ClCompile Include="CDX2DApp.cpp" />
+    <ClCompile Include="CFadeInOut.cpp" />
     <ClCompile Include="CGame.cpp" />
     <ClCompile Include="CGameManager.cpp" />
     <ClCompile Include="CGameObject.cpp" />
