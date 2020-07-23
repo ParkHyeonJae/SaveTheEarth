@@ -29,12 +29,20 @@ CTitleBackground::CTitleBackground(D2D1_POINT_2F m_Pos, INT tag)
 	m_Exit[SELECT] = CGameManager::m_ImageManager->GetImages()->GetSprite("UI/Exit_SELECT");
 	m_Exit[PRESS] = CGameManager::m_ImageManager->GetImages()->GetSprite("UI/Exit_PRESS");
 
-	
+	m_ReturnUI[0] = CGameManager::m_ImageManager->GetImages()->GetSprite("Return/Return_SELECT");
+	m_ReturnUI[1] = CGameManager::m_ImageManager->GetImages()->GetSprite("Return/Return_PRESS");
+
+
 	m_UISelectAnimFunc = new CSpriteAnimation();
 	m_UISelectAnim = CGameManager::m_ImageManager->GetImages()->GetMultiSprite("UISelectAnim");
 
 	m_CreditSprite = CGameManager::m_ImageManager->GetImages()->GetSprite("Credit");
+
+
 	m_CreditCheck = FALSE;
+	m_bReturnUICheck = FALSE;
+	m_returnState = 0;
+
 }
 
 CTitleBackground::~CTitleBackground()
@@ -60,7 +68,6 @@ void CTitleBackground::Init()
 
 	m_UISelectAnimSequence = 0;
 
-	
 	GameStartUIPos = D2D1::Point2F(m_UIPos.x - UIOffset, m_UIPos.y - UIOffset);
 	HowToPlayUIPos = D2D1::Point2F(m_UIPos.x - UIOffset, m_UIPos.y + 100 - UIOffset);
 	CreditUIPos = D2D1::Point2F(m_UIPos.x - UIOffset + 50.0f, m_UIPos.y + 200 - UIOffset);
@@ -174,9 +181,17 @@ void CTitleBackground::Render()
 	else m_Exit[m_uiState[EXIT]]->Draw(ExitUIPos);
 
 	if (m_CreditCheck)
-	{
-		printf("BOOL Check : %d\n", m_CreditCheck);
 		m_CreditSprite->Draw(m_Pos);
+
+	if (m_bReturnUICheck) {
+		Vector2 Pos = D2D1::Point2F(1100.0f, 50.0f);
+		
+		m_UISelectAnim[m_UISelectAnimSequence]->Draw(D2D1::Point2F(Pos.x + 30, Pos.y + 10));
+
+		if (m_UISelectAnimSequence != 3) {
+			m_UISelectAnimSequence = m_UISelectAnimFunc->OnAnimRender(50, 0, 4);
+		}
+		m_ReturnUI[m_returnState]->Draw(Pos);
 	}
 	//CGameManager::m_Gfx->DrawTextOut(L"Press Space Key To Start", D2D1::Point2F(MAX_WIN_WIDTH / 2, 200));
 }
@@ -229,11 +244,14 @@ void CTitleBackground::Control(CInput* Input)
 				m_uiSelected = -1;
 				break;
 			case CREDIT:
-				if (m_CreditCheck)
+				if (m_CreditCheck) {
+					m_bReturnUICheck = FALSE;
 					m_CreditCheck = FALSE;
-				else
+				}
+				else {
 					m_CreditCheck = TRUE;
-
+					m_bReturnUICheck = TRUE;
+				}
 				m_uiSelected = -1;
 				break;
 			case OPTION:
