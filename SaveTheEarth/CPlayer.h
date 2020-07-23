@@ -1,6 +1,7 @@
 #pragma once
 #define PLAYER_ANIM_COUNT 3
 #define PLAYER_HIT_OVERLAY_COUNT 6
+class CFadeInOut;
 class CPlayer : public CGameObject
 {
 private:
@@ -27,11 +28,8 @@ private:
 private:
 	
 	BOOL isHit;
-	INT m_hitEffectCount;
+	CFadeInOut* m_HitFadeInOut;
 	FLOAT overlay;
-	FLOAT tTime = 0.0f;
-	FLOAT dTime;
-	FLOAT HitOverlaySpeed;
 	CTimer* m_playerBulletFireTimer;
 
 private:
