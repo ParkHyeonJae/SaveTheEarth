@@ -152,6 +152,7 @@
     <ClInclude Include="CBossEnemy.h" />
     <ClInclude Include="CBossLaserLauncher.h" />
     <ClInclude Include="CDX2DApp.h" />
+    <ClInclude Include="CFadeInOut.h" />
     <ClInclude Include="CGame.h" />
     <ClInclude Include="CGameManager.h" />
     <ClInclude Include="CGameObject.h" />
@@ -169,7 +170,9 @@
     <ClInclude Include="CNormalEnemyBullet.h" />
     <ClInclude Include="CObjectManager.h" />
     <ClInclude Include="CPlayer.h" />
+    <ClInclude Include="CPlayerBarrierLauncher.h" />
     <ClInclude Include="CPlayerBullet.h" />
+    <ClInclude Include="CPlayerLaserLauncher.h" />
     <ClInclude Include="CSceneObject.h" />
     <ClInclude Include="CScoreManager.h" />
     <ClInclude Include="CScrollBackground.h" />
@@ -191,6 +194,7 @@
     <ClCompile Include="CBossEnemy.cpp" />
     <ClCompile Include="CBossLaserLauncher.cpp" />
     <ClCompile Include="CDX2DApp.cpp" />
+    <ClCompile Include="CFadeInOut.cpp" />
     <ClCompile Include="CGame.cpp" />
     <ClCompile Include="CGameManager.cpp" />
     <ClCompile Include="CGameObject.cpp" />
@@ -207,7 +211,9 @@
     <ClCompile Include="CNormalEnemyBullet.cpp" />
     <ClCompile Include="CObjectManager.cpp" />
     <ClCompile Include="CPlayer.cpp" />
+    <ClCompile Include="CPlayerBarrierLauncher.cpp" />
     <ClCompile Include="CPlayerBullet.cpp" />
+    <ClCompile Include="CPlayerLaserLauncher.cpp" />
     <ClCompile Include="CSceneObject.cpp" />
     <ClCompile Include="CScoreManager.cpp" />
     <ClCompile Include="CScrollBackground.cpp" />

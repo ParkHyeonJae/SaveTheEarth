@@ -19,10 +19,12 @@ public:
 	static 	CImageManager* m_ImageManager;
 	static BOOL isinvincibility;
 	static BOOL EnableInput;
-
+	
 	static PLAYER_ATTR m_PlayerAttribute;
 	static INT m_Level;
 	static FLOAT ApplyScore;
+
+	static BOOL m_bBarrier;
 public:
 	CGameManager(CGraphics * m_Gfx, CInput* m_Input, CObjectManager * m_ObjectManager, CImageManager* m_ImageManager);
 	~CGameManager();

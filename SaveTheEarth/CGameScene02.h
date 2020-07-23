@@ -1,4 +1,5 @@
 #pragma once
+
 class CGameScene02 : public CSceneObject, CObjectManager
 {
 private:

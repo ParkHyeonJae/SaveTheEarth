@@ -1,5 +1,6 @@
 #pragma once
-#define MAXBOSSHP 10000
+#define MAXBOSSHP 100000
+class CFadeInOut;
 class CBossEnemy : public CGameObject
 {
 private:
@@ -26,6 +27,8 @@ private:
 	CBossLaserLauncher* m_LaserLauncher;
 	CBossBulletLauncher* m_BulletLauncher;
 	CTimer* m_SkillTimer;
+private:
+	CFadeInOut* m_WarningFadeInOut;
 public:
 	CBossEnemy(D2D1_POINT_2F m_Pos, INT tag);
 	~CBossEnemy();

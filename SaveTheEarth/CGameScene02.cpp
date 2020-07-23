@@ -1,6 +1,7 @@
 #include "framework.h"
 #include "CScoreManager.h"
 
+
 CGameScene02::CGameScene02()
 {
 }
@@ -29,6 +30,7 @@ void CGameScene02::Init()
 	m_MisileSpawnTimer = new CTimer(1500);
 	m_BossSpawnTimer = new CTimer(4500);
 	m_BalanceTimer = new CTimer(5000);
+
 	m_BossSpawnTimer->LoopCheck(FALSE);
 
 	AddUI(dynamic_cast<CGameObject*>(m_GameUI));
@@ -47,6 +49,7 @@ void CGameScene02::FrameMove(DWORD elapsed)
 
 	if (CGameManager::m_Level == 1) {
 		Score::CScoreManager::ApplyScore(1.0f);		//n점 추가
+
 		if (m_BalanceTimer->OnTimer()) {
 			if (m_EnemySpawnTimer->GetDestTime() - 10 >= 500)
 				m_EnemySpawnTimer->SetTimer(m_EnemySpawnTimer->GetDestTime() - 20);
@@ -64,7 +67,8 @@ void CGameScene02::FrameMove(DWORD elapsed)
 	}
 	else {
 		Score::CScoreManager::ApplyScore(1.0f);		//n점 추가
-		m_Player->SetHp(m_Player->GetHp() - 0.1f);
+
+		//m_Player->SetHp(m_Player->GetHp() - 0.1f);
 		if (m_BossSpawnTimer->OnTimer())
 		{
 			m_BossEnemy = new CBossEnemy(D2D1::Point2F(MAX_WIN_WIDTH, rand() % MAX_WIN_HEIGHT), BOSS);
@@ -78,7 +82,6 @@ void CGameScene02::FrameMove(DWORD elapsed)
 
 void CGameScene02::Render()
 {
-
 	CSceneObject::Render();
 	AllRender();
 }

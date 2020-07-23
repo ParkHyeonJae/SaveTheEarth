@@ -1,4 +1,5 @@
 #include "framework.h"
+#include "CFadeInOut.h"
 
 CPlayer::CPlayer(D2D1_POINT_2F m_Pos, INT tag, FLOAT m_HP) : CGameObject()
 {
@@ -18,6 +19,7 @@ CPlayer::CPlayer(D2D1_POINT_2F m_Pos, INT tag, FLOAT m_HP) : CGameObject()
 	m_ShotgunMotionFunc = new CSpriteAnimation();
 
 	m_playerBulletFireTimer = new CTimer(550);
+	m_HitFadeInOut = new CFadeInOut(PLAYER_HIT_OVERLAY_COUNT, 0.2f);
 	Init();
 }
 
@@ -30,8 +32,6 @@ void CPlayer::Init()
 {
 	isHit = FALSE;
 	overlay = 1.0f;
-	HitOverlaySpeed = 0.2f;
-	m_hitEffectCount = PLAYER_HIT_OVERLAY_COUNT;
 	m_Rot = 0.0f;
 	MoveSpeed = 15.0f;
 	m_playerState = IDLE;
@@ -40,7 +40,6 @@ void CPlayer::Init()
 
 	m_RifleMotionSequence = 0;
 	m_ShotgunMotionSequence = 0;
-	dTime = HitOverlaySpeed;
 
 	IsStart = TRUE;
 }
@@ -54,7 +53,8 @@ void CPlayer::FrameMove(DWORD elapsed)
 			IsStart = FALSE;
 		MoveR();
 	}
-	if (CGameManager::m_PlayerAttribute.m_IncreaseHP != 0 && m_HP <= MAX_PLAYER_HP - CGameManager::m_PlayerAttribute.m_IncreaseHP)
+	if (CGameManager::m_PlayerAttribute.m_IncreaseHP != 0 
+		&& m_HP <= MAX_PLAYER_HP - CGameManager::m_PlayerAttribute.m_IncreaseHP)
 	{
 		m_HP += CGameManager::m_PlayerAttribute.m_IncreaseHP;
 		CGameManager::m_PlayerAttribute.m_IncreaseHP = 0;
@@ -65,9 +65,7 @@ void CPlayer::FrameMove(DWORD elapsed)
 		{
 			if (m_HP < wasPlayerHP)		//HP가 감소했을 때
 			{
-				CGameManager::isinvincibility = TRUE;
-				m_hitEffectCount = PLAYER_HIT_OVERLAY_COUNT;
-				dTime = HitOverlaySpeed;
+				m_HitFadeInOut->Initialize();
 				overlay = 1.0f;
 				isHit = TRUE;
 			}
@@ -76,18 +74,11 @@ void CPlayer::FrameMove(DWORD elapsed)
 	}
 	if (isHit)
 	{
-		if (m_hitEffectCount >= 0)
-		{
-			overlay = Mathf::Lerp(0.0f, 1.0f, tTime);
+		overlay = m_HitFadeInOut->Blinking();
 
-			if (tTime > 1.0f || tTime < 0.0f) {
-				m_hitEffectCount--;
-				dTime *= -1;
-			}
-			tTime += dTime;
-		}
-		else
-		{
+		if (!m_HitFadeInOut->IsFinish())
+			CGameManager::isinvincibility = TRUE;
+		else {
 			isHit = FALSE;
 			CGameManager::isinvincibility = FALSE;
 		}
@@ -163,6 +154,14 @@ void CPlayer::Control(CInput* m_Input)
 					CGameManager::m_ObjectManager->AddObject(dynamic_cast<CGameObject*>(m_PlayerBullet));
 				}
 			}
+		}
+		if (m_Input->KeyDown('B') || m_Input->KeyDown('b')) {
+			m_BarrierLauncher = new CPlayerBarrierLauncher(&m_Pos, BARRIER);
+			OBJECT->AddObject(dynamic_cast<CGameObject*>(m_BarrierLauncher));
+		}
+		if (m_Input->KeyDown('V') || m_Input->KeyDown('v')) {
+			m_LaserLauncher = new CPlayerLaserLauncher(&m_Pos, PLAYERLASER);
+			OBJECT->AddObject(dynamic_cast<CGameObject*>(m_LaserLauncher));
 		}
 	}
 	CGameManager::m_PlayerPos = m_Pos;
