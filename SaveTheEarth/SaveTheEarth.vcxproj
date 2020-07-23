@@ -171,6 +171,7 @@
     <ClInclude Include="CPlayer.h" />
     <ClInclude Include="CPlayerBarrierLauncher.h" />
     <ClInclude Include="CPlayerBullet.h" />
+    <ClInclude Include="CPlayerLaserLauncher.h" />
     <ClInclude Include="CSceneObject.h" />
     <ClInclude Include="CScoreManager.h" />
     <ClInclude Include="CScrollBackground.h" />
@@ -210,6 +211,7 @@
     <ClCompile Include="CPlayer.cpp" />
     <ClCompile Include="CPlayerBarrierLauncher.cpp" />
     <ClCompile Include="CPlayerBullet.cpp" />
+    <ClCompile Include="CPlayerLaserLauncher.cpp" />
     <ClCompile Include="CSceneObject.cpp" />
     <ClCompile Include="CScoreManager.cpp" />
     <ClCompile Include="CScrollBackground.cpp" />

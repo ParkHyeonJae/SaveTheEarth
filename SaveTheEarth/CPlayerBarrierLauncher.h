@@ -4,7 +4,7 @@ class CPlayerBarrierLauncher : public CGameObject, public ILauncher
 private:
 	Animation m_Barrier;
 	CTimer* m_BarrierTimer;
-	D2D1_POINT_2F* m_Pos;
+	Vector2* m_Pos;
 	
 public:
 	CPlayerBarrierLauncher(D2D1_POINT_2F* m_Pos, INT tag);

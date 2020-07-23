@@ -387,6 +387,15 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 				break;
 			}
 		}
+		if ((*iter)->m_tag == PLAYERLASER)	// Enemyiter가 BOSS(보스 몬스터)일 경우
+		{
+			CPlayerLaserLauncher* m_PlayerLaser = dynamic_cast<CPlayerLaserLauncher*>((*iter));
+			if (!m_PlayerLaser->IsRun() && m_PlayerLaser->IsFinish())
+			{
+				m_gameObjectList.erase(iter);		//몬스터 객체 제거
+				break;
+			}
+		}
 		iter++;
 	}
 	for (auto iter = m_uiList.begin(); iter != m_uiList.end();)
