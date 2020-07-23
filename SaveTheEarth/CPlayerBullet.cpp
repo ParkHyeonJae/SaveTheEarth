@@ -43,12 +43,12 @@ void CPlayerBullet::Render()
 		switch (m_GUN)
 		{
 		case Rifle:
-			CGameManager::m_ImageManager->GetImages()->MultiRender("RifleBullet", RifleBulletAnimSequence, m_Pos, D2D1::SizeF(1.5f, 1.5f), NULL, theta);
+			IMAGES->MultiRender("RifleBullet", RifleBulletAnimSequence, m_Pos, D2D1::SizeF(1.5f, 1.5f), NULL, theta);
 			//m_BulletSprites[RifleBulletAnimSequence]->Draw(m_Pos, D2D1::SizeF(1.0f, 1.0f), NULL, theta);
 			RifleBulletAnimSequence = m_RifleBulletAnimFunc->OnAnimRender(100, 0, 3);
 			break;
 		case Shotgun:
-			CGameManager::m_ImageManager->GetImages()->Render("ShotgunBullet", m_Pos, D2D1::SizeF(1.5f, 1.5f), NULL, theta);
+			IMAGES->Render("ShotgunBullet", m_Pos, D2D1::SizeF(1.5f, 1.5f), NULL, theta);
 			break;
 		}
 	}
@@ -57,14 +57,14 @@ void CPlayerBullet::Render()
 		switch (m_GUN)
 		{
 		case Rifle:
-			CGameManager::m_ImageManager->GetImages()
+			IMAGES
 				->MultiRender("RifleEffectAnim", RifleEffectAnimSequence
 					,m_Pos, D2D1::SizeF(1.0f, 1.0f), NULL, theta);
 			RifleEffectAnimSequence = m_RifleEffectAnimFunc->OnAnimRender(50, 0, 8);
 			
 			break;
 		case Shotgun:
-			CGameManager::m_ImageManager->GetImages()
+			IMAGES
 				->MultiRender("ShotgunEffectAnim", ShotgunEffectAnimSequence
 					, m_Pos, D2D1::SizeF(1.0f, 1.0f), NULL, theta);
 			ShotgunEffectAnimSequence = m_ShotgunEffectAnimFunc->OnAnimRender(50, 0, 6);

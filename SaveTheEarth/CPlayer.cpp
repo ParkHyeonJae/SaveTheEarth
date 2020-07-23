@@ -172,19 +172,19 @@ void CPlayer::Render()
 	switch (m_playerState)
 	{
 	case IDLE:
-		CGameManager::m_ImageManager->GetImages()
+		IMAGES
 			->MultiRender("playerIdleMotion", m_PlayerMotionAnimSequence[m_playerState]
 				, D2D1::Point2F(m_Pos.x, m_Pos.y), D2D1::SizeF(1.0f, 1.0f), NULL, 0.0f, overlay);
 		m_PlayerMotionAnimSequence[m_playerState] = m_PlayerMotionAnimFunc[m_playerState]->OnAnimRender(50, 0, 5);
 		break;
 	case BACK:
-		CGameManager::m_ImageManager->GetImages()
+		IMAGES
 			->MultiRender("playerBackMotion", m_PlayerMotionAnimSequence[m_playerState]
 				, D2D1::Point2F(m_Pos.x, m_Pos.y), D2D1::SizeF(1.0f, 1.0f), NULL, 0.0f, overlay);
 		m_PlayerMotionAnimSequence[m_playerState] = m_PlayerMotionAnimFunc[m_playerState]->OnAnimRender(50, 0, 4);
 		break;
 	case FORWARD:
-		CGameManager::m_ImageManager->GetImages()
+		IMAGES
 			->MultiRender("playerForwardMotion", m_PlayerMotionAnimSequence[m_playerState]
 				, D2D1::Point2F(m_Pos.x, m_Pos.y), D2D1::SizeF(1.0f, 1.0f), NULL, 0.0f, overlay);
 		m_PlayerMotionAnimSequence[m_playerState] = m_PlayerMotionAnimFunc[m_playerState]->OnAnimRender(50, 0, 4);
@@ -194,7 +194,7 @@ void CPlayer::Render()
 	switch (m_GunState)
 	{
 	case DEFAULT:
-		CGameManager::m_ImageManager->GetImages()
+		IMAGES
 			->Render("DefaultGun", D2D1::Point2F(m_Pos.x + 30, m_Pos.y + 20), D2D1::SizeF(1.0f, 1.0f), NULL, m_Rot, overlay);
 		break;
 	case Rifle:
@@ -202,7 +202,7 @@ void CPlayer::Render()
 			m_RifleImageSize = CGameManager::m_ImageManager->GetMultiImageSize("RifleMotion" , m_RifleMotionSequence);
 			D2D1_POINT_2F center = { (m_Pos.x + m_RifleImageSize.width / 2)
 				, (m_Pos.y + m_RifleImageSize.height / 2) };
-			CGameManager::m_ImageManager->GetImages()
+			IMAGES
 				->MultiRender("RifleMotion", m_RifleMotionSequence, D2D1::Point2F(m_Pos.x, m_Pos.y), D2D1::SizeF(1.0f, 1.0f), &center, m_Rot, overlay);
 			m_RifleMotionSequence = m_RifleMotionFunc->OnAnimRender(50, 0, 5);
 		}
@@ -215,7 +215,7 @@ void CPlayer::Render()
 		break;
 	case Shotgun:
 		if (!m_ShotgunMotionFunc->IsEndFrame()) {
-			CGameManager::m_ImageManager->GetImages()
+			IMAGES
 				->MultiRender("ShotgunMotion", m_ShotgunMotionSequence, D2D1::Point2F(m_Pos.x, m_Pos.y - 5), D2D1::SizeF(1.0f, 1.0f), NULL, m_Rot, overlay);
 			m_ShotgunMotionSequence = m_ShotgunMotionFunc->OnAnimRender(50, 0, 5);
 		}
