@@ -14,7 +14,7 @@ CBossBullet::~CBossBullet()
 
 void CBossBullet::Init()
 {
-	m_BulletDamage = 20.0f;
+	m_BulletDamage = 200.0f;
 	m_Bullet.AnimFunc = new CSpriteAnimation();
 	m_Bullet.sequence = 0;
 

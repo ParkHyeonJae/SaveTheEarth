@@ -15,6 +15,7 @@ BOOL CGameManager::EnableInput = TRUE;
 PLAYER_ATTR CGameManager::m_PlayerAttribute = { 1.0f, 0.0f, 0.0f };
 INT CGameManager::m_Level = 1;
 FLOAT CGameManager::ApplyScore = 25.0f;
+BOOL CGameManager::m_bBarrier = FALSE;
 
 CGameManager::CGameManager(CGraphics* m_Gfx, CInput* m_Input, CObjectManager* m_ObjectManager, CImageManager* m_ImageManager)
 {
@@ -39,6 +40,8 @@ void CGameManager::Init()
 	CGameManager::EnableInput = TRUE;
 	CGameManager::m_PlayerAttribute = { 1.0f, 0.0f, 0.0f };
 	CGameManager::m_Level = 1;
+
+	CGameManager::m_bBarrier = FALSE;
 }
 
 void CGameManager::FrameMove(DWORD elapsed)

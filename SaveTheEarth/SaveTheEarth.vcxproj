@@ -169,6 +169,7 @@
     <ClInclude Include="CNormalEnemyBullet.h" />
     <ClInclude Include="CObjectManager.h" />
     <ClInclude Include="CPlayer.h" />
+    <ClInclude Include="CPlayerBarrierLauncher.h" />
     <ClInclude Include="CPlayerBullet.h" />
     <ClInclude Include="CSceneObject.h" />
     <ClInclude Include="CScoreManager.h" />
@@ -207,6 +208,7 @@
     <ClCompile Include="CNormalEnemyBullet.cpp" />
     <ClCompile Include="CObjectManager.cpp" />
     <ClCompile Include="CPlayer.cpp" />
+    <ClCompile Include="CPlayerBarrierLauncher.cpp" />
     <ClCompile Include="CPlayerBullet.cpp" />
     <ClCompile Include="CSceneObject.cpp" />
     <ClCompile Include="CScoreManager.cpp" />

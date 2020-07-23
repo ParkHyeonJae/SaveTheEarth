@@ -55,6 +55,12 @@
     <Filter Include="헤더 파일\Main">
       <UniqueIdentifier>{1dab368d-ded9-4f29-b2eb-459eb6b49459}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\CGameObject\Scene02\PLAYER">
+      <UniqueIdentifier>{81f24f07-3830-4ce5-8330-db48eb55d0f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\CGameObject\Scene02\PLAYER">
+      <UniqueIdentifier>{df03fbfc-91a3-4410-aee2-8e046d1f902a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CSceneObject.h">
@@ -76,12 +82,6 @@
       <Filter>헤더 파일\CGameObject\Scene02</Filter>
     </ClInclude>
     <ClInclude Include="CNormalEnemyBullet.h">
-      <Filter>헤더 파일\CGameObject\Scene02</Filter>
-    </ClInclude>
-    <ClInclude Include="CPlayer.h">
-      <Filter>헤더 파일\CGameObject\Scene02</Filter>
-    </ClInclude>
-    <ClInclude Include="CPlayerBullet.h">
       <Filter>헤더 파일\CGameObject\Scene02</Filter>
     </ClInclude>
     <ClInclude Include="CScrollBackground.h">
@@ -168,6 +168,15 @@
     <ClInclude Include="CBossBullet.h">
       <Filter>헤더 파일\CGameObject\Scene02\BOSS</Filter>
     </ClInclude>
+    <ClInclude Include="CPlayer.h">
+      <Filter>헤더 파일\CGameObject\Scene02\PLAYER</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlayerBullet.h">
+      <Filter>헤더 파일\CGameObject\Scene02\PLAYER</Filter>
+    </ClInclude>
+    <ClInclude Include="CPlayerBarrierLauncher.h">
+      <Filter>헤더 파일\CGameObject\Scene02\PLAYER</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CSceneObject.cpp">
@@ -186,12 +195,6 @@
       <Filter>소스 파일\CGameObject\Scene02</Filter>
     </ClCompile>
     <ClCompile Include="CNormalEnemyBullet.cpp">
-      <Filter>소스 파일\CGameObject\Scene02</Filter>
-    </ClCompile>
-    <ClCompile Include="CPlayer.cpp">
-      <Filter>소스 파일\CGameObject\Scene02</Filter>
-    </ClCompile>
-    <ClCompile Include="CPlayerBullet.cpp">
       <Filter>소스 파일\CGameObject\Scene02</Filter>
     </ClCompile>
     <ClCompile Include="CScrollBackground.cpp">
@@ -265,6 +268,15 @@
     </ClCompile>
     <ClCompile Include="CBossBullet.cpp">
       <Filter>소스 파일\CGameObject\Scene02\BOSS</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayer.cpp">
+      <Filter>소스 파일\CGameObject\Scene02\PLAYER</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayerBullet.cpp">
+      <Filter>소스 파일\CGameObject\Scene02\PLAYER</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayerBarrierLauncher.cpp">
+      <Filter>소스 파일\CGameObject\Scene02\PLAYER</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

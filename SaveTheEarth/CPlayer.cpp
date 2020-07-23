@@ -43,6 +43,7 @@ void CPlayer::Init()
 	dTime = HitOverlaySpeed;
 
 	IsStart = TRUE;
+	m_BarrierLauncher = new CPlayerBarrierLauncher(&m_Pos, BARRIER);
 }
 
 
@@ -163,6 +164,10 @@ void CPlayer::Control(CInput* m_Input)
 					CGameManager::m_ObjectManager->AddObject(dynamic_cast<CGameObject*>(m_PlayerBullet));
 				}
 			}
+		}
+		if (m_Input->KeyDown('B') || m_Input->KeyDown('b')) {
+			m_BarrierLauncher = new CPlayerBarrierLauncher(&m_Pos, BARRIER);
+			OBJECT->AddObject(dynamic_cast<CGameObject*>(m_BarrierLauncher));
 		}
 	}
 	CGameManager::m_PlayerPos = m_Pos;

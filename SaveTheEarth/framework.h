@@ -59,6 +59,7 @@ enum OpacityBrush
 enum TAG {
 	PLAYER,
 	PBULLET,
+	BARRIER,
 	ENEMY,
 	EBULLET,
 	BACKGROUND,
@@ -120,12 +121,12 @@ typedef enum class LaserLauncherState {
 #include "CBossBulletLauncher.h"
 #include "CBossEnemy.h"
 #include "MisileEnemy.h"
+#include "CPlayerBarrierLauncher.h"
 #include "CPlayerBullet.h"
 #include "CPlayer.h"
 #include "CScrollBackground.h"
 #include "CTitleBackground.h"
 #include "CInGameUI.h"
-
 #include "CObjectManager.h"
 #include "CSceneObject.h"
 #include "CGameScene01.h"
