@@ -17,7 +17,7 @@ void CNormalEnemyBullet::Init()
 
 void CNormalEnemyBullet::Render()
 {
-	CGameManager::m_ImageManager->GetImages()->Render("NormalEnemyBullet", m_Pos, 1.0f);
+	//CGameManager::m_ImageManager->GetImages()->Render("NormalEnemyBullet", m_Pos, 1.0f);
 }
 
 void CNormalEnemyBullet::FrameMove(DWORD elapsed)
