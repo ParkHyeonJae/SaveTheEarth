@@ -4,9 +4,10 @@ struct PLAYER_ATTR {
 	FLOAT m_IncreaseHP;
 	FLOAT m_RPM;
 };
-class CGameManager
+class CGameManager : singleton<CGameManager>
 {
 public:
+	INT DDTEst;
 	static CGraphics* m_Gfx;
 	static  CInput* m_Input;
 	static CObjectManager* m_ObjectManager;

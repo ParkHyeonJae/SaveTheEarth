@@ -103,6 +103,7 @@ typedef enum class LaserLauncherState {
 	LaserOff
 }LAUNCHER_STATE;
 
+#include "singleton.h"
 #include "CInput.h"
 #include "CGraphics.h"
 #include "CSprite.h"
