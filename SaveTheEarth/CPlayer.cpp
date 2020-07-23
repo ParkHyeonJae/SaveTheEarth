@@ -67,7 +67,6 @@ void CPlayer::FrameMove(DWORD elapsed)
 		{
 			if (m_HP < wasPlayerHP)		//HP가 감소했을 때
 			{
-				CGameManager::isinvincibility = TRUE;
 				m_hitEffectCount = PLAYER_HIT_OVERLAY_COUNT;
 				dTime = HitOverlaySpeed;
 				overlay = 1.0f;
@@ -80,6 +79,7 @@ void CPlayer::FrameMove(DWORD elapsed)
 	{
 		if (m_hitEffectCount >= 0)
 		{
+			CGameManager::isinvincibility = TRUE;
 			overlay = Mathf::Lerp(0.0f, 1.0f, tTime);
 
 			if (tTime > 1.0f || tTime < 0.0f) {

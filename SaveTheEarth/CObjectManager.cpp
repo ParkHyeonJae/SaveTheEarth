@@ -223,8 +223,8 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 					if (IntersectRect(&temp, &BossBulletColl, &rPlayerColl))		//총알이 보스하고 닿았을때
 					{
 						m_cBossBullet->SetColl(TRUE);
-						m_cPlayer->SetPos(D2D1::Point2F(m_cPlayer->GetPos().x - 5.0f, m_cPlayer->GetPos().y));		//넉백
 						m_cPlayer->GetDamage(m_cBossBullet->GetDamage());		//데미지
+						m_cPlayer->SetPos(D2D1::Point2F(m_cPlayer->GetPos().x - 5.0f, m_cPlayer->GetPos().y));		//넉백
 						break;
 					}
 
@@ -250,7 +250,78 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 				break;
 			}
 		}
+		if ((*iter)->m_tag == PLAYERLASER)
+		{
+			CPlayerLaserLauncher* m_cPlayerLaser = dynamic_cast<CPlayerLaserLauncher*>((*iter));
+			for (auto Enemyiter = m_gameObjectList.begin(); Enemyiter != m_gameObjectList.end();)
+			{
+				if ((*Enemyiter)->m_tag == ENEMY)		// Enemyiter가 ENEMY(일반 몬스터)일 경우
+				{
+					CNormalEnemy* m_cNormalEnemy = dynamic_cast<CNormalEnemy*>((*Enemyiter));
+					float CollRange = 40.0f;
+					RECT EnemyColl = {
+					(LONG)((*Enemyiter)->GetPos().x - CollRange),
+					(LONG)((*Enemyiter)->GetPos().y - CollRange),
+					(LONG)((*Enemyiter)->GetPos().x + CollRange),
+					(LONG)((*Enemyiter)->GetPos().y + CollRange),
+					};
 
+					RECT temp;
+					if (IntersectRect(&temp, &m_cPlayerLaser->GetCollider(), &EnemyColl))		//플레이어 총알이 몬스터를 맞췄을 때
+					{
+						if (m_cNormalEnemy->GetHp() > 0) {		//몬스터가 죽지 않았을 때
+							m_cNormalEnemy->SetHp(
+								m_cNormalEnemy->GetHp()
+								- m_cPlayerLaser->GetDamage());	//체력적용(몬스터의 현재HP - 플레이어 총알 데미지)
+							break;
+						}
+						else
+						{
+							m_cNormalEnemy->SetDead(TRUE);		//몬스터 죽음
+							break;
+						}
+						break;
+					}
+
+				}
+				if ((*Enemyiter)->m_tag == BOSS)	// Enemyiter가 BOSS(보스 몬스터)일 경우
+				{
+					CBossEnemy* m_cBossEnemy = dynamic_cast<CBossEnemy*>((*Enemyiter));
+					RECT EnemyColl = {
+					(LONG)((*Enemyiter)->GetPos().x + 0.0f),
+					(LONG)((*Enemyiter)->GetPos().y + 0.0f),
+					(LONG)((*Enemyiter)->GetPos().x + 200.0f),
+					(LONG)((*Enemyiter)->GetPos().y + 300.0f),
+					};
+
+					RECT temp;
+					if (IntersectRect(&temp, &m_cPlayerLaser->GetCollider(), &EnemyColl))		//총알이 보스하고 닿았을때
+					{
+						if (m_cBossEnemy->GetHp() >= 0) {
+							m_cBossEnemy->SetHp(
+								m_cBossEnemy->GetHp()
+								- m_cPlayerLaser->GetDamage());
+
+
+							if (m_cBossEnemy->IsHit()) {
+								break;
+							}
+							m_cBossEnemy->SetHit(TRUE);
+							break;
+						}
+						else
+						{
+							m_cBossEnemy->SetDead(TRUE);
+							break;
+						}
+						break;
+					}
+
+				}
+				
+				Enemyiter++;
+			}
+		}
 		if ((*iter)->m_tag == PBULLET)
 		{
 			CPlayerBullet* m_cPlayerBullet = dynamic_cast<CPlayerBullet*>((*iter));
