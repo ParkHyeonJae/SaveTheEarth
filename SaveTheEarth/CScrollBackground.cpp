@@ -61,29 +61,29 @@ void CScrollBackground::Render()
 {
 	switch (CGameManager::m_Level) {
 	case 1:
-		CGameManager::m_ImageManager->GetImages()->Render("Stage01/SKY", D2D1::Point2F(0, 0), D2D1::SizeF(1.0f, 1.0f), NULL, 0.0f);
+		IMAGES->Render("Stage01/SKY", D2D1::Point2F(0, 0), D2D1::SizeF(1.0f, 1.0f), NULL, 0.0f);
 		//CGameManager::m_ImageManager->GetImages()->Render("Stage01/SKY", D2D1::Point2F(m_Pos02.x, m_Pos.y), D2D1::SizeF(1.0f, 1.0f), NULL, 0.0f);
 
-		CGameManager::m_ImageManager->GetImages()->Render("Stage01/CLOUD", D2D1::Point2F(m_CloudPos[0].x, 450), D2D1::SizeF(1.0f, 1.0f), NULL, 0.0f);
-		CGameManager::m_ImageManager->GetImages()->Render("Stage01/CLOUD", D2D1::Point2F(m_CloudPos[1].x, 450), D2D1::SizeF(1.0f, 1.0f), NULL, 0.0f);
+		IMAGES->Render("Stage01/CLOUD", D2D1::Point2F(m_CloudPos[0].x, 450), D2D1::SizeF(1.0f, 1.0f), NULL, 0.0f);
+		IMAGES->Render("Stage01/CLOUD", D2D1::Point2F(m_CloudPos[1].x, 450), D2D1::SizeF(1.0f, 1.0f), NULL, 0.0f);
 
-		CGameManager::m_ImageManager->GetImages()->Render("Stage01/MOUNTAIN", D2D1::Point2F(m_MountainPos[0].x, 550), D2D1::SizeF(1.0f, 1.0f), NULL, 0.0f);
-		CGameManager::m_ImageManager->GetImages()->Render("Stage01/MOUNTAIN", D2D1::Point2F(m_MountainPos[1].x, 550), D2D1::SizeF(1.0f, 1.0f), NULL, 0.0f);
+		IMAGES->Render("Stage01/MOUNTAIN", D2D1::Point2F(m_MountainPos[0].x, 550), D2D1::SizeF(1.0f, 1.0f), NULL, 0.0f);
+		IMAGES->Render("Stage01/MOUNTAIN", D2D1::Point2F(m_MountainPos[1].x, 550), D2D1::SizeF(1.0f, 1.0f), NULL, 0.0f);
 
-		CGameManager::m_ImageManager->GetImages()->Render("Stage01/SUN", D2D1::Point2F(1200, 150), D2D1::SizeF(1.0f, 1.0f), NULL, 0.0f);
+		IMAGES->Render("Stage01/SUN", D2D1::Point2F(1200, 150), D2D1::SizeF(1.0f, 1.0f), NULL, 0.0f);
 
-		CGameManager::m_ImageManager->GetImages()->Render("Stage01/TREES", D2D1::Point2F(m_Pos.x, 700), D2D1::SizeF(1.0f, 1.0f), NULL, 0.0f);
-		CGameManager::m_ImageManager->GetImages()->Render("Stage01/TREES", D2D1::Point2F(m_Pos02.x, 700), D2D1::SizeF(1.0f, 1.0f), NULL, 0.0f);
+		IMAGES->Render("Stage01/TREES", D2D1::Point2F(m_Pos.x, 700), D2D1::SizeF(1.0f, 1.0f), NULL, 0.0f);
+		IMAGES->Render("Stage01/TREES", D2D1::Point2F(m_Pos02.x, 700), D2D1::SizeF(1.0f, 1.0f), NULL, 0.0f);
 		break;
 	case 2:
-		CGameManager::m_ImageManager->GetImages()->Render("Stage02/SKY", D2D1::Point2F(0, 0), D2D1::SizeF(1.0f, 1.0f), NULL, 0.0f);
+		IMAGES->Render("Stage02/SKY", D2D1::Point2F(0, 0), D2D1::SizeF(1.0f, 1.0f), NULL, 0.0f);
 		//CGameManager::m_ImageManager->GetImages()->Render("Stage02/SKY", D2D1::Point2F(m_Pos02.x, m_Pos.y), D2D1::SizeF(1.0f, 1.0f), NULL, 0.0f);
 
-		CGameManager::m_ImageManager->GetImages()->Render("Stage02/MOUNTAIN", D2D1::Point2F(m_MountainPos[0].x, 550), D2D1::SizeF(1.0f, 1.0f), NULL, 0.0f);
-		CGameManager::m_ImageManager->GetImages()->Render("Stage02/MOUNTAIN", D2D1::Point2F(m_MountainPos[1].x, 550), D2D1::SizeF(1.0f, 1.0f), NULL, 0.0f);
+		IMAGES->Render("Stage02/MOUNTAIN", D2D1::Point2F(m_MountainPos[0].x, 550), D2D1::SizeF(1.0f, 1.0f), NULL, 0.0f);
+		IMAGES->Render("Stage02/MOUNTAIN", D2D1::Point2F(m_MountainPos[1].x, 550), D2D1::SizeF(1.0f, 1.0f), NULL, 0.0f);
 
-		CGameManager::m_ImageManager->GetImages()->Render("Stage02/TREES", D2D1::Point2F(m_Pos.x, 700), D2D1::SizeF(1.0f, 1.0f), NULL, 0.0f);
-		CGameManager::m_ImageManager->GetImages()->Render("Stage02/TREES", D2D1::Point2F(m_Pos02.x, 700), D2D1::SizeF(1.0f, 1.0f), NULL, 0.0f);
+		IMAGES->Render("Stage02/TREES", D2D1::Point2F(m_Pos.x, 700), D2D1::SizeF(1.0f, 1.0f), NULL, 0.0f);
+		IMAGES->Render("Stage02/TREES", D2D1::Point2F(m_Pos02.x, 700), D2D1::SizeF(1.0f, 1.0f), NULL, 0.0f);
 		break;
 	}
 

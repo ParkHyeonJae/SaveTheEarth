@@ -140,7 +140,6 @@ typedef enum class LaserLauncherState {
 #include "Mathf.h"
 
 
-
 #ifdef _DEBUG
 
 #ifdef UNICODE

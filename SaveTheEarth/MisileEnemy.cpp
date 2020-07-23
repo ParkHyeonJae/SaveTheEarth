@@ -22,11 +22,11 @@ void MisileEnemy::Init()
 
 void MisileEnemy::Render()
 {
-	CGameManager::m_ImageManager->GetImages()
+	IMAGES
 		->Render("warning", m_Pos, overlay);
 
 	if (m_SpawnCheck) {
-		CGameManager::m_ImageManager->GetImages()
+		IMAGES
 			->Render("Misile", D2D1::Point2F(m_Pos.x, m_Pos.y + 40.0f), 1.0f);
 	}
 }
