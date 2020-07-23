@@ -301,5 +301,8 @@ INT CImageManager::ImageInit()
 	m_PlayerLaserAnim.push_back(new CSprite(L"../Images/Sprites/11 Player Skill/LASERBEAM/Laser Fire/6.png", CGameManager::m_Gfx));
 	m_PlayerLaserAnim.push_back(new CSprite(L"../Images/Sprites/11 Player Skill/LASERBEAM/Laser Fire/7.png", CGameManager::m_Gfx));
 	m_Images->AddMultiImage("PlayerLaserAnim", m_PlayerLaserAnim);
+
+	// Warning Text
+	m_Images->AddImage("WarningText", new CSprite(L"../Images/Sprites/04 Boss/warningText.png", CGameManager::m_Gfx));
 	return 0;
 }
