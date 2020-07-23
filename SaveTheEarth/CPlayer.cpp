@@ -140,7 +140,7 @@ void CPlayer::Control(CInput* m_Input)
 			{
 				m_GunState = Rifle;
 				m_PlayerBullet = new CPlayerBullet(D2D1::Point2F(CGameManager::m_PlayerPos.x, CGameManager::m_PlayerPos.y + 15.0f), m_Rot, PBULLET, m_GunState);
-				CGameManager::m_ObjectManager->AddObject(dynamic_cast<CGameObject*>(m_PlayerBullet));
+				OBJECT->AddObject(dynamic_cast<CGameObject*>(m_PlayerBullet));
 			}
 		}
 		if (m_Input->BtnDown(VK_RBUTTON))
@@ -151,7 +151,7 @@ void CPlayer::Control(CInput* m_Input)
 				for (int i = m_Rot - 10; i < m_Rot + 10; i += 5)
 				{
 					m_PlayerBullet = new CPlayerBullet(D2D1::Point2F(CGameManager::m_PlayerPos.x, CGameManager::m_PlayerPos.y + 30.0f), i, PBULLET, m_GunState);
-					CGameManager::m_ObjectManager->AddObject(dynamic_cast<CGameObject*>(m_PlayerBullet));
+					OBJECT->AddObject(dynamic_cast<CGameObject*>(m_PlayerBullet));
 				}
 			}
 		}
