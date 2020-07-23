@@ -5,7 +5,7 @@ class CGameObject : public IGameObject
 protected:
 	D2D1_POINT_2F m_Pos;
 	CSprite* m_Sprite;
-
+	RECT m_Collider;
 public:
 	struct Animation {
 		CSpriteAnimation* AnimFunc;
@@ -28,5 +28,9 @@ public:
 	CSprite* GetSprite() { return m_Sprite; }
 
 	void SetPos(Vector2 m_Pos) { this->m_Pos = m_Pos; }
+
+	RECT GetCollider() { return m_Collider; }
+	VOID SetCollider(RECT r) { m_Collider = r; }
+	VOID SetCollider(LONG left, LONG top, LONG right, LONG bottom) { m_Collider = {left,top,right,bottom}; }
 };
 

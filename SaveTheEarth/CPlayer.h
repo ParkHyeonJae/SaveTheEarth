@@ -33,6 +33,9 @@ private:
 	FLOAT dTime;
 	FLOAT HitOverlaySpeed;
 	CTimer* m_playerBulletFireTimer;
+
+private:
+	CPlayerBarrierLauncher* m_BarrierLauncher;
 public:
 	CPlayer(D2D1_POINT_2F m_Pos, INT tag, FLOAT m_HP);
 	~CPlayer();

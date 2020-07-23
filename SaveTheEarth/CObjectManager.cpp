@@ -223,12 +223,8 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 					if (IntersectRect(&temp, &BossBulletColl, &rPlayerColl))		//총알이 보스하고 닿았을때
 					{
 						m_cBossBullet->SetColl(TRUE);
-						if (m_cPlayer->GetHp() >= 0) {
-							m_cPlayer->SetHp(
-								m_cPlayer->GetHp()
-								- m_cBossBullet->GetDamage());
-							break;
-						}
+						m_cPlayer->SetPos(D2D1::Point2F(m_cPlayer->GetPos().x - 5.0f, m_cPlayer->GetPos().y));		//넉백
+						m_cPlayer->GetDamage(m_cBossBullet->GetDamage());		//데미지
 						break;
 					}
 
@@ -382,7 +378,15 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 				break;
 			}
 		}
-		
+		if ((*iter)->m_tag == BARRIER)	// Enemyiter가 BOSS(보스 몬스터)일 경우
+		{
+			CPlayerBarrierLauncher * m_Barrier = dynamic_cast<CPlayerBarrierLauncher*>((*iter));
+			if (!m_Barrier->IsRun() && m_Barrier->IsFinish())
+			{
+				m_gameObjectList.erase(iter);		//몬스터 객체 제거
+				break;
+			}
+		}
 		iter++;
 	}
 	for (auto iter = m_uiList.begin(); iter != m_uiList.end();)
