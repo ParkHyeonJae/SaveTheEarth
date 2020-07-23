@@ -64,7 +64,7 @@ void CGameScene02::FrameMove(DWORD elapsed)
 	}
 	else {
 		Score::CScoreManager::ApplyScore(1.0f);		//nÁ¡ Ãß°¡
-		m_Player->SetHp(m_Player->GetHp() - 0.1f);
+		//m_Player->SetHp(m_Player->GetHp() - 0.1f);
 		if (m_BossSpawnTimer->OnTimer())
 		{
 			m_BossEnemy = new CBossEnemy(D2D1::Point2F(MAX_WIN_WIDTH, rand() % MAX_WIN_HEIGHT), BOSS);

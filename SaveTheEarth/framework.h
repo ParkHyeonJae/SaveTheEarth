@@ -60,6 +60,7 @@ enum TAG {
 	PLAYER,
 	PBULLET,
 	BARRIER,
+	PLAYERLASER,
 	ENEMY,
 	EBULLET,
 	BACKGROUND,
@@ -122,6 +123,7 @@ typedef enum class LaserLauncherState {
 #include "CBossEnemy.h"
 #include "MisileEnemy.h"
 #include "CPlayerBarrierLauncher.h"
+#include "CPlayerLaserLauncher.h"
 #include "CPlayerBullet.h"
 #include "CPlayer.h"
 #include "CScrollBackground.h"

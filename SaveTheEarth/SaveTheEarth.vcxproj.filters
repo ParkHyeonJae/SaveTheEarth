@@ -177,6 +177,9 @@
     <ClInclude Include="CPlayerBarrierLauncher.h">
       <Filter>헤더 파일\CGameObject\Scene02\PLAYER</Filter>
     </ClInclude>
+    <ClInclude Include="CPlayerLaserLauncher.h">
+      <Filter>헤더 파일\CGameObject\Scene02\PLAYER</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CSceneObject.cpp">
@@ -276,6 +279,9 @@
       <Filter>소스 파일\CGameObject\Scene02\PLAYER</Filter>
     </ClCompile>
     <ClCompile Include="CPlayerBarrierLauncher.cpp">
+      <Filter>소스 파일\CGameObject\Scene02\PLAYER</Filter>
+    </ClCompile>
+    <ClCompile Include="CPlayerLaserLauncher.cpp">
       <Filter>소스 파일\CGameObject\Scene02\PLAYER</Filter>
     </ClCompile>
   </ItemGroup>

@@ -1,5 +1,5 @@
 #pragma once
-#define MAXBOSSHP 10000
+#define MAXBOSSHP 100000
 class CBossEnemy : public CGameObject
 {
 private:

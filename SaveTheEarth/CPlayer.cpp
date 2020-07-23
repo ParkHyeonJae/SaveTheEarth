@@ -43,7 +43,8 @@ void CPlayer::Init()
 	dTime = HitOverlaySpeed;
 
 	IsStart = TRUE;
-	m_BarrierLauncher = new CPlayerBarrierLauncher(&m_Pos, BARRIER);
+	//m_BarrierLauncher = new CPlayerBarrierLauncher(&m_Pos, BARRIER);
+	//m_LaserLauncher = new CPlayerLaserLauncher(&m_Pos, PLAYERLASER);
 }
 
 
@@ -66,7 +67,6 @@ void CPlayer::FrameMove(DWORD elapsed)
 		{
 			if (m_HP < wasPlayerHP)		//HP가 감소했을 때
 			{
-				CGameManager::isinvincibility = TRUE;
 				m_hitEffectCount = PLAYER_HIT_OVERLAY_COUNT;
 				dTime = HitOverlaySpeed;
 				overlay = 1.0f;
@@ -79,6 +79,7 @@ void CPlayer::FrameMove(DWORD elapsed)
 	{
 		if (m_hitEffectCount >= 0)
 		{
+			CGameManager::isinvincibility = TRUE;
 			overlay = Mathf::Lerp(0.0f, 1.0f, tTime);
 
 			if (tTime > 1.0f || tTime < 0.0f) {
@@ -168,6 +169,10 @@ void CPlayer::Control(CInput* m_Input)
 		if (m_Input->KeyDown('B') || m_Input->KeyDown('b')) {
 			m_BarrierLauncher = new CPlayerBarrierLauncher(&m_Pos, BARRIER);
 			OBJECT->AddObject(dynamic_cast<CGameObject*>(m_BarrierLauncher));
+		}
+		if (m_Input->KeyDown('V') || m_Input->KeyDown('v')) {
+			m_LaserLauncher = new CPlayerLaserLauncher(&m_Pos, PLAYERLASER);
+			OBJECT->AddObject(dynamic_cast<CGameObject*>(m_LaserLauncher));
 		}
 	}
 	CGameManager::m_PlayerPos = m_Pos;
