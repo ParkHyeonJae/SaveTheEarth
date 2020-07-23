@@ -304,5 +304,9 @@ INT CImageManager::ImageInit()
 
 	// Warning Text
 	m_Images->AddImage("WarningText", new CSprite(L"../Images/Sprites/04 Boss/warningText.png", CGameManager::m_Gfx));
+
+	m_Images->AddImage("Return/Return_PRESS", new CSprite(L"../Images/Title/CreditImageUI/Return_PRESS.png", CGameManager::m_Gfx));
+	m_Images->AddImage("Return/Return_SELECT", new CSprite(L"../Images/Title/CreditImageUI/Return_SELECT.png", CGameManager::m_Gfx));
+
 	return 0;
 }

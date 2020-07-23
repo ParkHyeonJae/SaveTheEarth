@@ -38,6 +38,10 @@ private:
 	CSprite* m_Option[3];
 	CSprite* m_Exit[3];
 
+	INT m_returnState;
+	BOOL m_bReturnUICheck;
+	CSprite* m_ReturnUI[2];
+
 	INT m_uiSequence;
 	INT wasSequence;
 	INT m_uiState[5];
