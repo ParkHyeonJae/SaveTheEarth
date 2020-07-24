@@ -1,4 +1,7 @@
 #pragma once
+/*
+타이머 클래스
+*/
 class CTimer
 {
 private:

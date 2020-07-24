@@ -1,4 +1,7 @@
 #pragma once
+/*
+수학관련 클래스
+*/
 class Mathf
 {
 public:

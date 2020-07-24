@@ -33,6 +33,12 @@ void MisileEnemy::Render()
 
 void MisileEnemy::FrameMove(DWORD elapsed)
 {
+	SetCollider(
+		(LONG)(m_Pos.x - 20.0f),
+		(LONG)(m_Pos.y - 15.0f),
+		(LONG)(m_Pos.x + 20.0f),
+		(LONG)(m_Pos.y + 20.0f)
+	);
 	if (m_warningCount > 0)
 	{
 		overlay = Mathf::Lerp(0.0f, 1.0f, tTime);

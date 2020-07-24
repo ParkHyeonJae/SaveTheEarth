@@ -70,7 +70,8 @@ void CPlayerBullet::Render()
 			ShotgunEffectAnimSequence = m_ShotgunEffectAnimFunc->OnAnimRender(50, 0, 6);
 			break;
 		}
-		if (m_RifleEffectAnimFunc->IsEndFrame() || m_ShotgunEffectAnimFunc->IsEndFrame()) {
+		if (m_RifleEffectAnimFunc->IsEndFrame() || m_ShotgunEffectAnimFunc->IsEndFrame())
+		{
 			m_isDelete = TRUE;
 			m_RifleEffectAnimFunc->InitSequence();
 			m_ShotgunEffectAnimFunc->InitSequence();
@@ -80,6 +81,12 @@ void CPlayerBullet::Render()
 
 void CPlayerBullet::FrameMove(DWORD elapsed)
 {
+	SetCollider(
+		(LONG)(m_Pos.x - 20.0f),
+		(LONG)(m_Pos.y - 5.0f),
+		(LONG)(m_Pos.x + 20.0f),
+		(LONG)(m_Pos.y + 5.0f)
+	);
 	if (!CollCheck) {
 		switch (m_GUN)
 		{

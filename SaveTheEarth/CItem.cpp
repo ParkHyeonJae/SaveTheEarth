@@ -53,6 +53,13 @@ void CItem::Render()
 
 void CItem::FrameMove(DWORD elapsed)
 {
+	SetCollider(
+		(LONG)(m_Pos.x),
+		(LONG)(m_Pos.y),
+		(LONG)(m_Pos.x + GetSize().width),
+		(LONG)(m_Pos.y + GetSize().height)
+	);
+
 	m_Pos.x += cosf(MoveAngle * Mathf::Radian);
 	m_Pos.y += sinf(MoveAngle * Mathf::Radian);
 

@@ -1,4 +1,7 @@
 #pragma once
+/*
+HP 바를 관리하기 위한 클래스
+*/
 class CHealthBar
 {
 private:
