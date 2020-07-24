@@ -46,7 +46,12 @@ void CBossBullet::Render()
 
 void CBossBullet::FrameMove(DWORD elapsed)
 {
-
+	SetCollider(
+		(LONG)(m_Pos.x - 15.0f),
+		(LONG)(m_Pos.y - 15.0f),
+		(LONG)(m_Pos.x + 15.0f),
+		(LONG)(m_Pos.y + 15.0f)
+	);
 	 m_Pos.y += sinf(theta) * BulletSpeed;
 	 m_Pos.x -= BulletSpeed;
 }

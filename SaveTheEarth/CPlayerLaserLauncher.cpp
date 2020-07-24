@@ -55,6 +55,7 @@ void CPlayerLaserLauncher::LauncherUpdate(DWORD elapsed)
 	);
 }
 
+
 void CPlayerLaserLauncher::LauncherRender()
 {
 	if (!m_PlayerLaserTimer->OnTimer()) {

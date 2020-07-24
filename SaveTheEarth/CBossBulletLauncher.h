@@ -1,4 +1,8 @@
 #pragma once
+/*
+CBossBulletLauncher 클래스 : 보스 총알 생성을 위한 런처
+보스에서 CBossBullletLauncher 오브젝트만 추가해도 Bullet 들을 생성이 가능하다
+*/
 class CBossBulletLauncher : public CGameObject, public ILauncher
 {
 private:

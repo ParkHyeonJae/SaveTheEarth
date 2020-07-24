@@ -74,7 +74,7 @@ CSprite::~CSprite()
 {
 }
 
-
+// 그리기 함수
 void CSprite::Draw()
 {
 	m_gfx->GetRenderTarget()->SetTransform(D2D1::Matrix3x2F::Identity());
@@ -183,7 +183,7 @@ void CSprite::Draw(D2D1_POINT_2F Pos, D2D1_SIZE_F Scale, D2D1_POINT_2F* center, 
 
 	m_gfx->GetRenderTarget()->SetTransform(D2D1::Matrix3x2F::Identity());
 }
-
+// 마스크 그리기
 void CSprite::MaskDraw(D2D1_POINT_2F Pos, D2D1_SIZE_F Scale, D2D1_POINT_2F* center, float angle, OpacityBrush BrushType)
 {
 	m_gfx->GetRenderTarget()->SetAntialiasMode(D2D1_ANTIALIAS_MODE_ALIASED);

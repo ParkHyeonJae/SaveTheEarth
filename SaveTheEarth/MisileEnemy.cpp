@@ -22,17 +22,23 @@ void MisileEnemy::Init()
 
 void MisileEnemy::Render()
 {
-	CGameManager::m_ImageManager->GetImages()
+	IMAGES
 		->Render("warning", m_Pos, overlay);
 
 	if (m_SpawnCheck) {
-		CGameManager::m_ImageManager->GetImages()
+		IMAGES
 			->Render("Misile", D2D1::Point2F(m_Pos.x, m_Pos.y + 40.0f), 1.0f);
 	}
 }
 
 void MisileEnemy::FrameMove(DWORD elapsed)
 {
+	SetCollider(
+		(LONG)(m_Pos.x - 20.0f),
+		(LONG)(m_Pos.y - 15.0f),
+		(LONG)(m_Pos.x + 20.0f),
+		(LONG)(m_Pos.y + 20.0f)
+	);
 	if (m_warningCount > 0)
 	{
 		overlay = Mathf::Lerp(0.0f, 1.0f, tTime);

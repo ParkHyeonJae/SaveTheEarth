@@ -20,6 +20,7 @@ public:
 	void AllControl(CInput* m_Input);
 	void AllRender();
 	void AllRelease();
+	BOOL OnCollision(RECT Collider01, RECT Collider02);
 
 	std::list<CGameObject*> GetObjectList() { return m_gameObjectList; }
 	CObjectManager* GetObjectManager() { return this; }

@@ -7,13 +7,13 @@ CItem::CItem(D2D1_POINT_2F m_Pos, INT tag)
 	INT State = rand() % 3;
 	switch (State) {
 	case ATKUP:
-		m_ItemSprite = CGameManager::m_ImageManager->GetImages()->GetSprite("ATKUP");
+		m_ItemSprite = IMAGES->GetSprite("ATKUP");
 		break;
 	case HPUP:
-		m_ItemSprite = CGameManager::m_ImageManager->GetImages()->GetSprite("HPUP");
+		m_ItemSprite = IMAGES->GetSprite("HPUP");
 		break;
 	case RPMUP:
-		m_ItemSprite = CGameManager::m_ImageManager->GetImages()->GetSprite("RPMUP");
+		m_ItemSprite = IMAGES->GetSprite("RPMUP");
 		break;
 	}
 	ItemState = State;
@@ -53,6 +53,13 @@ void CItem::Render()
 
 void CItem::FrameMove(DWORD elapsed)
 {
+	SetCollider(
+		(LONG)(m_Pos.x),
+		(LONG)(m_Pos.y),
+		(LONG)(m_Pos.x + GetSize().width),
+		(LONG)(m_Pos.y + GetSize().height)
+	);
+
 	m_Pos.x += cosf(MoveAngle * Mathf::Radian);
 	m_Pos.y += sinf(MoveAngle * Mathf::Radian);
 

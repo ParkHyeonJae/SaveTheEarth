@@ -10,9 +10,9 @@ CBossEnemy::CBossEnemy(D2D1_POINT_2F m_Pos, INT tag)
 	m_SkillTimer = new CTimer(10000);
 	m_BossAnimFunc = new CSpriteAnimation();
 
-	m_BossNullHp = CGameManager::m_ImageManager->GetImages()->GetSprite("BossNullHp");
-	m_BossHpBar = CGameManager::m_ImageManager->GetImages()->GetSprite("BossHpBar");
-	m_Sprite = CGameManager::m_ImageManager->GetImages()->GetMultiSprite("BossIdleAnim")[0];
+	m_BossNullHp = IMAGES->GetSprite("BossNullHp");
+	m_BossHpBar =  IMAGES->GetSprite("BossHpBar");
+	m_Sprite =	   IMAGES->GetMultiSprite("BossIdleAnim")[0];
 	Init();
 }
 
@@ -43,7 +43,7 @@ void CBossEnemy::Render()
 		, D2D1::SizeF(1.0f, 1.0f), NULL, 0.0f, m_WarningFadeInOut->Blinking());
 
 	if (m_WarningFadeInOut->IsFinish()) {
-		CSprite* m_texture = CGameManager::m_ImageManager->GetImages()->GetMultiSprite("BossIdleAnim", sequence);
+		CSprite* m_texture = IMAGES->GetMultiSprite("BossIdleAnim", sequence);
 		if (!m_deadCheck) {
 			if (m_LaserLauncher->IsRun()) {		//런처가 실행중일때 원래 이미지를 감추고 스킬 애니메이션을 보여준다
 				m_IsBossShow = FALSE;
@@ -93,6 +93,13 @@ void CBossEnemy::Render()
 
 void CBossEnemy::FrameMove(DWORD elapsed)
 {
+	SetCollider(
+		(LONG)(m_Pos.x + 0.0f),
+		(LONG)(m_Pos.y + 0.0f),
+		(LONG)(m_Pos.x + 200.0f),
+		(LONG)(m_Pos.y + 300.0f)
+	);
+
 	if (m_WarningFadeInOut->IsFinish()) {
 		m_Pos.x = Mathf::Lerp(m_Pos.x, m_TargetPos.x, deltaTime);
 		m_Pos.y = Mathf::Lerp(m_Pos.y, m_TargetPos.y, deltaTime);
@@ -126,7 +133,7 @@ void CBossEnemy::Control(CInput* Input)
 			case 2:
 				for (size_t i = 0; i < 5; i++)
 				{
-					OBJECT->AddObject(dynamic_cast<CGameObject*>(new MisileEnemy(D2D1::Point2F(0, Mathf::RandomIntValue(0, 1000)), MISILE)));
+					OBJECT->AddObject(dynamic_cast<CGameObject*>(new MisileEnemy(D2D1::Point2F(0.0f, (FLOAT)Mathf::RandomIntValue(0, 1000)), MISILE)));
 				}
 			default:
 				for (size_t i = 0; i < 10; i++)

@@ -19,10 +19,10 @@ CNormalEnemy::CNormalEnemy(D2D1_POINT_2F m_Pos, INT tag)
 	SharkAnimSequence = 0;
 	m_deadCheck = FALSE;
 	m_isDelete = FALSE;
-	m_Sprite = CGameManager::m_ImageManager->GetImages()
+	m_Sprite = IMAGES
 		->GetMultiSprite("SharkAnim")[0];
-	m_SharkNullHP = CGameManager::m_ImageManager->GetImages()->GetSprite("SharkNullHp");
-	m_SharkFullHP = CGameManager::m_ImageManager->GetImages()->GetSprite("SharkHpBar");
+	m_SharkNullHP = IMAGES->GetSprite("SharkNullHp");
+	m_SharkFullHP = IMAGES->GetSprite("SharkHpBar");
 	m_SharkHP = new CHealthBar("SharkNullHp", "SharkHpBar", m_Pos, TRUE, FALSE);
 }
 
@@ -43,7 +43,7 @@ void CNormalEnemy::Render()
 			angle = atan2f(m_Pos.y - m_TargetPos.y, m_Pos.x - m_TargetPos.x) * (180.0f / PI);
 			SharkAnimSize = CGameManager::m_ImageManager->GetMultiImageSize("SharkAnim", SharkAnimSequence);
 			D2D1_POINT_2F center = { m_Pos.x + (SharkAnimSize.width / 2), m_Pos.y + (SharkAnimSize.height / 2) };
-			CGameManager::m_ImageManager->GetImages()
+			IMAGES
 				->MultiRender("SharkAnim", SharkAnimSequence, m_Pos, D2D1::SizeF(1.0f, 1.0f), &center, angle);
 			SharkAnimSequence = m_SharkAnimFunc->OnAnimRender(100, 0, 5);
 
@@ -59,11 +59,11 @@ void CNormalEnemy::Render()
 		}
 		else
 		{
-			CGameManager::m_ImageManager->GetImages()
+			IMAGES
 				->MultiRender("ExplosiveAnim", SharkAnimSequence, m_Pos, D2D1::SizeF(1.0f, 1.0f), NULL, angle);
 			
 			if (SharkDeadAnimSequence != 5) {
-				CGameManager::m_ImageManager->GetImages()
+				IMAGES
 					->MultiRender("SharkDeadAnim", SharkDeadAnimSequence, m_Pos, D2D1::SizeF(1.0f, 1.0f), NULL, angle);
 				SharkDeadAnimSequence = m_SharkDeadAnimFunc->OnAnimRender(100, 0, 5);
 			}
@@ -71,7 +71,7 @@ void CNormalEnemy::Render()
 			if (SharkAnimSequence == 9) {
 				m_isDelete = TRUE;
 				if (Mathf::Probability(50))
-					CGameManager::m_ObjectManager
+					OBJECT
 					->AddObject(dynamic_cast<CGameObject*>
 					(new CItem(m_Pos, ITEM)));
 			}
@@ -83,10 +83,18 @@ void CNormalEnemy::Render()
 
 void CNormalEnemy::FrameMove(DWORD elapsed)
 {
+	SetCollider(
+		(LONG)(m_Pos.x - CollRange),
+		(LONG)(m_Pos.y - CollRange),
+		(LONG)(m_Pos.x + CollRange),
+		(LONG)(m_Pos.y + CollRange)
+		);
+
 	if (m_Pos.x < m_TargetPos.x)
 		m_Pos.x++;
 	if (m_Pos.x > m_TargetPos.x)
 		m_Pos.x--;
+
 	if (m_Pos.y < m_TargetPos.y)
 		m_Pos.y++;
 	if (m_Pos.y > m_TargetPos.y)

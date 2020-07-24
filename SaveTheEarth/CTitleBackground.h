@@ -1,4 +1,7 @@
 #pragma once
+/*
+TitleBackground 클래스: Title 화면의 모든 UI부터 배경까지 담아둔 클래스
+*/
 class CTitleBackground : public CGameObject
 {
 	CSprite* m_Title;

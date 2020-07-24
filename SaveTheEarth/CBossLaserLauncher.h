@@ -1,4 +1,10 @@
 #pragma once
+
+/*
+CBossLaserLauncher 클래스 : 보스가 레이저를 발사하기 위한 클래스
+Launcher를 생성하면 보스가 레이저를 발사할 수 있다.
+*/
+
 class CBossLaserLauncher : public CGameObject, public ILauncher
 {
 private:
