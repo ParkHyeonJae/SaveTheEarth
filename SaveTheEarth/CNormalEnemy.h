@@ -25,6 +25,8 @@ private:
 	CHealthBar* m_SharkHP;
 	CSprite* m_SharkNullHP;
 	CSprite* m_SharkFullHP;
+private:
+	float CollRange = 40.0f;
 public:
 	CNormalEnemy(D2D1_POINT_2F m_Pos, INT tag);
 	~CNormalEnemy();

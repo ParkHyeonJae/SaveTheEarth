@@ -1,5 +1,13 @@
 #pragma once
 #define MAXBOSSHP 100000
+
+/*
+CBossEnemy : 보스 (적) 클래스
+보스의 기본적인 요소들을 담고 있다.
+보스 체력, 위치 등
+
+*/
+
 class CFadeInOut;
 class CBossEnemy : public CGameObject
 {

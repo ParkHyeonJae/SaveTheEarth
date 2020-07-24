@@ -93,6 +93,13 @@ void CBossEnemy::Render()
 
 void CBossEnemy::FrameMove(DWORD elapsed)
 {
+	SetCollider(
+		(LONG)(m_Pos.x + 0.0f),
+		(LONG)(m_Pos.y + 0.0f),
+		(LONG)(m_Pos.x + 200.0f),
+		(LONG)(m_Pos.y + 300.0f)
+	);
+
 	if (m_WarningFadeInOut->IsFinish()) {
 		m_Pos.x = Mathf::Lerp(m_Pos.x, m_TargetPos.x, deltaTime);
 		m_Pos.y = Mathf::Lerp(m_Pos.y, m_TargetPos.y, deltaTime);
@@ -126,7 +133,7 @@ void CBossEnemy::Control(CInput* Input)
 			case 2:
 				for (size_t i = 0; i < 5; i++)
 				{
-					OBJECT->AddObject(dynamic_cast<CGameObject*>(new MisileEnemy(D2D1::Point2F(0, Mathf::RandomIntValue(0, 1000)), MISILE)));
+					OBJECT->AddObject(dynamic_cast<CGameObject*>(new MisileEnemy(D2D1::Point2F(0.0f, (FLOAT)Mathf::RandomIntValue(0, 1000)), MISILE)));
 				}
 			default:
 				for (size_t i = 0; i < 10; i++)

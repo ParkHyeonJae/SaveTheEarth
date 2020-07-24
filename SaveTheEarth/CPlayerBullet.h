@@ -1,4 +1,11 @@
 #pragma once
+
+/*
+CPlayerBullet 클래스 : 플레이어가 발사하는 총알 클래스
+경우에 따라서 샷건의 총알, 라이플의 총알이 될 수 있음
+
+*/
+
 class CPlayerBullet : public CGameObject
 {
 private:
@@ -37,7 +44,15 @@ public:
 		return CollCheck;
 	}
 	void SetColl(BOOL CollCheck) { this->CollCheck = CollCheck; }
-	FLOAT GetDamage() { return m_BulletDamage; }
+	FLOAT GetDamage() {
+		switch (m_GUN) {
+		case Rifle:
+			return m_BulletDamage * 2.0f;
+		case Shotgun:
+			return m_BulletDamage;
+		}
+		
+	}
 
 	BOOL IsDelete() { return m_isDelete; }
 

@@ -35,6 +35,8 @@ private:
 private:
 	CPlayerBarrierLauncher* m_BarrierLauncher;
 	CPlayerLaserLauncher* m_LaserLauncher;
+private:
+	float CollRange = 40.0f;
 public:
 	CPlayer(D2D1_POINT_2F m_Pos, INT tag, FLOAT m_HP);
 	~CPlayer();

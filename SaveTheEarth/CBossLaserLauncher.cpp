@@ -53,6 +53,12 @@ void CBossLaserLauncher::LauncherInit()
 
 void CBossLaserLauncher::LauncherUpdate(DWORD elapsed)
 {
+	SetCollider(
+		(LONG)(m_Pos.x - 1600),
+		(LONG)(m_Pos.y + 100),
+		(LONG)(m_Pos.x + 500),
+		(LONG)(m_Pos.y + 400)
+	);
 	if (m_LaserTimer->OnTimer())
 	{
 		m_CurState = (LAUNCHER_STATE)((INT)(m_CurState)+1);

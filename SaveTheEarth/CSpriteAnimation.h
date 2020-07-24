@@ -1,4 +1,7 @@
 #pragma once
+/*
+CSpriteAnimation : 애니메이션 순서를 관리해주는 클래스
+*/
 class CSpriteAnimation
 {
 private:

@@ -67,28 +67,14 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 		if ((*iter)->m_tag == PLAYER)
 		{
 			CPlayer* m_cPlayer = dynamic_cast<CPlayer*>((*iter));
-			float CollRange = 40.0f;
-			RECT rPlayerColl = {
-			(LONG)((*iter)->GetPos().x - CollRange),
-			(LONG)((*iter)->GetPos().y - CollRange),
-			(LONG)((*iter)->GetPos().x + CollRange),
-			(LONG)((*iter)->GetPos().y + CollRange - 20.0f),
-			};
 
 			for (auto iter02 = m_gameObjectList.begin(); iter02 != m_gameObjectList.end();)
 			{
 				if ((*iter02)->m_tag == ENEMY)
 				{
-					float CollRange = 40.0f;
-					RECT EnemyColl = {
-					(LONG)((*iter02)->GetPos().x - CollRange),
-					(LONG)((*iter02)->GetPos().y - CollRange),
-					(LONG)((*iter02)->GetPos().x + CollRange),
-					(LONG)((*iter02)->GetPos().y + CollRange),
-					};
-
-					RECT temp;
-					if (IntersectRect(&temp, &rPlayerColl, &EnemyColl))
+					CNormalEnemy* m_NormalEnemy = dynamic_cast<CNormalEnemy*>((*iter02));
+					
+					if (OnCollision(m_cPlayer->GetCollider(), m_NormalEnemy->GetCollider()))
 					{
 						m_cPlayer->GetDamage(100.0f);
 						break;
@@ -96,15 +82,9 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 				}
 				if ((*iter02)->m_tag == BOSS)
 				{
-					RECT EnemyColl = {
-					(LONG)((*iter02)->GetPos().x + 0.0f),
-					(LONG)((*iter02)->GetPos().y + 0.0f),
-					(LONG)((*iter02)->GetPos().x + 200.0f),
-					(LONG)((*iter02)->GetPos().y + 300.0f),
-					};
-
-					RECT temp;
-					if (IntersectRect(&temp, &rPlayerColl, &EnemyColl))
+					CBossEnemy* m_BossEnemy = dynamic_cast<CBossEnemy*>((*iter02));
+					
+					if (OnCollision(m_cPlayer->GetCollider(), m_BossEnemy->GetCollider()))
 					{
 						m_cPlayer->GetDamage(100.0f);
 						break;
@@ -122,15 +102,9 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 							iter02 = m_gameObjectList.erase(iter02);
 							break;
 						}
-						RECT rMisileColl = {
-						(LONG)((*iter02)->GetPos().x - 20.0f),
-						(LONG)((*iter02)->GetPos().y - 15.0f),
-						(LONG)((*iter02)->GetPos().x + 20.0f),
-						(LONG)((*iter02)->GetPos().y + 20.0f),
-						};
+						
 
-						RECT temp;
-						if (IntersectRect(&temp, &rPlayerColl, &rMisileColl))
+						if (OnCollision(m_cPlayer->GetCollider(), m_misileEnemy->GetCollider()))
 						{
 							m_cPlayer->GetDamage(100.0f);
 							break;
@@ -140,15 +114,8 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 				if ((*iter02)->m_tag == ITEM)
 				{
 					CItem* m_Item = dynamic_cast<CItem*>((*iter02));
-					RECT rItemColl = {
-						(LONG)((*iter02)->GetPos().x),
-						(LONG)((*iter02)->GetPos().y),
-						(LONG)((*iter02)->GetPos().x + m_Item->GetSize().width ),
-						(LONG)((*iter02)->GetPos().y + m_Item->GetSize().height),
-					};
 
-					RECT temp;
-					if (IntersectRect(&temp, &rPlayerColl, &rItemColl))
+					if (OnCollision(m_cPlayer->GetCollider(), m_Item->GetCollider()))
 					{
 						if (m_Item->GetItemState() == HPUP) {
 							if (m_cPlayer->GetHp() < MAX_PLAYER_HP) {
@@ -170,14 +137,9 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 					if (m_BossLaser->IsRun() && !m_BossLaser->IsFinish())
 					{
 						if (m_BossLaser->GetLaserState() == LAUNCHER_STATE::LaserFire) {
-							RECT rBOSSLaser = {
-								(LONG)((*iter02)->GetPos().x - 1600),
-								(LONG)((*iter02)->GetPos().y + 100),
-								(LONG)((*iter02)->GetPos().x + 500),
-								(LONG)((*iter02)->GetPos().y + 400)
-							};
+							
 							RECT temp;
-							if (IntersectRect(&temp, &rPlayerColl, &rBOSSLaser))
+							if (OnCollision(m_cPlayer->GetCollider(), m_BossLaser->GetCollider()))
 							{
 								m_cPlayer->GetDamage(100.0f);
 								break;
@@ -199,28 +161,16 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 				m_gameObjectList.erase(iter);
 				break;
 			}
-			RECT BossBulletColl = {
-				(LONG)((*iter)->GetPos().x - 15.0f),
-				(LONG)((*iter)->GetPos().y - 15.0f),
-				(LONG)((*iter)->GetPos().x + 15.0f),
-				(LONG)((*iter)->GetPos().y + 15.0f),
-			};
+			
 
 			for (auto iter02 = m_gameObjectList.begin(); iter02 != m_gameObjectList.end();)
 			{
 				if ((*iter02)->m_tag == PLAYER)	// Enemyiter가 BOSS(보스 몬스터)일 경우
 				{
 					CPlayer* m_cPlayer = dynamic_cast<CPlayer*>((*iter02));
-					float CollRange = 40.0f;
-					RECT rPlayerColl = {
-					(LONG)((*iter02)->GetPos().x - CollRange),
-					(LONG)((*iter02)->GetPos().y - CollRange),
-					(LONG)((*iter02)->GetPos().x + CollRange),
-					(LONG)((*iter02)->GetPos().y + CollRange - 20.0f),
-					};
 
 					RECT temp;
-					if (IntersectRect(&temp, &BossBulletColl, &rPlayerColl))		//총알이 보스하고 닿았을때
+					if (OnCollision(m_cBossBullet->GetCollider(), m_cPlayer->GetCollider()))		//총알이 보스하고 닿았을때
 					{
 						m_cBossBullet->SetColl(TRUE);
 						m_cPlayer->GetDamage(m_cBossBullet->GetDamage());		//데미지
@@ -258,16 +208,7 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 				if ((*Enemyiter)->m_tag == ENEMY)		// Enemyiter가 ENEMY(일반 몬스터)일 경우
 				{
 					CNormalEnemy* m_cNormalEnemy = dynamic_cast<CNormalEnemy*>((*Enemyiter));
-					float CollRange = 40.0f;
-					RECT EnemyColl = {
-					(LONG)((*Enemyiter)->GetPos().x - CollRange),
-					(LONG)((*Enemyiter)->GetPos().y - CollRange),
-					(LONG)((*Enemyiter)->GetPos().x + CollRange),
-					(LONG)((*Enemyiter)->GetPos().y + CollRange),
-					};
-
-					RECT temp;
-					if (IntersectRect(&temp, &m_cPlayerLaser->GetCollider(), &EnemyColl))		//플레이어 총알이 몬스터를 맞췄을 때
+					if (OnCollision(m_cPlayerLaser->GetCollider(), m_cNormalEnemy->GetCollider()))		//플레이어 총알이 몬스터를 맞췄을 때
 					{
 						if (m_cNormalEnemy->GetHp() > 0) {		//몬스터가 죽지 않았을 때
 							m_cNormalEnemy->SetHp(
@@ -287,15 +228,8 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 				if ((*Enemyiter)->m_tag == BOSS)	// Enemyiter가 BOSS(보스 몬스터)일 경우
 				{
 					CBossEnemy* m_cBossEnemy = dynamic_cast<CBossEnemy*>((*Enemyiter));
-					RECT EnemyColl = {
-					(LONG)((*Enemyiter)->GetPos().x + 0.0f),
-					(LONG)((*Enemyiter)->GetPos().y + 0.0f),
-					(LONG)((*Enemyiter)->GetPos().x + 200.0f),
-					(LONG)((*Enemyiter)->GetPos().y + 300.0f),
-					};
 
-					RECT temp;
-					if (IntersectRect(&temp, &m_cPlayerLaser->GetCollider(), &EnemyColl))		//총알이 보스하고 닿았을때
+					if (OnCollision(m_cPlayerLaser->GetCollider(), m_cBossEnemy->GetCollider()))		//총알이 보스하고 닿았을때
 					{
 						if (m_cBossEnemy->GetHp() >= 0) {
 							m_cBossEnemy->SetHp(
@@ -331,27 +265,15 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 				break;
 			}
 
-			RECT pBulletColl = {
-				(LONG)((*iter)->GetPos().x - 20.0f),
-				(LONG)((*iter)->GetPos().y - 5.0f),
-				(LONG)((*iter)->GetPos().x + 20.0f),
-				(LONG)((*iter)->GetPos().y + 5.0f),
-			};
+			
 
 			for (auto Enemyiter = m_gameObjectList.begin(); Enemyiter != m_gameObjectList.end();)
 			{
 				if ((*Enemyiter)->m_tag == BOSS)	// Enemyiter가 BOSS(보스 몬스터)일 경우
 				{
 					CBossEnemy* m_cBossEnemy = dynamic_cast<CBossEnemy*>((*Enemyiter));
-					RECT EnemyColl = {
-					(LONG)((*Enemyiter)->GetPos().x + 0.0f),
-					(LONG)((*Enemyiter)->GetPos().y + 0.0f),
-					(LONG)((*Enemyiter)->GetPos().x + 200.0f),
-					(LONG)((*Enemyiter)->GetPos().y + 300.0f),
-					};
 
-					RECT temp;
-					if (IntersectRect(&temp, &pBulletColl, &EnemyColl))		//총알이 보스하고 닿았을때
+					if (OnCollision(m_cPlayerBullet->GetCollider(), m_cBossEnemy->GetCollider()))		//총알이 보스하고 닿았을때
 					{
 						m_cPlayerBullet->SetColl(TRUE);
 						if (m_cBossEnemy->GetHp() >= 0) {
@@ -378,16 +300,8 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 				if ((*Enemyiter)->m_tag == ENEMY)		// Enemyiter가 ENEMY(일반 몬스터)일 경우
 				{
 					CNormalEnemy* m_cNormalEnemy = dynamic_cast<CNormalEnemy*>((*Enemyiter));
-					float CollRange = 40.0f;
-					RECT EnemyColl = {
-					(LONG)((*Enemyiter)->GetPos().x - CollRange),
-					(LONG)((*Enemyiter)->GetPos().y - CollRange),
-					(LONG)((*Enemyiter)->GetPos().x + CollRange),
-					(LONG)((*Enemyiter)->GetPos().y + CollRange),
-					};
 
-					RECT temp;
-					if (IntersectRect(&temp, &pBulletColl, &EnemyColl))		//플레이어 총알이 몬스터를 맞췄을 때
+					if (OnCollision(m_cPlayerBullet->GetCollider(), m_cNormalEnemy->GetCollider()))		//플레이어 총알이 몬스터를 맞췄을 때
 					{
 						m_cPlayerBullet->SetColl(TRUE);		//총알 충돌
 						if (m_cNormalEnemy->GetHp() > 0) {		//몬스터가 죽지 않았을 때
@@ -526,4 +440,15 @@ void CObjectManager::AllRelease()
 	}
 	m_gameObjectList.clear();
 	m_uiList.clear();
+}
+
+BOOL CObjectManager::OnCollision(RECT Collider01, RECT Collider02)
+{
+	if (Collider01.left < Collider02.right
+		&& Collider01.top < Collider02.bottom
+		&& Collider01.right > Collider02.left
+		&& Collider01.bottom > Collider02.top) {
+		return TRUE;
+	}
+	return FALSE;
 }

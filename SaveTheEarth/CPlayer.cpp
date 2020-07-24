@@ -47,6 +47,14 @@ void CPlayer::Init()
 
 void CPlayer::FrameMove(DWORD elapsed)
 {
+	
+	SetCollider(
+		(LONG)(m_Pos.x - CollRange),
+		(LONG)(m_Pos.y - CollRange),
+		(LONG)(m_Pos.x + CollRange),
+		(LONG)(m_Pos.y + CollRange - 20.0f)
+	
+	);
 	if (IsStart)
 	{
 		if (m_Pos.x > 150.0f)

@@ -1,4 +1,8 @@
 #pragma once
+/*
+CBossBullet 클래스 : 보스가 발사하는 총알 클래스
+보스 패턴 중 하나인 총알 패탄에서 발사되는 총알 이다
+*/
 class CBossBullet : public CGameObject
 {
 private:

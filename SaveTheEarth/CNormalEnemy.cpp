@@ -83,10 +83,18 @@ void CNormalEnemy::Render()
 
 void CNormalEnemy::FrameMove(DWORD elapsed)
 {
+	SetCollider(
+		(LONG)(m_Pos.x - CollRange),
+		(LONG)(m_Pos.y - CollRange),
+		(LONG)(m_Pos.x + CollRange),
+		(LONG)(m_Pos.y + CollRange)
+		);
+
 	if (m_Pos.x < m_TargetPos.x)
 		m_Pos.x++;
 	if (m_Pos.x > m_TargetPos.x)
 		m_Pos.x--;
+
 	if (m_Pos.y < m_TargetPos.y)
 		m_Pos.y++;
 	if (m_Pos.y > m_TargetPos.y)
