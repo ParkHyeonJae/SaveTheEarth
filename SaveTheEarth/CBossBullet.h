@@ -5,6 +5,7 @@ CBossBullet 클래스 : 보스가 발사하는 총알 클래스
 */
 class CBossBullet : public CGameObject
 {
+
 private:
 	Animation m_Bullet;
 	Animation m_BulletEffect;
@@ -14,9 +15,12 @@ private:
 	BOOL CollCheck;
 	BOOL m_isDelete;
 
+	Pattern m_pattern;
 	FLOAT theta;
+	INT Offset;
+	CTimer* m_explosiveTimer;
 public:
-	CBossBullet(D2D1_POINT_2F m_Pos, INT tag);
+	CBossBullet(D2D1_POINT_2F m_Pos, Pattern pattern, FLOAT theta, INT tag);
 	~CBossBullet();
 
 	virtual void Init() override;

@@ -43,6 +43,12 @@ enum OpacityBrush
 	BLACK,
 	WHITE
 };
+enum class Pattern {
+	Tracking,
+	Circle,
+	Explosive
+};
+
 #define SAFE_DELETE( p ) { if( p ) { delete ( p ); ( p ) = nullptr; } }
 
 #define  SAFE_RELEASE( p ) { if( p ) { ( p )->Release(); } }

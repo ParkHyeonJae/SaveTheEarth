@@ -141,7 +141,7 @@ void CPlayer::Control(CInput* m_Input)
 		CGameManager::m_PlayerAttribute.m_RPM = 0;
 	}
 	if (CGameManager::EnableInput) {
-		if (m_Input->BtnDown(VK_LBUTTON))
+		if (m_Input->BtnPress(VK_LBUTTON))
 		{
 
 			if (m_playerBulletFireTimer->OnTimer())
@@ -151,7 +151,7 @@ void CPlayer::Control(CInput* m_Input)
 				OBJECT->AddObject(dynamic_cast<CGameObject*>(m_PlayerBullet));
 			}
 		}
-		if (m_Input->BtnDown(VK_RBUTTON))
+		if (m_Input->BtnPress(VK_RBUTTON))
 		{
 			if (m_playerBulletFireTimer->OnTimer())
 			{
