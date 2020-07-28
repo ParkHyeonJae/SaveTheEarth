@@ -10,6 +10,7 @@ private:
 	BOOL m_deadCheck;
 	BOOL m_isDelete;
 	FLOAT m_HP;
+	float t = 0.0f;
 private:
 	INT SharkAnimSequence;
 	D2D1_SIZE_F SharkAnimSize;

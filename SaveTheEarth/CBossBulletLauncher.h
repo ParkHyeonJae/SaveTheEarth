@@ -5,6 +5,7 @@ CBossBulletLauncher 클래스 : 보스 총알 생성을 위한 런처
 */
 class CBossBulletLauncher : public CGameObject, public ILauncher
 {
+	Pattern m_pattern;
 private:
 	Animation m_BulletIdle;
 	CTimer* m_BulletTimer;

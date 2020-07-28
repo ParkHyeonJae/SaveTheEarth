@@ -1,10 +1,12 @@
 #include "framework.h"
 
-CBossBullet::CBossBullet(D2D1_POINT_2F m_Pos, INT tag)
+CBossBullet::CBossBullet(D2D1_POINT_2F m_Pos, Pattern pattern, FLOAT theta, INT tag)
 {
 	this->m_Pos = m_Pos;
 	this->m_tag = tag;
-	BulletSpeed = 10.0f;
+	this->m_pattern = pattern;
+	this->theta = theta;
+	
 	Init();
 }
 
@@ -20,9 +22,30 @@ void CBossBullet::Init()
 
 	m_BulletEffect.AnimFunc = new CSpriteAnimation();
 	m_BulletEffect.sequence = 0;
+
+	m_explosiveTimer = new CTimer(10000);
+
 	CollCheck = FALSE;
 	m_isDelete = FALSE;
-	theta = atan2f(m_Pos.y - CGameManager::m_PlayerPos.y, m_Pos.x - CGameManager::m_PlayerPos.x) * Mathf::Radian;
+	switch (m_pattern) {
+	case Pattern::Tracking:
+		BulletSpeed = 10.0f;
+		m_explosiveTimer->SetTimer(5000);
+		theta = atan2f(m_Pos.y - CGameManager::m_PlayerPos.y, m_Pos.x - CGameManager::m_PlayerPos.x) * Mathf::Radian;
+		break;
+	case Pattern::Circle:
+		m_explosiveTimer->SetTimer(3000);
+		BulletSpeed = 5.0f;
+		break;
+	case Pattern::Explosive:
+		m_explosiveTimer->SetTimer(10000);
+		Offset = (rand() % 2) ? 1 : -1;
+		BulletSpeed = 5.0f;
+		break;
+	default:
+		
+		break;
+	}
 }
 
 void CBossBullet::Render()
@@ -52,8 +75,27 @@ void CBossBullet::FrameMove(DWORD elapsed)
 		(LONG)(m_Pos.x + 15.0f),
 		(LONG)(m_Pos.y + 15.0f)
 	);
-	 m_Pos.y += sinf(theta) * BulletSpeed;
-	 m_Pos.x -= BulletSpeed;
+	if (m_explosiveTimer->OnTimer()) {
+		SetDelete(TRUE);
+	}
+	switch (m_pattern)
+	{
+	case Pattern::Tracking:
+		m_Pos.y += sinf(theta) * BulletSpeed;
+		m_Pos.x -= BulletSpeed;
+		break;
+	case Pattern::Circle:
+		theta += 0.01f;
+		m_Pos.y += sinf(theta) * BulletSpeed;
+		m_Pos.x += cosf(theta) * BulletSpeed;
+		break;
+	case Pattern::Explosive:
+		theta += 0.01f * Offset;
+		m_Pos.y += sinf(theta) * BulletSpeed;
+		m_Pos.x += cosf(theta) * BulletSpeed;
+		break;
+	}
+
 }
 
 void CBossBullet::Control(CInput* Input)
@@ -68,7 +110,7 @@ BOOL CBossBullet::IsMapOut()
 {
 	if (m_Pos.x < 0 || MAX_WIN_WIDTH < m_Pos.x)
 		return TRUE;
-	if (MAX_WIN_HEIGHT < m_Pos.y || m_Pos.y < 0)
+	if (MAX_WIN_HEIGHT + 500 < m_Pos.y || m_Pos.y < - 500)
 		return TRUE;
 
 	return FALSE;

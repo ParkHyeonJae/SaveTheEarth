@@ -64,6 +64,11 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 	for (auto iter = m_gameObjectList.begin(); iter != m_gameObjectList.end();)
 	{
 		(*iter)->FrameMove(elapsed);
+
+		if ((*iter)->IsDelete()) {
+			m_gameObjectList.erase(iter);
+			break;
+		}
 		if ((*iter)->m_tag == PLAYER)
 		{
 			CPlayer* m_cPlayer = dynamic_cast<CPlayer*>((*iter));

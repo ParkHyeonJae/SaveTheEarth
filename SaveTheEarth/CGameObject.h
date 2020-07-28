@@ -1,11 +1,12 @@
 #pragma once
 class CGameObject : public IGameObject
 {
-	
+
 protected:
 	D2D1_POINT_2F m_Pos;
 	CSprite* m_Sprite;
 	RECT m_Collider;
+	BOOL m_bDelete = FALSE;
 public:
 	struct Animation {
 		CSpriteAnimation* AnimFunc;
@@ -24,6 +25,11 @@ public:
 	virtual void Control(CInput* Input) override;
 	virtual void Release() override;
 
+
+	VOID SetDelete(BOOL m_bDelete) { this->m_bDelete = m_bDelete; }
+	BOOL IsDelete() {
+		return m_bDelete;
+	}
 	D2D1_POINT_2F GetPos() { return m_Pos; }
 	CSprite* GetSprite() { return m_Sprite; }
 
