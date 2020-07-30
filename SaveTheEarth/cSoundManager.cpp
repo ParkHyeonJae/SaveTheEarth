@@ -9,13 +9,27 @@ FMOD_RESULT cSoundManager::InitSound()
 
 	AppendSoundList();
 
-	for (INT i = 0; i < m_SoundList.size(); i++)
+	if (!m_SoundList.empty())
 	{
-		FMOD_SOUND* sound;
-		char str[256] = "\0";
-		sprintf(str, "../Sounds/%s.mp3", m_SoundList[i].c_str());
-		FMOD_RESULT result = FMOD_System_CreateSound(g_system, str, FMOD_DEFAULT, 0, &sound);
-		AppendSound(m_SoundList[i], sound);
+		for (INT i = 0; i < m_SoundList.size(); i++)
+		{
+			FMOD_SOUND* sound;
+			char str[256] = "\0";
+			sprintf(str, "../Sounds/%s.mp3", m_SoundList[i].c_str());
+			FMOD_RESULT result = FMOD_System_CreateStream(g_system, str, FMOD_DEFAULT, 0, &sound);
+			AppendSound(m_SoundList[i], sound);
+		}
+	}
+	if (!m_EffectList.empty())
+	{
+		for (INT i = 0; i < m_EffectList.size(); i++)
+		{
+			FMOD_SOUND* effect;
+			char str[256] = "\0";
+			sprintf(str, "../Sounds/%s.wav", m_EffectList[i].c_str());
+			FMOD_RESULT result = FMOD_System_CreateSound(g_system, str, FMOD_DEFAULT, 0, &effect);
+			AppendSound(m_EffectList[i], effect);
+		}
 	}
 	FMOD_Channel_SetVolume(m_channel, m_volume);
 
@@ -43,7 +57,10 @@ FMOD_RESULT cSoundManager::ReleaseSound()
 
 VOID cSoundManager::AppendSoundList()
 {
-	m_SoundList.push_back("Alan Walker - Fade");
+	m_SoundList.push_back("Pote_m-milky way");
+	m_SoundList.push_back("Masader - Super Power");
+	m_SoundList.push_back("sacrifice");
+	m_EffectList.push_back("LaserEffect");
 	return VOID();
 }
 
@@ -73,4 +90,14 @@ FMOD_SOUND* cSoundManager::FindSound(string soundKey)
 FMOD_RESULT cSoundManager::PlaySoundFunc(string soundKey)
 {
 	return FMOD_System_PlaySound(g_system, m_sounds[soundKey], 0, 0, &m_channel);
+}
+
+FMOD_RESULT cSoundManager::PlayEffectFunc(string soundKey)
+{
+	return FMOD_System_PlaySound(g_system, m_sounds[soundKey], 0, 0, &m_effectChannel);
+}
+
+FMOD_RESULT cSoundManager::StopSoundChannelFunc()
+{
+	return FMOD_Channel_Stop(m_channel);
 }
