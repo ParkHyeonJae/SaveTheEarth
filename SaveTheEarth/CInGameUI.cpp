@@ -36,7 +36,9 @@ void CInGameUI::Render()
 		0
 	};
 	IMAGES->Render("playerHpBar_foreground", m_hpPos, &hpSrc);
-	m_wherePosX = ((ENDPOINT * Score::GETSCORE) / MAXSCORE);
+	if (Score::GETSCORE <= MAXSCORE) {
+		m_wherePosX = ((ENDPOINT * Score::GETSCORE) / MAXSCORE);
+	}
 	m_LongDistancBar->Draw(D2D1::Point2F(STARTPOINT, 820));
 	m_whereDistanceBar->Draw(D2D1::Point2F(m_wherePosX, 740));
 }

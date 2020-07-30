@@ -1,7 +1,7 @@
 #pragma once
 struct PLAYER_ATTR {
 	FLOAT m_ATKDamage;
-	FLOAT m_IncreaseHP;
+	FLOAT m_UPHP;
 	FLOAT m_RPM;
 };
 class CGameManager : singleton<CGameManager>
@@ -23,7 +23,7 @@ public:
 	static BOOL isinvincibility;
 	static BOOL EnableInput;
 	
-	static PLAYER_ATTR m_PlayerAttribute;
+	static PLAYER_ATTR m_playerAttr;
 	static INT m_Level;
 	static FLOAT ApplyScore;
 

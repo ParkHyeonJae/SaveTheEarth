@@ -29,18 +29,18 @@ void CBossBullet::Init()
 	m_isDelete = FALSE;
 	switch (m_pattern) {
 	case Pattern::Tracking:
-		BulletSpeed = 10.0f;
+		BulletSpeed = 1.0f;
 		m_explosiveTimer->SetTimer(5000);
 		theta = atan2f(m_Pos.y - CGameManager::m_PlayerPos.y, m_Pos.x - CGameManager::m_PlayerPos.x) * Mathf::Radian;
 		break;
 	case Pattern::Circle:
 		m_explosiveTimer->SetTimer(3000);
-		BulletSpeed = 5.0f;
+		BulletSpeed = 0.5f;
 		break;
 	case Pattern::Explosive:
-		m_explosiveTimer->SetTimer(10000);
+		m_explosiveTimer->SetTimer(15000);
 		Offset = (rand() % 2) ? 1 : -1;
-		BulletSpeed = 5.0f;
+		BulletSpeed = 0.5f;
 		break;
 	default:
 		
@@ -81,18 +81,18 @@ void CBossBullet::FrameMove(DWORD elapsed)
 	switch (m_pattern)
 	{
 	case Pattern::Tracking:
-		m_Pos.y += sinf(theta) * BulletSpeed;
-		m_Pos.x -= BulletSpeed;
+		m_Pos.y += sinf(theta) * BulletSpeed * elapsed;
+		m_Pos.x -= BulletSpeed * elapsed;
 		break;
 	case Pattern::Circle:
 		theta += 0.01f;
-		m_Pos.y += sinf(theta) * BulletSpeed;
-		m_Pos.x += cosf(theta) * BulletSpeed;
+		m_Pos.y += sinf(theta) * BulletSpeed * elapsed;
+		m_Pos.x += cosf(theta) * BulletSpeed * elapsed;
 		break;
 	case Pattern::Explosive:
 		theta += 0.01f * Offset;
-		m_Pos.y += sinf(theta) * BulletSpeed;
-		m_Pos.x += cosf(theta) * BulletSpeed;
+		m_Pos.y += sinf(theta * 2) * BulletSpeed * elapsed;
+		m_Pos.x += cosf(theta * 2) * BulletSpeed * elapsed;
 		break;
 	}
 
@@ -110,8 +110,13 @@ BOOL CBossBullet::IsMapOut()
 {
 	if (m_Pos.x < 0 || MAX_WIN_WIDTH < m_Pos.x)
 		return TRUE;
-	if (MAX_WIN_HEIGHT + 500 < m_Pos.y || m_Pos.y < - 500)
-		return TRUE;
-
+	if (m_pattern != Pattern::Explosive) {
+		if (MAX_WIN_HEIGHT < m_Pos.y || m_Pos.y < 0)
+			return TRUE;
+	}
+	else {
+		if (MAX_WIN_HEIGHT + 700 < m_Pos.y || m_Pos.y < -700)
+			return TRUE;
+	}
 	return FALSE;
 }
