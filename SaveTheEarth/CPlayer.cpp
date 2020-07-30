@@ -137,7 +137,7 @@ void CPlayer::Control(CInput* m_Input)
 			m_Pos.y = 0;
 	}
 	float RotDegree = atan2f(m_Pos.y - m_Input->GetMousePos().y, m_Pos.x - m_Input->GetMousePos().x);
-	m_Rot = (RotDegree * (180.0f / PI)) + 180.0f;
+	m_Rot = (RotDegree * (180.0f / (FLOAT)PI)) + 180.0f;
 
 	if (CGameManager::m_playerAttr.m_RPM != 0 && 0 < m_playerBulletFireTimer->GetDestTime() - CGameManager::m_playerAttr.m_RPM)
 	{
@@ -163,7 +163,7 @@ void CPlayer::Control(CInput* m_Input)
 			{
 				m_GunState = Shotgun;
 				SOUND->PlayEffectFunc("LaserEffect");
-				for (int i = m_Rot - 10; i < m_Rot + 10; i += 5)
+				for (float i = m_Rot - 10.0f; i < m_Rot + 10.0f; i += 5.0f)
 				{
 					m_PlayerBullet = new CPlayerBullet(D2D1::Point2F(CGameManager::m_PlayerPos.x, CGameManager::m_PlayerPos.y + 30.0f), i, PBULLET, m_GunState);
 					OBJECT->AddObject(dynamic_cast<CGameObject*>(m_PlayerBullet));

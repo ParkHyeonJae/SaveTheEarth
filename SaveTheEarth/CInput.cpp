@@ -250,6 +250,8 @@ LRESULT CInput::MsgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
 	switch (msg)
 	{
+	default:
+		break;
 	}
 
 	return 0;

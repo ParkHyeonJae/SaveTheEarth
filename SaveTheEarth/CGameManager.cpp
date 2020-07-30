@@ -7,7 +7,7 @@ CImageManager* CGameManager::m_ImageManager = NULL;
 cSoundManager* CGameManager::m_SoundManager = NULL;
 FLOAT CGameManager::m_ScrollSpeed = 10.0f;
 D2D1_POINT_2F CGameManager::m_PlayerPos = { -100, 350 };
-FLOAT CGameManager::radian = PI / 180.0f;
+FLOAT CGameManager::radian = (FLOAT)PI / 180.0f;
 INT CGameManager::nowStatus = TITLE;
 DWORD CGameManager::m_fps = 0;
 FLOAT CGameManager::m_playerHp = 1000.0f;
@@ -38,7 +38,7 @@ void CGameManager::Init()
 {
 	CGameManager::m_ScrollSpeed = 10.0f;
 	CGameManager::m_PlayerPos = { -100, 350 };
-	CGameManager::radian = PI / 180.0f;
+	CGameManager::radian = (FLOAT)PI / 180.0f;
 	CGameManager::isinvincibility = FALSE;
 	CGameManager::EnableInput = TRUE;
 	CGameManager::m_playerAttr = { 1.0f, 0.0f, 0.0f };

@@ -50,6 +50,8 @@ public:
 			return m_BulletDamage * 2.0f;
 		case Shotgun:
 			return m_BulletDamage;
+		default:
+			return m_BulletDamage;
 		}
 		
 	}
