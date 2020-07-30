@@ -16,7 +16,7 @@ void CGameScene01::Init()
 	AddObject(dynamic_cast<CGameObject*>(m_TitleBG));
 	
 	SOUND->InitSound();
-	SOUND->PlaySoundFunc("Alan Walker - Fade");
+	SOUND->PlaySoundFunc("Pote_m-milky way");
 	CSceneObject::Init();
 	AllInitalize();
 }

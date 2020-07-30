@@ -36,7 +36,7 @@ void CGameScene02::Init()
 
 	Score::CScoreManager::SetScore(3000);
 	SOUND->InitSound();
-	SOUND->PlaySoundFunc("Alan Walker - Fade");
+	SOUND->PlaySoundFunc("Masader - Super Power");
 	CSceneObject::Init();
 	AllInitalize();
 }
@@ -72,6 +72,8 @@ void CGameScene02::FrameMove(DWORD elapsed)
 		//m_Player->SetHp(m_Player->GetHp() - 0.1f);
 		if (m_BossSpawnTimer->OnTimer())
 		{
+			SOUND->StopSoundChannelFunc();
+			SOUND->PlaySoundFunc("sacrifice");
 			m_BossEnemy = new CBossEnemy(D2D1::Point2F((FLOAT)MAX_WIN_WIDTH, (FLOAT)(rand() % MAX_WIN_HEIGHT)), BOSS);
 			AddObject(dynamic_cast<CGameObject*>(m_BossEnemy));
 		}

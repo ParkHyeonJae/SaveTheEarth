@@ -151,8 +151,10 @@ void CPlayer::Control(CInput* m_Input)
 			if (m_playerBulletFireTimer->OnTimer())
 			{
 				m_GunState = Rifle;
+				SOUND->PlayEffectFunc("LaserEffect");
 				m_PlayerBullet = new CPlayerBullet(D2D1::Point2F(CGameManager::m_PlayerPos.x, CGameManager::m_PlayerPos.y + 35.0f), m_Rot, PBULLET, m_GunState);
 				OBJECT->AddObject(dynamic_cast<CGameObject*>(m_PlayerBullet));
+				
 			}
 		}
 		if (m_Input->BtnPress(VK_RBUTTON))
@@ -160,6 +162,7 @@ void CPlayer::Control(CInput* m_Input)
 			if (m_playerBulletFireTimer->OnTimer())
 			{
 				m_GunState = Shotgun;
+				SOUND->PlayEffectFunc("LaserEffect");
 				for (int i = m_Rot - 10; i < m_Rot + 10; i += 5)
 				{
 					m_PlayerBullet = new CPlayerBullet(D2D1::Point2F(CGameManager::m_PlayerPos.x, CGameManager::m_PlayerPos.y + 30.0f), i, PBULLET, m_GunState);
