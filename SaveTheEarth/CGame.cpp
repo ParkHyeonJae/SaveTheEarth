@@ -28,7 +28,6 @@ INT CGame::Init()
 
 	m_GameManager->Init();
 	m_ImageManager->ImageInit();
-	m_SoundManager->InitSound();
 
 	auto iter = m_SceneList.begin();
 	std::advance(iter, CGameManager::nowStatus);

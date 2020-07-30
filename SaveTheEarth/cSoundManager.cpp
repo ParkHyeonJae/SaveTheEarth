@@ -37,6 +37,7 @@ FMOD_RESULT cSoundManager::ReleaseSound()
 	result = FMOD_System_Close(g_system);
 
 	result = FMOD_System_Release(g_system);
+	m_sounds.clear();
 	return result;
 }
 

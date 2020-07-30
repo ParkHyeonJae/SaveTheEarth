@@ -30,13 +30,13 @@ void CItem::Apply()
 	switch (ItemState)
 	{
 	case ATKUP:
-		CGameManager::m_PlayerAttribute.m_ATKDamage += 1.0f;
+		CGameManager::m_playerAttr.m_ATKDamage += 1.0f;
 		break;
 	case HPUP:
-		CGameManager::m_PlayerAttribute.m_IncreaseHP = 100.0f;
+		CGameManager::m_playerAttr.m_UPHP = 100.0f;
 		break;
 	case RPMUP:
-		CGameManager::m_PlayerAttribute.m_RPM = 10.0f;
+		CGameManager::m_playerAttr.m_RPM = 10.0f;
 		break;
 	}
 }

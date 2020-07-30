@@ -33,6 +33,8 @@ private:
 	CTimer* m_playerBulletFireTimer;
 
 private:
+	CTimer* m_BarrierCoolTimer;
+	CTimer* m_LaserCoolTimer;
 	CPlayerBarrierLauncher* m_BarrierLauncher;
 	CPlayerLaserLauncher* m_LaserLauncher;
 private:

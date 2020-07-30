@@ -14,7 +14,6 @@ CGameScene02::~CGameScene02()
 void CGameScene02::Init()
 {
 	CGameManager::m_ObjectManager = GetObjectManager();
-
 	m_ScrollBackground01 = new CScrollBackground(D2D1::Point2F(0, 0), BACKGROUND, CGameManager::m_ScrollSpeed);
 	m_Player = new CPlayer(D2D1::Point2F(-100, 350), PLAYER, MAX_PLAYER_HP);
 	
@@ -36,6 +35,8 @@ void CGameScene02::Init()
 	AddUI(dynamic_cast<CGameObject*>(m_GameUI));
 
 	Score::CScoreManager::SetScore(3000);
+	SOUND->InitSound();
+	SOUND->PlaySoundFunc("Alan Walker - Fade");
 	CSceneObject::Init();
 	AllInitalize();
 }
@@ -76,6 +77,7 @@ void CGameScene02::FrameMove(DWORD elapsed)
 		}
 
 	}
+	SOUND->UpdateSound();
 	CSceneObject::FrameMove(elapsed);
 	AllFrameMove(elapsed);
 }
@@ -110,7 +112,7 @@ void CGameScene02::Control(CInput* m_Input)
 
 	if (m_Input->KeyDown(VK_F9)) {
 		CGameManager::isinvincibility = TRUE;
-		CGameManager::m_PlayerAttribute.m_ATKDamage = 500;
+		CGameManager::m_playerAttr.m_ATKDamage = 500;
 		CGameManager::ApplyScore = 1000.0f;
 	}
 	CSceneObject::Control(m_Input);
@@ -119,7 +121,7 @@ void CGameScene02::Control(CInput* m_Input)
 
 void CGameScene02::Release()
 {
-
+	SOUND->ReleaseSound();
 	CSceneObject::Release();
 	AllRelease();
 }
