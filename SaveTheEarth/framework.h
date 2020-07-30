@@ -34,6 +34,7 @@
 #include <Mmsystem.h>
 #include <atlstr.h>
 #include <string>
+#include <WinSock2.h>
 
 #include <map>
 #include <list>
@@ -122,6 +123,7 @@ typedef enum class LaserLauncherState {
 #include "CInput.h"
 #include "CGraphics.h"
 #include "CSprite.h"
+#include "cNetwork.h"
 #include "cSoundManager.h"
 #include "Cimage.h"
 #include "CImageManager.h"
