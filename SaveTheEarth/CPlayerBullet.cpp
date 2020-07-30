@@ -8,7 +8,7 @@ CPlayerBullet::CPlayerBullet(D2D1_POINT_2F m_Pos, FLOAT m_Rot, INT tag, INT m_GU
 
 	theta = m_Rot;
 	m_BulletSpeed = 1.0f;
-	m_BulletDamage = CGameManager::m_PlayerAttribute.m_ATKDamage;
+	m_BulletDamage = CGameManager::m_playerAttr.m_ATKDamage;
 
 	m_RifleBulletAnimFunc = new CSpriteAnimation();
 	m_RifleEffectAnimFunc = new CSpriteAnimation();
@@ -91,15 +91,15 @@ void CPlayerBullet::FrameMove(DWORD elapsed)
 		switch (m_GUN)
 		{
 		case Rifle:
-			m_BulletSpeed = 20;
+			m_BulletSpeed = 2;
 			break;
 		case Shotgun:
-			m_BulletSpeed = 10;
+			m_BulletSpeed = 1;
 			break;
 		}
 		FLOAT Angle = theta * CGameManager::radian;
-		m_Pos.x += cosf(Angle) * m_BulletSpeed;
-		m_Pos.y += sinf(Angle) * m_BulletSpeed;
+		m_Pos.x += cosf(Angle) * m_BulletSpeed * elapsed;
+		m_Pos.y += sinf(Angle) * m_BulletSpeed * elapsed;
 	}
 }
 

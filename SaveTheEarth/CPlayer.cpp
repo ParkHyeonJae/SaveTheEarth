@@ -20,6 +20,10 @@ CPlayer::CPlayer(D2D1_POINT_2F m_Pos, INT tag, FLOAT m_HP) : CGameObject()
 
 	m_playerBulletFireTimer = new CTimer(550);
 	m_HitFadeInOut = new CFadeInOut(PLAYER_HIT_OVERLAY_COUNT, 0.2f);
+
+	m_BarrierCoolTimer = new CTimer(10000);
+	m_LaserCoolTimer = new CTimer(20000);
+
 	Init();
 }
 
@@ -61,11 +65,11 @@ void CPlayer::FrameMove(DWORD elapsed)
 			IsStart = FALSE;
 		MoveR();
 	}
-	if (CGameManager::m_PlayerAttribute.m_IncreaseHP != 0 
-		&& m_HP <= MAX_PLAYER_HP - CGameManager::m_PlayerAttribute.m_IncreaseHP)
+	if (CGameManager::m_playerAttr.m_UPHP != 0 
+		&& m_HP <= MAX_PLAYER_HP - CGameManager::m_playerAttr.m_UPHP)
 	{
-		m_HP += CGameManager::m_PlayerAttribute.m_IncreaseHP;
-		CGameManager::m_PlayerAttribute.m_IncreaseHP = 0;
+		m_HP += CGameManager::m_playerAttr.m_UPHP;
+		CGameManager::m_playerAttr.m_UPHP = 0;
 	}
 	else {
 		static FLOAT wasPlayerHP = m_HP;
@@ -133,12 +137,12 @@ void CPlayer::Control(CInput* m_Input)
 			m_Pos.y = 0;
 	}
 	float RotDegree = atan2f(m_Pos.y - m_Input->GetMousePos().y, m_Pos.x - m_Input->GetMousePos().x);
-	m_Rot = (RotDegree * (180.0f / PI)) + 180.0f;
+	m_Rot = (RotDegree * (180.0f / (FLOAT)PI)) + 180.0f;
 
-	if (CGameManager::m_PlayerAttribute.m_RPM != 0 && 0 < m_playerBulletFireTimer->GetDestTime() - CGameManager::m_PlayerAttribute.m_RPM)
+	if (CGameManager::m_playerAttr.m_RPM != 0 && 0 < m_playerBulletFireTimer->GetDestTime() - CGameManager::m_playerAttr.m_RPM)
 	{
-		m_playerBulletFireTimer->SetTimer(m_playerBulletFireTimer->GetDestTime() - CGameManager::m_PlayerAttribute.m_RPM);
-		CGameManager::m_PlayerAttribute.m_RPM = 0;
+		m_playerBulletFireTimer->SetTimer(m_playerBulletFireTimer->GetDestTime() - CGameManager::m_playerAttr.m_RPM);
+		CGameManager::m_playerAttr.m_RPM = 0;
 	}
 	if (CGameManager::EnableInput) {
 		if (m_Input->BtnPress(VK_LBUTTON))
@@ -147,8 +151,10 @@ void CPlayer::Control(CInput* m_Input)
 			if (m_playerBulletFireTimer->OnTimer())
 			{
 				m_GunState = Rifle;
-				m_PlayerBullet = new CPlayerBullet(D2D1::Point2F(CGameManager::m_PlayerPos.x, CGameManager::m_PlayerPos.y + 15.0f), m_Rot, PBULLET, m_GunState);
+				SOUND->PlayEffectFunc("LaserEffect");
+				m_PlayerBullet = new CPlayerBullet(D2D1::Point2F(CGameManager::m_PlayerPos.x, CGameManager::m_PlayerPos.y + 35.0f), m_Rot, PBULLET, m_GunState);
 				OBJECT->AddObject(dynamic_cast<CGameObject*>(m_PlayerBullet));
+				
 			}
 		}
 		if (m_Input->BtnPress(VK_RBUTTON))
@@ -156,20 +162,27 @@ void CPlayer::Control(CInput* m_Input)
 			if (m_playerBulletFireTimer->OnTimer())
 			{
 				m_GunState = Shotgun;
-				for (int i = m_Rot - 10; i < m_Rot + 10; i += 5)
+				SOUND->PlayEffectFunc("LaserEffect");
+				for (float i = m_Rot - 10.0f; i < m_Rot + 10.0f; i += 5.0f)
 				{
 					m_PlayerBullet = new CPlayerBullet(D2D1::Point2F(CGameManager::m_PlayerPos.x, CGameManager::m_PlayerPos.y + 30.0f), i, PBULLET, m_GunState);
 					OBJECT->AddObject(dynamic_cast<CGameObject*>(m_PlayerBullet));
 				}
 			}
 		}
-		if (m_Input->KeyDown('B') || m_Input->KeyDown('b')) {
-			m_BarrierLauncher = new CPlayerBarrierLauncher(&m_Pos, BARRIER);
-			OBJECT->AddObject(dynamic_cast<CGameObject*>(m_BarrierLauncher));
+		if (m_BarrierCoolTimer->CoolTimer()) {
+			if (m_Input->KeyDown('B') || m_Input->KeyDown('b')) {
+				m_BarrierLauncher = new CPlayerBarrierLauncher(&m_Pos, BARRIER);
+				OBJECT->AddObject(dynamic_cast<CGameObject*>(m_BarrierLauncher));
+				m_BarrierCoolTimer->InitCool();
+			}
 		}
-		if (m_Input->KeyDown('V') || m_Input->KeyDown('v')) {
-			m_LaserLauncher = new CPlayerLaserLauncher(&m_Pos, PLAYERLASER);
-			OBJECT->AddObject(dynamic_cast<CGameObject*>(m_LaserLauncher));
+		if (m_LaserCoolTimer->CoolTimer()) {
+			if (m_Input->KeyDown('V') || m_Input->KeyDown('v')) {
+				m_LaserLauncher = new CPlayerLaserLauncher(&m_Pos, PLAYERLASER);
+				OBJECT->AddObject(dynamic_cast<CGameObject*>(m_LaserLauncher));
+				m_LaserCoolTimer->InitCool();
+			}
 		}
 	}
 	CGameManager::m_PlayerPos = m_Pos;
@@ -196,6 +209,8 @@ void CPlayer::Render()
 			->MultiRender("playerForwardMotion", m_PlayerMotionAnimSequence[m_playerState]
 				, D2D1::Point2F(m_Pos.x, m_Pos.y), D2D1::SizeF(1.0f, 1.0f), NULL, 0.0f, overlay);
 		m_PlayerMotionAnimSequence[m_playerState] = m_PlayerMotionAnimFunc[m_playerState]->OnAnimRender(50, 0, 4);
+		break;
+	default:
 		break;
 	}
 	
@@ -232,6 +247,8 @@ void CPlayer::Render()
 			m_ShotgunMotionFunc->InitSequence();
 			m_GunState = DEFAULT;
 		}
+		break;
+	default:
 		break;
 	}
 	

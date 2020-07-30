@@ -104,7 +104,7 @@ void CBossEnemy::FrameMove(DWORD elapsed)
 		m_Pos.x = Mathf::Lerp(m_Pos.x, m_TargetPos.x, deltaTime);
 		m_Pos.y = Mathf::Lerp(m_Pos.y, m_TargetPos.y, deltaTime);
 		if (deltaTime <= 1.0f)
-			deltaTime += 0.01;
+			deltaTime += 0.01f;
 		else {
 			m_TargetPos = { 1060,  static_cast<FLOAT>(Mathf::RandomIntValue(100,200)) };
 			deltaTime = 0.01f;
@@ -138,7 +138,7 @@ void CBossEnemy::Control(CInput* Input)
 			default:
 				for (size_t i = 0; i < 10; i++)
 				{
-					OBJECT->AddObject(dynamic_cast<CGameObject*>(new CNormalEnemy(D2D1::Point2F(MAX_WIN_WIDTH, rand() % MAX_WIN_HEIGHT), ENEMY)));
+					OBJECT->AddObject(dynamic_cast<CGameObject*>(new CNormalEnemy(D2D1::Point2F((FLOAT)MAX_WIN_WIDTH, (FLOAT)(rand() % MAX_WIN_HEIGHT)), ENEMY)));
 				}
 				break;
 			}

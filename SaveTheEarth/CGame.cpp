@@ -15,8 +15,9 @@ INT CGame::Init()
 
 	m_ObjectManager = new CObjectManager();
 	m_ImageManager = new CImageManager();
+	m_SoundManager = new cSoundManager();
 
-	m_GameManager = new CGameManager(m_Gfx, m_Input, m_ObjectManager, m_ImageManager);
+	m_GameManager = new CGameManager(m_Gfx, m_Input, m_ObjectManager, m_ImageManager, m_SoundManager);
 
 
 	m_GameScene01 = new CGameScene01();

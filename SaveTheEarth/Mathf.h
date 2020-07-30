@@ -9,7 +9,5 @@ public:
 	static BOOL Probability(INT prob);
 	static INT RandomIntValue(INT start, INT End);
 	static FLOAT Radian;
-	static Vector2 PointOnCubicBezier(Vector2* cp, float t);
-
 };
 
