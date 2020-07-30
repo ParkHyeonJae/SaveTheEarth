@@ -143,7 +143,6 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 					{
 						if (m_BossLaser->GetLaserState() == LAUNCHER_STATE::LaserFire) {
 							
-							RECT temp;
 							if (OnCollision(m_cPlayer->GetCollider(), m_BossLaser->GetCollider()))
 							{
 								m_cPlayer->GetDamage(100.0f);
@@ -174,7 +173,6 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 				{
 					CPlayer* m_cPlayer = dynamic_cast<CPlayer*>((*iter02));
 
-					RECT temp;
 					if (OnCollision(m_cBossBullet->GetCollider(), m_cPlayer->GetCollider()))		//총알이 보스하고 닿았을때
 					{
 						m_cBossBullet->SetColl(TRUE);

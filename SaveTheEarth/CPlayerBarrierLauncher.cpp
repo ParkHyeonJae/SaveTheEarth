@@ -47,8 +47,8 @@ void CPlayerBarrierLauncher::LauncherInit()
 void CPlayerBarrierLauncher::LauncherUpdate(DWORD elapsed)
 {
 	SetCollider(
-		m_Pos->x - 100, m_Pos->y - 120,
-		m_Pos->x, m_Pos->y
+		(LONG)(m_Pos->x - 100.0f), (LONG)(m_Pos->y - 120.0f),
+		(LONG)m_Pos->x, (LONG)m_Pos->y
 	);
 }
 

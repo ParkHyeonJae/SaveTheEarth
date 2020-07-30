@@ -17,7 +17,7 @@ CItem::CItem(D2D1_POINT_2F m_Pos, INT tag)
 		break;
 	}
 	ItemState = State;
-	MoveAngle = rand() % 360;
+	MoveAngle = (FLOAT)(rand() % 360);
 
 }
 

@@ -40,7 +40,7 @@ void CNormalEnemy::Render()
 	if (!m_isDelete) {
 		if (!m_deadCheck)
 		{
-			angle = atan2f(m_Pos.y - m_TargetPos.y, m_Pos.x - m_TargetPos.x) * (180.0f / PI);
+			angle = atan2f(m_Pos.y - m_TargetPos.y, m_Pos.x - m_TargetPos.x) * (180.0f /(FLOAT) PI);
 			SharkAnimSize = CGameManager::m_ImageManager->GetMultiImageSize("SharkAnim", SharkAnimSequence);
 			D2D1_POINT_2F center = { m_Pos.x + (SharkAnimSize.width / 2), m_Pos.y + (SharkAnimSize.height / 2) };
 			IMAGES
