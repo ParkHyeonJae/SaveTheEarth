@@ -50,7 +50,7 @@ void CBossBullet::Init()
 
 void CBossBullet::Render()
 {
-
+	
 	if (!CollCheck) {		//충돌안됬을때
 		IMAGES->MultiRender("BossBullet", m_Bullet.sequence, m_Pos, D2D1::SizeF(1.0f, 1.0f), NULL, 0.0f, 1.0f);
 		m_Bullet.sequence = m_Bullet.AnimFunc->OnAnimRender(100, 0, 3);

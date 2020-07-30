@@ -59,7 +59,7 @@ void CPlayerBarrierLauncher::LauncherRender()
 		SetFinish(FALSE);
 		CGameManager::isinvincibility = TRUE;
 		IMAGES->MultiRender("PlayerBarrier", m_Barrier.sequence,
-			D2D1::Point2F(GetCollider().left, GetCollider().top), D2D1::SizeF(1.0f, 1.0f), NULL, 0.0f, 1.0f);
+			D2D1::Point2F((FLOAT)GetCollider().left, (FLOAT)GetCollider().top), D2D1::SizeF(1.0f, 1.0f), NULL, 0.0f, 1.0f);
 		m_Barrier.sequence = m_Barrier.AnimFunc->OnAnimRender(100, 0, 6);
 	}
 	else {		//n초가 되었을 시

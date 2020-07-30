@@ -18,6 +18,8 @@ public:
 	static DWORD m_fps;
 	static FLOAT m_playerHp;
 	static 	CImageManager* m_ImageManager;
+	static cSoundManager* m_SoundManager;
+
 	static BOOL isinvincibility;
 	static BOOL EnableInput;
 	
@@ -27,7 +29,7 @@ public:
 
 	static BOOL m_bBarrier;
 public:
-	CGameManager(CGraphics * m_Gfx, CInput* m_Input, CObjectManager * m_ObjectManager, CImageManager* m_ImageManager);
+	CGameManager(CGraphics * m_Gfx, CInput* m_Input, CObjectManager * m_ObjectManager, CImageManager* m_ImageManager, cSoundManager* m_SoundManager);
 	~CGameManager();
 
 	void Init();
@@ -38,3 +40,4 @@ public:
 };
 #define IMAGES CGameManager::m_ImageManager->GetImages()
 #define OBJECT CGameManager::m_ObjectManager
+#define SOUND CGameManager::m_SoundManager

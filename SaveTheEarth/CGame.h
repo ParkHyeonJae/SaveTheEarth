@@ -10,7 +10,7 @@ private:
 	CObjectManager* m_ObjectManager;
 	CImageManager* m_ImageManager;
 	CGameManager* m_GameManager;
-
+	cSoundManager* m_SoundManager;
 	
 public:
 	CGame();
