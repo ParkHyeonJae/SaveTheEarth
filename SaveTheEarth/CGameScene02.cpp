@@ -56,12 +56,12 @@ void CGameScene02::FrameMove(DWORD elapsed)
 		}
 		if (m_EnemySpawnTimer->OnTimer())
 		{
-			m_NormalEnemy = new CNormalEnemy(D2D1::Point2F(MAX_WIN_WIDTH, rand() % MAX_WIN_HEIGHT), ENEMY);
+			m_NormalEnemy = new CNormalEnemy(D2D1::Point2F((FLOAT)MAX_WIN_WIDTH, (FLOAT)(rand() % MAX_WIN_HEIGHT)), ENEMY);
 			AddObject(dynamic_cast<CGameObject*>(m_NormalEnemy));
 		}
 		if (m_MisileSpawnTimer->OnTimer())
 		{
-			m_misileEnemy = new MisileEnemy(D2D1::Point2F(0, Mathf::RandomIntValue(0, 1000)), MISILE);
+			m_misileEnemy = new MisileEnemy(D2D1::Point2F(0.0f, (FLOAT)Mathf::RandomIntValue(0, 1000)), MISILE);
 			AddObject(dynamic_cast<CGameObject*>(m_misileEnemy));
 		}
 	}
@@ -71,7 +71,7 @@ void CGameScene02::FrameMove(DWORD elapsed)
 		//m_Player->SetHp(m_Player->GetHp() - 0.1f);
 		if (m_BossSpawnTimer->OnTimer())
 		{
-			m_BossEnemy = new CBossEnemy(D2D1::Point2F(MAX_WIN_WIDTH, rand() % MAX_WIN_HEIGHT), BOSS);
+			m_BossEnemy = new CBossEnemy(D2D1::Point2F((FLOAT)MAX_WIN_WIDTH, (FLOAT)(rand() % MAX_WIN_HEIGHT)), BOSS);
 			AddObject(dynamic_cast<CGameObject*>(m_BossEnemy));
 		}
 
@@ -90,16 +90,16 @@ void CGameScene02::Control(CInput* m_Input)
 
 	//spawn Enemy
 	if (m_Input->KeyDown(VK_F1)) {
-		m_NormalEnemy = new CNormalEnemy(D2D1::Point2F(MAX_WIN_WIDTH, rand() % MAX_WIN_HEIGHT), ENEMY);
+		m_NormalEnemy = new CNormalEnemy(D2D1::Point2F((FLOAT)MAX_WIN_WIDTH, (FLOAT)(rand() % MAX_WIN_HEIGHT)), ENEMY);
 		AddObject(dynamic_cast<CGameObject*>(m_NormalEnemy));
 
 	}
 	if (m_Input->KeyDown(VK_F2)) {
-		m_misileEnemy = new MisileEnemy(D2D1::Point2F(0, Mathf::RandomIntValue(0, 500)), MISILE);
+		m_misileEnemy = new MisileEnemy(D2D1::Point2F(0.0f, (FLOAT)Mathf::RandomIntValue(0, 500)), MISILE);
 		AddObject(dynamic_cast<CGameObject*>(m_misileEnemy));
 	}
 	if (m_Input->KeyDown(VK_F3)) {
-		m_BossEnemy = new CBossEnemy(D2D1::Point2F(MAX_WIN_WIDTH, rand() % MAX_WIN_HEIGHT), BOSS);
+		m_BossEnemy = new CBossEnemy(D2D1::Point2F((FLOAT)MAX_WIN_WIDTH, (FLOAT)(rand() % MAX_WIN_HEIGHT)), BOSS);
 		AddObject(dynamic_cast<CGameObject*>(m_BossEnemy));
 	}
 

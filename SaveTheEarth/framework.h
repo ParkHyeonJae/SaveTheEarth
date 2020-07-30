@@ -9,12 +9,19 @@
 // Windows 헤더 파일
 #include <windows.h>
 
+#pragma comment( lib, "fmod_vc.lib" )
+#pragma comment( lib, "fmodL_vc.lib" )
+
 #pragma comment(lib, "winmm.lib")
 #pragma comment(lib, "windowscodecs.lib")
 #pragma comment(lib, "d2d1.lib")
 #pragma comment(lib, "dwrite.lib")
 
+
+#pragma warning(disable: 4996)
+
 // C 런타임 헤더 파일입니다.
+#include <fmod.h>
 #include <stdlib.h>
 #include <malloc.h>
 #include <memory.h>
@@ -109,10 +116,13 @@ typedef enum class LaserLauncherState {
 	LaserOff
 }LAUNCHER_STATE;
 
+
+
 #include "singleton.h"
 #include "CInput.h"
 #include "CGraphics.h"
 #include "CSprite.h"
+#include "cSoundManager.h"
 #include "Cimage.h"
 #include "CImageManager.h"
 #include "CSpriteAnimation.h"

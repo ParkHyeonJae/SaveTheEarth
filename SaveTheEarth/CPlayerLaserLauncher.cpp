@@ -50,8 +50,8 @@ void CPlayerLaserLauncher::LauncherInit()
 void CPlayerLaserLauncher::LauncherUpdate(DWORD elapsed)
 {
 	SetCollider(
-		m_Pos->x, m_Pos->y,
-		m_Pos->x + 1600, m_Pos->y + 200
+		(LONG)m_Pos->x, (LONG)m_Pos->y,
+		(LONG)(m_Pos->x + 1600), (LONG)(m_Pos->y + 200)
 	);
 }
 
