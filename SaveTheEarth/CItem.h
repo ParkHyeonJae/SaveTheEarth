@@ -6,6 +6,9 @@ private:
 
 	FLOAT MoveAngle;
 	CSprite* m_ItemSprite;
+
+	CPlayerLaserLauncher* m_LaserLauncher;
+	CPlayerBarrierLauncher* m_BarrierLauncher;
 public:
 	CItem(D2D1_POINT_2F m_Pos, INT tag);
 	~CItem();
