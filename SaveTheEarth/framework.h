@@ -107,7 +107,9 @@ enum ITEMS
 {
 	ATKUP,
 	HPUP,
-	RPMUP
+	RPMUP,
+	LASERBEAM,
+	BARRIER
 };
 typedef enum class LaserLauncherState {
 	LaserCharging,
