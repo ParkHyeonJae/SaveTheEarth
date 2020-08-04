@@ -122,7 +122,7 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 
 					if (OnCollision(m_cPlayer->GetCollider(), m_Item->GetCollider()))
 					{
-						if (m_Item->GetItemState() == HPUP) {
+						if (m_Item->GetItemState() == (INT)ITEMS::HPUP) {
 							if (m_cPlayer->GetHp() < MAX_PLAYER_HP) {
 								m_Item->Apply();
 								m_gameObjectList.erase(iter02);
