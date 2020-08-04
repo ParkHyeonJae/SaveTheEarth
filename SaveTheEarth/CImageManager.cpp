@@ -210,6 +210,8 @@ INT CImageManager::ImageInit()
 	m_Images->AddImage("ATKUP", new CSprite(L"../Images/Sprites/01 Items/01 ATKUP.png", CGameManager::m_Gfx));
 	m_Images->AddImage("HPUP", new CSprite(L"../Images/Sprites/01 Items/02 HPUP.png", CGameManager::m_Gfx));
 	m_Images->AddImage("RPMUP", new CSprite(L"../Images/Sprites/01 Items/03 RPMUP.png", CGameManager::m_Gfx));
+	m_Images->AddImage("LASERBEAM", new CSprite(L"../Images/Sprites/01 Items/04 LASERBEAM.png", CGameManager::m_Gfx));
+	m_Images->AddImage("BARRIER", new CSprite(L"../Images/Sprites/01 Items/05 BARRIER.png", CGameManager::m_Gfx));
 
 	//Boss Laser Skills
 	// 보스 스킬 - 레이저 (차징)
