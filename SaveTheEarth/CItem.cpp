@@ -35,8 +35,7 @@ CItem::~CItem()
 
 void CItem::Apply()
 {
-	unique_ptr<CPlayerLaserLauncher> m_LaserLauncher = make_unique<CPlayerLaserLauncher>(&m_Pos, PLAYERLASER);
-	unique_ptr<CPlayerBarrierLauncher> m_BarrierLauncher = make_unique<CPlayerBarrierLauncher>(&m_Pos, BARRIER);
+	
 	switch ((ITEMS)ItemState)
 	{
 	case ITEMS::ATKUP:
@@ -49,12 +48,14 @@ void CItem::Apply()
 		CGameManager::m_playerAttr.m_RPM = 10.0f;
 		break;
 	case ITEMS::LASERBEAM:
+		m_LaserLauncher = new CPlayerLaserLauncher(&CGameManager::m_PlayerPos, PLAYERLASER);
 		//CPlayerLaserLauncher * m_LaserLauncher = new CPlayerLaserLauncher(&m_Pos, PLAYERLASER);
-		OBJECT->AddObject(dynamic_cast<CGameObject*>(m_LaserLauncher.get()));
+		OBJECT->AddObject(dynamic_cast<CGameObject*>(m_LaserLauncher));
 		break;
 	case ITEMS::BARRIER:
+		m_BarrierLauncher = new CPlayerBarrierLauncher(&CGameManager::m_PlayerPos, BARRIER);
 		//CPlayerBarrierLauncher * m_BarrierLauncher = new CPlayerBarrierLauncher(&m_Pos, BARRIER);
-		OBJECT->AddObject(dynamic_cast<CGameObject*>(m_BarrierLauncher.get()));
+		OBJECT->AddObject(dynamic_cast<CGameObject*>(m_BarrierLauncher));
 		break;
 	default:
 		break;
