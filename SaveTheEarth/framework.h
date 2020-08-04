@@ -103,14 +103,14 @@ enum GUNS
 	Rifle,
 	Shotgun
 };
-enum ITEMS
+typedef enum class ITEMS
 {
 	ATKUP,
 	HPUP,
 	RPMUP,
 	LASERBEAM,
 	BARRIER
-};
+}ITEMS;
 typedef enum class LaserLauncherState {
 	LaserCharging,
 	LaserON,

@@ -4,21 +4,21 @@ CItem::CItem(D2D1_POINT_2F m_Pos, INT tag)
 {
 	this->m_Pos = m_Pos;
 	this->m_tag = tag;
-	INT State = rand() % 3;
-	switch (State) {
-	case ATKUP:
+	INT State = rand() % 5;
+	switch ((ITEMS)State) {
+	case ITEMS::ATKUP:
 		m_ItemSprite = IMAGES->GetSprite("ATKUP");
 		break;
-	case HPUP:
+	case ITEMS::HPUP:
 		m_ItemSprite = IMAGES->GetSprite("HPUP");
 		break;
-	case RPMUP:
+	case ITEMS::RPMUP:
 		m_ItemSprite = IMAGES->GetSprite("RPMUP");
 		break;
-	case LASERBEAM:
+	case ITEMS::LASERBEAM:
 		m_ItemSprite = IMAGES->GetSprite("LASERBEAM");
 		break;
-	case BARRIER:
+	case ITEMS::BARRIER:
 		m_ItemSprite = IMAGES->GetSprite("BARRIER");
 		break;
 	default:
@@ -35,16 +35,28 @@ CItem::~CItem()
 
 void CItem::Apply()
 {
-	switch (ItemState)
+	unique_ptr<CPlayerLaserLauncher> m_LaserLauncher = make_unique<CPlayerLaserLauncher>(&m_Pos, PLAYERLASER);
+	unique_ptr<CPlayerBarrierLauncher> m_BarrierLauncher = make_unique<CPlayerBarrierLauncher>(&m_Pos, BARRIER);
+	switch ((ITEMS)ItemState)
 	{
-	case ATKUP:
+	case ITEMS::ATKUP:
 		CGameManager::m_playerAttr.m_ATKDamage += 1.0f;
 		break;
-	case HPUP:
+	case ITEMS::HPUP:
 		CGameManager::m_playerAttr.m_UPHP = 100.0f;
 		break;
-	case RPMUP:
+	case ITEMS::RPMUP:
 		CGameManager::m_playerAttr.m_RPM = 10.0f;
+		break;
+	case ITEMS::LASERBEAM:
+		//CPlayerLaserLauncher * m_LaserLauncher = new CPlayerLaserLauncher(&m_Pos, PLAYERLASER);
+		OBJECT->AddObject(dynamic_cast<CGameObject*>(m_LaserLauncher.get()));
+		break;
+	case ITEMS::BARRIER:
+		//CPlayerBarrierLauncher * m_BarrierLauncher = new CPlayerBarrierLauncher(&m_Pos, BARRIER);
+		OBJECT->AddObject(dynamic_cast<CGameObject*>(m_BarrierLauncher.get()));
+		break;
+	default:
 		break;
 	}
 }
