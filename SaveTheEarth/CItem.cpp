@@ -15,6 +15,14 @@ CItem::CItem(D2D1_POINT_2F m_Pos, INT tag)
 	case RPMUP:
 		m_ItemSprite = IMAGES->GetSprite("RPMUP");
 		break;
+	case LASERBEAM:
+		m_ItemSprite = IMAGES->GetSprite("LASERBEAM");
+		break;
+	case BARRIER:
+		m_ItemSprite = IMAGES->GetSprite("BARRIER");
+		break;
+	default:
+		break;
 	}
 	ItemState = State;
 	MoveAngle = (FLOAT)(rand() % 360);
