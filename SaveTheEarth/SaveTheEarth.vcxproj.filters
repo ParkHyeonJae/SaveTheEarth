@@ -61,6 +61,12 @@
     <Filter Include="헤더 파일\CGameObject\Scene02\PLAYER">
       <UniqueIdentifier>{df03fbfc-91a3-4410-aee2-8e046d1f902a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\CGameObject\Scene03">
+      <UniqueIdentifier>{58cc032e-8804-46b2-8883-600c77f27901}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\CGameObject\Scene03">
+      <UniqueIdentifier>{e80bba14-6bf2-479f-96c9-b6fce0b2571c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CSceneObject.h">
@@ -189,6 +195,15 @@
     <ClInclude Include="cSoundManager.h">
       <Filter>헤더 파일\Manager</Filter>
     </ClInclude>
+    <ClInclude Include="COptionController.h">
+      <Filter>헤더 파일\CGameObject\Scene01</Filter>
+    </ClInclude>
+    <ClInclude Include="CGameScene03.h">
+      <Filter>헤더 파일\CScene</Filter>
+    </ClInclude>
+    <ClInclude Include="cStageClearBackground.h">
+      <Filter>헤더 파일\CGameObject\Scene03</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CSceneObject.cpp">
@@ -298,6 +313,15 @@
     </ClCompile>
     <ClCompile Include="cSoundManager.cpp">
       <Filter>소스 파일\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="COptionController.cpp">
+      <Filter>소스 파일\CGameObject\Scene01</Filter>
+    </ClCompile>
+    <ClCompile Include="CGameScene03.cpp">
+      <Filter>소스 파일\CScene</Filter>
+    </ClCompile>
+    <ClCompile Include="cStageClearBackground.cpp">
+      <Filter>소스 파일\CGameObject\Scene03</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -77,6 +77,8 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>C:\Program Files %28x86%29\FMOD SoundSystem\FMOD Studio API Windows\api\core\inc;$(IncludePath)</IncludePath>
+    <LibraryPath>C:\Program Files %28x86%29\FMOD SoundSystem\FMOD Studio API Windows\api\core\lib\x86;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -112,6 +114,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Program Files %28x86%29\FMOD SoundSystem\FMOD Studio API Windows\api\core\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -169,6 +172,7 @@
     <ClInclude Include="CGameObject.h" />
     <ClInclude Include="CGameScene01.h" />
     <ClInclude Include="CGameScene02.h" />
+    <ClInclude Include="CGameScene03.h" />
     <ClInclude Include="CGraphics.h" />
     <ClInclude Include="CHealthBar.h" />
     <ClInclude Include="Cimage.h" />
@@ -180,6 +184,7 @@
     <ClInclude Include="CNormalEnemy.h" />
     <ClInclude Include="CNormalEnemyBullet.h" />
     <ClInclude Include="CObjectManager.h" />
+    <ClInclude Include="COptionController.h" />
     <ClInclude Include="CPlayer.h" />
     <ClInclude Include="CPlayerBarrierLauncher.h" />
     <ClInclude Include="CPlayerBullet.h" />
@@ -190,6 +195,7 @@
     <ClInclude Include="cSoundManager.h" />
     <ClInclude Include="CSprite.h" />
     <ClInclude Include="CSpriteAnimation.h" />
+    <ClInclude Include="cStageClearBackground.h" />
     <ClInclude Include="CTimer.h" />
     <ClInclude Include="CTitleBackground.h" />
     <ClInclude Include="framework.h" />
@@ -213,6 +219,7 @@
     <ClCompile Include="CGameObject.cpp" />
     <ClCompile Include="CGameScene01.cpp" />
     <ClCompile Include="CGameScene02.cpp" />
+    <ClCompile Include="CGameScene03.cpp" />
     <ClCompile Include="CGraphics.cpp" />
     <ClCompile Include="CHealthBar.cpp" />
     <ClCompile Include="Cimage.cpp" />
@@ -223,6 +230,7 @@
     <ClCompile Include="CNormalEnemy.cpp" />
     <ClCompile Include="CNormalEnemyBullet.cpp" />
     <ClCompile Include="CObjectManager.cpp" />
+    <ClCompile Include="COptionController.cpp" />
     <ClCompile Include="CPlayer.cpp" />
     <ClCompile Include="CPlayerBarrierLauncher.cpp" />
     <ClCompile Include="CPlayerBullet.cpp" />
@@ -233,6 +241,7 @@
     <ClCompile Include="cSoundManager.cpp" />
     <ClCompile Include="CSprite.cpp" />
     <ClCompile Include="CSpriteAnimation.cpp" />
+    <ClCompile Include="cStageClearBackground.cpp" />
     <ClCompile Include="CTimer.cpp" />
     <ClCompile Include="CTitleBackground.cpp" />
     <ClCompile Include="Mathf.cpp" />

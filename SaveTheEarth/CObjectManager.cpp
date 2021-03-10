@@ -336,7 +336,7 @@ void CObjectManager::AllFrameMove(DWORD elapsed)
 		{
 			if (dynamic_cast<CBossEnemy*>((*iter))->IsDelete()) {
 				m_gameObjectList.erase(iter);
-				CGameManager::nowStatus = TITLE;
+				CGameManager::nowStatus = STAGECLEAR;
 				break;
 			}
 		}

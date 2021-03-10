@@ -21,7 +21,7 @@
 #pragma warning(disable: 4996)
 
 // C 런타임 헤더 파일입니다.
-#include <fmod.h>
+#include <fmod.hpp>
 #include <stdlib.h>
 #include <malloc.h>
 #include <memory.h>
@@ -89,6 +89,7 @@ enum TAG {
 enum SCENE {
 	TITLE,
 	GAME01,
+	STAGECLEAR,
 	GAMEOVER
 };
 enum PLAYERSTATE
@@ -147,11 +148,14 @@ typedef enum class LaserLauncherState {
 #include "CItem.h"
 #include "CScrollBackground.h"
 #include "CTitleBackground.h"
+#include "CStageClearBackground.h"
 #include "CInGameUI.h"
 #include "CObjectManager.h"
 #include "CSceneObject.h"
+#include "COptionController.h"
 #include "CGameScene01.h"
 #include "CGameScene02.h"
+#include "CGameScene03.h"
 #include "CGameManager.h"
 #include "CDX2DApp.h"
 #include "CGame.h"

@@ -22,12 +22,15 @@ INT CGame::Init()
 
 	m_GameScene01 = new CGameScene01();
 	m_GameScene02 = new CGameScene02();
+	m_GameScene03 = new CGameScene03();
 
 	m_SceneList.push_back(m_GameScene01);
 	m_SceneList.push_back(m_GameScene02);
+	m_SceneList.push_back(m_GameScene03);
 
 	m_GameManager->Init();
 	m_ImageManager->ImageInit();
+	m_SoundManager->InitSound();
 
 	auto iter = m_SceneList.begin();
 	std::advance(iter, CGameManager::nowStatus);
@@ -43,11 +46,23 @@ void CGame::Destroy()
 	std::advance(iter, CGameManager::nowStatus);
 
 	(*iter)->Release();
+
+	if (m_SoundManager)
+	{
+		m_SoundManager->ReleaseSound();
+		delete m_SoundManager;
+	}
+
+	if (m_ImageManager)
+		delete m_ImageManager;
+
 	if (m_GameManager)
 	{
 		m_GameManager->Release();
 		delete m_GameManager;
 	}
+
+	
 }
 
 INT CGame::FrameMove(DWORD elapsed)
