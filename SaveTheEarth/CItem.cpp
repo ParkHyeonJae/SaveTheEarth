@@ -48,7 +48,7 @@ void CItem::Apply()
 		CGameManager::m_playerAttr.m_RPM = 10.0f;
 		break;
 	case ITEMS::LASERBEAM:
-		m_LaserLauncher = new CPlayerLaserLauncher(&CGameManager::m_PlayerPos, PLAYERLASER);
+		m_LaserLauncher = new CPlayerLaserLauncher(CGameManager::m_PlayerPos, PLAYERLASER);
 		//CPlayerLaserLauncher * m_LaserLauncher = new CPlayerLaserLauncher(&m_Pos, PLAYERLASER);
 		OBJECT->AddObject(dynamic_cast<CGameObject*>(m_LaserLauncher));
 		break;

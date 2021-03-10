@@ -5,9 +5,9 @@ private:
 	Animation m_PlayerLaser;
 	CTimer* m_PlayerLaserTimer;
 	FLOAT m_LaserDamage;
-	Vector2* m_Pos;
+	Vector2 m_Pos;
 public:
-	CPlayerLaserLauncher(D2D1_POINT_2F *m_Pos, INT tag);
+	CPlayerLaserLauncher(D2D1_POINT_2F m_Pos, INT tag);
 	~CPlayerLaserLauncher();
 	virtual void Init() override;
 	virtual void Render() override;

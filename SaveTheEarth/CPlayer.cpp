@@ -179,7 +179,7 @@ void CPlayer::Control(CInput* m_Input)
 		}
 		if (m_LaserCoolTimer->CoolTimer()) {
 			if (m_Input->KeyDown('V') || m_Input->KeyDown('v')) {
-				m_LaserLauncher = new CPlayerLaserLauncher(&m_Pos, PLAYERLASER);
+				m_LaserLauncher = new CPlayerLaserLauncher(m_Pos, PLAYERLASER);
 				OBJECT->AddObject(dynamic_cast<CGameObject*>(m_LaserLauncher));
 				m_LaserCoolTimer->InitCool();
 			}

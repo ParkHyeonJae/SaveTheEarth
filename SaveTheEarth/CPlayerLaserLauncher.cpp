@@ -1,6 +1,6 @@
 #include "framework.h"
 
-CPlayerLaserLauncher::CPlayerLaserLauncher(D2D1_POINT_2F *m_Pos, INT tag)
+CPlayerLaserLauncher::CPlayerLaserLauncher(D2D1_POINT_2F m_Pos, INT tag)
 {
 	this->m_Pos = m_Pos;
 	this->m_tag = tag;
@@ -49,9 +49,11 @@ void CPlayerLaserLauncher::LauncherInit()
 
 void CPlayerLaserLauncher::LauncherUpdate(DWORD elapsed)
 {
+	m_Pos = D2D1::Point2F(CGameManager::m_PlayerPos.x + 20, CGameManager::m_PlayerPos.y - 200);
+
 	SetCollider(
-		(LONG)m_Pos->x, (LONG)m_Pos->y,
-		(LONG)(m_Pos->x + 1600), (LONG)(m_Pos->y + 200)
+		(LONG)m_Pos.x, (LONG)m_Pos.y,
+		(LONG)(m_Pos.x + 1600), (LONG)(m_Pos.y + 200)
 	);
 }
 
@@ -62,7 +64,7 @@ void CPlayerLaserLauncher::LauncherRender()
 		SetRun(TRUE);
 		SetFinish(FALSE);
 		//IMAGES->Render("PlayerLaserGun", *m_Pos, 1.0f);
-		IMAGES->MultiRender("PlayerLaserAnim", m_PlayerLaser.sequence, *m_Pos, D2D1::SizeF(1.0f, 1.0f), NULL, 0.0f, 1.0f);
+		IMAGES->MultiRender("PlayerLaserAnim", m_PlayerLaser.sequence, m_Pos, D2D1::SizeF(1.0f, 1.0f), NULL, 0.0f, 1.0f);
 		m_PlayerLaser.sequence = m_PlayerLaser.AnimFunc->OnAnimRender(100, 0, 7);
 	}
 	else {

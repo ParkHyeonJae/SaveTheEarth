@@ -35,8 +35,13 @@ void CGameScene02::Init()
 	AddUI(dynamic_cast<CGameObject*>(m_GameUI));
 
 	Score::CScoreManager::SetScore(3000);
-	SOUND->InitSound();
+	//SOUND->InitSound();
+	SOUND->StopSoundChannelFunc();
 	SOUND->PlaySoundFunc("Masader - Super Power");
+
+	SOUND->SetBGMVolume(SOUND->GetBGMVolume());
+	std::cout << SOUND->SetSFXVolume(SOUND->GetSFXVolume()) << std::endl;
+
 	CSceneObject::Init();
 	AllInitalize();
 }
@@ -123,7 +128,7 @@ void CGameScene02::Control(CInput* m_Input)
 
 void CGameScene02::Release()
 {
-	SOUND->ReleaseSound();
+	//SOUND->ReleaseSound();
 	CSceneObject::Release();
 	AllRelease();
 }

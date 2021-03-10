@@ -192,7 +192,20 @@ INT CImageManager::ImageInit()
 	m_Images->AddMultiImage("UISelectAnim", m_UISelectAnim);
 
 	//Credit Image
-	m_Images->AddImage("Credit", new CSprite(L"../Images/Title/Credit.png", CGameManager::m_Gfx));
+	m_Images->AddImage("MenuUI/TitleCredit", new CSprite(L"../Images/Title/MenuUI/Credit/TitleCredit.png", CGameManager::m_Gfx));
+	m_Images->AddImage("MenuUI/GameClearCredit", new CSprite(L"../Images/Title/MenuUI/Credit/GameClearCredit.png", CGameManager::m_Gfx));
+
+	// How To Play
+	m_Images->AddImage("MenuUI/GameRule", new CSprite(L"../Images/Title/MenuUI/HowToPlay/GameRule.png", CGameManager::m_Gfx));
+
+	// Options
+	m_Images->AddImage("MenuUI/Options/Highlight_BGM", new CSprite(L"../Images/Title/MenuUI/Options/Highlight_BGM.png", CGameManager::m_Gfx));
+	m_Images->AddImage("MenuUI/Options/Highlight_SFX", new CSprite(L"../Images/Title/MenuUI/Options/Highlight_SFX.png", CGameManager::m_Gfx));
+
+	m_Images->AddImage("MenuUI/Options/True", new CSprite(L"../Images/Title/MenuUI/Options/True.png", CGameManager::m_Gfx));
+	m_Images->AddImage("MenuUI/Options/False", new CSprite(L"../Images/Title/MenuUI/Options/False.png", CGameManager::m_Gfx));
+
+
 
 	// Distance Bar
 	m_Images->AddImage("LongBar", new CSprite(L"../Images/Sprites/10 Distance Bar/long bar.png", CGameManager::m_Gfx));

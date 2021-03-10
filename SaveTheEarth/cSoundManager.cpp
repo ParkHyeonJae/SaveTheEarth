@@ -2,10 +2,12 @@
 
 FMOD_RESULT cSoundManager::InitSound()
 {
-	m_volume = 1.0f;
 	FMOD_RESULT result;
 	result = FMOD_System_Create(&g_system);
 	result = FMOD_System_Init(g_system, 32, FMOD_INIT_NORMAL, NULL);
+
+	m_effectChannel = nullptr;
+	m_channel = nullptr;
 
 	AppendSoundList();
 
@@ -16,7 +18,7 @@ FMOD_RESULT cSoundManager::InitSound()
 			FMOD_SOUND* sound;
 			char str[256] = "\0";
 			sprintf(str, "../Sounds/%s.mp3", m_SoundList[i].c_str());
-			FMOD_RESULT result = FMOD_System_CreateStream(g_system, str, FMOD_DEFAULT, 0, &sound);
+			FMOD_RESULT result = FMOD_System_CreateStream(g_system, str, FMOD_LOOP_NORMAL, 0, &sound);
 			AppendSound(m_SoundList[i], sound);
 		}
 	}
@@ -31,7 +33,7 @@ FMOD_RESULT cSoundManager::InitSound()
 			AppendSound(m_EffectList[i], effect);
 		}
 	}
-	FMOD_Channel_SetVolume(m_channel, m_volume);
+	//SetBGMVolume(m_volume);
 
 	return result;
 }
@@ -53,6 +55,26 @@ FMOD_RESULT cSoundManager::ReleaseSound()
 	result = FMOD_System_Release(g_system);
 	m_sounds.clear();
 	return result;
+}
+
+FMOD_RESULT cSoundManager::SetBGMVolume(FLOAT volume)
+{
+	return FMOD_Channel_SetVolume(m_channel, m_volume = volume);
+}
+
+FLOAT cSoundManager::GetBGMVolume()
+{
+	return m_volume;
+}
+
+FMOD_RESULT cSoundManager::SetSFXVolume(FLOAT volume)
+{
+	return FMOD_Channel_SetVolume(m_effectChannel, m_sfxVolume = volume);
+}
+
+FLOAT cSoundManager::GetSFXVolume()
+{
+	return m_sfxVolume;
 }
 
 VOID cSoundManager::AppendSoundList()
@@ -89,11 +111,15 @@ FMOD_SOUND* cSoundManager::FindSound(string soundKey)
 
 FMOD_RESULT cSoundManager::PlaySoundFunc(string soundKey)
 {
+	if (g_system == nullptr)
+		return FMOD_RESULT();
 	return FMOD_System_PlaySound(g_system, m_sounds[soundKey], 0, 0, &m_channel);
 }
 
 FMOD_RESULT cSoundManager::PlayEffectFunc(string soundKey)
 {
+	if (g_system == nullptr)
+		return FMOD_RESULT();
 	return FMOD_System_PlaySound(g_system, m_sounds[soundKey], 0, 0, &m_effectChannel);
 }
 
