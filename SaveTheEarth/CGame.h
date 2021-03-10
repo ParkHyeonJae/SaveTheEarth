@@ -6,6 +6,7 @@ private:
 
 	CGameScene01* m_GameScene01;
 	CGameScene02* m_GameScene02;
+	CGameScene03* m_GameScene03;
 
 	CObjectManager* m_ObjectManager;
 	CImageManager* m_ImageManager;

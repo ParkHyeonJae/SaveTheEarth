@@ -15,15 +15,16 @@ void CGameScene01::Init()
 	m_TitleBG = new CTitleBackground(D2D1::Point2F(0, 0), BACKGROUND);
 	AddObject(dynamic_cast<CGameObject*>(m_TitleBG));
 	
-	SOUND->InitSound();
+	//SOUND->InitSound();
+	SOUND->StopSoundChannelFunc();
 	SOUND->PlaySoundFunc("Pote_m-milky way");
+
 	CSceneObject::Init();
 	AllInitalize();
 }
 
 void CGameScene01::FrameMove(DWORD elapsed)
 {
-	
 	SOUND->UpdateSound();
 	CSceneObject::FrameMove(elapsed);
 	AllFrameMove(elapsed);
@@ -47,14 +48,13 @@ void CGameScene01::Render()
 
 void CGameScene01::Control(CInput* m_Input)
 {
-	
 	CSceneObject::Control(m_Input);
 	AllControl(m_Input);
 }
 
 void CGameScene01::Release()
 {
-	SOUND->ReleaseSound();
+	//SOUND->ReleaseSound();
 	CSceneObject::Release();
 	AllRelease();
 }

@@ -9,25 +9,25 @@ CTitleBackground::CTitleBackground(D2D1_POINT_2F m_Pos, INT tag)
 	m_Cloud01 = IMAGES->GetSprite("Title/Cloud");
 	m_Cloud02 = IMAGES->GetSprite("Title/Cloud");
 
-	m_GameStart[IDLE] =		IMAGES->GetSprite("UI/GameStart");
-	m_GameStart[SELECT] =	IMAGES->GetSprite("UI/GameStart_SELECT");
-	m_GameStart[PRESS] =	IMAGES->GetSprite("UI/GameStart_PRESS");
+	m_GameStart[(DWORD)UISTATE::IDLE]	=		IMAGES->GetSprite("UI/GameStart");
+	m_GameStart[(DWORD)UISTATE::SELECT] =	IMAGES->GetSprite("UI/GameStart_SELECT");
+	m_GameStart[(DWORD)UISTATE::PRESS]	=	IMAGES->GetSprite("UI/GameStart_PRESS");
 
-	m_HowToPlay[IDLE] =		IMAGES->GetSprite("UI/HowToPlay");
-	m_HowToPlay[SELECT] =	IMAGES->GetSprite("UI/HowToPlay_SELECT");
-	m_HowToPlay[PRESS] =	IMAGES->GetSprite("UI/HowToPlay_PRESS");
+	m_HowToPlay[(DWORD)UISTATE::IDLE]	=		IMAGES->GetSprite("UI/HowToPlay");
+	m_HowToPlay[(DWORD)UISTATE::SELECT] =	IMAGES->GetSprite("UI/HowToPlay_SELECT");
+	m_HowToPlay[(DWORD)UISTATE::PRESS]	=	IMAGES->GetSprite("UI/HowToPlay_PRESS");
 
-	m_Credit[IDLE] =	IMAGES->GetSprite("UI/Credit");
-	m_Credit[SELECT] =	IMAGES->GetSprite("UI/Credit_SELECT");
-	m_Credit[PRESS] =	IMAGES->GetSprite("UI/Credit_PRESS");
+	m_Credit[(DWORD)UISTATE::IDLE]		=	IMAGES->GetSprite("UI/Credit");
+	m_Credit[(DWORD)UISTATE::SELECT]	=	IMAGES->GetSprite("UI/Credit_SELECT");
+	m_Credit[(DWORD)UISTATE::PRESS]		=	IMAGES->GetSprite("UI/Credit_PRESS");
 
-	m_Option[IDLE] =	IMAGES->GetSprite("UI/Option");
-	m_Option[SELECT] =	IMAGES->GetSprite("UI/Option_SELECT");
-	m_Option[PRESS] =	IMAGES->GetSprite("UI/Option_PRESS");
+	m_Option[(DWORD)UISTATE::IDLE]		=	IMAGES->GetSprite("UI/Option");
+	m_Option[(DWORD)UISTATE::SELECT]	=	IMAGES->GetSprite("UI/Option_SELECT");
+	m_Option[(DWORD)UISTATE::PRESS]		=	IMAGES->GetSprite("UI/Option_PRESS");
 
-	m_Exit[IDLE] =		IMAGES->GetSprite("UI/Exit");
-	m_Exit[SELECT] =	IMAGES->GetSprite("UI/Exit_SELECT");
-	m_Exit[PRESS] =		IMAGES->GetSprite("UI/Exit_PRESS");
+	m_Exit[(DWORD)UISTATE::IDLE]		=		IMAGES->GetSprite("UI/Exit");
+	m_Exit[(DWORD)UISTATE::SELECT]		=	IMAGES->GetSprite("UI/Exit_SELECT");
+	m_Exit[(DWORD)UISTATE::PRESS]		=		IMAGES->GetSprite("UI/Exit_PRESS");
 
 	m_ReturnUI[0] = IMAGES->GetSprite("Return/Return_SELECT");
 	m_ReturnUI[1] = IMAGES->GetSprite("Return/Return_PRESS");
@@ -36,10 +36,20 @@ CTitleBackground::CTitleBackground(D2D1_POINT_2F m_Pos, INT tag)
 	m_UISelectAnimFunc = new CSpriteAnimation();
 	m_UISelectAnim = IMAGES->GetMultiSprite("UISelectAnim");
 
-	m_CreditSprite = IMAGES->GetSprite("Credit");
+	//m_formUI[(DWORD)UI::CREDIT].m_UIMenuSprite = IMAGES->GetSprite("Credit");
+	//m_formUI[(DWORD)UI::CREDIT].m_UIMenuCheck = FALSE;
+
+	SetUIMenuProperty(UI::CREDIT, "MenuUI/TitleCredit");
+	SetUIMenuProperty(UI::HOWTOPLAY, "MenuUI/GameRule");
+	SetUIMenuProperty(UI::OPTION, "MenuUI/Options/Highlight_BGM");
+
+	m_OptionConditionForm[0].m_ConditionSprite = IMAGES->GetSprite("MenuUI/Options/False"); 
+	m_OptionConditionForm[0].m_OptionCondition = TRUE;
+
+	m_OptionConditionForm[1].m_ConditionSprite = IMAGES->GetSprite("MenuUI/Options/True");
+	m_OptionConditionForm[1].m_OptionCondition = TRUE;
 
 
-	m_CreditCheck = FALSE;
 	m_bReturnUICheck = FALSE;
 	m_returnState = 0;
 
@@ -48,6 +58,19 @@ CTitleBackground::CTitleBackground(D2D1_POINT_2F m_Pos, INT tag)
 CTitleBackground::~CTitleBackground()
 {
 }
+void CTitleBackground::SetUIMenuProperty(UI uiType, std::string spriteName)
+{
+	m_formUI[(DWORD)uiType].m_UIMenuSprite = IMAGES->GetSprite(std::move(spriteName));
+	m_formUI[(DWORD)uiType].m_UIMenuCheck = FALSE;
+
+}
+
+void CTitleBackground::SetUIMenuSprite(UI uiType, std::string spriteName)
+{
+	m_formUI[(DWORD)uiType].m_UIMenuSprite = IMAGES->GetSprite(std::move(spriteName));
+}
+
+
 void CTitleBackground::Init()
 {
 	m_CloudPosX01 = 0.0f;
@@ -94,106 +117,115 @@ void CTitleBackground::Render()
 
 	switch (m_uiSequence)
 	{
-	case GAMESTART:
+	case (DWORD)UI::GAMESTART:
 
 		m_UISelectAnim[m_UISelectAnimSequence]->Draw(D2D1::Point2F(GameStartUIPos.x + 60, GameStartUIPos.y + 10));
 
 		if (m_UISelectAnimSequence != 3) {
-			m_uiState[EXIT] = IDLE;
-			m_uiState[GAMESTART] = SELECT;
-			m_uiState[HOWTOPLAY] = IDLE;
+			m_uiState[(DWORD)UI::EXIT]		=	(DWORD)UISTATE::IDLE;
+			m_uiState[(DWORD)UI::GAMESTART] =	(DWORD)UISTATE::SELECT;
+			m_uiState[(DWORD)UI::HOWTOPLAY] =	(DWORD)UISTATE::IDLE;
 			m_UISelectAnimSequence = m_UISelectAnimFunc->OnAnimRender(50, 0, 4);
 		}
 		break;
-	case HOWTOPLAY:
+	case (DWORD)UI::HOWTOPLAY:
 
 
 		m_UISelectAnim[m_UISelectAnimSequence]->Draw(D2D1::Point2F(HowToPlayUIPos.x + 60, HowToPlayUIPos.y + 10));
 		
 		if (m_UISelectAnimSequence != 3) {
-			m_uiState[GAMESTART] = IDLE;
-			m_uiState[HOWTOPLAY] = SELECT;
-			m_uiState[CREDIT] = IDLE;
+			m_uiState[(DWORD)UI::GAMESTART]	= (DWORD)UISTATE::IDLE;
+			m_uiState[(DWORD)UI::HOWTOPLAY]	= (DWORD)UISTATE::SELECT;
+			m_uiState[(DWORD)UI::CREDIT]	= (DWORD)UISTATE::IDLE;
 			m_UISelectAnimSequence = m_UISelectAnimFunc->OnAnimRender(50, 0, 4);
 		}
 		break;
-	case CREDIT:
+	case (DWORD)UI::CREDIT:
 
 
 		m_UISelectAnim[m_UISelectAnimSequence]->Draw(D2D1::Point2F(CreditUIPos.x + 10, CreditUIPos.y + 10));
 
 		if (m_UISelectAnimSequence != 3) {
-			m_uiState[HOWTOPLAY] = IDLE;
-			m_uiState[CREDIT] = SELECT;
-			m_uiState[OPTION] = IDLE;
+			m_uiState[(DWORD)UI::HOWTOPLAY] = (DWORD)UISTATE::IDLE;
+			m_uiState[(DWORD)UI::CREDIT]	= (DWORD)UISTATE::SELECT;
+			m_uiState[(DWORD)UI::OPTION]	= (DWORD)UISTATE::IDLE;
 			m_UISelectAnimSequence = m_UISelectAnimFunc->OnAnimRender(50, 0, 4);
 		}
 		break;
-	case OPTION:
+	case (DWORD)UI::OPTION:
 
 
 		m_UISelectAnim[m_UISelectAnimSequence]->Draw(D2D1::Point2F(OptionUIPos.x - 50, OptionUIPos.y + 10));
 
 		if (m_UISelectAnimSequence != 3) {
-			m_uiState[CREDIT] = IDLE;
-			m_uiState[OPTION] = SELECT;
-			m_uiState[EXIT] = IDLE;
+			m_uiState[(DWORD)UI::CREDIT]	= (DWORD)UISTATE::IDLE;
+			m_uiState[(DWORD)UI::OPTION]	= (DWORD)UISTATE::SELECT;
+			m_uiState[(DWORD)UI::EXIT]		= (DWORD)UISTATE::IDLE;
 			m_UISelectAnimSequence = m_UISelectAnimFunc->OnAnimRender(50, 0, 4);
 		}
 		break;
-	case EXIT:
+	case (DWORD)UI::EXIT:
 
 
 		m_UISelectAnim[m_UISelectAnimSequence]->Draw(D2D1::Point2F(ExitUIPos.x - 50, ExitUIPos.y + 10));
 
 		if (m_UISelectAnimSequence != 3) {
-			m_uiState[OPTION] = IDLE;
-			m_uiState[EXIT] = SELECT;
-			m_uiState[GAMESTART] = IDLE;
+			m_uiState[(DWORD)UI::OPTION]	= (DWORD)UISTATE::IDLE;
+			m_uiState[(DWORD)UI::EXIT]		= (DWORD)UISTATE::SELECT;
+			m_uiState[(DWORD)UI::GAMESTART] = (DWORD)UISTATE::IDLE;
 			m_UISelectAnimSequence = m_UISelectAnimFunc->OnAnimRender(50, 0, 4);
 		}
 		break;
 	default:
 		if (m_uiSequence == 5)
-			m_uiSequence = GAMESTART;
+			m_uiSequence = (DWORD)UI::GAMESTART;
 		if (m_uiSequence == -1)
-			m_uiSequence = EXIT;
+			m_uiSequence = (DWORD)UI::EXIT;
 		break;
 	}
 
-	if (m_uiState[GAMESTART] != SELECT) m_GameStart[m_uiState[GAMESTART]]->Draw(D2D1::Point2F(m_UIPos.x, m_UIPos.y));
-	else m_GameStart[m_uiState[GAMESTART]]->Draw(GameStartUIPos);
+	if (m_uiState[(DWORD)UI::GAMESTART] != (DWORD)UISTATE::SELECT) m_GameStart[m_uiState[(DWORD)UI::GAMESTART]]->Draw(D2D1::Point2F(m_UIPos.x, m_UIPos.y));
+	else m_GameStart[m_uiState[(DWORD)UI::GAMESTART]]->Draw(GameStartUIPos);
 
 
-	if (m_uiState[HOWTOPLAY] != SELECT) m_HowToPlay[m_uiState[HOWTOPLAY]]->Draw(D2D1::Point2F(m_UIPos.x, m_UIPos.y + 100));
-	else m_HowToPlay[m_uiState[HOWTOPLAY]]->Draw(HowToPlayUIPos);
+	if (m_uiState[(DWORD)UI::HOWTOPLAY] != (DWORD)UISTATE::SELECT) m_HowToPlay[m_uiState[(DWORD)UI::HOWTOPLAY]]->Draw(D2D1::Point2F(m_UIPos.x, m_UIPos.y + 100));
+	else m_HowToPlay[m_uiState[(DWORD)UI::HOWTOPLAY]]->Draw(HowToPlayUIPos);
 
 
-	if (m_uiState[CREDIT] != SELECT) m_Credit[m_uiState[CREDIT]]->Draw(D2D1::Point2F(m_UIPos.x + 50, m_UIPos.y + 200));
-	else m_Credit[m_uiState[CREDIT]]->Draw(CreditUIPos);
+	if (m_uiState[(DWORD)UI::CREDIT] != (DWORD)UISTATE::SELECT) m_Credit[m_uiState[(DWORD)UI::CREDIT]]->Draw(D2D1::Point2F(m_UIPos.x + 50, m_UIPos.y + 200));
+	else m_Credit[m_uiState[(DWORD)UI::CREDIT]]->Draw(CreditUIPos);
 
 
-	if (m_uiState[OPTION] != SELECT) m_Option[m_uiState[OPTION]]->Draw(D2D1::Point2F(m_UIPos.x + 110.0f, m_UIPos.y + 300));
-	else m_Option[m_uiState[OPTION]]->Draw(OptionUIPos);
+	if (m_uiState[(DWORD)UI::OPTION] != (DWORD)UISTATE::SELECT) m_Option[m_uiState[(DWORD)UI::OPTION]]->Draw(D2D1::Point2F(m_UIPos.x + 110.0f, m_UIPos.y + 300));
+	else m_Option[m_uiState[(DWORD)UI::OPTION]]->Draw(OptionUIPos);
 
 
-	if (m_uiState[EXIT] != SELECT) m_Exit[m_uiState[EXIT]]->Draw(D2D1::Point2F(m_UIPos.x + 110.0f, m_UIPos.y + 400));
-	else m_Exit[m_uiState[EXIT]]->Draw(ExitUIPos);
+	if (m_uiState[(DWORD)UI::EXIT] != (DWORD)UISTATE::SELECT) m_Exit[m_uiState[(DWORD)UI::EXIT]]->Draw(D2D1::Point2F(m_UIPos.x + 110.0f, m_UIPos.y + 400));
+	else m_Exit[m_uiState[(DWORD)UI::EXIT]]->Draw(ExitUIPos);
 
-	if (m_CreditCheck)
-		m_CreditSprite->Draw(m_Pos);
+	for (size_t i = 0; i < (DWORD)UI::UI_ENUM_COUNT; i++)
+		if (m_formUI[i].m_UIMenuCheck)
+			m_formUI[i].m_UIMenuSprite->Draw(m_Pos);
+	
 
-	if (m_bReturnUICheck) {
-		Vector2 Pos = D2D1::Point2F(1100.0f, 50.0f);
-		
-		m_UISelectAnim[m_UISelectAnimSequence]->Draw(D2D1::Point2F(Pos.x + 30, Pos.y + 10));
+	//if (m_bReturnUICheck) {
+	//	Vector2 Pos = D2D1::Point2F(1100.0f, 50.0f);
+	//	
+	//	m_UISelectAnim[m_UISelectAnimSequence]->Draw(D2D1::Point2F(Pos.x + 30, Pos.y + 10));
 
-		if (m_UISelectAnimSequence != 3) {
-			m_UISelectAnimSequence = m_UISelectAnimFunc->OnAnimRender(50, 0, 4);
-		}
-		m_ReturnUI[m_returnState]->Draw(Pos);
+	//	if (m_UISelectAnimSequence != 3) {
+	//		m_UISelectAnimSequence = m_UISelectAnimFunc->OnAnimRender(50, 0, 4);
+	//	}
+	//	m_ReturnUI[m_returnState]->Draw(Pos);
+	//}
+
+	if (IsOptionMenuOpened())
+	{
+		m_OptionConditionForm[m_OptionConditionForm[0].m_OptionCondition].m_ConditionSprite->Draw(D2D1::Point2F(925, 330));
+
+		m_OptionConditionForm[m_OptionConditionForm[1].m_OptionCondition].m_ConditionSprite->Draw(D2D1::Point2F(925, 530));
 	}
-	//CGameManager::m_Gfx->DrawTextOut(L"Press Space Key To Start", D2D1::Point2F(MAX_WIN_WIDTH / 2, 200));
+	
 }
 
 void CTitleBackground::FrameMove(DWORD elapsed)
@@ -213,18 +245,68 @@ void CTitleBackground::FrameMove(DWORD elapsed)
 		dTime *= -1;
 	}
 	tTime += dTime;
+
 }
+
+bool CTitleBackground::IsOptionMenuOpened()
+{
+	return m_bReturnUICheck && m_uiSequence == (DWORD)UI::OPTION;
+}
+
 
 void CTitleBackground::Control(CInput* Input)
 {
-	if (Input->KeyDown('W'))
-		m_uiSequence--;
-	if (Input->KeyDown('S'))
-		m_uiSequence++;
+	if (!m_bReturnUICheck) {
+		if (Input->KeyDown('W'))
+			m_uiSequence--;
+		if (Input->KeyDown('S'))
+			m_uiSequence++;
+	}
 
-	if (Input->KeyPress(VK_RETURN))
+	if (IsOptionMenuOpened())
 	{
-		m_uiState[m_uiSequence] = PRESS;
+		if (Input->KeyDown('W')) {
+			m_optionSequence--;
+			m_optionSequence %= 2;
+		}
+		if (Input->KeyDown('S')) {
+			m_optionSequence++;
+			m_optionSequence %= 2;
+		}
+		
+		if (Input->KeyDown('A')) {
+			m_OptionConditionForm[m_optionSequence].m_OptionCondition 
+				= !m_OptionConditionForm[m_optionSequence].m_OptionCondition;
+		}
+		if (Input->KeyDown('D')) {
+			m_OptionConditionForm[m_optionSequence].m_OptionCondition 
+				= !m_OptionConditionForm[m_optionSequence].m_OptionCondition;
+		}
+
+		if (m_OptionConditionForm[0].m_OptionCondition)
+			SOUND->SetBGMVolume(1.0f);
+		else SOUND->SetBGMVolume(0.0f);
+		if (m_OptionConditionForm[1].m_OptionCondition)
+			SOUND->SetSFXVolume(1.0f);
+		else {
+			SOUND->SetSFXVolume(0.0f);
+		}
+		switch (m_optionSequence)
+		{
+		case 0:
+			SetUIMenuSprite(UI::OPTION, "MenuUI/Options/Highlight_BGM");
+			break;
+		case 1:
+			SetUIMenuSprite(UI::OPTION, "MenuUI/Options/Highlight_SFX");
+			break;
+		default:
+			break;
+		}
+	}
+
+	if (Input->KeyPress(VK_RETURN) || Input->KeyPress(VK_ESCAPE))
+	{
+		m_uiState[m_uiSequence] = (DWORD)UISTATE::PRESS;
 		m_uiSelected = m_uiSequence;
 		CurLoadTime = timeGetTime();
 		OldLoadTime = CurLoadTime;
@@ -236,28 +318,26 @@ void CTitleBackground::Control(CInput* Input)
 		{
 			switch (m_uiSequence)
 			{
-			case GAMESTART:
+			case (DWORD)UI::GAMESTART:
 				CGameManager::nowStatus = GAME01;
 				m_uiSelected = -1;
 				break;
-			case HOWTOPLAY:
+			case (DWORD)UI::HOWTOPLAY:
+				m_bReturnUICheck = !m_bReturnUICheck;
+				m_formUI[m_uiSequence].m_UIMenuCheck = !m_formUI[m_uiSequence].m_UIMenuCheck;
 				m_uiSelected = -1;
 				break;
-			case CREDIT:
-				if (m_CreditCheck) {
-					m_bReturnUICheck = FALSE;
-					m_CreditCheck = FALSE;
-				}
-				else {
-					m_CreditCheck = TRUE;
-					m_bReturnUICheck = TRUE;
-				}
+			case (DWORD)UI::CREDIT:
+				m_bReturnUICheck = !m_bReturnUICheck;
+				m_formUI[m_uiSequence].m_UIMenuCheck = !m_formUI[m_uiSequence].m_UIMenuCheck;
 				m_uiSelected = -1;
 				break;
-			case OPTION:
+			case (DWORD)UI::OPTION:
+				m_bReturnUICheck = !m_bReturnUICheck;
+				m_formUI[m_uiSequence].m_UIMenuCheck = !m_formUI[m_uiSequence].m_UIMenuCheck;
 				m_uiSelected = -1;
 				break;
-			case EXIT:
+			case (DWORD)UI::EXIT:
 				m_uiSelected = -1;
 				PostQuitMessage(0);
 				break;
